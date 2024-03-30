@@ -1,0 +1,96 @@
+{% extends 'theme3/elements/layouts/layout1.html' %}
+
+{% load static custom_tags %}
+
+{% block additional_css %}
+{% endblock %}
+
+
+
+
+{% block message %}
+{% comment %} {% include 'dashboard/elements/alert.html' %} {% endcomment %}
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+{% if instance %}
+    {% if not is_locked %}
+	
+        <div class="blog-single dz-card sidebar">
+            <div class="dz-media dz-media-rounded">
+                <img src="/media/{{ instance.feature_image }}" alt="">
+            </div>
+            <div class="dz-info m-b30">
+                <div class="dz-meta">
+                    <ul>
+                        <li class="post-author">
+                            <a href="javascript:void(0);">
+                                <img src="/media/{{instance.user.avatar}}" alt="" > 
+                                <span>By{{instance.user.first_name}}{{instance.user.last_name}}</span>
+                            </a>
+                        </li>
+                        <li class="post-date"><a href="javascript:void(0);">{{instance.publish_on}}</a></li>
+                        <li class="post-comment"><a href="javascript:void(0);">3 comment</a></li>
+                    </ul>
+                </div>
+                <h3 class="dz-title">{{ instance.title }}</h3>
+                <div class="dz-post-text">
+                        <p>{{ instance.excerpt }}</p>
+                        {{instance.content|safe}}
+                </div>
+                <div class="dz-share-post">
+                    <div class="post-tags">
+                    <h6 class="m-b0 m-r10 d-inline">Tags:</h6>
+                        <a href="javascript:void(0);"><span>Corporate</span></a>
+                        <a href="javascript:void(0);"><span>Blog</span></a>
+                        <a href="javascript:void(0);"><span>Marketing</span></a>
+                    </div>
+                    <div class="dz-social-icon dark">
+                        <ul>
+                            <li><a target="_blank" class="fab fa-facebook-f" href="https://www.facebook.com/"></a></li>
+                            <li><a target="_blank" class="fab fa-instagram" href="https://www.instagram.com/"></a></li>
+                            <li><a target="_blank" class="fab fa-twitter" href="https://twitter.com/"></a></li>
+                            <li><a target="_blank" class="fab fa-youtube" href="https://www.youtube.com/"></a></li>
+                        </ul>
+                    </div>									
+                </div>
+            </div>
+        </div>
+    
+
+	{% else %}
+	<form  method="post"> {% csrf_token %}
+            <div class="form-group">
+                <label>Password <span class="text-danger">*</span></label>
+                <input type="password" name="password" class="form-control mb-3">
+                {% if message %}
+                <div class="text-danger mb-2">
+                    {{message}}
+                </div>
+                {% endif %}
+            </div>
+            <button class="btn btn-primary" type="submit">Submit form</button>
+        </form>
+	{% endif %}
+{% else %}
+<h3>Not Valid!!!</h3>
+<h4>{{message}}</h4>
+
+
+
+
+{% endif %}
+
+
+
+{% endblock %}
+
+{% block additional_js %}
+
+{% endblock %}
