@@ -15,6 +15,8 @@ import os
 from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 
+DJANGO_DEBUG=1
+SECRET_KEY = 'django-insecure-p-boi38#^)d*@q1)wr)io&=hrkmsdfsz%j&*l3+9e-aiot12ii+bsxz'
 
 load_dotenv('.env')
 
@@ -38,10 +40,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.getenv('SECRET_KEY')
+# SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG =  True
+# DEBUG =  True
 
 
 ALLOWED_HOSTS = ['*']

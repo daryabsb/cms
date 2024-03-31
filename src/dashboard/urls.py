@@ -12,6 +12,9 @@ urlpatterns = [
     path('login/',users_views.login_user,name="login"),
     path('logout/',users_views.logout_user,name="logout"),
 
+    # CMS Links
+    path('blogs/', include('src.blogs.urls', namespace='blog')),
+
     path('',dashboard_views.index,name="index"),
 
     # This Route for PasswordChange

@@ -27,12 +27,18 @@ THIRD_PARTY_APPS = [
     'rest_framework',
     'django_extensions',
     'widget_tweaks',
+    'mptt',
 ]
 LOCAL_APPS = [
     'src.accounts',
     'src.core',
     # DASHBOARD APPS
-    'src.dashboard'
+    'src.dashboard',
+    'src.dashboard.cms',
+
+    'src.blogs',
+    'src.menu',
+    'src.sliders',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -59,6 +65,7 @@ TEMPLATES = [
             PROJECT_PATH + 'templates',
             PROJECT_PATH + 'accounts' + 'templates',
             PROJECT_PATH + 'dashboard' + 'templates',
+            PROJECT_PATH + 'blogs' + 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
