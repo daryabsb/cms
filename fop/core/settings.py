@@ -15,7 +15,7 @@ import os
 from dotenv import load_dotenv
 from django.utils.translation import gettext_lazy as _
 
-DJANGO_DEBUG=1
+DJANGO_DEBUG = 1
 SECRET_KEY = 'django-insecure-p-boi38#^)d*@q1)wr)io&=hrkmsdfsz%j&*l3+9e-aiot12ii+bsxz'
 
 load_dotenv('.env')
@@ -23,7 +23,7 @@ load_dotenv('.env')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = '' #Put Your Email here
+EMAIL_HOST_USER = ''  # Put Your Email here
 
 '''
 Enable 2fa on your google account and create an apps password and use that in place of your true password in your code
@@ -48,7 +48,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 ALLOWED_HOSTS = ['*']
 
-SITE_ID=1
+SITE_ID = 1
 
 # Application definition
 
@@ -74,14 +74,13 @@ INSTALLED_APPS = [
     'dashboard.cms.contactus',
     'frontend',
     'mptt',
-    'ckeditor', 
+    'ckeditor',
     'ckeditor_uploader',
     'rosetta',
 
     'welly',
-    
-    ]
 
+]
 
 
 MIDDLEWARE = [
@@ -101,18 +100,18 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-                    BASE_DIR / 'frontend' / 'templates',
-                    BASE_DIR / 'dashboard' / 'templates',
-                    BASE_DIR / 'dashboard' / 'cms' / 'pages' / 'templates',
-                    BASE_DIR / 'dashboard' / 'cms' / 'blog' / 'templates',
-                    BASE_DIR / 'dashboard' / 'cms' / 'comment' / 'templates',
-                    BASE_DIR / 'dashboard' / 'cms' / 'menu' / 'templates',
-                    BASE_DIR / 'dashboard' / 'cms' / 'reels' / 'templates',
-                    BASE_DIR / 'dashboard' / 'cms' / 'sliders' / 'templates',
-                    BASE_DIR / 'dashboard' / 'cms' / 'subscribe' / 'templates',
-                    BASE_DIR / 'dashboard' / 'cms' / 'contactus' / 'templates',
-                    
-                    ],
+            BASE_DIR / 'frontend' / 'templates',
+            BASE_DIR / 'dashboard' / 'templates',
+            BASE_DIR / 'dashboard' / 'cms' / 'pages' / 'templates',
+            BASE_DIR / 'dashboard' / 'cms' / 'blog' / 'templates',
+            BASE_DIR / 'dashboard' / 'cms' / 'comment' / 'templates',
+            BASE_DIR / 'dashboard' / 'cms' / 'menu' / 'templates',
+            BASE_DIR / 'dashboard' / 'cms' / 'reels' / 'templates',
+            BASE_DIR / 'dashboard' / 'cms' / 'sliders' / 'templates',
+            BASE_DIR / 'dashboard' / 'cms' / 'subscribe' / 'templates',
+            BASE_DIR / 'dashboard' / 'cms' / 'contactus' / 'templates',
+
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -143,7 +142,6 @@ DATABASES = {
 }
 
 
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -154,7 +152,6 @@ DATABASES = {
 #         'PORT': '5432',
 #     }
 # }
-
 
 
 # Password validation
@@ -199,7 +196,7 @@ LOCALE_PATHS = [
 # The name of the session key that stores the user's language preference
 # LANGUAGE_SESSION_KEY = 'dz_language_session'
 
-#TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
 TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
@@ -214,7 +211,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-
+print("FOB_BASE = ", BASE_DIR)
 STATICFILES_DIRS = [
     BASE_DIR / 'dashboard' / 'static',
     BASE_DIR / 'frontend' / 'static',
@@ -226,9 +223,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'dashboard' / 'cms' / 'sliders' / 'static',
     BASE_DIR / 'dashboard' / 'cms' / 'subscribe' / 'static',
     BASE_DIR / 'dashboard' / 'cms' / 'contactus' / 'static',
-]  
+]
 
-STATIC_ROOT = STATIC_ROOT = BASE_DIR / "static" 
+STATIC_ROOT = STATIC_ROOT = BASE_DIR / "static"
 
 
 MEDIA_URL = '/media/'
@@ -248,14 +245,17 @@ CKEDITOR_CONFIGS = {
         'removePlugins': 'stylesheetparser',
         'allowedContent': True,
         # 'extraAllowedContent': '*(*)',
-        
+
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
         'toolbar_YourCustomToolbarConfig': [
-            {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
-            {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
-            {'name': 'editing', 'items': ['Find', 'Replace', '-', 'SelectAll']},
+            {'name': 'document', 'items': [
+                'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+            {'name': 'clipboard', 'items': [
+                'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
+            {'name': 'editing', 'items': [
+                'Find', 'Replace', '-', 'SelectAll']},
             {'name': 'forms',
              'items': ['Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton',
                        'HiddenField']},
@@ -270,23 +270,22 @@ CKEDITOR_CONFIGS = {
             {'name': 'insert',
              'items': ['Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe']},
             '/',
-            {'name': 'styles', 'items': ['Styles', 'Format', 'Font', 'FontSize']},
+            {'name': 'styles', 'items': [
+                'Styles', 'Format', 'Font', 'FontSize']},
             {'name': 'colors', 'items': ['TextColor', 'BGColor']},
             {'name': 'tools', 'items': ['Maximize', 'ShowBlocks']},
             {'name': 'about', 'items': ['About']},
 
         ],
         'toolbar': 'YourCustomToolbarConfig',  # put selected toolbar config here
-      
+
         'height': 400,
         'width': '100%',
-      
+
         'toolbarCanCollapse': True,
-        'tabSpaces': 4,  
+        'tabSpaces': 4,
         'extraPlugins': ','.join([
-            'uploadimage', # the upload image feature
+            'uploadimage',  # the upload image feature
         ]),
     }
 }
-
-

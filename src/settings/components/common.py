@@ -28,6 +28,8 @@ THIRD_PARTY_APPS = [
     'django_extensions',
     'widget_tweaks',
     'mptt',
+    'ckeditor',
+    'ckeditor_uploader',
 ]
 LOCAL_APPS = [
     'src.accounts',
@@ -39,6 +41,7 @@ LOCAL_APPS = [
     'src.blogs',
     'src.menu',
     'src.sliders',
+    'src.pages',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -66,6 +69,7 @@ TEMPLATES = [
             PROJECT_PATH + 'accounts' + 'templates',
             PROJECT_PATH + 'dashboard' + 'templates',
             PROJECT_PATH + 'blogs' + 'templates',
+            PROJECT_PATH + 'menu' + 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -122,8 +126,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
-
 
 
 # Default primary key field type

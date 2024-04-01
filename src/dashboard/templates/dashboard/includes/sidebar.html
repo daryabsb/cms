@@ -1,3 +1,5 @@
+{% load i18n %}
+{% load static custom_tags %}
 <div class="deznav">
     <div class="deznav-scroll">
         <ul class="metismenu" id="menu">
@@ -14,34 +16,36 @@
                     <li><a href="reviews.html">Reviews</a></li>
                 </ul>
             </li>
+        {% if perms.users.view_customuser or perms.auth.view_group or perms.auth.view_permission %}
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-television"></i>
-                    <span class="nav-text">Apps</span>
+                    <i class="flaticon-381-user"></i>
+                    <span class="nav-text">{% translate 'User' %}<span class="badge light badge-sm badge-primary ms-2 mb-0">{% translate 'Modules'%}</span></span>
                 </a>
                 <ul aria-expanded="false">
-                    <li><a href="app-profile.html">Profile</a></li>
-                    <li><a href="post-details.html">Post Details</a></li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Email</a>
-                        <ul aria-expanded="false">
-                            <li><a href="email-compose.html">Compose</a></li>
-                            <li><a href="email-inbox.html">Inbox</a></li>
-                            <li><a href="email-read.html">Read</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="./app-calender.html">Calendar</a></li>
-                    <li><a class="has-arrow" href="javascript:void()" aria-expanded="false">Shop</a>
-                        <ul aria-expanded="false">
-                            <li><a href="ecom-product-grid.html">Product Grid</a></li>
-                            <li><a href="ecom-product-list.html">Product List</a></li>
-                            <li><a href="ecom-product-detail.html">Product Details</a></li>
-                            <li><a href="ecom-product-order.html">Order</a></li>
-                            <li><a href="ecom-checkout.html">Checkout</a></li>
-                            <li><a href="ecom-invoice.html">Invoice</a></li>
-                            <li><a href="ecom-customers.html">Customers</a></li>
-                        </ul>
-                    </li>
+                {% if perms.users.view_customuser or perms.users.change_customuser or perms.users.add_customuser or perms.users.delete_customuser %}
+                    <li><a href="{% url 'dashboard:users' %}">{% translate 'Users' %}</a></li>
+                    {% endif %}
+                    {% if perms.auth.view_group or perms.auth.change_group or perms.auth.add_group or perms.auth.delete_group %}
+                    <li><a href="{% url 'dashboard:groups' %}">{% trans 'Groups' %}</a></li>
+                    {% endif %}
+                    {% if perms.auth.view_permission or perms.auth.change_permission or perms.auth.add_permission or  perms.auth.delete_permission%}
+                    <li><a href="{% url 'dashboard:permissions' %}">{% translate 'Permissions' %}</a></li>
+                    {% endif %}
                 </ul>
             </li>
+            {% endif %}
+            {% if perms.pages.view_page or perms.blog.view_blogs or perms.menu.view_menus or perms.blog.view_comment or perms.blog.view_reels or perms.blog.view_slider or perms.blog.view_categories or perms.blog.view_tags or perms.contactus.view_contactus or perms.subscribe.view_subscribers %} 
+            <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                    <i class="flaticon-381-television"></i>
+                    <span class="nav-text">{% translate 'CMS' %}<span class="badge light badge-sm badge-primary ms-2 mb-0">{% translate 'Modules'%}</span>
+                </a>
+                <ul aria-expanded="false">
+                {% if perms.pages.view_page or perms.pages.change_page or perms.pages.add_page or perms.pages.delete_page %}
+                    <li><a href="{% url 'dashboard:blog:blogs' %}">{% translate 'Blogs'%}</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            {% endif %}
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-381-controls-3"></i>
                     <span class="nav-text">Charts</span>
