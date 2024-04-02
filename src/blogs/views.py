@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from src.blogs.blog_config import ScreenOption
 import json
 from django.contrib.auth.decorators import login_required, permission_required 
-from src.dashboard.cms import utils
+from src.core import utils
 from django.db import IntegrityError
 import datetime
 

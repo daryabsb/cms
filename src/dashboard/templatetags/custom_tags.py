@@ -22,9 +22,9 @@ def getdata(json_data, args):
             logger.success("*"*50)
             print()
             logger.debug("Function Name:> {} ",
-                         myfunc.__name__, feature="f-strings")
+                        myfunc.__name__, feature="f-strings")
             logger.debug("Module Name:> {} ",
-                         myfunc.__module__, feature="f-strings")
+                        myfunc.__module__, feature="f-strings")
             logger.debug("URL_Path:> {} ", args, feature="f-strings")
             func_name = myfunc.__name__
             print()
@@ -34,7 +34,6 @@ def getdata(json_data, args):
         pass
 
     return json_data.get(func_name)
-
 
 register.filter('getdata', getdata)
 
@@ -73,7 +72,6 @@ def getMenuItemUrl(item_type, id):
             base_url = '#'
 
     return base_url
-
 
 register.filter('getMenuItemUrl', getMenuItemUrl)
 
