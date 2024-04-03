@@ -14,7 +14,7 @@ dz_array = {
     "global": {
         "css": [
             # f"{foldername_d}/vendor/jquery-nice-select/css/nice-select.css",
-            f"{foldername_d}vendor/bootstrap-select/dist/css/bootstrap-select.min.css",
+            f"{foldername_d}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css",
             f"{foldername_d}/css/style.css",
         ],
         "js": {
