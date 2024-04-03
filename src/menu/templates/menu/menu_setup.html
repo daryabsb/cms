@@ -50,34 +50,39 @@ d{% extends 'dashboard/dashboard_base.html' %}
                                         </div>
                                     </div>
                                     <div class="col-md-6">
-                                       <div class="card-body">
+										<div class="card-body">
 											<div class="nestable">
 												<form method="post" id="MenuItem2Form">
 													<div class="dd" id="nestable2">
 														<ol class="dd-list" id="setMenu">
 														{% recursetree menu_items %}
-														<li class="dd-item" data-id="{{node.id}}">
+														<li class="dd-item accordion position-relative"  data-id="{{node.id}}">
+															<div class="dd-handle">{{ node.title}}</div>
 															{% comment %} <div class="dd-handle"><i class="fa-solid fa-arrows-up-down-left-right"></i> {{ node.title}}</div> {% endcomment %}
-															 <div class="accordion" id="accordionExample-1">
-																<div class="accordion-item">
-																	<div class="accordion-header p-0 border-0 row" id="heading-1">
-																		{% comment %} <div class="move-media dd-handle col-1" style="cursor: move; width: 35px;">
-																			<i class="fa-solid fa-arrows-up-down-left-right"></i>
-																		</div> {% endcomment %}
-																			<span class="accordion-header-icon dd-handle">
-																			<i class="fa-solid fa-arrows-up-down-left-right"></i>
-																			{{ node.title}}
-																			</span>
-																			<span>
-																			<button class="accordion-button collapsed justify-content-between col-10" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{node.id}}" aria-expanded="false" aria-controls="collapse-8">
-																				<span class="font-w500 showLabel_{{node.id}}">{{ node.title}}</span>
-																				<span class="mx-3">|</span><span class="text-primary">Page</span>
-																			</button>
-																			</span>
-																		
-
-																	</div>
-																	<div id="collapse-{{node.id}}" class="accordion-collapse collapse" aria-labelledby="heading-1" data-bs-parent="#accordionExample-1" style="">
+														
+																<div class="accordion-item position-absolute w-100" id="accordionExample-1">
+																	
+																				{% comment %} <div class="move-media dd-handle col-1" style="cursor: move; width: 35px;">
+																					<i class="fa-solid fa-arrows-up-down-left-right"></i>
+																				</div> {% endcomment %}
+																				
+																					<button type="button" class="btn btn-xs btn-link collapsed position-absolute top-036 end-0"
+																						data-bs-toggle="collapse" data-bs-target="#collapse-{{node.id}}" aria-expanded="false"
+																						style="z-index:1000;">
+																						<i class="fa-solid fa-caret-down text-white"></i>
+																						{% comment %} <h1>DARYA</h1> {% endcomment %}
+																					</button>
+																				
+																		{% comment %} <span class="accordion-header-icon showLabel_{{node.id}}">
+																			
+																		<i class="fa-solid fa-bars"></i>
+																		{{ node.title}}
+																		</span> {% endcomment %}
+																	
+																	
+																	
+																</div>
+<div id="collapse-{{node.id}}" class="accordion-collapse collapse" aria-labelledby="heading-1" data-bs-parent="#accordionExample-1" style="">
 																		<div class="accordion-body dd-content">
 																			
 																			<div class="row">
@@ -127,8 +132,6 @@ d{% extends 'dashboard/dashboard_base.html' %}
 																			
 																		</div>
 																	</div>
-																</div>
-															</div>	 
 														</li>
 														{% endrecursetree %} 
 														</ol>

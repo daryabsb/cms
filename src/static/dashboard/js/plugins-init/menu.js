@@ -3,12 +3,7 @@ $(document).ready(function () {
     jQuery(document).on('click', '.RemoveItem', function (event) {
         var itemId = jQuery(this).attr('rel');
         var item_name = jQuery(this).attr('item-name');
-
-
-
         if (itemId != "") {
-
-
             Swal.fire({
                 title: 'Are you sure?',
                 text: "Are you sure you want to delete item " + item_name + "?",
@@ -76,9 +71,7 @@ $(document).ready(function () {
         jQuery('.showLabel_' + rel).text(label);
     });
 
-
     /////////////////////////StartSaveMenu>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-
 
     jQuery(document).on('click', '.SaveMenu', function () {
         var menu_id = jQuery(this).attr('rel');
@@ -148,7 +141,6 @@ $(document).ready(function () {
 
     //////
 
-
     jQuery(document).on('click', '.CreateNewMenu', function () {
 
 
@@ -203,7 +195,6 @@ $(document).ready(function () {
             else { $('.actions button').removeClass('disabled'); }
         });
     });
-
 
     ///////////////////////////////////////////////
 
@@ -265,7 +256,6 @@ $(document).ready(function () {
 
     ///////////////////////////////
 
-
     setScreenOption();
     allowBlock();
     SearchForMenu();
@@ -278,7 +268,6 @@ $(document).ready(function () {
     ////End
 });
 
-
 function selectAll() {
     jQuery('.SelectAllItems').click(function () {
         jQuery(this).parents('.ItemsCheckboxSec').find('input[type="checkbox"]').prop("checked", true);
@@ -287,7 +276,6 @@ function selectAll() {
         jQuery(this).parents('.ItemsCheckboxSec').find('input[type="checkbox"]').prop("checked", false);
     });
 }
-
 
 function setScreenOption() {
 
@@ -353,7 +341,6 @@ function cancelMenuObject() {
 
 }
 
-
 function checkboxUtility() {
     jQuery(document).on('click', '.checkboxUtility', function () {
 
@@ -363,8 +350,6 @@ function checkboxUtility() {
 }
 
 ////////////////////////////////////////////////AddMenu/////////////////////////////
-
-
 
 function AddToMenu() {
     jQuery(document).on('click', '.AddToMenu', function () {
@@ -418,8 +403,6 @@ function AddToMenu() {
 
     });
 }
-
-
 
 function LinksAddToMenu() {
     jQuery(document).on('click', '.LinksAddToMenu', function () {
@@ -493,7 +476,6 @@ function LinksAddToMenu() {
     });
 }
 
-
 function SearchForMenu() {
 
     jQuery(document).on('keyup', '.SearchForMenu', function () {
@@ -539,8 +521,6 @@ function SearchForMenu() {
 
     });
 }
-
-
 
 $('.sweet-delete-menu-cancel').on('click', function (event) {
     event.preventDefault();
