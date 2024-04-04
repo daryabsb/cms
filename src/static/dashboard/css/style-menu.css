@@ -48987,11 +48987,11 @@ div#mCSB_1 {
   margin: 0;
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  height: 100%;
-  border: 0;
+  max-height: 100%;
   z-index: 2;
+  border: 0;
   background: none;
-  position: absolute;
+  /* position: absolute; */
   background-color: var(--rgba-primary-8);
   top: 0;
   font-size: 1.25rem;
