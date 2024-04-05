@@ -6,12 +6,115 @@
 
 {% block content %}
 
+
+<div class="row">
+	<div class="accordion" id="accordion_screen_options">
+		<div class="accordion-item card">
+			<h2 class="accordion-header border-0" id="headingOne">
+			  <button class="accordion-button d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseScreenOption" aria-expanded="false" aria-controls="collapseScreenOption">
+				<span class="acc-heading">Screen Options</span>
+			  </button>
+			</h2>
+			<div id="collapseScreenOption" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion_screen_options" style="">
+				<div class="accordion-body card-body pt-0">
+					<div class="row">
+						<div class="col-lg-2 col-md-3">
+							<div class="form-check custom-checkbox mb-3">
+								<input type="checkbox" id="AllowPage" class="mr-1 allowField AllowPage form-check-input" rel="Page">
+								<label class="form-check-label" for="AllowPage">Page</label>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-3">
+							<div class="form-check custom-checkbox mb-3">
+								<input type="checkbox" id="AllowBlog" class="mr-1 allowField AllowBlog form-check-input" rel="Blog">
+								<label class="form-check-label" for="AllowBlog">Blog</label>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-3">
+							<div class="form-check custom-checkbox mb-3">
+								<input type="checkbox" id="AllowCustomLink" class="mr-1 allowField AllowCustomLink form-check-input" rel="CustomLink">
+								<label class="form-check-label" for="AllowCustomLink">CustomLink</label>
+							</div>
+						</div>
+						<!-- <div class="col-lg-2 col-md-3">
+								<div class="form-check custom-checkbox mb-3">
+									<input type="checkbox" id="AllowCategories" class="mr-1 allowField AllowCategories form-check-input" rel="Categories" disabled>
+									<label class="form-check-label" for="AllowCategories">Categories</label>
+								</div>
+						</div> -->
+						<div class="col-lg-2 col-md-3">
+							<div class="form-check custom-checkbox mb-3">
+								<input type="checkbox" id="AllowTitleAttribute" class="mr-1 allowField AllowTitleAttribute form-check-input" rel="TitleAttribute">
+								<label class="form-check-label" for="AllowTitleAttribute">Title Attribute</label>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-3">
+							<div class="form-check custom-checkbox mb-3">
+								<input type="checkbox" id="AllowClassAttribute" class="mr-1 allowField AllowClassAttribute form-check-input" rel="ClassAttribute">
+								<label class="form-check-label" for="AllowClassAttribute">Class Attribute</label>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-3">
+							<div class="form-check custom-checkbox mb-3">
+								<input type="checkbox" id="AllowTargetAttribute" class="mr-1 allowField AllowTargetAttribute form-check-input" rel="TargetAttribute">
+								<label class="form-check-label" for="AllowTargetAttribute">Target Attribute</label>
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-3">
+							<div class="form-check custom-checkbox mb-3">
+								<input type="checkbox" id="AllowDescription" class="mr-1 allowField AllowDescription form-check-input" rel="Description">
+								<label class="form-check-label" for="AllowDescription">Description</label>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+			
+			  
+			
+
 <div class="page-titles">
-	<h4>Nestable</h4>
-	<ol class="breadcrumb">
-		<li class="breadcrumb-item"><a href="javascript:void(0)">Advanced</a></li>
-		<li class="breadcrumb-item active"><a href="javascript:void(0)">Nestable</a></li>
-	</ol>
+	<div class="row">
+		<div class="col-12">
+			<div class="card">
+				<div class="card-header">
+					<h4>Menu</h4>
+					{% if perms.menu.add_menus %}
+						<a href="javascript:void(0);" class="CreateNewMenu fw-bold btn btn-primary light"><i class="fa fa-plus"></i>&nbsp; Add menu</a>
+					{% endif %}
+				</div>
+				<div class="card-body row">
+				<div class="row">
+						<div class="col-sm-6">
+							<h4 class="text-dark">Select a menu to edit</h4>
+						</div>
+						<div class="col-sm-4 MenuSelectDiv">
+							<select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
+								{% if not menu_obj %}
+								<option value="" selected>Choose Menu</option> 
+								{% endif %}
+								{% for menu in menus %}
+									<option value="{{menu.id}}" 
+								{% if menu_obj %}
+									{% if menu.id == menu_obj.id %}
+									selected
+									{% endif %}
+								{% endif %}
+									>{{menu.title}}</option>
+								{% endfor %}
+							</select>
+						</div>
+						<div class="col-sm-2 text-end">
+							<button type="button" class="btn btn-primary MenuSelectbtn" title="Select Menu">Select</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 <!-- row -->
 
@@ -20,7 +123,30 @@
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				<h4 class="card-title">Nestable</h4>
+				
+					<div>
+						<h4 class="text-dark">Select a menu to edit</h4>
+					</div>
+					<div class=" MenuSelectDiv">
+						<select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
+							{% if not menu_obj %}
+							<option value="" selected>Choose Menu</option> 
+							{% endif %}
+							{% for menu in menus %}
+								<option value="{{menu.id}}" 
+							{% if menu_obj %}
+								{% if menu.id == menu_obj.id %}
+								selected
+								{% endif %}
+							{% endif %}
+								>{{menu.title}}</option>
+							{% endfor %}
+						</select>
+					</div>
+					<div class="text-end">
+						<button type="button" class="btn btn-primary MenuSelectbtn" title="Select Menu">Select</button>
+					</div>
+				
 			</div>
 			<div class="card-body">
 				<div class="row">
@@ -32,7 +158,7 @@
 							<div class="card-body border-bottom border-start border-end border-primary">
 								{% if menu_type_view %}
 								<div class="accordion" id="accordion-one">
-									<div class="accordion-item" style="display:none;">
+									<div class="accordion-item">
 										<h2 class="accordion-header">
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseOne" aria-expanded="true" aria-controls="default-collapseOne">
 												Page
@@ -40,99 +166,157 @@
 										</h2>
 										<div id="default-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
 											<div class="accordion-body">
-												<div class="default-tab">
-													<ul class="nav nav-tabs" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" data-bs-toggle="tab" href="#blog__tab1"><i class="la la-home me-2"></i> Home</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" data-bs-toggle="tab" href="#blog__tab2"><i class="la la-user me-2"></i> Profile</a>
-														</li>
-													</ul>
-													<div class="tab-content card-body">
-														<div class="tab-pane fade show active" id="blog__tab1" role="tabpanel">
-															<div class="basic-form">
-																<form>
+												<form action="{% url 'dashboard:menu:add_content_to_menu' %}" method="post" id="MenuAjaxAddPageForm">
+													{% csrf_token %}
+													<input type="hidden" name="menu_id" class="PageMenu" id="PageMenuId" value="{{menu_obj.id}}">
+													<div class="default-tab">
+														<ul class="nav nav-tabs" role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" data-bs-toggle="tab" href="#page__tab1"><i class="la la-home me-2"></i>All Pages</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" data-bs-toggle="tab" href="#page__tab2"><i class="la la-user me-2"></i>Search</a>
+															</li>
+														</ul>
+														<div class="tab-content card-body">
+															<div class="tab-pane fade show active" id="page__tab1" role="tabpanel">
+																<div class="basic-form">
 																	<div class="form-group">
+																	{% recursetree pages %}
 																		<div class="form-check mb-2">
-																			<input type="checkbox" class="form-check-input" id="check1" value="" checked>
-																			<label class="form-check-label" for="check1">Option 1</label>
+																			<input 
+																			type="checkbox" 
+																			class="form-check-input" 
+																			name="MenuItem[]" value="{{node.id}}"
+																			>
+																			<label class="form-check-label" for="check1">{{node.title}}</label>
 																		</div>
-																		<div class="form-check mb-2">
-																			<input type="checkbox" class="form-check-input" id="check2" value="">
-																			<label class="form-check-label" for="check2">Option 2</label>
-																		</div>
-																		<div class="form-check disabled">
-																			<input type="checkbox" class="form-check-input" id="check3" value="" disabled>
-																			<label class="form-check-label" for="check3">Disabled</label>
+																		{% if not node.is_leaf_node %}
+																			<ul class="pages-checkbox-list">
+																				{{children}}
+																			</ul>
+																		{% endif %}
+																		{% endrecursetree %}
+																	</div>
+																	<div class="row">
+																		<div class="col-md-12 pt-3 pb-2 ">
+																			<a href="javascript:void(0);" class="text-primary SelectAllItems" >Select All</a>
+																			<span class="text-black mx-1">|</span>
+																			<a href="javascript:void(0);" class="text-primary DeSelectAllItems">Deselect All</a>
 																		</div>
 																	</div>
-																</form>
+																</div>
 															</div>
-														</div>
-														<div class="tab-pane fade" id="blog__tab2">
-															<div class="pt-4">
-																<h4>This is blog__tab2 title</h4>
-																<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-																</p>
+															<div class="tab-pane fade" id="page__tab2">
+																<div class="mb-3 mt-3">
+																	<label  class="form-label">Search</label>
+																	<input type="text" class="form-control SearchForMenu" placeholder="type here">
+																	<input type="hidden" class="search_type" value="Page">
+																</div>
+																<div class="searchContentDiv"> </div>
+															</div>
+															<div class="row">
+																<div class="col-md-12 text-right pt-2">
+																	<button type="button" class="btn btn-primary AddToMenu"  menu-type="Page" menu-id="{{menu_obj.id}}"  >Add to Menu</button>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
+												</form>
 											</div>
 										</div>
 									</div>
 									<div class="accordion-item">
 										<h2 class="accordion-header">
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseTwo" aria-expanded="false" aria-controls="default-collapseTwo">
-												About
+												Blog
 											</button>
 										</h2>
 										<div id="default-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
 											<div class="accordion-body">
-												<!-- Nav tabs -->
-												<div class="default-tab">
-													<ul class="nav nav-tabs" role="tablist">
-														<li class="nav-item">
-															<a class="nav-link active" data-bs-toggle="tab" href="#page__tab1"><i class="la la-home me-2"></i> Home</a>
-														</li>
-														<li class="nav-item">
-															<a class="nav-link" data-bs-toggle="tab" href="#page__tab2"><i class="la la-user me-2"></i> Profile</a>
-														</li>
-													</ul>
-													<div class="tab-content">
-														<div class="tab-pane fade show active" id="page__tab1" role="tabpanel">
-															<div class="pt-4">
-																<h4>This is page__tab1 title</h4>
-																<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-																</p>
+												<form action="{% url 'dashboard:menu:add_content_to_menu' %}" method="post" id="MenuAjaxAddPageForm">
+													{% csrf_token %}
+													<input type="hidden" name="menu_id" class="BlogMenu" id="BlogMenuId" value="{{menu_obj.id}}">
+													<div class="default-tab">
+														<ul class="nav nav-tabs" role="tablist">
+															<li class="nav-item">
+																<a class="nav-link active" data-bs-toggle="tab" href="#blog__tab1"><i class="la la-home me-2"></i>All Pages</a>
+															</li>
+															<li class="nav-item">
+																<a class="nav-link" data-bs-toggle="tab" href="#blog__tab2"><i class="la la-user me-2"></i>Search</a>
+															</li>
+														</ul>
+														<div class="tab-content card-body">
+															<div class="tab-pane fade show active" id="blog__tab1" role="tabpanel">
+																<div class="basic-form">
+																	<div class="form-group">
+																	{% for blog in blogs %}
+																		<div class="form-check mb-2">
+																			<input 
+																			type="checkbox" 
+																			class="form-check-input" 
+																			name="MenuItem[]" value="{{blog.id}}"
+																			>
+																			<label class="form-check-label" for="check1">{{ blog.title }}</label>
+																		</div>
+																		{% endfor %}
+																	</div>
+																	<div class="row">
+																		<div class="col-md-12 pt-3 pb-2 ">
+																			<a href="javascript:void(0);" class="text-primary SelectAllItems" >Select All</a>
+																			<span class="text-black mx-1">|</span>
+																			<a href="javascript:void(0);" class="text-primary DeSelectAllItems">Deselect All</a>
+																		</div>
+																	</div>
+																</div>
 															</div>
-														</div>
-														<div class="tab-pane fade" id="page__tab2">
-															<div class="pt-4">
-																<h4>This is page__tab2 title</h4>
-																<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-																</p>
+															<div class="tab-pane fade" id="blog__tab2">
+																<div class="mb-3 mt-3">
+																	<label  class="form-label">Search</label>
+																	<input type="text" class="form-control SearchForMenu" placeholder="type here">
+																	<input type="hidden" class="search_type" value="Blog">
+																	<input type="hidden" class="menu_id" value="{{menu_obj.id}}">
+																</div>
+																<div class="searchContentDiv"> </div>
+															</div>
+															<div class="row">
+																<div class="col-md-12 text-right pt-2">
+																	<button type="button" class="btn btn-primary AddToMenu"  menu-type="Blog" menu-id="{{menu_obj.id}}"  >Add to Menu</button>
+																</div>
 															</div>
 														</div>
 													</div>
-												</div>
+												</form>
 											</div>
 										</div>
 									</div>
 									<div class="accordion-item">
 										<h2 class="accordion-header">
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseThree" aria-expanded="false" aria-controls="#default-collapseThree">
-												Custom page
+												Custom Links
 											</button>
 										</h2>
 										<div id="default-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
-											<div class="accordion-body">
-													<div class="accordion-body">
-														<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-															</p>
+											<div class="accordion-body card-body pt-0">
+													<div class="my-3">
+														<form action="{% url 'dashboard:menu:add_link_to_menu' %}" method="post" id="MenuAjaxAddLinkForm">
+															{% csrf_token %}
+
+																<input type="hidden" name="menu_id" class="LinkMenu" id="LinkMenuId" value="{{menu_obj.id}}">
+
+															<div class="mb-3">
+																<label  class="form-label">URL</label>
+																<input type="url" name="link" class="form-control MenuLinkUrl"  >
+															</div>
+															<div class="mb-3 ">
+																<label  class="form-label">Label</label>
+																
+																<input type="text" name="linktitle" class="form-control MenuLinkTitle" >
+															</div>
+															<button type="button" title="Add Menu" class="btn btn-primary LinksAddToMenu" menu-type="custom-link" menu-id="{{menu_obj.id}}">Add to Menu</button>
+														</form>
 													</div>
-											</div>
+												</div>
 										</div>
 									</div>
 								</div>

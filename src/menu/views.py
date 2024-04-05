@@ -50,6 +50,7 @@ def cms_menu_setup(request, id=None):
 
     if request.user.has_perm('menu.add_items'):
         menu_type_view = True
+    print("user has perm: ", menu_type_view)
 
     context = {
         "menu_items": menu_items,
