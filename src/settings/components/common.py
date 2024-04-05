@@ -60,6 +60,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'src.urls'
 
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -68,6 +69,7 @@ TEMPLATES = [
             PROJECT_PATH + 'templates',
             PROJECT_PATH + 'accounts' + 'templates',
             PROJECT_PATH + 'dashboard' + 'templates',
+            PROJECT_PATH + 'pages' + 'templates',
             PROJECT_PATH + 'blogs' + 'templates',
             PROJECT_PATH + 'menu' + 'templates',
         ],

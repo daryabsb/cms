@@ -6,488 +6,231 @@
 
 {% block content %}
 
-<!--**********************************
-	Content body start
-***********************************-->
+<div class="page-titles">
+	<h4>Nestable</h4>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item"><a href="javascript:void(0)">Advanced</a></li>
+		<li class="breadcrumb-item active"><a href="javascript:void(0)">Nestable</a></li>
+	</ol>
+</div>
+<!-- row -->
 
-       <div class="content-body">
-            <div class="container-fluid">
-                <div class="page-titles">
-					<h4>Nestable</h4>
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="javascript:void(0)">Advanced</a></li>
-						<li class="breadcrumb-item active"><a href="javascript:void(0)">Nestable</a></li>
-					</ol>
-                </div>
-                <!-- row -->
-
-                <!-- Nestable -->
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Nestable</h4>
-                            </div>
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-4">
-										<div class="card">
-											<div class="card-header bg-primary">
-												<h6 class="text-white">Menu Name</h6>
-											</div>
-												<div class="card-body border-bottom border-start border-end border-primary">
-													<div class="accordion accordion-primary" id="accordion-one">
-														<div class="accordion-item">
-															<h2 class="accordion-header">
-																<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseOne" aria-expanded="true" aria-controls="default-collapseOne">
-																	Blogs
-																</button>
-															</h2>
-															<div id="default-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
-																<div class="accordion-body">
-																<!-- Nav tabs -->
-																
-																	<div class="default-tab">
-																		<ul class="nav nav-tabs" role="tablist">
-																			<li class="nav-item">
-																				<a class="nav-link active" data-bs-toggle="tab" href="#blog__tab1"><i class="la la-home me-2"></i> Home</a>
-																			</li>
-																			<li class="nav-item">
-																				<a class="nav-link" data-bs-toggle="tab" href="#blog__tab2"><i class="la la-user me-2"></i> Profile</a>
-																			</li>
-																		</ul>
-																		<div class="tab-content card-body">
-																			<div class="tab-pane fade show active" id="blog__tab1" role="tabpanel">
-																				<div class="basic-form">
-																					<form>
-																						<div class="form-group">
-																							<div class="form-check mb-2">
-																								<input type="checkbox" class="form-check-input" id="check1" value="" checked>
-																								<label class="form-check-label" for="check1">Option 1</label>
-																							</div>
-																							<div class="form-check mb-2">
-																								<input type="checkbox" class="form-check-input" id="check2" value="">
-																								<label class="form-check-label" for="check2">Option 2</label>
-																							</div>
-																							<div class="form-check disabled">
-																								<input type="checkbox" class="form-check-input" id="check3" value="" disabled>
-																								<label class="form-check-label" for="check3">Disabled</label>
-																							</div>
-																						</div>
-																					</form>
-																				</div>
-																			</div>
-																			<div class="tab-pane fade" id="blog__tab2">
-																				<div class="pt-4">
-																					<h4>This is blog__tab2 title</h4>
-																					<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-																					</p>
-																				</div>
-																			</div>
+<!-- Nestable -->
+<div class="row">
+	<div class="col-12">
+		<div class="card">
+			<div class="card-header">
+				<h4 class="card-title">Nestable</h4>
+			</div>
+			<div class="card-body">
+				<div class="row">
+					<div class="col-md-4">
+						<div class="card">
+							<div class="card-header bg-primary">
+								<h6 class="text-white">Menu Name</h6>
+							</div>
+							<div class="card-body border-bottom border-start border-end border-primary">
+								{% if menu_type_view %}
+								<div class="accordion" id="accordion-one">
+									<div class="accordion-item" style="display:none;">
+										<h2 class="accordion-header">
+											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseOne" aria-expanded="true" aria-controls="default-collapseOne">
+												Page
+											</button>
+										</h2>
+										<div id="default-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
+											<div class="accordion-body">
+												<div class="default-tab">
+													<ul class="nav nav-tabs" role="tablist">
+														<li class="nav-item">
+															<a class="nav-link active" data-bs-toggle="tab" href="#blog__tab1"><i class="la la-home me-2"></i> Home</a>
+														</li>
+														<li class="nav-item">
+															<a class="nav-link" data-bs-toggle="tab" href="#blog__tab2"><i class="la la-user me-2"></i> Profile</a>
+														</li>
+													</ul>
+													<div class="tab-content card-body">
+														<div class="tab-pane fade show active" id="blog__tab1" role="tabpanel">
+															<div class="basic-form">
+																<form>
+																	<div class="form-group">
+																		<div class="form-check mb-2">
+																			<input type="checkbox" class="form-check-input" id="check1" value="" checked>
+																			<label class="form-check-label" for="check1">Option 1</label>
+																		</div>
+																		<div class="form-check mb-2">
+																			<input type="checkbox" class="form-check-input" id="check2" value="">
+																			<label class="form-check-label" for="check2">Option 2</label>
+																		</div>
+																		<div class="form-check disabled">
+																			<input type="checkbox" class="form-check-input" id="check3" value="" disabled>
+																			<label class="form-check-label" for="check3">Disabled</label>
 																		</div>
 																	</div>
-																
-																<!-- card end -->
+																</form>
 															</div>
 														</div>
-													</div>
-													<div class="accordion-item">
-														<h2 class="accordion-header">
-															<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseTwo" aria-expanded="false" aria-controls="default-collapseTwo">
-																About
-															</button>
-														</h2>
-														<div id="default-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
-															<div class="accordion-body">
-																<!-- Nav tabs -->
-																<div class="default-tab">
-																	<ul class="nav nav-tabs" role="tablist">
-																		<li class="nav-item">
-																			<a class="nav-link active" data-bs-toggle="tab" href="#page__tab1"><i class="la la-home me-2"></i> Home</a>
-																		</li>
-																		<li class="nav-item">
-																			<a class="nav-link" data-bs-toggle="tab" href="#page__tab2"><i class="la la-user me-2"></i> Profile</a>
-																		</li>
-																	</ul>
-																	<div class="tab-content">
-																		<div class="tab-pane fade show active" id="page__tab1" role="tabpanel">
-																			<div class="pt-4">
-																				<h4>This is page__tab1 title</h4>
-																				<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
-																				</p>
-																			</div>
-																		</div>
-																		<div class="tab-pane fade" id="page__tab2">
-																			<div class="pt-4">
-																				<h4>This is page__tab2 title</h4>
-																				<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-																				</p>
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</div>
-													</div>
-													<div class="accordion-item">
-														<h2 class="accordion-header">
-															<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseThree" aria-expanded="false" aria-controls="#default-collapseThree">
-																Custom page
-															</button>
-														</h2>
-														<div id="default-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
-															<div class="accordion-body">
-																	<div class="accordion-body">
-																		<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
-																			</p>
-																	</div>
+														<div class="tab-pane fade" id="blog__tab2">
+															<div class="pt-4">
+																<h4>This is blog__tab2 title</h4>
+																<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+																</p>
 															</div>
 														</div>
 													</div>
 												</div>
 											</div>
 										</div>
-                                    </div>
-                                    <div class="col-md-8">
-										<div class="card">
-											<div class="card-header bg-primary">
-												<h6 class="text-white">Menu Name</h6>
-												<input 
-													type="text" id="MenuNameEdit" class="form-control w-auto"  
-													value="{{ menu_obj.title }}">
-												{% if perms.menu.change_items and perms.menu.change_menus %}
-												<button type="button" title="Save Menu" class="btn btn-primary light SaveMenu" rel="{{menu_obj.id}}">Save Menu</button>
-												{% endif %}
-											</div>
-											<div class="card-body border-start border-end border-primary">
-											<div class="dd" id="nestable">
-													<ol class="dd-list">
-														<li class="dd-item menu-ac-item" data-id="1">
-															<!-- <div class="dd-handle"></div> -->
-															<div class="accordion" id="accordionExample-1">
-																<div class="accordion-item">
-																	<div class="accordion-header p-0" id="heading-1">
-																		<div class="move-media dd-handle">
-																			<i class="fa-solid fa-arrows-up-down-left-right"></i>
-																		</div>
-																	  <button class="accordion-button contact" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="true" aria-controls="collapse-1">
-																		Contact Us
-																	  </button>
-																	</div>
-																	<div id="collapse-1" class="accordion-collapse collapse" aria-labelledby="heading-1" data-bs-parent="#accordionExample-1">
-																		<div class="accordion-body">
-																			<div class="row">
-																				<div class="col-xl-12">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">URL</label>
-																						<input type="text" class="form-control" placeholder="https://bodyclub.dexignzone.com/xhtml/about-us.html">
-																					  </div>
-																					</form>													
-																				</div>
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Navigation Label</label>
-																						<input type="text" class="form-control" placeholder="Contact Us">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Title Attribute</label>
-																						<input type="text" class="form-control" placeholder="Contact Us">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="d-flex align-items-center">
-																					<a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
-																					
-																					<a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
-																					Cancel
-																				  </a>
-																				</div>
-																			</div>												
-																		</div>
-																	</div>
-																</div>
-																<!-- Accordion body -->
-																
-
-															</div>
+									</div>
+									<div class="accordion-item">
+										<h2 class="accordion-header">
+											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseTwo" aria-expanded="false" aria-controls="default-collapseTwo">
+												About
+											</button>
+										</h2>
+										<div id="default-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
+											<div class="accordion-body">
+												<!-- Nav tabs -->
+												<div class="default-tab">
+													<ul class="nav nav-tabs" role="tablist">
+														<li class="nav-item">
+															<a class="nav-link active" data-bs-toggle="tab" href="#page__tab1"><i class="la la-home me-2"></i> Home</a>
 														</li>
-														<li class="dd-item menu-ac-item" data-id="2">
-															<div class="accordion" id="accordionExample-2">
-																<div class="accordion-item">
-																	<div class="accordion-header p-0" id="heading-2">
-																		<div class="move-media dd-handle">
-																			<i class="fa-solid fa-arrows-up-down-left-right"></i>
-																		</div>
-																	  <button class="accordion-button contact" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2">
-																		Privacy Policy
-																	  </button>
-																	</div>
-																	<div id="collapse-2" class="accordion-collapse collapse" aria-labelledby="heading-2" data-bs-parent="#accordionExample-2">
-																		<div class="accordion-body">
-																			<div class="row">
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Navigation Label</label>
-																						<input type="text" class="form-control" placeholder="Privacy Policy">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Title Attribute</label>
-																						<input type="text" class="form-control" placeholder="Privacy Policy">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="col-xl-12">
-																					<p class="dz-terms">Original: <a href="javascript:void(0);">Privacy Policy</a></p>
-																				</div>
-																				<div class="d-flex align-items-center">
-																					<a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
-																					<a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse-2" aria-expanded="false" aria-controls="collapse-2">
-																					Cancel
-																				  </a>
-																				</div>
-																			</div>												
-																		</div>
-																	</div>
-																</div>
-															</div>
+														<li class="nav-item">
+															<a class="nav-link" data-bs-toggle="tab" href="#page__tab2"><i class="la la-user me-2"></i> Profile</a>
 														</li>
-														<li class="dd-item menu-ac-item" data-id="3">
-															<div class="accordion" id="accordionExample-3">
-																<div class="accordion-item">
-																	<div class="accordion-header p-0" id="heading-3">
-																		<div class="move-media dd-handle">
-																			<i class="fa-solid fa-arrows-up-down-left-right"></i>
-																		</div>
-																	  <button class="accordion-button contact" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="true" aria-controls="collapse-3">
-																		Terms and Conditions
-																	  </button>
-																	</div>
-																	<div id="collapse-3" class="accordion-collapse collapse" aria-labelledby="heading-3" data-bs-parent="#accordionExample-3">
-																		<div class="accordion-body">
-																			<div class="row">
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Navigation Label</label>
-																						<input type="text" class="form-control" placeholder="Terms and Conditions">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Title Attribute</label>
-																						<input type="text" class="form-control" placeholder="Terms and Conditions">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="col-xl-12">
-																					<p class="dz-terms">Original: <a href="javascript:void(0);">Terms and Conditions</a></p>
-																				</div>
-																				<div class="d-flex align-items-center">
-																					<a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
-																					<a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-																					Cancel
-																				  </a>
-																				</div>
-																			</div>												
-																		</div>
-																	</div>
-																</div>
+													</ul>
+													<div class="tab-content">
+														<div class="tab-pane fade show active" id="page__tab1" role="tabpanel">
+															<div class="pt-4">
+																<h4>This is page__tab1 title</h4>
+																<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove.
+																</p>
 															</div>
-														</li>
-														<li class="dd-item menu-ac-item" data-id="4">
-															<div class="accordion" id="accordionExample-4">
-																<div class="accordion-item">
-																	<div class="accordion-header p-0" id="heading-4">
-																		<div class="move-media dd-handle">
-																			<i class="fa-solid fa-arrows-up-down-left-right"></i>
-																		</div>
-																	  <button class="accordion-button contact" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-4" aria-expanded="true" aria-controls="collapse-4">
-																		About Us
-																	  </button>
-																	</div>
-																	<div id="collapse-4" class="accordion-collapse collapse" aria-labelledby="heading-4" data-bs-parent="#accordionExample-4">
-																		<div class="accordion-body">
-																			<div class="row">
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Navigation Label</label>
-																						<input type="text" class="form-control" placeholder="About Us">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Title Attribute</label>
-																						<input type="text" class="form-control" placeholder="About Us">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="col-xl-12">
-																					<p class="dz-terms">Original: <a href="javascript:void(0);">About Us</a></p>
-																				</div>
-																				<div class="d-flex align-items-center">
-																					<a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
-																					<a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse-4" aria-expanded="false" aria-controls="collapse-4">
-																					Cancel
-																				  </a>
-																				</div>
-																			</div>												
-																		</div>
-																	</div>
-																</div>
+														</div>
+														<div class="tab-pane fade" id="page__tab2">
+															<div class="pt-4">
+																<h4>This is page__tab2 title</h4>
+																<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+																</p>
 															</div>
-														</li>
-														<li class="dd-item menu-ac-item" data-id="5">
-															<div class="accordion" id="accordionExample-5">
-																<div class="accordion-item">
-																	<div class="accordion-header p-0" id="heading-5">
-																		<div class="move-media dd-handle">
-																			<i class="fa-solid fa-arrows-up-down-left-right"></i>
-																		</div>
-																	  <button class="accordion-button contact" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-5" aria-expanded="true" aria-controls="collapse-5">
-																		Important Information
-																	  </button>
-																	</div>
-																	<div id="collapse-5" class="accordion-collapse collapse" aria-labelledby="heading-5" data-bs-parent="#accordionExample-5">
-																		<div class="accordion-body">
-																			<div class="row">
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Navigation Label</label>
-																						<input type="text" class="form-control" placeholder="Important Information">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="col-xl-6">
-																					<form>
-																					  <div class="mb-3">
-																						<label class="form-label">Title Attribute</label>
-																						<input type="text" class="form-control" placeholder="">
-																					  </div>
-																					</form>
-																				</div>
-																				<div class="col-xl-12">
-																					<p class="dz-terms">Original: <a href="javascript:void(0);">Terms and Conditions</a></p>
-																				</div>
-																				<div class="d-flex align-items-center">
-																					<a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
-																					<a href="javascript:void(0);" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-5" aria-expanded="false" aria-controls="collapse-5">
-																					Cancel
-																				  </a>
-																				</div>
-																			</div>												
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</li>
-													</ol>
-												</div>
-											<div class="nestable2">
-												<form method="post" id="MenuItem2Form">
-													<div class="dd" id="nestable2">
-														<ol class="dd-list" id="setMenu">
-															{% recursetree menu_items %}
-															<li class="dd-item accordion position-relative"  data-id="{{node.id}}">
-																<div class="accordion-header p-0" id="heading-1">
-																<div class="move-media dd-handle">
-																	<i class="fa-solid fa-arrows-up-down-left-right"></i>
-																	{{ node.title}}
-																</div>
-																<div class="accordion-item position-absolute w-100" id="accordionExample-1">
-																	<button type="button" class="btn btn-xs btn-link collapsed position-absolute top-036 end-0"
-																		data-bs-toggle="collapse" data-bs-target="#collapse-{{node.id}}" aria-expanded="false"
-																		style="z-index:1000;">
-																		<i class="fa-solid fa-caret-down text-white"></i>
-																	</button>
-																</div>
-																<div id="collapse-{{node.id}}" class="accordion-collapse collapse" aria-labelledby="heading-1" data-bs-parent="#accordionExample-1" style="">
-																	<div class="accordion-body dd-content">
-																		<div class="row">
-																			<div class="col-xl-12">
-																				<div class="mb-3">
-																					<label class="form-label">Navigation Label</label>
-																					<input type="text" name="item_label{{node.id}}" class="form-control itemLabel" id="MenuItem{{node.id}}Title" value="Home" rel="{{node.id}}">
-																				</div>	
-																			</div>
-																			<div class="col-xl-6 XTitleAttribute" style="">
-																					<div class="mb-3">
-																						<label class="form-label">Title Attribute</label>
-																						<input type="text" name="item_title_attribute{{node.id}}" class="form-control" id="MenuItem{{node.id}}TitleAttribute" value="">
-																					</div>
-																			</div>
-																			<div class="col-xl-6 XClassAttribute" style="">
-																					<div class="mb-3">
-																						<label class="form-label">Class Attribute</label>
-																						<input type="text" name="item_class_attribute{{node.id}}" class="form-control" id="MenuItem{{node.id}}ClassAttribute" value="">
-																					</div>
-																			</div>
-																			<div class="col-xl-12 XTargetAttribute" style="">
-																				<div class="form-check custom-checkbox mb-3">
-																					<input type="hidden" name="item_target_attribute{{node.id}}" id="MenuItem{{node.id}}TargetAttribute" class="form-check-input" value="0">
-																					<input type="checkbox" name="item_target_attribute{{node.id}}" id="MenuItem{{node.id}}TargetAttribute" class="form-check-input" value="1">
-																					<label class="form-check-label" for="MenuItem{{node.id}}TargetAttribute">open in new tab</label>
-																				</div>
-																			</div>
-																			<div class="col-xl-12 XDescription" style="">
-																					<div class="mb-3">
-																						<label class="form-label">Description</label>
-																						<textarea name="item_description{{node.id}}" class="form-control" rows="4" id="MenuItem{{node.id}}Description"></textarea>
-																					</div>
-																			</div>
-																			<div class="d-flex align-items-center">
-																				<a href="javascript:void(0);" class="RemoveItem text-primary" rel="{{node.id}}" item-name="Home">Remove</a><span class="mx-2">|</span>
-																				<a href="javascript:void(0);" class="CancelItem">Cancel</a>            
-																			</div>
-																		</div>
-																	</div>
-																</div>
-															</li>
-															{% endrecursetree %} 
-														</ol>
+														</div>
 													</div>
-												</form>
-											</div>
-										</div>
-											<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">
-												<div class="card-footer-link mb-4 mb-sm-0">
-													<p class="card-text text-dark d-inline">Last updated 3 mins ago</p>
 												</div>
-				
-												<a href="javascript:void()" class="btn btn-primary">Save menu</a>
 											</div>
 										</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+									</div>
+									<div class="accordion-item">
+										<h2 class="accordion-header">
+											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseThree" aria-expanded="false" aria-controls="#default-collapseThree">
+												Custom page
+											</button>
+										</h2>
+										<div id="default-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
+											<div class="accordion-body">
+													<div class="accordion-body">
+														<p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor.
+															</p>
+													</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% else %}
+								<p>You have nothing to add so far!</p>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8">
+						<div class="card">
+							<div class="card-header bg-primary">
+								<h6 class="text-white">Menu Name</h6>
+								<input 
+									type="text" id="MenuNameEdit" class="form-control w-auto"  
+									value="{{ menu_obj.title }}">
+								{% if perms.menu.change_items and perms.menu.change_menus %}
+								<button type="button" title="Save Menu" class="btn btn-primary light SaveMenu" rel="{{menu_obj.id}}">Save Menu</button>
+								{% endif %}
+							</div>
+							<div class="card-body border-start border-end border-primary">
+							<div class="dd" id="nestable">
+									<ol class="dd-list">
+									{% recursetree menu_items %}
+										<li class="dd-item menu-ac-item" data-id="{{node.id}}">
+											<!-- <div class="dd-handle"></div> -->
+											<div class="accordion" id="accordion-{{node.id}}">
+												<div class="accordion-item">
+													<div class="accordion-header p-0" id="heading-{{node.id}}">
+														<div class="move-media dd-handle">
+															<i class="fa-solid fa-arrows-up-down-left-right"></i>
+														</div>
+														<button class="accordion-button contact collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{node.id}}" aria-expanded="false" aria-controls="collapse-{{node.id}}">
+														{{ node.title}}
+														</button>
+													</div>
+													<div id="collapse-{{node.id}}" class="accordion-collapse collapse" aria-labelledby="heading-{{node.id}}" data-bs-parent="#accordion-{{node.id}}">
+														<div class="accordion-body">
+															<div class="row">
+																<div class="col-xl-12">
+																	<form>
+																		<div class="mb-3">
+																		<label class="form-label">URL</label>
+																		<input type="text" class="form-control" placeholder="https://bodyclub.dexignzone.com/xhtml/about-us.html">
+																		</div>
+																	</form>													
+																</div>
+																<div class="col-xl-6">
+																	<form>
+																		<div class="mb-3">
+																		<label class="form-label">Navigation Label</label>
+																		<input type="text" class="form-control" placeholder="Contact Us">
+																		</div>
+																	</form>
+																</div>
+																<div class="col-xl-6">
+																	<form>
+																		<div class="mb-3">
+																		<label class="form-label">Title Attribute</label>
+																		<input type="text" class="form-control" placeholder="Contact Us">
+																		</div>
+																	</form>
+																</div>
+																<div class="d-flex align-items-center">
+																	<a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
+																	
+																	<a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
+																	Cancel
+																	</a>
+																</div>
+															</div>												
+														</div>
+													</div>
+												</div>
+												<!-- Accordion body -->
+												
 
-            </div>
-        </div>
+											</div>
+										</li>
+										{% endrecursetree %} 
+									</ol>
+								</div>
+						
+						</div>
+							<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">
+								<div class="card-footer-link mb-4 mb-sm-0">
+									<p class="card-text text-dark d-inline">Last updated 3 mins ago</p>
+								</div>
 
-
-<!--**********************************
-	Content body end
-***********************************-->
-
+								<a href="javascript:void()" class="btn btn-primary">Save menu</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 
 {% comment %} {% block extra_scripts %} {% endcomment %}
     <!--**********************************

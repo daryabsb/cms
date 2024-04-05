@@ -8,6 +8,13 @@ app_name = 'dashboard'
 
 urlpatterns = [
     path('users/', users_views.users, name="users"),
+    path('user-details/<int:id>/', users_views.user_details, name="user-details"),
+    path('add-user/', users_views.add_user, name="add-user"),
+    path('edit-user/<int:id>/', users_views.edit_user, name="edit-user"),
+    path('delete-user/<int:id>/', users_views.delete_user, name="delete-user"),
+    path('delete-multiple-user/', users_views.delete_multiple_user,
+         name="delete-multiple-user"),
+    #     path('reels/', include('dashboard.cms.reels.urls', namespace='reels')),
 
     path('login/', users_views.login_user, name="login"),
     path('logout/', users_views.logout_user, name="logout"),
@@ -26,6 +33,7 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/', users_views.activate, name='activate'),
 
     # CMS Links
+    path('pages/', include('src.pages.urls', namespace='pages')),
     path('blogs/', include('src.blogs.urls', namespace='blog')),
     path('menus/', include('src.menu.urls', namespace='menu')),
 
