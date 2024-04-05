@@ -187,28 +187,19 @@
                             </tbody>
                         </table>
                     </div>
-
-
-
-
-
                     <nav mt-5 class="d-flex align-items-center justify-content-between pt-3">
-
                         <p>
                         <span class="current">
                         Page {{ categories.number }} of {{ categories.paginator.num_pages }}.
                         </span> 
-                        </p>
-                            
-        
-                        <ul class="pagination pagination-gutter  justify-content-end">
-                            
+                        </p
+                        <ul class="pagination pagination-gutter  justify-content-end"> 
                                 <li class="page-item page-indicator ">
-                                    <a class="page-link" href="{% if categories.has_previous %}
-                                                                ?page={{ categories.previous_page_number }}
-                                                                {% else %}
-                                                                javascript:void(0);
-                                                                {% endif %}">
+                                    <a class="page-link" 
+                                        href="{% if categories.has_previous %}
+                                        ?page={{ categories.previous_page_number }}
+                                        {% else %}javascript:void(0);
+                                            {% endif %}">
                                         <i class="la la-angle-left"></i></a>
                                 </li>
         
@@ -216,37 +207,22 @@
         
                                 <li class="page-item {% if categories.number == i %}
                                                     active{% endif %}"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-                            
                             {% endfor %}
-        
-                            
-                            
-                            
                             <li class="page-item page-indicator ">
                                 <a class="page-link"  href="{% if categories.has_next %}
-                                                            ?page={{ categories.next_page_number }}
-                                                            {% else %}
-                                                            javascript:void(0);
-                                                            {% endif %}">
-                                    <i class="la la-angle-right"></i></a>
+                                    ?page={{ categories.next_page_number }}
+                                    {% else %}
+                                    javascript:void(0);
+                                    {% endif %}">
+                                    <i class="la la-angle-right"></i>
+                                </a>
                             </li>
-        
                         </ul>
                     </nav>
-
-        
-        
-
-
-        
                 </div>
             </div>
         </div>
-
-
     </div>
-
-  
 </div>
 
 {% endblock %}
