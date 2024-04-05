@@ -35,6 +35,7 @@ urlpatterns = [
     # CMS Links
     path('pages/', include('src.pages.urls', namespace='pages')),
     path('blogs/', include('src.blogs.urls', namespace='blog')),
+    path('comments/', include('src.comment.urls', namespace='comment')),
     path('menus/', include('src.menu.urls', namespace='menu')),
 
     path('', dashboard_views.index, name="index"),

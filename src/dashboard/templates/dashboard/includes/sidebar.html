@@ -64,6 +64,10 @@
                         </li>
                     {% endif %}
 
+                                        {% if perms.comment.view_comment %}
+                    <li><a href="{% url 'dashboard:comment:comments' %}">{% translate 'Comment' %}</a></li>
+                    {% endif %}
+
 
                 <!-- Menu Setup -->
                 {% if perms.menu.view_menus or perms.menu.change_menus or perms.menu.add_menus or perms.menu.delete_menus %}

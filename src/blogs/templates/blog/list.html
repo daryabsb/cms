@@ -1,10 +1,10 @@
 {% extends 'dashboard/dashboard_base.html' %}
 {% load static %}
 
-		{% block extra_head %}
+		{% comment %} {% block extra_head %}
 	<!-- Datatable -->
 <link href="{% static 'dashboard/vendor/datatables/css/jquery.dataTables.min.css' %}" rel="stylesheet"> 
-	{% endblock extra_head %}
+	{% endblock extra_head %} {% endcomment %}
 
 
 {% block content %}
@@ -135,7 +135,7 @@
 </div>
         
     <!-- Datatable -->
-    {% block extra_scripts %}
+    {% comment %} {% block extra_scripts %}
     {{block.super}}
     <script src="{% static 'dashboard/vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
     {% endblock extra_scripts %}
@@ -154,5 +154,5 @@
 				
 			});
 		})(jQuery);
-	</script>
+	</script> {% endcomment %}
    {% endblock content %}

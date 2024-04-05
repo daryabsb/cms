@@ -39,6 +39,7 @@ LOCAL_APPS = [
     'src.dashboard.cms',
 
     'src.blogs',
+    'src.comment',
     'src.menu',
     'src.sliders',
     'src.pages',

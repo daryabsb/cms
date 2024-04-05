@@ -358,6 +358,10 @@ dz_array = {
                 f"{foldername_d}/vendor/nestable2/css/jquery.nestable.min.css",
                 f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.css",
                 "cms/menu/css/menu.css",
+            ],
+            "cms_blog_list": [
+                f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
+
             ]
         },
         "js": {
@@ -369,6 +373,11 @@ dz_array = {
                 f"{foldername_d}/js/plugins-init/nestable-init.js",
 
             ],
+            "cms_blog_list": [
+                f"{foldername_d}/vendor/datatables/js/jquery.dataTables.min.js",
+                f"{foldername_d}/js/plugins-init/datatables.init.js",
+
+            ]
         },
         "menu": {
             "views": {
