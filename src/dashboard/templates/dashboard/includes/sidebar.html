@@ -91,6 +91,23 @@
                 </ul>
             </li>
             {% endif %}
+
+            {% if perms.dashboard.view_configurations or perms.dashboard.change_configurations or perms.dashboard.add_configurations or perms.dashboard.delete_configurations %}
+            <li>
+                <a class="has-arrow " href="javascript:void(0);" aria-expanded="false">
+                    <i class="bi bi-gear"></i>
+                    <span class="nav-text">{% translate 'Config' %}<span class="badge light badge-sm badge-primary ms-2 mb-0">{% translate 'Modules'%}</span></span>
+                    
+                </a>
+                <ul aria-expanded="false">
+                    {% for prefix in ''|getAllprefix %}
+                    <li><a href="{% url 'dashboard:filter-config' prefix=prefix %}">{{prefix}}</a></li>
+                    {% endfor %}
+                    <li><a href="{% url 'dashboard:all-config' %}">{% translate 'Configurations' %}</a></li>
+                </ul>
+            </li>
+        {% endif %}
+        
             <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                     <i class="flaticon-381-controls-3"></i>
                     <span class="nav-text">Charts</span>

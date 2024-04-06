@@ -41,6 +41,17 @@ urlpatterns = [
      path('subscribe/', include('src.subscribe.urls', namespace='subscribe')),
      path('contact-us/', include('src.contactus.urls', namespace='contactus')),
 
+     path('configurations/',dashboard_views.all_config,name='all-config'),
+     path('configurations/reset/',dashboard_views.reset_config,name='reset-config'),
+     path('configurations/download/',dashboard_views.download_config,name='download-config'),
+     path('configurations/delete/<int:id>/<str:file_name>/',dashboard_views.deleteConfigSlider,name='deleteConfigSlider'),
+
+     path('configurations/prefix/<str:prefix>/',dashboard_views.filter_config,name='filter-config'),
+     path('add-configurations/',dashboard_views.add_config,name='add-config'),
+     path('edit-configurations/<int:id>/',dashboard_views.edit_config,name='edit-config'),
+     path('delete-configurations/<int:id>/',dashboard_views.delete_config,name='delete-config'),
+
+
      path('', dashboard_views.index, name="index"),
 
      # This Route for PasswordChange

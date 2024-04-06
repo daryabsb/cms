@@ -362,7 +362,10 @@ dz_array = {
             "cms_blog_list": [
                 f"{foldername_d}/vendor/datatables/css/jquery.dataTables.min.css",
 
-            ]
+            ],
+            "filter_config": [
+                # f"{foldername_d}/css/homepage.css",
+            ],
         },
         "js": {
             "cms_menu_setup": [

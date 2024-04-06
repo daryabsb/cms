@@ -1,3 +1,6 @@
 from django.contrib import admin
+from src.dashboard.models import Configurations
 
-# Register your models here.
+
+
+admin.site.register(Configurations)
