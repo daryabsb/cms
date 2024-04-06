@@ -68,11 +68,26 @@
                     <li><a href="{% url 'dashboard:comment:comments' %}">{% translate 'Comment' %}</a></li>
                     {% endif %}
 
+                    {% if perms.reels.view_reels or perms.reels.change_reels or perms.reels.add_reels or perms.reels.delete_reels %}
+                    <li><a href="{% url 'dashboard:reels:reel_list' %}">{% translate 'reels' %}</a></li>
+                    {% endif %}
 
-                <!-- Menu Setup -->
-                {% if perms.menu.view_menus or perms.menu.change_menus or perms.menu.add_menus or perms.menu.delete_menus %}
+                    <li><a href="{% url 'dashboard:sliders:slider_list' %}">{% translate 'sliders' %}</a></li>
+
+                    <!-- Menu Setup -->
+                    {% if perms.menu.view_menus or perms.menu.change_menus or perms.menu.add_menus or perms.menu.delete_menus %}
                     <li><a href="{% url 'dashboard:menu:setup' %}">{% translate 'Menu Setup' %}</a></li>
                     {% endif %}
+
+                    {% if perms.subscribe.view_subscribes or perms.subscribe.change_subscribes or perms.subscribe.add_subscribes or perms.subscribe.delete_subscribes %}
+                    <li><a href="{% url 'dashboard:subscribe:subscribers' %}">{% translate 'Subscribers' %}</a></li>
+                    {% endif %}                
+
+                
+                    {% if perms.contactus.view_contactus or perms.contactus.change_contactus or perms.contactus.add_contactus or perms.contactus.delete_contactus %}
+                    <li><a href="{% url 'dashboard:contactus:contact-us' %}">{% translate 'Contact Us' %}</a></li>
+                    {% endif %}
+                
                 </ul>
             </li>
             {% endif %}

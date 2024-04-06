@@ -40,8 +40,11 @@ LOCAL_APPS = [
 
     'src.blogs',
     'src.comment',
+    'src.contactus',
     'src.menu',
+    'src.reels',
     'src.sliders',
+    'src.subscribe',
     'src.pages',
 ]
 
@@ -73,6 +76,11 @@ TEMPLATES = [
             PROJECT_PATH + 'pages' + 'templates',
             PROJECT_PATH + 'blogs' + 'templates',
             PROJECT_PATH + 'menu' + 'templates',
+
+            PROJECT_PATH + 'reels' + 'templates',
+            PROJECT_PATH + 'sliders' + 'templates',
+            PROJECT_PATH + 'subscribe' + 'templates',
+            PROJECT_PATH + 'contactus' + 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {

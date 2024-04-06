@@ -1,69 +1,73 @@
 from django.contrib import messages
 from django.shortcuts import render,redirect,get_object_or_404
-from src.sliders.models import Slider
-from src.sliders.forms import  SliderForm
+from src.reels.models import Video
+from src.reels.forms import  VideoForm
 from src.pages.models import Page
 from django.http import HttpResponse, JsonResponse
 from django.core.paginator import Paginator
 from src.core import utils
 
 import json
+
+
+
+
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import Slider
-from .forms import SliderForm
+from .models import Video
+from .forms import VideoForm
 
 @login_required(login_url='dashboard:login')
-def slider_list(request):
-    template_name = 'slider_list.html'
-    slider_list = Slider.objects.all()
+def reel_list(request):
+    template_name = 'reel_list.html'
+    reel_list = Video.objects.all()
     context = {
-        "sliders": slider_list,
-        "page_title": "Sliders"
+        "reels": reel_list,
+        "page_title": "Reels"
     }
     return render(request, template_name, context)
 
 @login_required(login_url='dashboard:login')
-def slider_create(request):
-    template_name = 'slider_create.html'
+def reel_create(request):
+    template_name = 'reel_create.html'
     if request.method == 'POST':
-        form=SliderForm(request.POST,request.FILES)
+        form=VideoForm(request.POST,request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('dashboard:sliders:slider_list')
+            return redirect('dashboard:reels:reel_list')
     else:
-        form=SliderForm()
+        form=VideoForm()
     return render(request, template_name,{'form':form})
 
 @login_required(login_url='dashboard:login')
-def slider_edit(request, id):
-    template_name = 'slider_edit.html'
+def reel_edit(request, id):
+    template_name = 'reel_edit.html'
 
     try:
         # Step 1: Retrieve the existing Video object
-        slider_obj = Slider.objects.get(id=id)
+        reel_obj = Video.objects.get(id=id)
 
         if request.method == 'POST':
             # Step 2: Use the VideoForm to handle the form data (including files)
-            form = SliderForm(request.POST, request.FILES, instance=slider_obj)
+            form = VideoForm(request.POST, request.FILES, instance=reel_obj)
 
             if form.is_valid():
                 # Step 3: Save the updated Video object
                 form.save()
-                return redirect('dashboard:sliders:slider_list')
+                return redirect('dashboard:reels:reel_list')
         else:
             # Step 4: Render the form for editing
-            form = SliderForm(instance=slider_obj)
+            form = VideoForm(instance=reel_obj)
 
-        return render(request, template_name, {'form': form, 'slider_obj': slider_obj})
-    except Slider.DoesNotExist:
+        return render(request, template_name, {'form': form, 'reel_obj': reel_obj})
+    except Video.DoesNotExist:
         # Handle the case where the specified Video object does not exist
-        return HttpResponse('Image not found', status=404)
+        return HttpResponse('Video not found', status=404)
 
 
 @login_required(login_url='dashboard:login')
-def slider_delete(request, id):
-    slider = Slider.objects.get(id=id)
-    if slider:
-        slider.delete()
-    return redirect('dashboard:sliders:slider_list')
+def reel_delete(request, id):
+    reel = Video.objects.get(id=id)
+    if reel:
+        reel.delete()
+    return redirect('dashboard:reels:reel_list')
