@@ -31,10 +31,11 @@
                                        {{ form.avatar|attr:"type:file" }}
                                        <label for="id_avatar"><i class="fas fa-pencil-alt"></i></label>
                                     </div>
-                                    <div class="avatar-preview">
-                                       <div id="imagePreview" style="background-image: url('{{ form.instance.avatar.url }}');">
-                                       </div>
-                                    </div>
+                                    <img src="/media/profile/image/default.jpg" width="200" class="img-fluid border border-4 rounded-circle" alt="">
+                                    {% comment %} <div class="avatar-preview">
+                                      
+                                     
+                                    </div> {% endcomment %}
                               </div>
                               <div class="text-danger w-100 d-block mt-1">
                                  {{ form.avatar.errors }}     

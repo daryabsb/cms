@@ -366,6 +366,9 @@ dz_array = {
             "filter_config": [
                 # f"{foldername_d}/css/homepage.css",
             ],
+            "courses": [
+                f"{foldername_d}/vendor/swiper/css/swiper-bundle.min.css",
+            ],
         },
         "js": {
             "cms_menu_setup": [
@@ -380,7 +383,11 @@ dz_array = {
                 f"{foldername_d}/vendor/datatables/js/jquery.dataTables.min.js",
                 f"{foldername_d}/js/plugins-init/datatables.init.js",
 
-            ]
+            ],
+            "courses": [
+                f"{foldername_d}/vendor/swiper/js/swiper-bundle.min.js",
+                f"{foldername_d}/js/dlab.carousel.js",
+            ],
         },
         "menu": {
             "views": {

@@ -586,7 +586,7 @@
 		<!--**********************************
             Chat box End
         ***********************************-->
-		
+	{% load i18n %}	
 		<!--**********************************
             Header start
         ***********************************-->
@@ -596,6 +596,7 @@
                     <div class="collapse navbar-collapse justify-content-between">
                         <div class="header-left">
                             <div class="dashboard_bar">
+								{% trans page_title %}
 								<div class="input-group search-area d-lg-inline-flex d-none">
 									<input type="text" class="form-control" placeholder="Search here...">
 									<div class="input-group-append">
