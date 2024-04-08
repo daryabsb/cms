@@ -7,7 +7,7 @@ from django.shortcuts import render
 def index(request):
     # config_data = setup_config.loadConfig()
     theme_value = 'industico' # config_data.get('Theme', {}).get('value', 'theme5')
-    template_name = f"{theme_value}/index.html"
+    template_name = f"{theme_value}/home/index.html"
     # config = setup_config.loadConfig()
     # query = request.GET.get('search')
     # if config['Reading']['show_on_front']['value'] == 'Page':
