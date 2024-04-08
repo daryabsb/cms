@@ -46,6 +46,9 @@ LOCAL_APPS = [
     'src.sliders',
     'src.subscribe',
     'src.pages',
+
+    # Frontends
+    'src.industico',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -81,6 +84,9 @@ TEMPLATES = [
             PROJECT_PATH + 'sliders' + 'templates',
             PROJECT_PATH + 'subscribe' + 'templates',
             PROJECT_PATH + 'contactus' + 'templates',
+
+            # Frontend templates
+            PROJECT_PATH + 'industico' + 'templates',
         ],
         'APP_DIRS': True,
         'OPTIONS': {
