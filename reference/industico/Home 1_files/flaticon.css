@@ -1,0 +1,230 @@
+@font-face {
+    font-family: "flaticon";
+    src: url("./flaticon.ttf?6251fe4218d32195159a39393abe4135") format("truetype"),
+url("./flaticon.woff?6251fe4218d32195159a39393abe4135") format("woff"),
+url("./flaticon.woff2?6251fe4218d32195159a39393abe4135") format("woff2"),
+url("./flaticon.eot?6251fe4218d32195159a39393abe4135#iefix") format("embedded-opentype"),
+url("./flaticon.svg?6251fe4218d32195159a39393abe4135#flaticon") format("svg");
+}
+
+i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+    font-family: flaticon !important;
+    font-style: normal;
+    font-weight: normal !important;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.flaticon-idea:before {
+    content: "\f101";
+}
+.flaticon-newsletter:before {
+    content: "\f102";
+}
+.flaticon-24-hours:before {
+    content: "\f103";
+}
+.flaticon-location:before {
+    content: "\f104";
+}
+.flaticon-quote:before {
+    content: "\f105";
+}
+.flaticon-pin:before {
+    content: "\f106";
+}
+.flaticon-email:before {
+    content: "\f107";
+}
+.flaticon-calendar:before {
+    content: "\f108";
+}
+.flaticon-phone-call:before {
+    content: "\f109";
+}
+.flaticon-bubble-chat:before {
+    content: "\f10a";
+}
+.flaticon-oil-pump:before {
+    content: "\f10b";
+}
+.flaticon-oil-refinery:before {
+    content: "\f10c";
+}
+.flaticon-oil-station:before {
+    content: "\f10d";
+}
+.flaticon-oil-platform:before {
+    content: "\f10e";
+}
+.flaticon-oil-drill:before {
+    content: "\f10f";
+}
+.flaticon-oil-rig:before {
+    content: "\f110";
+}
+.flaticon-natural-gas:before {
+    content: "\f111";
+}
+.flaticon-meter:before {
+    content: "\f112";
+}
+.flaticon-oil-platform-1:before {
+    content: "\f113";
+}
+.flaticon-valve:before {
+    content: "\f114";
+}
+.flaticon-oil-refinery-1:before {
+    content: "\f115";
+}
+.flaticon-biofuel:before {
+    content: "\f116";
+}
+.flaticon-offshore-platform:before {
+    content: "\f117";
+}
+.flaticon-oil-refinery-2:before {
+    content: "\f118";
+}
+.flaticon-oil-platform-2:before {
+    content: "\f119";
+}
+.flaticon-petrol-station:before {
+    content: "\f11a";
+}
+.flaticon-oil-tanker:before {
+    content: "\f11b";
+}
+.flaticon-maintenance:before {
+    content: "\f11c";
+}
+.flaticon-factory:before {
+    content: "\f11d";
+}
+.flaticon-document:before {
+    content: "\f11e";
+}
+.flaticon-service:before {
+    content: "\f11f";
+}
+.flaticon-smile:before {
+    content: "\f120";
+}
+.flaticon-press:before {
+    content: "\f121";
+}
+.flaticon-headphones:before {
+    content: "\f122";
+}
+.flaticon-system-update:before {
+    content: "\f123";
+}
+.flaticon-technical-support:before {
+    content: "\f124";
+}
+.flaticon-shield:before {
+    content: "\f125";
+}
+.flaticon-worker:before {
+    content: "\f126";
+}
+.flaticon-idea-1:before {
+    content: "\f127";
+}
+.flaticon-idea-2:before {
+    content: "\f128";
+}
+.flaticon-menu:before {
+    content: "\f129";
+}
+.flaticon-menu-1:before {
+    content: "\f12a";
+}
+.flaticon-shared-vision:before {
+    content: "\f12b";
+}
+.flaticon-profits:before {
+    content: "\f12c";
+}
+.flaticon-achievement:before {
+    content: "\f12d";
+}
+.flaticon-selective:before {
+    content: "\f12e";
+}
+.flaticon-gas-tank:before {
+    content: "\f12f";
+}
+.flaticon-emergency-call:before {
+    content: "\f130";
+}
+.flaticon-customer-support:before {
+    content: "\f131";
+}
+.flaticon-play:before {
+    content: "\f132";
+}
+.flaticon-menu-2:before {
+    content: "\f133";
+}
+.flaticon-trigger:before {
+    content: "\f134";
+}
+.flaticon-budget:before {
+    content: "\f135";
+}
+.flaticon-accountant:before {
+    content: "\f136";
+}
+.flaticon-straight-quotes:before {
+    content: "\f137";
+}
+.flaticon-location-1:before {
+    content: "\f138";
+}
+.flaticon-phone:before {
+    content: "\f139";
+}
+.flaticon-email-1:before {
+    content: "\f13a";
+}
+.flaticon-mailing:before {
+    content: "\f13b";
+}
+.flaticon-live-chat:before {
+    content: "\f13c";
+}
+.flaticon-clock:before {
+    content: "\f13d";
+}
+.flaticon-technical-support-1:before {
+    content: "\f13e";
+}
+.flaticon-quotes:before {
+    content: "\f13f";
+}
+.flaticon-maintenance-1:before {
+    content: "\f140";
+}
+.flaticon-next:before {
+    content: "\f141";
+}
+.flaticon-back:before {
+    content: "\f142";
+}
+.flaticon-planet-earth:before {
+    content: "\f143";
+}
+.flaticon-smile-1:before {
+    content: "\f144";
+}
+.flaticon-briefcase:before {
+    content: "\f145";
+}
+.flaticon-award:before {
+    content: "\f146";
+}
