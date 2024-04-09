@@ -196,7 +196,7 @@ div.prt-titlebar-wrapper>.prt-bg-layer {
 }
 
 .footer {
-    background-image: url('../uploads/2022/06/pattern-footer.png');
+    background-image: url('https://industico.preyantechnosys.com/wp-content/uploads/2022/06/pattern-footer.png');
     background-color: #090909;
     background-position: center center;
     background-size: cover;
@@ -429,7 +429,7 @@ body .widget .widgettitle,
     text-transform: capitalize;
     font-size: 15px;
     line-height: 25px;
-    color: #ffffff;
+    color: #282b2d;
 }
 
 ul.nav-menu li ul li a,
@@ -504,12 +504,6 @@ a {
 
 a:hover {
     color: #ff172d;
-}
-
-/* Header bg color */
-.site-header.prt-bgcolor-custom:not(.is_stuck),
-.prt-header-style-classic-box.prt-header-overlay .site-header.prt-bgcolor-custom:not(.is_stuck) .prt-container-for-header {
-    background-color: rgba(9, 9, 9, 0.7) !important;
 }
 
 /* Sticky menu bg color */
@@ -881,7 +875,7 @@ ins {
 
 /* Logo Max-Height */
 .headerlogo img {
-    max-height: 45px;
+    max-height: 50px;
 }
 
 .is_stuck .headerlogo img {
@@ -959,12 +953,9 @@ table.compare-list .add-to-cart td a,
    * ----------------------------------------------------------------------------
    */
 
-.site-header .preyantechnosys-topbar {
-    background-color: #090909;
-}
 
 .top-contact {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 /* Show/hide topbar in some devices */
@@ -1201,7 +1192,7 @@ ul.industico_contact_widget_wrapper.call-email-footer li:before,
 .righticon i,
 .menu-toggle i,
 .header-controls a {
-    color: rgba(255, 255, 255, 1);
+    color: rgba(40, 43, 45, 1);
 }
 
 .menu-toggle i:hover,
@@ -1748,13 +1739,13 @@ span.prt-fsize,
 .prt-header-icon.prt-header-social-box a.prt-social-btn-link i,
 .prt-header-icons .prt-header-search-link a,
 .prt-header-icons .prt-header-wc-cart-link a {
-    color: rgba(255, 255, 255, 1);
+    color: rgba(40, 43, 45, 1);
 }
 
 .is_stuck .prt-header-icon.prt-header-social-box a.prt-social-btn-link i,
 
 .is_stuck .prt-header-icons .prt-header-wc-cart-link a {
-    color: rgba(255, 255, 255, 1);
+    color: rgba(40, 43, 45, 1);
 }
 
 @keyframes menu_sticky {
@@ -2069,13 +2060,13 @@ span.prt-fsize,
 
     .menu-toggle i,
     .prt-header-icons a {
-        color: rgba(255, 255, 255, 1);
+        color: rgba(40, 43, 45, 1);
     }
 
     .menu-toggle span,
     .menu-toggle span:after,
     .menu-toggle span:before {
-        background-color: rgba(255, 255, 255, 1);
+        background-color: rgba(40, 43, 45, 1);
     }
 
     #site-header-menu #site-navigation div.nav-menu>ul {
@@ -2741,7 +2732,7 @@ span.prt-fsize,
     .prt-mmmenu-override-yes #site-header-menu .is_stuck #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item>a,
     #site-header-menu.is_stuck #site-navigation div.nav-menu>ul>li>a,
     .prt-mmmenu-override-yes #site-header-menu.is_stuck #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item>a {
-        color: #ffffff;
+        color: #282b2d;
     }
 
     .prt-dmenu-active-color-skin .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal ul.mega-sub-menu li:hover>a,
@@ -2751,14 +2742,14 @@ span.prt-fsize,
     }
 
     .prt-header-icons .preyantechnosys-fbar-btn a {
-        color: rgba(255, 255, 255, 1);
+        color: rgba(40, 43, 45, 1);
     }
 
     .prt-header-style-infostack .prt-header-menu-bg-color-skincolor .prt-header-icons .prt-header-search-link a,
     .prt-header-style-infostack .prt-header-menu-bg-color-skincolor .prt-header-icons .prt-header-wc-cart-link a,
     .prt-header-style-infostack .prt-header-menu-bg-color-darkgrey .prt-header-icons .prt-header-search-link a,
     .prt-header-style-infostack .prt-header-menu-bg-color-darkgrey .prt-header-icons .prt-header-wc-cart-link a {
-        border-color: rgba(255, 255, 255, 0.70);
+        border-color: rgba(40, 43, 45, 0.70);
         background-color: transparent;
     }
 
@@ -2772,7 +2763,7 @@ span.prt-fsize,
     .prt-header-style-infostack .prt-header-menu-bg-color-skincolor .prt-header-icons .prt-header-wc-cart-link a:hover,
     .prt-header-style-infostack .prt-header-menu-bg-color-darkgrey .prt-header-icons .prt-header-search-link a:hover,
     .prt-header-style-infostack .prt-header-menu-bg-color-darkgrey .prt-header-icons .prt-header-wc-cart-link a:hover {
-        border-color: rgba(255, 255, 255, 1);
+        border-color: rgba(40, 43, 45, 1);
     }
 
     .prt-header-style-infostack .prt-header-menu-bg-color-skincolor .prt-header-wc-cart-link a span.number-cart {
@@ -3119,7 +3110,7 @@ span.prt-fsize,
     }
 
     .is_stuck .prt-header-icons {
-        border-left-color: rgba(255, 255, 255, 0.15);
+        border-left-color: rgba(40, 43, 45, 0.15);
         height: 95px;
     }
 
@@ -3148,11 +3139,11 @@ span.prt-fsize,
         left: 10px;
         top: 50%;
         margin-top: -14px;
-        background-color: rgba(255, 255, 255, 0.09);
+        background-color: rgba(40, 43, 45, 0.09);
     }
 
     .is_stuck .prt-header-icons:before {
-        background-color: rgba(255, 255, 255, 0.09);
+        background-color: rgba(40, 43, 45, 0.09);
     }
 
     /*** Mega menu widget calendar ***/
@@ -3560,13 +3551,13 @@ span.prt-fsize,
         -ms-transform: translateX(0%) translateY(-50%);
         -o-transform: translateX(0%) translateY(-50%);
         transform: translateX(0%) translateY(-50%);
-        background-color: rgba(255, 255, 255, 0.07);
+        background-color: rgba(40, 43, 45, 0.07);
         display: inline-block;
     }
 
     .prt-header-style-infostack #site-header-menu .is_stuck #site-navigation div.mega-menu-wrap>ul>li:after,
     .prt-header-style-infostack #site-header-menu .is_stuck #site-navigation div.nav-menu>ul>li:after {
-        background-color: rgba(255, 255, 255, 0.07);
+        background-color: rgba(40, 43, 45, 0.07);
     }
 
     #site-header-menu #site-navigation div.mega-menu-wrap>ul>li:last-child:after,
@@ -3730,11 +3721,11 @@ span.prt-fsize,
         margin-right: 0px;
         margin-left: 15px;
         padding-left: 10px;
-        border-left: 1px solid rgba(255, 255, 255, 0.07);
+        border-left: 1px solid rgba(40, 43, 45, 0.07);
     }
 
     .prt-header-style-infostack .is_stuck .kw-phone .prt-header-icons .prt-header-wc-cart-link {
-        border-color: rgba(255, 255, 255, 0.07);
+        border-color: rgba(40, 43, 45, 0.07);
     }
 
     /*** Tm-Header-Invert ***/
@@ -3804,7 +3795,7 @@ span.prt-fsize,
     }
 
     .prt-header-style-infostack.prt-header-invert .preyantechnosys-fbar-btn {
-        border-left: 1px solid rgba(255, 255, 255, 0.09);
+        border-left: 1px solid rgba(40, 43, 45, 0.09);
         left: 0;
         float: left;
     }
@@ -3866,7 +3857,7 @@ span.prt-fsize,
         transition: all 500ms ease;
         display: inline-block;
         top: 0px;
-        color: rgba(255, 255, 255, 0.5);
+        color: rgba(40, 43, 45, 0.5);
     }
 
     /*** Themetechmount Classic Box ***/
@@ -4453,6 +4444,158 @@ span.prt-fsize,
 }
 
 /******************************************************/
-.preyantechnosys-topbar-wrapper {
-    background-color: #090909;
+
+</style><link rel='stylesheet' id='industico-responsive-style-css' href='https://industico.preyantechnosys.com/wp-content/themes/industico/css/responsive.css?ver=6.0.7' media='all' /><link rel='stylesheet' id='industico-last-checkpoint-css' href='https://industico.preyantechnosys.com/wp-content/themes/industico/css/industico-last-checkpoint.min.css?ver=6.0.7' media='all' /><link rel='stylesheet' id='google-fonts-1-css' href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto&#038;ver=6.0.7' media='all' /><link rel='stylesheet' id='elementor-icons-shared-0-css' href='https://industico.preyantechnosys.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3' media='all' /><link rel='stylesheet' id='elementor-icons-fa-solid-css' href='https://industico.preyantechnosys.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3' media='all' /><script src='https://industico.preyantechnosys.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script><script src='https://industico.preyantechnosys.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script><script src='https://industico.preyantechnosys.com/wp-content/plugins/preyantechnosys-industico-extras/js/jquery-resize.min.js?ver=6.0.7' id='jquery-resize-js'></script><script src='https://industico.preyantechnosys.com/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.6.6' id='font-awesome-4-shim-js'></script><link rel="https://api.w.org/" href="https://industico.preyantechnosys.com/wp-json/" /><link rel="alternate" type="application/json" href="https://industico.preyantechnosys.com/wp-json/wp/v2/pages/7425" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://industico.preyantechnosys.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://industico.preyantechnosys.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 6.0.7" /><link rel='shortlink' href='https://industico.preyantechnosys.com/?p=7425' /><link rel="alternate" type="application/json+oembed" href="https://industico.preyantechnosys.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Findustico.preyantechnosys.com%2Fhome-three%2F" /><link rel="alternate" type="text/xml+oembed" href="https://industico.preyantechnosys.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Findustico.preyantechnosys.com%2Fhome-three%2F&#038;format=xml" />< !-- Inline CSS Start -->< !-- Inline CSS End --><div class="ttm_floting_customsett"><a href="https://support.themetechmount.com/" target="_blank" class="tmtheme_fbar_icons"><i class="prt-industico-icon-headphones"></i><span>Support</span></a><a href="https://themetechmount.com/" target="_blank" class="tmtheme_fbar_icons"><i class="prt-industico-icon-pencil"></i><span>Customization</span></a><a href="https://1.envato.market/P09L66" target="_blank" class="tmtheme_fbar_icons"><i class="prt-industico-icon-shopping-cart"></i><span class="buy_link">Buy<span></span></span></a></div><script>var tm_breakpoint=1200;
+</script><script>var ajaxurl='https://industico.preyantechnosys.com/wp-admin/admin-ajax.php';
+
+</script><meta name="generator" content="Powered by Slider Revolution 6.5.4 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." /><link rel="icon" href="https://industico.preyantechnosys.com/wp-content/uploads/2022/07/cropped-themetechmount-small-logo-32x32.png" sizes="32x32" /><link rel="icon" href="https://industico.preyantechnosys.com/wp-content/uploads/2022/07/cropped-themetechmount-small-logo-192x192.png" sizes="192x192" /><link rel="apple-touch-icon" href="https://industico.preyantechnosys.com/wp-content/uploads/2022/07/cropped-themetechmount-small-logo-180x180.png" /><meta name="msapplication-TileImage" content="https://industico.preyantechnosys.com/wp-content/uploads/2022/07/cropped-themetechmount-small-logo-270x270.png" /><script>function setREVStartSize(e) {
+    //window.requestAnimationFrame(function() {				 
+    window.RSIW=window.RSIW===undefined ? window.innerWidth: window.RSIW;
+    window.RSIH=window.RSIH===undefined ? window.innerHeight: window.RSIH;
+
+    try {
+        var pw=document.getElementById(e.c).parentNode.offsetWidth,
+        newh;
+        pw=pw===0 || isNaN(pw) ? window.RSIW: pw;
+        e.tabw=e.tabw===undefined ? 0: parseInt(e.tabw);
+        e.thumbw=e.thumbw===undefined ? 0: parseInt(e.thumbw);
+        e.tabh=e.tabh===undefined ? 0: parseInt(e.tabh);
+        e.thumbh=e.thumbh===undefined ? 0: parseInt(e.thumbh);
+        e.tabhide=e.tabhide===undefined ? 0: parseInt(e.tabhide);
+        e.thumbhide=e.thumbhide===undefined ? 0: parseInt(e.thumbhide);
+        e.mh=e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0: parseInt(e.mh, 0);
+        if(e.layout==="fullscreen" || e.l==="fullscreen") newh=Math.max(e.mh, window.RSIH);
+
+        else {
+            e.gw=Array.isArray(e.gw) ? e.gw: [e.gw];
+            for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i]=e.gw[i-1];
+            e.gh=e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh: e.el;
+            e.gh=Array.isArray(e.gh) ? e.gh: [e.gh];
+            for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i]=e.gh[i-1];
+
+            var nl=new Array(e.rl.length),
+            ix=0,
+            sl;
+            e.tabw=e.tabhide>=pw ? 0: e.tabw;
+            e.thumbw=e.thumbhide>=pw ? 0: e.thumbw;
+            e.tabh=e.tabhide>=pw ? 0: e.tabh;
+            e.thumbh=e.thumbhide>=pw ? 0: e.thumbh;
+            for (var i in e.rl) nl[i]=e.rl[i]<window.RSIW ? 0: e.rl[i];
+            sl=nl[0];
+
+            for (var i in nl) if (sl>nl[i] && nl[i]>0) {
+                sl=nl[i];
+                ix=i;
+            }
+
+            var m=pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
+            newh=(e.gh[ix] * m)+(e.tabh + e.thumbh);
+        }
+
+        var el=document.getElementById(e.c);
+        if (el !==null && el) el.style.height=newh+"px";
+        el=document.getElementById(e.c+"_wrapper");
+        if (el !==null && el) el.style.height=newh+"px";
+    }
+
+    catch(e) {
+        console.log("Failure at Presize of Slider:" + e)
+    }
+
+    //});
+}
+
+;
+
+</script><style id="wp-custom-css">.single #tribe-events .tribe-events-content p,
+.single article.post .entry-content p {
+    margin-bottom: 27px;
+}
+
+/*prettyphoto*/
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon {
+    position: relative;
+    z-index: 1;
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container:after,
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: var(--prt-skin-color);
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon {
+    z-index: 11;
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:after {
+    z-index: 1;
+    width: 105px;
+    height: 105px;
+    opacity: 0.09;
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:before {
+    width: 90px;
+    height: 90px;
+    opacity: .38;
+    z-index: 0;
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:before,
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:after {
+    -webkit-animation: prittyphoto 1.7s infinite;
+    -moz-animation: prittyphoto 1.7s infinite;
+    -ms-animation: prittyphoto 1.7s infinite;
+    -o-animation: prittyphoto 1.7s infinite;
+    animation: prittyphoto 1.7s infinite;
+}
+
+@-webkit-keyframes prittyphoto {
+    100% {
+        width: 180%;
+        height: 180%;
+        opacity: 0;
+    }
+
+}
+
+@keyframes prittyphoto {
+    100% {
+        width: 180%;
+        height: 180%;
+        opacity: 0;
+    }
+
+}
+
+@-webkit-keyframes sonarEffect {
+    0% {
+        opacity: .3;
+    }
+
+    40% {
+        opacity: .5;
+    }
+
+    100% {
+        -webkit-transform: scale(1.2);
+        opacity: 0;
+    }
+
+}
+
+.preyantechnosys-boxes-historybox .slick-dots {
+    top: 0;
+}
+
+@media only screen and (min-width:1201px) and (max-width:1600px) {
+    .prt-headerstyle-classic-two .preyantechnosys-topbar-wrapper .preyantechnosys-fbar-btn {
+        left: -29px;
+    }
 }
