@@ -57,7 +57,7 @@ body #main,
 }
 
 .preyantechnosys-fbar-box-w {
-    background-image: url('https://industico.preyantechnosys.com/wp-content/themes/fabiflex/images/floatingbar-bg.jpg');
+    background-image: url('../themes/fabiflex/images/floatingbar-bg.jpg');
     background-position: 0% 0%;
     background-size: cover;
     background-repeat: no-repeat;
@@ -196,7 +196,7 @@ div.prt-titlebar-wrapper>.prt-bg-layer {
 }
 
 .footer {
-    background-image: url('https://industico.preyantechnosys.com/wp-content/uploads/2022/06/pattern-footer.png');
+    background-image: url('../uploads/2022/06/pattern-footer.png');
     background-color: #090909;
     background-position: center center;
     background-size: cover;
@@ -4445,69 +4445,7 @@ span.prt-fsize,
 
 /******************************************************/
 
-</style><link rel='stylesheet' id='industico-responsive-style-css' href='https://industico.preyantechnosys.com/wp-content/themes/industico/css/responsive.css?ver=6.0.7' media='all' /><link rel='stylesheet' id='industico-last-checkpoint-css' href='https://industico.preyantechnosys.com/wp-content/themes/industico/css/industico-last-checkpoint.min.css?ver=6.0.7' media='all' /><link rel='stylesheet' id='google-fonts-1-css' href='https://fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic%7CRoboto+Slab%3A100%2C100italic%2C200%2C200italic%2C300%2C300italic%2C400%2C400italic%2C500%2C500italic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic%2C900%2C900italic&#038;display=auto&#038;ver=6.0.7' media='all' /><link rel='stylesheet' id='elementor-icons-shared-0-css' href='https://industico.preyantechnosys.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/fontawesome.min.css?ver=5.15.3' media='all' /><link rel='stylesheet' id='elementor-icons-fa-solid-css' href='https://industico.preyantechnosys.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/solid.min.css?ver=5.15.3' media='all' /><script src='https://industico.preyantechnosys.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script><script src='https://industico.preyantechnosys.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script><script src='https://industico.preyantechnosys.com/wp-content/plugins/preyantechnosys-industico-extras/js/jquery-resize.min.js?ver=6.0.7' id='jquery-resize-js'></script><script src='https://industico.preyantechnosys.com/wp-content/plugins/elementor/assets/lib/font-awesome/js/v4-shims.min.js?ver=3.6.6' id='font-awesome-4-shim-js'></script><link rel="https://api.w.org/" href="https://industico.preyantechnosys.com/wp-json/" /><link rel="alternate" type="application/json" href="https://industico.preyantechnosys.com/wp-json/wp/v2/pages/7425" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://industico.preyantechnosys.com/xmlrpc.php?rsd" /><link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://industico.preyantechnosys.com/wp-includes/wlwmanifest.xml" /><meta name="generator" content="WordPress 6.0.7" /><link rel='shortlink' href='https://industico.preyantechnosys.com/?p=7425' /><link rel="alternate" type="application/json+oembed" href="https://industico.preyantechnosys.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Findustico.preyantechnosys.com%2Fhome-three%2F" /><link rel="alternate" type="text/xml+oembed" href="https://industico.preyantechnosys.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Findustico.preyantechnosys.com%2Fhome-three%2F&#038;format=xml" />< !-- Inline CSS Start -->< !-- Inline CSS End --><div class="ttm_floting_customsett"><a href="https://support.themetechmount.com/" target="_blank" class="tmtheme_fbar_icons"><i class="prt-industico-icon-headphones"></i><span>Support</span></a><a href="https://themetechmount.com/" target="_blank" class="tmtheme_fbar_icons"><i class="prt-industico-icon-pencil"></i><span>Customization</span></a><a href="https://1.envato.market/P09L66" target="_blank" class="tmtheme_fbar_icons"><i class="prt-industico-icon-shopping-cart"></i><span class="buy_link">Buy<span></span></span></a></div><script>var tm_breakpoint=1200;
-</script><script>var ajaxurl='https://industico.preyantechnosys.com/wp-admin/admin-ajax.php';
-
-</script><meta name="generator" content="Powered by Slider Revolution 6.5.4 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface." /><link rel="icon" href="https://industico.preyantechnosys.com/wp-content/uploads/2022/07/cropped-themetechmount-small-logo-32x32.png" sizes="32x32" /><link rel="icon" href="https://industico.preyantechnosys.com/wp-content/uploads/2022/07/cropped-themetechmount-small-logo-192x192.png" sizes="192x192" /><link rel="apple-touch-icon" href="https://industico.preyantechnosys.com/wp-content/uploads/2022/07/cropped-themetechmount-small-logo-180x180.png" /><meta name="msapplication-TileImage" content="https://industico.preyantechnosys.com/wp-content/uploads/2022/07/cropped-themetechmount-small-logo-270x270.png" /><script>function setREVStartSize(e) {
-    //window.requestAnimationFrame(function() {				 
-    window.RSIW=window.RSIW===undefined ? window.innerWidth: window.RSIW;
-    window.RSIH=window.RSIH===undefined ? window.innerHeight: window.RSIH;
-
-    try {
-        var pw=document.getElementById(e.c).parentNode.offsetWidth,
-        newh;
-        pw=pw===0 || isNaN(pw) ? window.RSIW: pw;
-        e.tabw=e.tabw===undefined ? 0: parseInt(e.tabw);
-        e.thumbw=e.thumbw===undefined ? 0: parseInt(e.thumbw);
-        e.tabh=e.tabh===undefined ? 0: parseInt(e.tabh);
-        e.thumbh=e.thumbh===undefined ? 0: parseInt(e.thumbh);
-        e.tabhide=e.tabhide===undefined ? 0: parseInt(e.tabhide);
-        e.thumbhide=e.thumbhide===undefined ? 0: parseInt(e.thumbhide);
-        e.mh=e.mh===undefined || e.mh=="" || e.mh==="auto" ? 0: parseInt(e.mh, 0);
-        if(e.layout==="fullscreen" || e.l==="fullscreen") newh=Math.max(e.mh, window.RSIH);
-
-        else {
-            e.gw=Array.isArray(e.gw) ? e.gw: [e.gw];
-            for (var i in e.rl) if (e.gw[i]===undefined || e.gw[i]===0) e.gw[i]=e.gw[i-1];
-            e.gh=e.el===undefined || e.el==="" || (Array.isArray(e.el) && e.el.length==0)? e.gh: e.el;
-            e.gh=Array.isArray(e.gh) ? e.gh: [e.gh];
-            for (var i in e.rl) if (e.gh[i]===undefined || e.gh[i]===0) e.gh[i]=e.gh[i-1];
-
-            var nl=new Array(e.rl.length),
-            ix=0,
-            sl;
-            e.tabw=e.tabhide>=pw ? 0: e.tabw;
-            e.thumbw=e.thumbhide>=pw ? 0: e.thumbw;
-            e.tabh=e.tabhide>=pw ? 0: e.tabh;
-            e.thumbh=e.thumbhide>=pw ? 0: e.thumbh;
-            for (var i in e.rl) nl[i]=e.rl[i]<window.RSIW ? 0: e.rl[i];
-            sl=nl[0];
-
-            for (var i in nl) if (sl>nl[i] && nl[i]>0) {
-                sl=nl[i];
-                ix=i;
-            }
-
-            var m=pw>(e.gw[ix]+e.tabw+e.thumbw) ? 1 : (pw-(e.tabw+e.thumbw)) / (e.gw[ix]);
-            newh=(e.gh[ix] * m)+(e.tabh + e.thumbh);
-        }
-
-        var el=document.getElementById(e.c);
-        if (el !==null && el) el.style.height=newh+"px";
-        el=document.getElementById(e.c+"_wrapper");
-        if (el !==null && el) el.style.height=newh+"px";
-    }
-
-    catch(e) {
-        console.log("Failure at Presize of Slider:" + e)
-    }
-
-    //});
-}
-
-;
-
-</script><style id="wp-custom-css">.single #tribe-events .tribe-events-content p,
+.single #tribe-events .tribe-events-content p,
 .single article.post .entry-content p {
     margin-bottom: 27px;
 }
