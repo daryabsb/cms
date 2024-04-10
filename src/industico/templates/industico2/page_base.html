@@ -6,8 +6,8 @@
 {% include 'industico/includes/common_head_top.html' %}
 
 <!-- Inline CSS Start -->
-{% block additional_style %}
-{% endblock additional_style %}
+{% block additional_page_style %}
+{% endblock additional_page_style %}
 <!-- Inline CSS End -->
 
 {% include 'industico/includes/common_head_down.html' %}
@@ -24,12 +24,12 @@
 <div class="main-holder">
 	<div id="page" class="hfeed site">
 	
-		{% include 'industico/base/header.html' %}
+		{% include 'industico/base/page_header.html' %}
 
 		<div id="content-wrapper" class="site-content-wrapper">
 			<div id="content" class="site-content ">
-			{% block base_content %}
-			{% endblock base_content %}
+			{% block base_page_content %}
+			{% endblock base_page_content %}
 			</div><!-- .site-content -->
 		</div><!-- .site-content-wrapper -->
 

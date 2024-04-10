@@ -1,43 +1,50 @@
 
 {% load static %}
 
-		<script>
-			window.RS_MODULES = window.RS_MODULES || {};
-			window.RS_MODULES.modules = window.RS_MODULES.modules || {};
-			window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
-			window.RS_MODULES.defered = true;
-			window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
-			window.RS_MODULES.type = 'compiled';
-		</script>
-		<script>(function() {function maybePrefixUrlField() {
-	if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
-		this.value = "http://" + this.value;
-	}
-}
+<script>
+	window.RS_MODULES = window.RS_MODULES || {};
+	window.RS_MODULES.modules = window.RS_MODULES.modules || {};
+	window.RS_MODULES.waiting = window.RS_MODULES.waiting || [];
+	window.RS_MODULES.defered = true;
+	window.RS_MODULES.moduleWaiting = window.RS_MODULES.moduleWaiting || {};
+	window.RS_MODULES.type = 'compiled';
+</script>
+<script>
+	(function() {
+		function maybePrefixUrlField() {
+			if (this.value.trim() !== '' && this.value.indexOf('http') !== 0) {
+				this.value = "http://" + this.value;
+			}
+		}
 
-var urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
-if (urlFields) {
-	for (var j=0; j < urlFields.length; j++) {
-		urlFields[j].addEventListener('blur', maybePrefixUrlField);
-	}
-}
-})();</script>
+		var urlFields = document.querySelectorAll('.mc4wp-form input[type="url"]');
+		if (urlFields) {
+			for (var j=0; j < urlFields.length; j++) {
+				urlFields[j].addEventListener('blur', maybePrefixUrlField);
+			}
+		}
+		})();
+</script>
 
 <link href="https://fonts.googleapis.com/css?family=Titillium+Web:600%7CRoboto:400" rel="stylesheet" property="stylesheet" media="all" >
+<link rel='stylesheet' id='preyantechnosys-cs-google-fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C300%2C300italic%2C400%2Citalic%2C500%2C500italic%2C700%2C700italic%2C900%2C900italic%7CTitillium+Web%3A600%2C600italic%7CArimo%3A400'  media='all' />
+<link rel="preload" as="font" id="rs-icon-set-fa-icon-woff" type="font/woff2" crossorigin="anonymous" href="{% static 'industico/plugins/revslider/public/assets/fonts/font-awesome/fonts/fontawesome-webfont.woff2' %}" media="all" />
+
+
+
+
 
 <script>
 		if(typeof revslider_showDoubleJqueryError === "undefined") {function revslider_showDoubleJqueryError(sliderID) {console.log("You have some jquery.js library include that comes after the Slider Revolution files js inclusion.");console.log("To fix this, you can:");console.log("1. Set 'Module General Options' -> 'Advanced' -> 'jQuery & OutPut Filters' -> 'Put JS to Body' to on");console.log("2. Find the double jQuery.js inclusion and remove it");return "Double Included jQuery Library";}}
 </script>
-
-<link rel="preload" as="font" id="rs-icon-set-fa-icon-woff" type="font/woff2" crossorigin="anonymous" href="{% static 'industico/plugins/revslider/public/assets/fonts/font-awesome/fonts/fontawesome-webfont.woff2' %}" media="all" />
 <link rel="stylesheet" property="stylesheet" id="rs-icon-set-fa-icon-css" href="{% static 'industico/plugins/revslider/public/assets/fonts/font-awesome/css/font-awesome.css' %}" media="all" />
-<link rel='stylesheet' id='preyantechnosys-cs-google-fonts-css'  href='//fonts.googleapis.com/css?family=Roboto%3A100%2C100italic%2C300%2C300italic%2C400%2Citalic%2C500%2C500italic%2C700%2C700italic%2C900%2C900italic%7CTitillium+Web%3A600%2C600italic%7CArimo%3A400'  media='all' />
 <link rel='stylesheet' id='rs-plugin-settings-css'  href="{% static 'industico/plugins/revslider/public/assets/css/rs6.css' %}"  media='all' />
 
 
 <style id='rs-plugin-settings-inline-css'>
 #rs-demo-id {}
 </style>
+
 
 <script src="{% static 'industico/js/dist/vendor/regenerator-runtime.min.js' %}" id='regenerator-runtime-js'></script>
 <script src="{% static 'industico/js/dist/vendor/wp-polyfill.min.js' %}" id='wp-polyfill-js'></script>
@@ -91,43 +98,3 @@ var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false
 <script  src="{% static 'industico/plugins/elementor/assets/js/frontend.min.js' %}" id='elementor-frontend-js'></script>
 
 
-
-<script id="rs-initialisation-scripts">
-		var	tpj = jQuery;
-
-		var	revapi5;
-
-		if(window.RS_MODULES === undefined) window.RS_MODULES = {};
-		if(RS_MODULES.modules === undefined) RS_MODULES.modules = {};
-		RS_MODULES.modules["revslider51"] = {init:function() {
-			revapi5 = jQuery("#rev_slider_5_1");
-			if(revapi5==undefined || revapi5.revolution==undefined){ revslider_showDoubleJqueryError("rev_slider_5_1"); return;}
-			revapi5.revolutionInit({
-					DPR:"dpr",
-					sliderLayout:"fullwidth",
-					visibilityLevels:"1240,1240,778,480",
-					gridwidth:"1240,1240,778,480",
-					gridheight:"648,648,480,320",
-					lazyType:"smart",
-					perspective:600,
-					perspectiveType:"global",
-					editorheight:"648,768,480,320",
-					responsiveLevels:"1240,1240,778,480",
-					progressBar:{disableProgressBar:true},
-					navigation: {
-						onHoverStop:false
-					},
-					viewPort: {
-						global:true,
-						globalDist:"-200px",
-						enable:false
-					},
-					fallbacks: {
-						allowHTML5AutoPlayOnAndroid:true
-					},
-			});
-			
-		}} // End of RevInitScript
-
-		if (window.RS_MODULES.checkMinimal!==undefined) { window.RS_MODULES.checkMinimal();};
-	</script>

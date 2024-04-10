@@ -4456,3 +4456,97 @@ span.prt-fsize,
 .preyantechnosys-topbar-wrapper {
     background-color: #090909;
 }
+
+
+.single #tribe-events .tribe-events-content p,
+.single article.post .entry-content p {
+    margin-bottom: 27px;
+}
+
+/*prettyphoto*/
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon {
+    position: relative;
+    z-index: 1;
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container:after,
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background-color: var(--prt-skin-color);
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon {
+    z-index: 11;
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:after {
+    z-index: 1;
+    width: 105px;
+    height: 105px;
+    opacity: 0.09;
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:before {
+    width: 90px;
+    height: 90px;
+    opacity: .38;
+    z-index: 0;
+}
+
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:before,
+.prt_prettyphoto.elementor-element .elementor-widget-container .elementor-icon:after {
+    -webkit-animation: prittyphoto 1.7s infinite;
+    -moz-animation: prittyphoto 1.7s infinite;
+    -ms-animation: prittyphoto 1.7s infinite;
+    -o-animation: prittyphoto 1.7s infinite;
+    animation: prittyphoto 1.7s infinite;
+}
+
+@-webkit-keyframes prittyphoto {
+    100% {
+        width: 180%;
+        height: 180%;
+        opacity: 0;
+    }
+
+}
+
+@keyframes prittyphoto {
+    100% {
+        width: 180%;
+        height: 180%;
+        opacity: 0;
+    }
+
+}
+
+@-webkit-keyframes sonarEffect {
+    0% {
+        opacity: .3;
+    }
+
+    40% {
+        opacity: .5;
+    }
+
+    100% {
+        -webkit-transform: scale(1.2);
+        opacity: 0;
+    }
+
+}
+
+.preyantechnosys-boxes-historybox .slick-dots {
+    top: 0;
+}
+
+@media only screen and (min-width:1201px) and (max-width:1600px) {
+    .prt-headerstyle-classic-two .preyantechnosys-topbar-wrapper .preyantechnosys-fbar-btn {
+        left: -29px;
+    }
+}
