@@ -56,16 +56,16 @@ body #main,
     background-color: #ffffff;
 }
 
-.preyantechnosys-fbar-box-w {
-    background-image: url('https://industico.preyantechnosys.com/wp-content/themes/fabiflex/images/floatingbar-bg.jpg');
+/* .preyantechnosys-fbar-box-w {
+    background-image: url('../themes/fabiflex/images/floatingbar-bg.jpg');
     background-position: 0% 0%;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: scroll;
-}
+} */
 
 div.prt-titlebar-wrapper {
-    background-image: url('https://industico.preyantechnosys.com/wp-content/uploads/2022/06/titlebar-01.jpg');
+    background-image: url('../uploads/2022/06/titlebar-01.jpg');
     background-color: rgba(0, 0, 0, 0.47);
     background-position: center center;
     background-size: cover;
@@ -196,7 +196,7 @@ div.prt-titlebar-wrapper>.prt-bg-layer {
 }
 
 .footer {
-    background-image: url('https://industico.preyantechnosys.com/wp-content/uploads/2022/06/pattern-footer.png');
+    background-image: url('../uploads/2022/06/pattern-footer.png');
     background-color: #090909;
     background-position: center center;
     background-size: cover;

@@ -20,7 +20,8 @@ def index(request):
     context = {
         "blogs": [],
         "banner_title": "Blogs",
-        "query": 'query'
+        "query": 'query',
+        "page_title": "Home Page 1"
     }
     return render(request, template_name, context)
 
@@ -64,6 +65,67 @@ def about2(request):
     context = {
         "blogs": [],
         "banner_title": "Blogs",
-        "query": 'query'
+        "query": 'query',
+        "page_title": "About Us 2"
+    }
+    return render(request, template_name, context)
+
+
+def about1(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/pages/about-us-1.html"
+
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "About Us 1"
+    }
+    return render(request, template_name, context)
+
+
+def services1(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/pages/services-1.html"
+
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Services 1"
+    }
+    return render(request, template_name, context)
+
+
+def services2(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/pages/services-2.html"
+
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Services Two"
+    }
+    return render(request, template_name, context)
+
+
+def our_team(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/pages/our-team.html"
+
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Our Team"
     }
     return render(request, template_name, context)
