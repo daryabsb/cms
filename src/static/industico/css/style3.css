@@ -56,13 +56,13 @@ body #main,
     background-color: #ffffff;
 }
 
-.preyantechnosys-fbar-box-w {
+/* .preyantechnosys-fbar-box-w {
     background-image: url('../themes/fabiflex/images/floatingbar-bg.jpg');
     background-position: 0% 0%;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: scroll;
-}
+} */
 
 div.prt-titlebar-wrapper {
     background-image: url('../uploads/2022/06/titlebar-01.jpg');
