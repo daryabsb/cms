@@ -1,6 +1,7 @@
 /*------------------------------------------------------------------
 * dynamic-style.php index *
 [Table of contents]
+
 1.  Background color
 2.  Topbar Background color
 3.  Element Border color
@@ -24,10 +25,11 @@
     --special-element-fontfamily: Titillium Web;
 }
 
+
 /**
-* 0. Background properties
-* ----------------------------------------------------------------------------
-*/
+   * 0. Background properties
+   * ----------------------------------------------------------------------------
+   */
 body {
     background-color: #ffffff;
     background-position: 0% 0%;
@@ -54,36 +56,25 @@ body #main,
     background-color: #ffffff;
 }
 
-/* .preyantechnosys-fbar-box-w {
-    background-image: url('/themes/fabiflex/images/floatingbar-bg.jpg');
+.preyantechnosys-fbar-box-w {
+    background-image: url('https://industico.preyantechnosys.com/wp-content/themes/fabiflex/images/floatingbar-bg.jpg');
     background-position: 0% 0%;
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: scroll;
-} */
+}
 
-/* div.prt-titlebar-wrapper { */
-/* background-image: url('../../uploads/2022/06/titlebar-01.jpg'); */
-/* background-color: rgba(0, 0, 0, 0.47);
+div.prt-titlebar-wrapper {
+    background-image: url('https://industico.preyantechnosys.com/wp-content/uploads/2022/06/titlebar-01.jpg');
+    background-color: rgba(0, 0, 0, 0.47);
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: scroll; */
-/* } */
+    background-attachment: scroll;
+}
 
 div.prt-titlebar-wrapper>.prt-bg-layer {
     background-color: rgba(0, 0, 0, 0.47);
-}
-
-
-.bg-img {
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    /* To ensure it's behind other content */
 }
 
 .prt-header-style-classic-vertical .site-header {
@@ -205,7 +196,7 @@ div.prt-titlebar-wrapper>.prt-bg-layer {
 }
 
 .footer {
-    background-image: url('../../uploads/2022/06/pattern-footer.png');
+    background-image: url('https://industico.preyantechnosys.com/wp-content/uploads/2022/06/pattern-footer.png');
     background-color: #090909;
     background-position: center center;
     background-size: cover;
@@ -506,6 +497,7 @@ a.prt-button-bold {
 }
 
 /* Text link and hover color properties */
+
 a {
     color: #090909;
 }
@@ -522,11 +514,13 @@ a:hover {
 
 /* Sticky menu bg color */
 /* breadcum bg color */
+
 .prt-titlebar-wrapper.prt-breadcrumb-on-bottom .prt-titlebar .breadcrumb-wrapper .container {
     background-color: rgba(0, 0, 0, 0.50) !important;
 }
 
 /* Footer CTA bg color */
+
 /* List style special style */
 .wpb_row .vc_tta.vc_general.vc_tta-color-white:not(.vc_tta-o-no-fill) .vc_tta-panel-body .wpb_text_column,
 .prt-list.prt-list-icon-color- li,
@@ -535,11 +529,14 @@ a:hover {
 }
 
 /* Page loader css */
+
 /* Floating bar */
+
 /**
-* 1. Background color
-* ----------------------------------------------------------------------------
-*/
+   * 1. Background color
+   * ----------------------------------------------------------------------------
+   */
+
 .elementor-column.elementor-top-column.prt-col-bgcolor-skincolor:not(.prt-bgimage-yes) .elementor-widget-wrap>.prt-stretched-div,
 .elementor-column.elementor-top-column.prt-col-bgcolor-skincolor:not(.prt-col-stretched-yes)>.elementor-widget-wrap,
 .elementor-column.elementor-inner-column.prt-col-bgcolor-skincolor:not(.prt-bgimage-yes)>.elementor-widget-wrap {
@@ -561,6 +558,7 @@ a:hover {
     background-color: #ff172d;
 }
 
+
 /*Heading Seperator Style*/
 .prt-header-overlay .social-icons li>a:hover,
 .elementor-widget-tabs.prt-tab-style1 .elementor-tab-desktop-title.elementor-active,
@@ -581,40 +579,53 @@ article.preyantechnosys-box-blog-classic .prt-entry-meta-wrapper:before,
 .prt-site-searchform button,
 .preyantechnosys-box-blog.preyantechnosys-blogbox-stylethree:hover .prt-box-post-date,
 .sidebar .widget .tagcloud a:hover,
+
 .main-holder .site-content ul.products li.product .yith-wcwl-wishlistexistsbrowse a[rel="nofollow"]:hover:after,
 .main-holder .site-content ul.products li.product .yith-wcwl-add-to-wishlist .yith-wcwl-wishlistaddedbrowse:hover:after,
 .main-holder .site-content ul.products li.product .prt-shop-icon>div:hover,
+
 .top-contact.prt-highlight-left:after,
 .top-contact.prt-highlight-right:after,
 .prt-social-share-links ul li a:hover,
+
 .preyantechnosys-blog-box-view-right-image .preyantechnosys-box-content .prt-post-categories>.prt-meta-line.cat-links a:hover,
 .preyantechnosys-blog-box-view-left-image .preyantechnosys-box-content .prt-post-categories>.prt-meta-line.cat-links a:hover,
 .prt-sortable-list .prt-sortable-link a:hover,
+
 footer#colophon.prt-bgcolor-skincolor>.prt-bg-layer,
 .prt-titlebar-wrapper.prt-bgcolor-skincolor .prt-titlebar-wrapper-bg-layer,
 .preyantechnosys-box-blog .preyantechnosys-box-content .preyantechnosys-box-post-date:after,
 article.preyantechnosys-box-blog-classic .preyantechnosys-post-date-wrapper,
+
 body .datepicker table tr td span.active.active,
 body .datepicker table tr td.active.active,
 .datepicker table tr td.active.active:hover,
 .datepicker table tr td span.active.active:hover,
+
 .widget .widget-title::before,
+
 .datepicker table tr td.day:hover,
 .datepicker table tr td.day.focused,
+
 /* Testimonals */
 .testimonials-nav .testimonial_item .preyantechnosys-box-img:hover .preyantechnosys-item-thumbnail-inner:before,
 .testimonials-nav .slick-center .testimonial_item .preyantechnosys-box-img .preyantechnosys-item-thumbnail-inner:before,
+
 /*Iconbox element*/
 .preyantechnosys-iconbox.preyantechnosys-iconbox-styletwo .prt-icon-type-text,
 .preyantechnosys-iconbox-stylefive .prt-box-icon,
 .preyantechnosys-iconbox-stylefive .prt-box-icon:after,
 .prt-bg-skin .elementor-icon-box-wrapper .elementor-icon,
+
 .preyantechnosys-servicebox-styleone .preyantechnosys-box-bottom-content:before,
 .sidebar .widget-title:before {
     background-color: #ff172d;
 }
 
+
+
 /* secondary bg color */
+
 .elementor-column.elementor-top-column.prt-col-bgcolor-darkgrey:not(.prt-bgimage-yes) .elementor-widget-wrap>.prt-stretched-div,
 .elementor-column.elementor-top-column.prt-col-bgcolor-darkgrey:not(.prt-col-stretched-yes)>.elementor-widget-wrap,
 .elementor-column.elementor-inner-column.prt-col-bgcolor-darkgrey:not(.prt-bgimage-yes)>.elementor-widget-wrap {
@@ -632,8 +643,10 @@ body .datepicker table tr td.active.active,
     background-color: #090909;
 }
 
+
 .preyantechnosys-slider-wrapper .prt-quickdetails-area,
 .tprt-pricetable-column-w .tprt-featured-title,
+
 .widget.prt-sidebar-custom-banner:before,
 .preyantechnosys-box-blog.preyantechnosys-blogbox-stylethree .prt-box-post-date,
 .site-header.prt-sticky-bgcolor-darkgrey.is_stuck,
@@ -670,6 +683,8 @@ body .datepicker table tr td.active.active,
 .preyantechnosys-portfoliobox-style1 .prt-featured-wrapper:before {
     background-image: -webkit-linear-gradient(90deg, rgba(9, 9, 9, .90)40%, rgba(0, 0, 0, 0)60%);
 }
+
+
 
 /*** Button Dark Color ***/
 button,
@@ -718,6 +733,7 @@ table.compare-list .add-to-cart td a,
 }
 
 /***Secondary Grey color***/
+
 .elementor-column.elementor-top-column.prt-col-bgcolor-grey:not(.prt-bgimage-yes) .elementor-widget-wrap>.prt-stretched-div,
 .elementor-column.elementor-top-column.prt-col-bgcolor-grey:not(.prt-col-stretched-yes)>.elementor-widget-wrap,
 .elementor-column.elementor-inner-column.prt-col-bgcolor-grey:not(.prt-bgimage-yes)>.elementor-widget-wrap {
@@ -738,9 +754,11 @@ table.compare-list .add-to-cart td a,
     background-color: #f3f3f3;
 }
 
+
 .preyantechnosys-testimonialbox-styleone .preyantechnosys-box-content:before,
 .preyantechnosys-testimonialbox-styleone .preyantechnosys-box-content:after,
 .preyantechnosys-blogbox-stylethree .prt-featured-outer-wrapper.prt-post-featured-outer-wrapper:after,
+
 .preyantechnosys-teambox-style2 .preyantechnosys-box-content,
 #add_payment_method #payment,
 .woocommerce-cart #payment,
@@ -780,39 +798,54 @@ blockquote,
     color: #f3f3f3;
 }
 
+
+
 /* Drop cap */
 .prt-dcap-color-skincolor,
+
 /* Slick Slider */
+
+
 /* Sidebar */
 .sidebar .widget .widget-title:before,
 .woocommerce-account .woocommerce-MyAccount-navigation li a:before,
 .widget.tm_widget_nav_menu li a:before,
 .widget.industico_all_post_list_widget li a:before,
 .widget.industico_category_list_widget li a:before,
+
 /* Global Input Button */
 input[type="submit"]:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
+
 /* Testimonials Section */
 .preyantechnosys-box-view-default .preyantechnosys-box-author .preyantechnosys-box-img .preyantechnosys-icon-box,
+
 .prt-header-overlay .site-header.prt-sticky-bgcolor-skincolor.is_stuck,
 .site-header-menu.prt-sticky-bgcolor-skincolor.is_stuck,
 .prt-header-style-infostack .site-header .prt-stickable-header.is_stuck.prt-sticky-bgcolor-skincolor,
 .is_stuck.prt-sticky-bgcolor-skincolor,
 .prt-header-style-infostack .site-header-menu .prt-stickable-header.is_stuck .prt-sticky-bgcolor-skincolor,
+
 /* Blog section */
 .preyantechnosys-box-view-overlay .preyantechnosys-boxes .preyantechnosys-box-content.preyantechnosys-overlay .preyantechnosys-icon-box a:hover,
 .preyantechnosys-post-box-icon-wrapper,
 .preyantechnosys-pagination .page-numbers.current,
 .preyantechnosys-pagination .page-numbers:hover,
+
 /*Search Result Page*/
 .prt-sresults-title small a,
 .prt-sresult-form-wrapper,
+
 /*Pricing Table*/
 .main-holder .rpt_style_basic .rpt_recommended_plan .rpt_title,
 .main-holder .rpt_4_plans.rpt_style_basic .rpt_plan.rpt_recommended_plan,
+
+
 /* square social icon */
+
 .preyantechnosys-teambox-style1 .prt-team-social-links-wrapper ul li a:hover,
+
 /*blog top-bottom content */
 .preyantechnosys-box-blog.preyantechnosys-box-blog-classic .preyantechnosys-post-date-wrapper,
 .entry-content .page-links>span:not(.page-links-title),
@@ -821,6 +854,7 @@ mark,
 ins {
     background-color: #ff172d;
 }
+
 
 /* This is Titlebar Background color */
 .prt-header-overlay .prt-titlebar-wrapper .prt-titlebar-inner-wrapper {
@@ -832,6 +866,7 @@ ins {
 }
 
 /* This is Titlebar Text color */
+
 .prt-titlebar-wrapper .prt-titlebar-inner-wrapper {
     height: 412px;
 }
@@ -918,10 +953,12 @@ table.compare-list .add-to-cart td a,
     line-height: 15px;
 }
 
+
 /**
-* 2. Topbar Background color
-* ----------------------------------------------------------------------------
-*/
+   * 2. Topbar Background color
+   * ----------------------------------------------------------------------------
+   */
+
 .site-header .preyantechnosys-topbar {
     background-color: #090909;
 }
@@ -937,10 +974,13 @@ table.compare-list .add-to-cart td a,
     }
 }
 
+
+
 /**
-* 4. Border color
-* ----------------------------------------------------------------------------
-*/
+   * 4. Border color
+   * ----------------------------------------------------------------------------
+   */
+
 .tprt-call-box i,
 .prt-slider-button.btn-skin,
 #totop.top-visible:before,
@@ -952,6 +992,8 @@ table.compare-list .add-to-cart td a,
 .prt-iconbox-style2 .prt-sbox:hover .prt-vc_cta3-container:after,
 .prt-border-skincolor .vc_column-inner,
 .slick-dots li.slick-active button:before,
+
+
 .main-holder .site #content table.cart td.actions .input-text:focus,
 textarea:focus,
 input[type="text"]:focus,
@@ -970,6 +1012,7 @@ input[type="tel"]:focus,
 input[type="color"]:focus,
 input.input-text:focus,
 select:focus,
+
 .preyantechnosys-iconbox-stylefive .prt-box-icon:before,
 /* testimonial */
 .preyantechnosys-boxes-testimonial.preyantechnosys-boxes-view-slickview .preyantechnosys-testimonials-info .prt-box-img img,
@@ -992,9 +1035,10 @@ select:focus,
 }
 
 /**
-* 5. Textcolor
-* ----------------------------------------------------------------------------
-*/
+   * 5. Textcolor
+   * ----------------------------------------------------------------------------
+   */
+
 .tprt-header-button a,
 .prt-fid.prt-fid-view-style5 strong,
 .prt-fid-view-style6.inside h4 span:nth-child(2),
@@ -1011,19 +1055,29 @@ select:focus,
 .sidebar .widget a:hover,
 .prt-textcolor-dark.prt-bgcolor-grey .prt-fbar-open-icon:hover,
 .prt-textcolor-dark.prt-bgcolor-white .prt-fbar-open-icon:hover,
+
 /*Iconbox element*/
+
+
 .preyantechnosys-iconbox.preyantechnosys-iconcolor-skincolor .prt-icon-type-text,
+
 /* Icon basic color */
 .prt-icolor-skincolor,
 .widget_calendar table td#today,
+
 section.error-404 .prt-big-icon,
+
 .prt-bgcolor-darkgrey ul.industico_contact_widget_wrapper li a:hover,
 .prt-bgcolor-skincolor .preyantechnosys-pagination .page-numbers.current,
 .prt-bgcolor-skincolor .preyantechnosys-pagination .page-numbers:hover,
+
 .prt-bgcolor-darkgrey .preyantechnosys-twitterbox-inner .tweet-text a:hover,
 .prt-bgcolor-darkgrey .preyantechnosys-twitterbox-inner .tweet-details a:hover,
+
 .prt-dcap-txt-color-skincolor,
+
 /* Blog */
+
 .comment-reply-link,
 .single .prt-pf-single-content-area blockquote:before,
 .single .prt-pf-single-content-wrapper blockquote:before,
@@ -1032,11 +1086,16 @@ article.post.format-link .prt-format-link-title a:hover,
 .preyantechnosys-box-blog .preyantechnosys-blogbox-desc-footer a,
 article.post .entry-title a:hover,
 .preyantechnosys-meta-details a:hover,
+
+
 /* Team Member meta details */
+
 .prt-extra-details-list .prt-team-extra-list-title,
 .prt-team-member-single-meta-value a:hover,
 .prt-team-member-single-category a:hover,
 .prt-team-details-list .prt-team-list-value a:hover,
+
+
 /* Testimonials Section */
 .prt-bgcolor-skincolor .preyantechnosys-box-view-default .preyantechnosys-box-author .preyantechnosys-box-img .preyantechnosys-icon-box,
 .testimonial_item .preyantechnosys-author-name a,
@@ -1046,19 +1105,25 @@ article.post .entry-title a:hover,
 .prt-textcolor-white a:hover,
 .prt-textcolor-skincolor,
 .prt-textcolor-skincolor a,
+
 .prt-textcolor-skincolor.prt-custom-heading,
 .prt-element-content-heading strong,
+
 .preyantechnosys-box-blog.preyantechnosys-box-topimage .preyantechnosys-box-title h4 a:hover,
 .preyantechnosys-box-blog-classic .entry-header .prt-meta-line a:hover,
 .preyantechnosys-blog-box-view-left-image .preyantechnosys-box-content .prt-post-categories>.prt-meta-line.cat-links a,
+
 ul.industico_contact_widget_wrapper.call-email-footer li:before,
+
 /*Tweets*/
 .widget_latest_tweets_widget p.tweet-text:before,
+
 /*search result page*/
 .prt-sresults-first-row .prt-list-li-content a:hover,
 .prt-results-post ul.prt-recent-post-list>li>a:hover,
 .prt-results-page .prt-list-li-content a:hover,
 .prt-sresults-first-row ul.prt-recent-post-list>li>a:hover,
+
 .prt-team-list-title i,
 .prt-bgcolor-darkgrey .preyantechnosys-box-view-left-image .preyantechnosys-box-title a:hover,
 .prt-team-member-view-wide-image .prt-team-details-list .prt-team-list-title,
@@ -1078,35 +1143,46 @@ ul.industico_contact_widget_wrapper.call-email-footer li:before,
 .main-holder .site-content ul.products li.product .yith-wcwl-add-to-wishlist .yith-wcwl-wishlistaddedbrowse:after,
 .main-holder .site-content ul.products li.product .yith-wcwl-wishlistexistsbrowse a[rel="nofollow"],
 .main-holder .site-content ul.products li.product .yith-wcwl-wishlistexistsbrowse a[rel="nofollow"]:after,
+
+
 /* Special Section */
+
+
 .preyantechnosys-servicebox-styleone .preyantechnosys-serviceboxbox-readmore a:hover,
 .preyantechnosys-pf-detailbox-list .prt-pf-details-date i,
 .content-area .social-icons li>a {
     color: #ff172d;
 }
 
+
 /*** Defaultmenu ***/
 /*Wordpress Main Menu*/
+
 /* Menu hover and select section */
+
 .prt-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li:hover i,
 .prt-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li.current-menu-ancestor>i,
 .prt-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li.current_page_item>i,
 .prt-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li.current_page_ancestor>i,
+
 .prt-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li:hover>a,
 .prt-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li.current-menu-ancestor>a,
 .prt-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li.current_page_item>a,
 .prt-mmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li.current_page_ancestor>a,
+
 /*Wordpress Dropdown Menu*/
 .prt-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li li.current-menu-ancestor>a,
 .prt-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li li.current-menu-item>a,
 .prt-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li li.current_page_item>a,
 .prt-dmenu-active-color-skin #site-header-menu #site-navigation div.nav-menu>ul>li li.current_page_ancestor>a,
+
 /*Mega Main Menu*/
 .prt-mmenu-active-color-skin .site-header.prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item:hover>a,
 .prt-mmenu-active-color-skin .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item.mega-current-menu-item>a,
 .prt-mmenu-active-color-skin .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item.mega-current-menu-ancestor>a,
 .prt-mmenu-active-color-skin .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item.mega-current-menu-item>a,
 .prt-mmenu-active-color-skin .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item.mega-current-menu-ancestor>a,
+
 /*Mega Dropdown Menu*/
 .prt-dmenu-active-color-skin .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item ul.mega-sub-menu li.mega-current-menu-item>a,
 .prt-dmenu-active-color-skin .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item ul.mega-sub-menu li.mega-current-menu-ancestor>a,
@@ -1114,6 +1190,11 @@ ul.industico_contact_widget_wrapper.call-email-footer li:before,
 .prt-dmenu-active-color-skin .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item ul.mega-sub-menu li.current_page_item>a {
     color: #ff172d;
 }
+
+
+
+
+
 
 /* Dynamic main menu color applying to responsive menu link text */
 .header-controls .search_box i.tmicon-fa-search,
@@ -1133,26 +1214,32 @@ ul.industico_contact_widget_wrapper.call-email-footer li:before,
     font-weight: normal;
 }
 
+
 /*Logo Color --------------------------------*/
 h1.site-title {
     color: #202020;
 }
 
+
 /**
-* 9. Genral Elements
-* ----------------------------------------------------------------------------
-*/
+   * 9. Genral Elements
+   * ----------------------------------------------------------------------------
+   */
+
 /* Site Pre-loader image */
+
+
 /**
-* 10. Heading Elements
-* ----------------------------------------------------------------------------
-*/
+   * 10. Heading Elements
+   * ----------------------------------------------------------------------------
+   */
 .prt-textcolor-skincolor h1,
 .prt-textcolor-skincolor h2,
 .prt-textcolor-skincolor h3,
 .prt-textcolor-skincolor h4,
 .prt-textcolor-skincolor h5,
 .prt-textcolor-skincolor h6,
+
 .prt-textcolor-skincolor .prt-vc_cta3-content-header h2 {
     color: #ff172d !important;
 }
@@ -1175,10 +1262,13 @@ h1.site-title {
     color: rgba(255, 23, 45, 0.80);
 }
 
+
+
 /**
-* 10. Floating Bar
-* ----------------------------------------------------------------------------
-*/
+   * 10. Floating Bar
+   * ----------------------------------------------------------------------------
+   */
+
 /* Show/hide topbar in some devices */
 @media (max-width: 1200px) {
 
@@ -1187,6 +1277,7 @@ h1.site-title {
         display: none !important;
     }
 }
+
 
 ::-moz-selection {
     text-shadow: none;
@@ -1206,10 +1297,12 @@ h1.site-title {
     color: #fff;
 }
 
+
 /**
-* Extra section
-* ----------------------------------------------------------------------------
-*/
+   * Extra section
+   * ----------------------------------------------------------------------------
+   */
+
 .site-footer .preyantechnosys-iconbox-styletwo .preyantechnosys-iconbox-icon .prt-box-icon,
 .single-product .main-holder .site-content span.onsale,
 .main-holder .site-content ul.products li.product .onsale.product-label,
@@ -1221,6 +1314,7 @@ article.preyantechnosys-box-blog-classic.sticky:after,
 .preyantechnosys-iconbox .prt-iconstyle-rounded .prt-box-icon,
 .preyantechnosys-iconbox .prt-iconstyle-boxed .prt-box-icon,
 .preyantechnosys-iconbox .prt-iconstyle-rounded-less .prt-box-icon,
+
 .woocommerce.single-product div.summary .stock,
 .preyantechnosys-box-portfolio .preyantechnosys-icon-box a,
 .woocommerce-account .woocommerce-MyAccount-navigation li a:hover:before,
@@ -1240,6 +1334,7 @@ article.preyantechnosys-box-blog-classic .prt-post-featured-outer-wrapper .prt-p
 .tooltip:after,
 [data-tooltip]:after,
 .single-tm_team_member .prt-team-member-single-title-wrapper .prt-team-social-links-wrapper ul li a:hover,
+
 .post.preyantechnosys-box-blog-classic .prt-box-post-icon,
 .preyantechnosys-box-blog .prt-box-post-date,
 .preyantechnosys-teambox-view-overlay .preyantechnosys-overlay a,
@@ -1266,6 +1361,7 @@ article.preyantechnosys-box-blog-classic .prt-post-featured-outer-wrapper .prt-p
 .woocommerce .main-holder #content .woocommerce-error .button:hover,
 .woocommerce .main-holder #content .woocommerce-info .button:hover,
 .woocommerce .main-holder #content .woocommerce-message .button:hover,
+
 .sidebar .widget .tagcloud a:hover,
 .woocommerce .widget_shopping_cart a.button:hover,
 .woocommerce-cart .wc-proceed-to-checkout a.checkout-button:hover,
@@ -1282,6 +1378,7 @@ table.compare-list .add-to-cart td a:hover,
 .main-holder .site .woocommerce-form-login button.woocommerce-Button:hover,
 .main-holder .site .woocommerce-ResetPassword button.woocommerce-Button:hover,
 .main-holder .site .woocommerce-EditAccountForm button.woocommerce-Button:hover,
+
 .single .main-holder div.product .woocommerce-tabs ul.tabs li.active,
 .main-holder .site table.cart .coupon input:hover,
 .woocommerce #payment #place_order:hover,
@@ -1358,6 +1455,7 @@ blockquote,
 .prt-contactform-onepage .elementor-button.elementor-size-md:hover,
 .preyantechnosys-blogbox-stylefive .preyantechnosys-blogbox-footer-readmore a:hover,
 .preyantechnosys-iconbox-styleseven .preyantechnosys-serviceboxbox-readmore a,
+
 .mailchimp-inputbox button[type="submit"]:hover,
 .prt-bgcolor-white .tprt-header-button a:hover,
 .preyantechnosys-iconbox-stylesix .prt-iocnbox-btn a:hover,
@@ -1384,6 +1482,7 @@ ul.industico_contact_widget_wrapper li:before,
 a.prt-link-underline,
 .prt-header-icon.prt-header-social-box a.prt-social-btn-link i:focus,
 .prt-header-icon.prt-header-social-box a.prt-social-btn-link i:hover,
+
 .preyantechnosys-boxes-testimonial .preyantechnosys-box.preyantechnosys-box-view-default .preyantechnosys-post-item .preyantechnosys-box-desc:after,
 .woocommerce .summary .compare.button:hover,
 .prt-fid-with-icon.prt-fid-view-topicon .prt-fid-icon-wrapper i,
@@ -1429,7 +1528,9 @@ span.prt-skincolor a {
     border-top-color: #ff172d;
 }
 
+
 /*Elementor Button*/
+
 .prt-btn-style-text .elementor-button-link.elementor-button:hover,
 .prt-btn-style-text.prt-btn-color-skincolor .elementor-button {
     color: #ff172d;
@@ -1464,6 +1565,7 @@ span.prt-skincolor a {
 
 .prt-btn-style-flat.prt-btn-color-skincolor.prt-btn-shape-square:not(.prt-btn-style-text).elementor-element.elementor-widget-button .elementor-button-link:before,
 .prt-btn-style-flat.prt-btn-color-skincolor.prt-btn-shape-square:not(.prt-btn-style-text).elementor-element.elementor-widget-button .elementor-button-link:after,
+
 .prt-btn-style-flat.prt-btn-color-darkgrey.prt-btn-shape-square:not(.prt-btn-style-text).elementor-element.elementor-widget-button .elementor-button-link:hover:before,
 .prt-btn-style-flat.prt-btn-color-darkgrey.prt-btn-shape-square:not(.prt-btn-style-text).elementor-element.elementor-widget-button .elementor-button-link:hover:after,
 .prt-contactform-onepage input[type="checkbox"]:checked:after,
@@ -1474,8 +1576,10 @@ span.prt-skincolor a {
 
 .prt-btn-style-flat.prt-btn-color-darkgrey.prt-btn-shape-square:not(.prt-btn-style-text).elementor-element.elementor-widget-button .elementor-button-link:before,
 .prt-btn-style-flat.prt-btn-color-darkgrey.prt-btn-shape-square:not(.prt-btn-style-text).elementor-element.elementor-widget-button .elementor-button-link:after,
+
 .prt-btn-style-flat.prt-btn-color-skincolor.prt-btn-shape-square:not(.prt-btn-style-text).elementor-element.elementor-widget-button .elementor-button-link:hover:before,
 .prt-btn-style-flat.prt-btn-color-skincolor.prt-btn-shape-square:not(.prt-btn-style-text).elementor-element.elementor-widget-button .elementor-button-link:hover:after,
+
 .preyantechnosys-box-blog.preyantechnosys-blogbox-styleone .preyantechnosys-blogbox-desc-footer a:hover:before,
 .preyantechnosys-box-blog.preyantechnosys-blogbox-styleone .preyantechnosys-blogbox-desc-footer a:hover:after {
     border-color: #282b2d;
@@ -1527,6 +1631,7 @@ span.prt-skincolor a {
 }
 
 /* Blackish Button Color */
+
 .preyantechnosys-blogbox-stylefive .preyantechnosys-blogbox-footer-readmore a,
 .preyantechnosys-iconbox-styleseven .preyantechnosys-serviceboxbox-readmore a:hover,
 .prt-bgcolor-white .tprt-header-button a,
@@ -1552,6 +1657,7 @@ span.prt-skincolor a {
 .comment-reply-link:hover,
 .testimonial_item .preyantechnosys-author-name a:hover,
 .preyantechnosys-box-team.preyantechnosys-box-view-top-image .preyantechnosys-box-content h4 a,
+
 .preyantechnosys-post-readmore a,
 .prt-bgcolor-skincolor .preyantechnosys-blogbox-footer-readmore a:hover,
 .logged-in-as a:hover,
@@ -1579,6 +1685,7 @@ h3.prt-custom-heading.prt-textcolor-dark {
     color: #282b2d !important;
 }
 
+
 .elementor-widget-heading .elementor-heading-title,
 .preyantechnosys-testimonial-text,
 .tm_coverimgbox_wrapper .prt-box-title:after,
@@ -1600,6 +1707,7 @@ span.prt-fsize,
 }
 
 .tprt-header-button a,
+
 .preyantechnosys-portfoliobox-style2 .prt-project-readmore-btn a,
 .woocommerce-account .woocommerce-MyAccount-navigation li a,
 .widget.tm_widget_nav_menu li a,
@@ -1607,6 +1715,8 @@ span.prt-fsize,
 .widget.industico_category_list_widget li a {
     font-weight: 600;
 }
+
+
 
 .prt-contact-btn input[type="submit"],
 .preyantechnosys-servicebox-stylefour .preyantechnosys-serviceboxbox-readmore a,
@@ -1625,6 +1735,7 @@ span.prt-fsize,
     border-radius: 0px;
 }
 
+
 /* ********************* Responsive Menu Code Start *************************** */
 .headerlogo,
 .prt-header-icon,
@@ -1641,6 +1752,7 @@ span.prt-fsize,
 }
 
 .is_stuck .prt-header-icon.prt-header-social-box a.prt-social-btn-link i,
+
 .is_stuck .prt-header-icons .prt-header-wc-cart-link a {
     color: rgba(255, 255, 255, 1);
 }
@@ -1663,9 +1775,9 @@ span.prt-fsize,
 }
 
 /**
-* Responsive Menu
-* ----------------------------------------------------------------------------
-*/
+  * Responsive Menu
+  * ----------------------------------------------------------------------------
+  */
 @media (max-width: 1200px) {
 
     /* Responsive Header bg color */
@@ -1921,6 +2033,7 @@ span.prt-fsize,
     .prt-dmenu-active-color-skin #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-item ul.mega-sub-menu li>a:hover {
         color: #ff172d;
     }
+
 
     #site-header-menu #site-navigation div.nav-menu>ul>li>a,
     .prt-mmmenu-override-yes #site-header-menu #site-navigation .mega-menu-wrap .mega-menu.mega-menu-horizontal>li.mega-menu-item>a,
@@ -2685,6 +2798,7 @@ span.prt-fsize,
     }
 
     /*** Sub Navigation Section ***/
+
     .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal li.mega-menu-item:not(.mega-menu-megamenu) ul.mega-sub-menu,
     #site-header-menu #site-navigation div.nav-menu>ul>li ul {
         box-shadow: 0 3px 25px 0px rgba(43, 52, 59, 0.10), 0 0 0 rgba(43, 52, 59, 0.10) inset;
@@ -2857,6 +2971,7 @@ span.prt-fsize,
         margin-top: 3px;
         opacity: 0.8;
     }
+
 
     /*** Sep Section ***/
     .prt-mmmenu-override-yes #site-header-menu #site-navigation div.mega-menu-wrap ul.mega-menu.mega-menu-horizontal>li.mega-menu-megamenu>ul.mega-sub-menu li.mega-menu-item:after {
@@ -3730,6 +3845,7 @@ span.prt-fsize,
         line-height: 95px !important;
     }
 
+
     .prt-titlebar-wrapper.prt-breadcrumb-on-bottom .prt-titlebar .entry-title-wrapper {
         margin-top: -50px;
     }
@@ -4213,7 +4329,10 @@ span.prt-fsize,
 }
 
 /* ********************** Responsive Menu Code END **************************** */
+
+
 /****************** Custom Code **********************/
+
 ::-moz-selection,
 ::selection {
     background-color: #ff172d;
@@ -4321,6 +4440,7 @@ span.prt-fsize,
     opacity: .2;
     background-color: var(--prt-skincolor-bg);
     animation: prittyphoto 2s infinite;
+
 }
 
 .prt_prettyphoto .elementor-icon-wrapper .elementor-icon:hover:before,

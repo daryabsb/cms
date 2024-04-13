@@ -129,3 +129,34 @@ def our_team(request):
         "page_title": "Our Team"
     }
     return render(request, template_name, context)
+
+
+def contact_us(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/pages/contact-us.html"
+
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Contact Us"
+    }
+    return render(request, template_name, context)
+
+
+def team_member(request, slug):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/pages/team-member.html"
+    print("Slug = ", slug)
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Team Member",
+        "object": {"name":"Darya Ibrahim"},
+    }
+    return render(request, template_name, context)
