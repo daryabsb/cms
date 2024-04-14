@@ -62,14 +62,14 @@ body #main,
     background-attachment: scroll;
 } */
 
-/* div.prt-titlebar-wrapper { */
-/* background-image: url('../../uploads/2022/06/titlebar-01.jpg'); */
-/* background-color: rgba(0, 0, 0, 0.47);
+div.prt-titlebar-wrapper {
+    /* background-image: url('../../uploads/2022/06/titlebar-01.jpg'); */
+    background-color: rgba(0, 0, 0, 0.47);
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: scroll; */
-/* } */
+    background-attachment: scroll;
+}
 
 div.prt-titlebar-wrapper>.prt-bg-layer {
     background-color: rgba(0, 0, 0, 0.47);

@@ -16,4 +16,5 @@ urlpatterns = [
     path('our-team/', views.our_team, name='our-team'),
     path('team-member/<slug:slug>/', views.team_member, name='team-member'),
     path('contact-us/', views.contact_us, name='contact-us'),
+    path('faq/', views.faq, name='faq'),
 ]

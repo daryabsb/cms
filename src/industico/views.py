@@ -157,6 +157,21 @@ def team_member(request, slug):
         "banner_title": "Blogs",
         "query": 'query',
         "page_title": "Team Member",
-        "object": {"name":"Darya Ibrahim"},
+        "object": {"name": "Darya Ibrahim"},
+    }
+    return render(request, template_name, context)
+
+
+def faq(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/pages/faq.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "FAQ",
+
     }
     return render(request, template_name, context)
