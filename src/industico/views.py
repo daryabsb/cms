@@ -175,3 +175,52 @@ def faq(request):
 
     }
     return render(request, template_name, context)
+
+def service_detail_left(request, slug):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/service/detail-left-sidebar.html"
+    title = ' '.join([word.capitalize() for word in slug.split('-')])
+    print("Slug = ", title)
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Team Member",
+        "object": {"title": title},
+    }
+    return render(request, template_name, context)
+
+def service_detail_right(request, slug):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/service/detail-right-sidebar.html"
+    title = ' '.join([word.capitalize() for word in slug.split('-')])
+    print("Slug = ", title)
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Team Member",
+        "object": {"title": title},
+    }
+    return render(request, template_name, context)
+
+
+def service_detail(request, slug):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/service/detail-no-sidebar.html"
+    title = ' '.join([word.capitalize() for word in slug.split('-')])
+    print("Slug = ", title)
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Team Member",
+        "object": {"title": title},
+    }
+    return render(request, template_name, context)

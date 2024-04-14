@@ -21,8 +21,9 @@
 		<title>Industico - Industry &amp; Manufacturers Popular WordPress Theme - Home 1</title>
         {% endblock title_1 %}
 	</head>
-	<body class="page-template-default page mega-menu-preyantechnosys-main-menu prt-headerstyle-classic-overlay preyantechnosys-topbar-yes preyantechnosys-fullwide preyantechnosys-page-full-width prt-empty-sidebar preyantechnosys-maxmegamenu-active elementor-default elementor-kit-6 elementor-page {% block page_body_classes %}home page-id-263 elementor-page-263{% endblock page_body_classes %}">
-
+	
+	
+	<body class="mega-menu-preyantechnosys-main-menu prt-headerstyle-classic-overlay preyantechnosys-topbar-yes preyantechnosys-fullwide  preyantechnosys-maxmegamenu-active elementor-default elementor-kit-6 elementor-page {% block page_body_classes %}home page-id-263 elementor-page-263{% endblock page_body_classes %}">
 		<div id="prt-home"></div>
 		<div class="main-holder">
 			<div id="page" class="hfeed site">
@@ -30,8 +31,8 @@
                 {% endblock header %}
 				<!-- .site-header -->		
 				<div id="content-wrapper" class="site-content-wrapper">
-					<div id="content" class="site-content ">
-						<div id="content-inner" class="site-content-inner ">
+					<div id="content" class="site-content {% block extra_content_class %}{% endblock extra_content_class %}">
+						<div id="content-inner" class="site-content-inner {% block extra_inner_class %}{% endblock extra_inner_class %}">
                         {% block content %}
                         {% endblock content %}
 							<!-- #primary .content-area -->
@@ -41,164 +42,7 @@
 					<!-- .site-content -->
 				</div>
 				<!-- .site-content-wrapper -->
-				<footer id="colophon" class="site-footer">
-					<div class="footer_inner_wrapper footer prt-bg prt-bgcolor-custom prt-bgimage-yes">
-						<div class="site-footer-bg-layer prt-bg-layer"></div>
-						<div class="site-footer-w">
-							<div class="footer-rows">
-								<div class="footer-rows-inner">
-									<div id="first-footer" class="sidebar-container first-footer  prt-bg prt-bgcolor-transparent prt-textcolor-white prt-bgimage-no prt-footerrow-sepnone prt-widgetsep-no" role="complementary">
-										<div class="first-footer-bg-layer prt-bg-layer"></div>
-										<div class="container prt-container-for-footer">
-											<div class="first-footer-inner">
-												<div class="row multi-columns-row">
-													<div class="widget-area col-xs-12 col-sm-3 col-md-3 col-lg-3 first-widget-area">
-														<aside id="enhancedtextwidget-3" class="widget widget_text enhanced-text-widget">
-															<div class="textwidget widget-text">
-																<div class="footer_logo"><img src="{% static 'industico/uploads/2022/06/final-logo-light.svg' %}" alt=""></div>
-																<p>Industico is widely considered as the largest 
-																	global providers of oil & gas refineries for the
-																	energy industries.
-																</p>
-																<div class=tm-colorstyle-social-link>
-																	<h3 style="font-size: 18px; font-weight:600;">Social Info:</h3>
-																	<div class="themetechmount-social-links-wrapper">
-																		<div class="preyantechnosys-social-links-wrapper">
-																			<ul class="social-icons">
-																				<li class="prt-social-facebook"><a class=" tooltip-top" target="_blank" href="https://www.facebook.com/preyantechnosys19" data-tooltip="Facebook"><span class="prt-ss">facebook</span><i class="prt-industico-icon-facebook"></i></a></li>
-																				<li class="prt-social-twitter"><a class=" tooltip-top" target="_blank" href="https://twitter.com/PreyanTechnosys" data-tooltip="Twitter"><span class="prt-ss">twitter</span><i class="prt-industico-icon-twitter"></i></a></li>
-																				<li class="prt-social-pinterest"><a class=" tooltip-top" target="_blank" href="https://in.pinterest.com/preyan_technosys/" data-tooltip="Pinterest"><span class="prt-ss">pinterest</span><i class="prt-industico-icon-pinterest"></i></a></li>
-																				<li class="prt-social-linkedin"><a class=" tooltip-top" target="_blank" href="https://www.instagram.com/preyan_technosys/" data-tooltip="LinkedIn"><span class="prt-ss">linkedin</span><i class="prt-industico-icon-linkedin"></i></a></li>
-																				<li class="prt-social-dribbble"><a class=" tooltip-top" target="_blank" href="https://dribbble.com/PreyanTechnosys" data-tooltip="Dribbble"><span class="prt-ss">dribbble</span><i class="prt-industico-icon-dribbble"></i></a></li>
-																			</ul>
-																		</div>
-																	</div>
-																</div>
-															</div>
-														</aside>
-													</div>
-													<!-- .widget-area -->
-													<div class="widget-area col-xs-12 col-sm-3 col-md-3 col-lg-3 first-widget-area">
-														<aside id="nav_menu-2" class="widget widget_nav_menu">
-															<h3 class="widget-title">Useful Links</h3>
-															<div class="menu-useful-links-container">
-																<ul id="menu-useful-links-1" class="menu">
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3914"><a href="#">Wind Turbines</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3915"><a href="#">Solar Panels</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3916"><a href="#">Fossil Resources</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3917"><a href="#">Hydropower Plants</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3918"><a href="#">Fuel Resources</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3919"><a href="#">Battery Materials</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3920"><a href="#">Charge Controllers</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3921"><a href="#">Wind Turbines</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3922"><a href="#">Solar Panels</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3923"><a href="#">Fossil Resources</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3924"><a href="#">Hydropower Plants</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3925"><a href="#">Chemical Research</a></li>
-																	<li class="prt-2column-menu menu-item menu-item-type-custom menu-item-object-custom menu-item-3926"><a href="#">Battery Materials</a></li>
-																</ul>
-															</div>
-														</aside>
-													</div>
-													<!-- .widget-area -->
-													<div class="widget-area col-xs-12 col-sm-6 col-md-6 col-lg-6 first-widget-area">
-														<aside id="enhancedtextwidget-4" class="prt-third-widget widget widget_text enhanced-text-widget">
-															<h3 class="widget-title">Contact Us</h3>
-															<div class="textwidget widget-text">
-																<div class="cmt-full-box">
-																	<div class="prt-lefticon-box">
-																		114 W. Elmwood Court Oakland Gardens,<br> NY 11364
-																	</div>
-																	<div class="prt-righticon-box">
-																		<h3>Get Free Estimate</h3>
-																		<h4>(222) 400-630</h4>
-																		<i aria-hidden="true" class="kw_fabiflex flaticon-24-hours"></i>
-																	</div>
-																</div>
-																<div class="prt-mailchimp-head">
-																	<h3 class="widget-title">Signup For Our Newsletter</h3>
-																</div>
-																<div class="prt-mailchimp">
-																	<script>(function() {
-																		window.mc4wp = window.mc4wp || {
-																			listeners: [],
-																			forms: {
-																				on: function(evt, cb) {
-																					window.mc4wp.listeners.push(
-																						{
-																							event   : evt,
-																							callback: cb
-																						}
-																					);
-																				}
-																			}
-																		}
-																		})();
-																	</script><!-- Mailchimp for WordPress v4.8.7 - https://wordpress.org/plugins/mailchimp-for-wp/ -->
-																	<form id="mc4wp-form-2" class="mc4wp-form mc4wp-form-3930" method="post" data-id="3930" data-name="form" >
-																		<div class="mc4wp-form-fields">
-																			<div class="mailchimp-inputbox tm-mailchimp">
-																				<div class="mailchimp-email">
-																					<input type="email" name="EMAIL" placeholder="Your email address">
-																				</div>
-																				<button class="btn" type="submit" >
-																				<i class="prt-industico-icon-paper-plane-1"></i> 
-																				</button>
-																			</div>
-																		</div>
-																		<label style="display: none !important;">Leave this field empty if you're human: <input type="text" name="_mc4wp_honeypot" value="" tabindex="-1" autocomplete="off" /></label><input type="hidden" name="_mc4wp_timestamp" value="1712671059" /><input type="hidden" name="_mc4wp_form_id" value="3930" /><input type="hidden" name="_mc4wp_form_element_id" value="mc4wp-form-2" />
-																		<div class="mc4wp-response"></div>
-																	</form>
-																	<!-- / Mailchimp for WordPress Plugin -->
-																</div>
-															</div>
-														</aside>
-													</div>
-													<!-- .widget-area -->
-												</div>
-												<!-- .row.multi-columns-row -->
-											</div>
-											<!-- .first-footer-inner -->
-										</div>
-										<!--  -->
-									</div>
-									<!-- #secondary -->
-								</div>
-								<!-- .footer-inner -->
-							</div>
-							<!-- .footer -->
-							<div id="bottom-footer-text" class="bottom-footer-text prt-bottom-footer-text site-info  prt-bg prt-bgcolor-transparent prt-textcolor-white prt-bgimage-no prt-bordercolor-none">
-								<div class="bottom-footer-bg-layer prt-bg-layer"></div>
-								<div class="container prt-container-for-footer">
-									<div class="bottom-footer-inner">
-										<div class="row multi-columns-row">
-											<div class="col-xs-12 col-sm-7 prt-footer2-left ">
-												Copyright © 2024 Industico. Designed and Developed by <span class="prt-skincolor u1"><a href="/">Preyan Technosys</a> </span>only on <span class="prt-green u1"><a href="https://themeforest.net/user/themetechmount">Envato Market.</a></span>				
-											</div>
-											<!--.footer menu -->
-											<div class="col-xs-12 col-sm-5 prt-footer2-right ">
-												<ul class="footer-nav-menu">
-													<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4544"><a href="/about-us-1-2/">About</a></li>
-													<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4545"><a href="/blog/">Blog</a></li>
-													<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4546"><a href="/contact-us/">Contact</a></li>
-													<li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4547"><a href="/faq/">Privacy Policy</a></li>
-												</ul>
-											</div>
-											<!--.copyright --> 
-										</div>
-										<!-- .row.multi-columns-row --> 
-									</div>
-									<!-- .bottom-footer-inner --> 
-								</div>
-								<!--  --> 
-							</div>
-							<!-- .footer-text -->				
-						</div>
-						<!-- .footer-inner-wrapper -->
-					</div>
-					<!-- .site-footer-inner -->
-				</footer>
-				<!-- .site-footer -->
+				{% include './elements/footer.html' %}
 			</div>
 			<!-- #page .site -->
 		</div>
