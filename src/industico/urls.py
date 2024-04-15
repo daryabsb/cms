@@ -22,4 +22,17 @@ urlpatterns = [
     path('team-member/<slug:slug>/', views.team_member, name='team-member'),
     path('contact-us/', views.contact_us, name='contact-us'),
     path('faq/', views.faq, name='faq'),
+    
+    # Blogs
+    path('blog/', views.blog_classic, name='blog'),
+    path('blog-grid/', views.blog_grid, name='blog-grid'),
+    path('blog-grid-4-column-full-width/', views.blog_4_column, name='blog-grid-4-column-full-width'),
+    path('blog-grid-2/', views.blog_2_column, name='blog-grid-2'),
+    path('blog-grid-2-column-left-sidebar/', views.blog_2_column_left_sidebar, name='blog-grid-2-column-left-sidebar'),
+    path('blog-grid-2-column-right-sidebar/', views.blog_2_column_right_sidebar, name='blog-grid-2-column-right-sidebar'),
+
+    # Blog single
+    path('blog/<str:year>/<str:month>/<int:day>/<slug:slug>/', views.blog_detail, name='blog_single'),
+    path('blog/left/<str:year>/<str:month>/<int:day>/<slug:slug>/', views.blog_detail_left_sidebar, name='blog_detail_left_sidebar'),
+    path('blog/right/<str:year>/<str:month>/<int:day>/<slug:slug>/', views.blog_detail_right_sidebar, name='blog_detail_right_sidebar'),
 ]

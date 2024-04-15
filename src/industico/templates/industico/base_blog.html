@@ -1,0 +1,56 @@
+{% extends 'industico/base.html' %}
+{% load static %}
+
+{% block additional_head_part1 %}
+{% endblock additional_head_part1 %}
+{% comment %} {% block additional_head_part2 %}
+{% endblock additional_head_part2 %} {% endcomment %}
+
+{% block body %}
+
+<body class="mega-menu-preyantechnosys-main-menu prt-headerstyle-classic-overlay preyantechnosys-topbar-yes preyantechnosys-fullwide preyantechnosys-page-full-width  preyantechnosys-maxmegamenu-active elementor-default elementor-kit-6 {% block page_body_classes %}blog prt-empty-sidebar{% endblock page_body_classes %}">
+
+<div id="prt-home"></div>
+<div class="main-holder">
+	<div id="page" class="hfeed site">
+
+
+		<header id="masthead" class=" prt-header-style-classic prt-header-overlay prt-main-menu-total-7 prt-main-menu-more-than-six">
+			<div class="prt-header-block  prt-mmenu-active-color-skin prt-dmenu-active-color-skin prt-dmenu-sep-no prt-header-hastextarea">
+				<div id="prt-stickable-header-w" class="prt-stickable-header-w prt-bgcolor-custom" style="height:100px">
+				<!-- TOP BAR -->
+				{% include 'industico/elements/1/top_bar.html' %}
+				<!-- Site Header -->
+				{% include 'industico/elements/1/site_header.html' %}
+				</div>
+				{% block header %}
+				{% endblock header %}
+				<!-- .prt-titlebar-wrapper -->
+			</div>
+		</header>
+		<!-- .site-header -->		
+		<div id="content-wrapper" class="site-content-wrapper">
+			<div id="content" class="site-content {% block extra_content_class %}{% endblock extra_content_class %}">
+				<div id="content-inner" class="site-content-inner {% block extra_inner_class %}{% endblock extra_inner_class %}">
+					{% block content %}
+					{% endblock content %}
+					<!-- .content-area -->
+				</div>
+				<!-- .site-content-inner -->
+			</div>
+			<!-- .site-content -->
+		</div>
+		<!-- .site-content-wrapper -->
+	
+		{% include 'industico/elements/footer.html' %}
+		<!-- .site-footer -->
+	</div>
+	<!-- #page .site -->
+</div>
+<!-- .main-holder -->
+<!-- To Top -->
+<a id="totop" href="#top"><i class="prt-industico-icon-angle-up"></i></a>
+{% include 'industico/includes/common_script_top.html' %}
+
+</body>
+{% endblock body %}

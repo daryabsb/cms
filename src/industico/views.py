@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from src.blogs.models import Blogs
 
 # Create your views here.
 
@@ -244,5 +245,154 @@ def service_detail(request, slug):
         "query": 'query',
         "page_title": "Team Member",
         "object": {"title": title},
+    }
+    return render(request, template_name, context)
+
+
+def blog_classic(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/blog/blog_classic.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Blog",
+
+    }
+    return render(request, template_name, context)
+
+
+def blog_detail(request, year, month, day, slug):
+
+    print("Year is: ", year)
+
+    blog = get_object_or_404(Blogs, slug=slug, publish_on__year=year, publish_on__month=month, publish_on__day=day)
+    if not blog:
+        blog = Blogs.objects.first()
+
+    theme_value = 'industico'
+    template_name = f"{theme_value}/blog/blog_single.html"
+    context = {
+        "blog": blog,
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": blog.title,
+
+    }
+    return render(request, template_name, context)
+
+
+def blog_detail_left_sidebar(request, year, month, day, slug):
+
+    print("Year is: ", year)
+
+    blog = get_object_or_404(Blogs, slug=slug, publish_on__year=year, publish_on__month=month, publish_on__day=day)
+    if not blog:
+        blog = Blogs.objects.first()
+
+    theme_value = 'industico'
+    template_name = f"{theme_value}/blog/blog_single_left_sidebar.html"
+    context = {
+        "blog": blog,
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": blog.title,
+
+    }
+    return render(request, template_name, context)
+
+
+def blog_detail_right_sidebar(request, year, month, day, slug):
+
+    print("Year is: ", year)
+
+    blog = get_object_or_404(Blogs, slug=slug, publish_on__year=year, publish_on__month=month, publish_on__day=day)
+    if not blog:
+        blog = Blogs.objects.first()
+
+    theme_value = 'industico'
+    template_name = f"{theme_value}/blog/blog_single_right_sidebar.html"
+    context = {
+        "blog": blog,
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": blog.title,
+
+    }
+    return render(request, template_name, context)
+
+
+def blog_grid(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/blog/blog_grid.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Blog Grid",
+
+    }
+    return render(request, template_name, context)
+
+
+def blog_4_column(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/blog/blog_grid_4.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Blog Grid 4 Column Full Width",
+
+    }
+    return render(request, template_name, context)
+
+def blog_2_column(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/blog/blog-grid-2.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Blog Grid Two Columns",
+
+    }
+    return render(request, template_name, context)
+
+
+def blog_2_column_left_sidebar(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/blog/blog-grid-2-column-left-sidebar.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Blog Grid Two Columns Left Sidebar",
+
+    }
+    return render(request, template_name, context)
+
+
+def blog_2_column_right_sidebar(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/blog/blog-grid-2-column-right-sidebar.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Blog Grid Two Columns Right Sidebar",
+
     }
     return render(request, template_name, context)

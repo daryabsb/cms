@@ -156,10 +156,12 @@ CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'moono-lisa',
         # 'skin': 'office2013',
+        'pasteAsPlainText': True,
+        'forcePasteAsPlainText': True,
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
-        # "removePlugins": "stylesheetparser",
+        "removePlugins": "stylesheetparser",
         'toolbar_YourCustomToolbarConfig': [
             {'name': 'document', 'items': ['Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
             {'name': 'clipboard', 'items': ['Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
