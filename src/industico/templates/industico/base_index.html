@@ -1,15 +1,63 @@
 {% extends 'industico/base.html' %}
 {% load static %}
 
-{% block header %}
-<header id="masthead" class=" prt-header-style-classic prt-header-overlay prt-main-menu-total-7 prt-main-menu-more-than-six">
-	<div class="prt-header-block  prt-mmenu-active-color-skin prt-dmenu-active-color-skin prt-dmenu-sep-no prt-header-hastextarea">
-        <!-- Site Header Static -->
-        {% include 'industico/elements/1/site_header.html' %}
+{% block body %}
+	
+	<body class="mega-menu-preyantechnosys-main-menu prt-headerstyle-classic-overlay preyantechnosys-topbar-yes preyantechnosys-fullwide  preyantechnosys-maxmegamenu-active elementor-default elementor-kit-6 elementor-page {% block page_body_classes %}home page-id-263 elementor-page-263{% endblock page_body_classes %}">
+		<div id="prt-home"></div>
+		<div class="main-holder">
+			<div id="page" class="hfeed site">
+
+        <header id="masthead" class=" prt-header-style-classic prt-header-overlay prt-main-menu-total-7 prt-main-menu-more-than-six">
+          <div class="prt-header-block  prt-mmenu-active-color-skin prt-dmenu-active-color-skin prt-dmenu-sep-no prt-header-hastextarea">
+            <!-- Site Header Static -->
+            <div id="prt-stickable-header-w" class="prt-stickable-header-w prt-bgcolor-custom" style="height:100px">
+                <!-- TOP BAR -->
+                {% include 'industico/elements/1/top_bar.html' %}
+                <!-- Site Header -->
+                {% include 'industico/elements/1/site_header.html' %}
+          </div>
+            {% block header %}
+            {% endblock header %}
+          </div>
+        </header>
+
+				<!-- .site-header -->		
+				<div id="content-wrapper" class="site-content-wrapper">
+					<div id="content" class="site-content {% block extra_content_class %}{% endblock extra_content_class %}">
+						<div id="content-inner" class="site-content-inner {% block extra_inner_class %}{% endblock extra_inner_class %}">
+                        {% block content %}
+                        {% endblock content %}
+							<!-- #primary .content-area -->
+						</div>
+						<!-- .site-content-inner -->
+					</div>
+					<!-- .site-content -->
+				</div>
+				<!-- .site-content-wrapper -->
+				{% include './elements/footer.html' %}
+			</div>
+			<!-- #page .site -->
+		</div>
+		<!-- .main-holder -->
+
 		
-		<!-- .prt-titlebar-wrapper -->
-    {% block header_1 %}
-    {% endblock header_1 %}
-	</div>
-</header>
-{% endblock header %}
+        
+		<!-- To Top -->
+        <a id="totop" href="#top"><i class="prt-industico-icon-angle-up"></i></a>
+		{% include './includes/common_script_top.html' %}
+	</body>
+
+  {% endblock body %}
+
+
+
+
+
+
+
+
+
+
+
+
