@@ -15,7 +15,7 @@
 
 {% block page_body_classes %}tm_team_member-template-default single single-tm_team_member postid-1994 elementor-page-1994{% endblock page_body_classes %}
 
-{% block header_1 %}
+{% block header %}
 
 <div class="prt-titlebar-wrapper prt-bg prt-bgcolor-custom prt-titlebar-align-default prt-textcolor-white prt-bgimage-yes prt-breadcrumb-bgcolor-custom">
 	<div class="prt-titlebar-wrapper-bg-layer prt-bg-layer"></div>
@@ -46,7 +46,7 @@
 	<!-- .prt-titlebar -->
 </div>
 
-{% endblock header_1 %}
+{% endblock header %}
 
 {% block content %}
 <div id="primary" class="content-area ">
@@ -56,7 +56,7 @@
 				<div class="prt-row-wrapper-bg-layer prt-bg-layer"></div>
 				<div class="preyantechnosys-team-member-single-featured-area col-xs-12 col-sm-6 col-md-6 col-lg-6">
 					<div class="preyantechnosys-team-img">
-						<div class="prt-featured-wrapper prt-tm_team_member-featured-wrapper"><img width="1370" height="1048" src="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/04-min.jpg" class="attachment-full size-full wp-post-image" alt="team-04" loading="lazy" srcset="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/04-min.jpg 1370w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/04-min-300x229.jpg 300w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/04-min-1024x783.jpg 1024w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/04-min-768x587.jpg 768w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/04-min-85x65.jpg 85w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/04-min-650x497.jpg 650w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/04-min-411x315.jpg 411w" sizes="(max-width: 1370px) 100vw, 1370px" data-id="4901" /></div>
+						<div class="prt-featured-wrapper prt-tm_team_member-featured-wrapper"><img width="1370" height="1048" src="{% static 'industico/uploads/2022/05/04-min.jpg' %}" class="attachment-full size-full wp-post-image" alt="team-04" loading="lazy" srcset="{% static 'industico/uploads/2022/05/04-min.jpg 1370w, {% static 'industico/uploads/2022/05/04-min-300x229.jpg 300w, {% static 'industico/uploads/2022/05/04-min-1024x783.jpg 1024w, {% static 'industico/uploads/2022/05/04-min-768x587.jpg 768w, {% static 'industico/uploads/2022/05/04-min-85x65.jpg 85w, {% static 'industico/uploads/2022/05/04-min-650x497.jpg 650w, {% static 'industico/uploads/2022/05/04-min-411x315.jpg 411w" sizes="(max-width: 1370px) 100vw, 1370px" data-id="4901" /></div>
 					</div>
 				</div>
 				<!-- .preyantechnosys-team-member-single-featured-area -->
@@ -285,7 +285,7 @@
 										<div class="elementor-element elementor-element-ae5d515 prt-btn-color-skincolor prt-btn-style-flat prt-btn-shape-square elementor-widget elementor-widget-button" data-id="ae5d515" data-element_type="widget" data-widget_type="button.default">
 											<div class="elementor-widget-container">
 												<div class="elementor-button-wrapper">
-													<a href="https://industico.preyantechnosys.com/about-us-1-2/" class="elementor-button-link elementor-button elementor-size-md" role="button">
+													<a href="/industico/about-us-1-2/" class="elementor-button-link elementor-button elementor-size-md" role="button">
 													<span class="elementor-button-content-wrapper">
 													<span class="elementor-button-text">More Details</span>
 													</span>

@@ -16,7 +16,7 @@
 {% block page_body_classes %}tm_service-template-default single single-tm_service postid-111 elementor-page-111 preyantechnosys-sidebar-true preyantechnosys-sidebar-right{% endblock page_body_classes %}
 {% block extra_content_class %}container prt-container-for-content{% endblock extra_content_class %}
 {% block extra_inner_class %}row multi-columns-row{% endblock extra_inner_class %}
-{% block header_1 %}
+{% block header %}
 
 <div class="prt-titlebar-wrapper prt-bg prt-bgcolor-custom prt-titlebar-align-default prt-textcolor-white prt-bgimage-yes prt-breadcrumb-bgcolor-custom"
 	style="background-image: url({% static 'industico/uploads/2022/06/titlebar-01.jpg' %});">
@@ -48,7 +48,7 @@
 	<!-- .prt-titlebar -->
 </div>
 
-{% endblock header_1 %}
+{% endblock header %}
 
 {% block content %}
 <div id="primary" class="content-area col-md-9 col-lg-9 col-xs-12">
@@ -65,9 +65,9 @@
 											<div class="elementor-element elementor-element-1f5c9cc5 elementor-widget elementor-widget-image" data-id="1f5c9cc5" data-element_type="widget" data-widget_type="image.default">
 												<div class="elementor-widget-container">
 													<style>/*! elementor - v3.6.6 - 08-06-2022 */
-														.elementor-widget-image{text-align:center}.elementor-widget-image a{display:inline-block}.elementor-widget-image a img[src$=".svg"]{width:48px}.elementor-widget-image img{vertical-align:middle;display:inline-block}
+														.elementor-widget-image{text-align:center}.elementor-widget-image a{display:inline-block}.elementor-widget-image a img[src$=".svg' %}"]{width:48px}.elementor-widget-image img{vertical-align:middle;display:inline-block}
 													</style>
-													<img width="923" height="470" src="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/ser-03.jpg" class="attachment-full size-full" alt="" loading="lazy" srcset="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/ser-03.jpg 923w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/ser-03-300x153.jpg 300w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/ser-03-768x391.jpg 768w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/ser-03-85x43.jpg 85w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/ser-03-650x331.jpg 650w" sizes="(max-width: 923px) 100vw, 923px" data-id="7329">															
+													<img width="923" height="470" src="{% static 'industico/uploads/2022/05/ser-03.jpg' %}" class="attachment-full size-full" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/05/ser-03.jpg 923w, {% static 'industico/uploads/2022/05/ser-03-300x153.jpg 300w, {% static 'industico/uploads/2022/05/ser-03-768x391.jpg 768w, {% static 'industico/uploads/2022/05/ser-03-85x43.jpg 85w, {% static 'industico/uploads/2022/05/ser-03-650x331.jpg 650w" sizes="(max-width: 923px) 100vw, 923px" data-id="7329">															
 												</div>
 											</div>
 											<div class="elementor-element elementor-element-156c0c55 elementor-widget elementor-widget-heading" data-id="156c0c55" data-element_type="widget" data-widget_type="heading.default">
@@ -100,7 +100,7 @@
 														<div class="preyantechnosys-iconbox-inner">
 															<div class="prt-iconbox-wrapper prt-wrap">
 																<div class="preyantechnosys-iconbox-icon prt-wrap-cell">
-																	<div class="prt-icon-type-image"><img src="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/img-03.jpg" alt="Icon"></div>
+																	<div class="prt-icon-type-image"><img src="{% static 'industico/uploads/2022/05/img-03.jpg' %}" alt="Icon"></div>
 																</div>
 																<div class="preyantechnosys-iconbox-heading prt-wrap-cell">
 																	<h2 class="prt-custom-heading">
@@ -123,7 +123,7 @@
 														<div class="preyantechnosys-iconbox-inner">
 															<div class="prt-iconbox-wrapper prt-wrap">
 																<div class="preyantechnosys-iconbox-icon prt-wrap-cell">
-																	<div class="prt-icon-type-image"><img src="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/img-04.jpg" alt="Icon"></div>
+																	<div class="prt-icon-type-image"><img src="{% static 'industico/uploads/2022/05/img-04.jpg' %}" alt="Icon"></div>
 																</div>
 																<div class="preyantechnosys-iconbox-heading prt-wrap-cell">
 																	<h2 class="prt-custom-heading">
@@ -160,7 +160,7 @@
 														<div class="elementor-widget-wrap elementor-element-populated">
 															<div class="elementor-element elementor-element-7438961e elementor-icon-list--layout-traditional elementor-list-item-link-full_width elementor-widget elementor-widget-icon-list" data-id="7438961e" data-element_type="widget" data-widget_type="icon-list.default">
 																<div class="elementor-widget-container">
-																	<link rel="stylesheet" href="https://industico.preyantechnosys.com/wp-content/plugins/elementor/assets/css/widget-icon-list.min.css">
+																	<link rel="stylesheet" href="{% static 'industico/plugins/elementor/assets/css/widget-icon-list.min.css' %}">
 																	<ul class="elementor-icon-list-items">
 																		<li class="elementor-icon-list-item">
 																			<span class="elementor-icon-list-icon">
@@ -266,7 +266,7 @@
 																			<article class="preyantechnosys-box preyantechnosys-box-service preyantechnosys-servicebox-styletwo ">
 																				<div class="preyantechnosys-post-item prt-wrap">
 																					<div class="item-figure prt-wrap-cell">
-																						<div class="prt-featured-wrapper prt-tm_service-featured-wrapper"><img loading="lazy" width="411" height="315" src="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/01-1-411x315.jpg" class="attachment-preyantechnosys-img-service2 size-preyantechnosys-img-service2 wp-post-image" alt="" data-id="3957"></div>
+																						<div class="prt-featured-wrapper prt-tm_service-featured-wrapper"><img loading="lazy" width="411" height="315" src="{% static 'industico/uploads/2022/05/01-1-411x315.jpg' %}" class="attachment-preyantechnosys-img-service2 size-preyantechnosys-img-service2 wp-post-image" alt="" data-id="3957"></div>
 																					</div>
 																					<div class="prt-servicebox-detials prt-wrap-cell">
 																						<div class="item-content prt-wrap">
@@ -291,7 +291,7 @@
 																			<article class="preyantechnosys-box preyantechnosys-box-service preyantechnosys-servicebox-styletwo ">
 																				<div class="preyantechnosys-post-item prt-wrap">
 																					<div class="item-figure prt-wrap-cell">
-																						<div class="prt-featured-wrapper prt-tm_service-featured-wrapper"><img loading="lazy" width="411" height="315" src="https://industico.preyantechnosys.com/wp-content/uploads/2022/06/04-411x315.jpg" class="attachment-preyantechnosys-img-service2 size-preyantechnosys-img-service2 wp-post-image" alt="" data-id="3991"></div>
+																						<div class="prt-featured-wrapper prt-tm_service-featured-wrapper"><img loading="lazy" width="411" height="315" src="{% static 'industico/uploads/2022/06/04-411x315.jpg' %}" class="attachment-preyantechnosys-img-service2 size-preyantechnosys-img-service2 wp-post-image" alt="" data-id="3991"></div>
 																					</div>
 																					<div class="prt-servicebox-detials prt-wrap-cell">
 																						<div class="item-content prt-wrap">
@@ -316,7 +316,7 @@
 																			<article class="preyantechnosys-box preyantechnosys-box-service preyantechnosys-servicebox-styletwo ">
 																				<div class="preyantechnosys-post-item prt-wrap">
 																					<div class="item-figure prt-wrap-cell">
-																						<div class="prt-featured-wrapper prt-tm_service-featured-wrapper"><img loading="lazy" width="411" height="315" src="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/01-1-411x315.jpg" class="attachment-preyantechnosys-img-service2 size-preyantechnosys-img-service2 wp-post-image" alt="" data-id="3957"></div>
+																						<div class="prt-featured-wrapper prt-tm_service-featured-wrapper"><img loading="lazy" width="411" height="315" src="{% static 'industico/uploads/2022/05/01-1-411x315.jpg' %}" class="attachment-preyantechnosys-img-service2 size-preyantechnosys-img-service2 wp-post-image" alt="" data-id="3957"></div>
 																					</div>
 																					<div class="prt-servicebox-detials prt-wrap-cell">
 																						<div class="item-content prt-wrap">
@@ -341,7 +341,7 @@
 																			<article class="preyantechnosys-box preyantechnosys-box-service preyantechnosys-servicebox-styletwo ">
 																				<div class="preyantechnosys-post-item prt-wrap">
 																					<div class="item-figure prt-wrap-cell">
-																						<div class="prt-featured-wrapper prt-tm_service-featured-wrapper"><img loading="lazy" width="411" height="315" src="https://industico.preyantechnosys.com/wp-content/uploads/2022/06/04-411x315.jpg" class="attachment-preyantechnosys-img-service2 size-preyantechnosys-img-service2 wp-post-image" alt="" data-id="3991"></div>
+																						<div class="prt-featured-wrapper prt-tm_service-featured-wrapper"><img loading="lazy" width="411" height="315" src="{% static 'industico/uploads/2022/06/04-411x315.jpg' %}" class="attachment-preyantechnosys-img-service2 size-preyantechnosys-img-service2 wp-post-image" alt="" data-id="3991"></div>
 																					</div>
 																					<div class="prt-servicebox-detials prt-wrap-cell">
 																						<div class="item-content prt-wrap">
@@ -388,7 +388,7 @@
 </div>
 <aside id="sidebar-right" class="widget-area col-md-3 col-lg-3 col-xs-12 sidebar">
 	<aside id="search-5" class="widget widget_search">
-		<form role="search" method="get" class="search-form" action="https://industico.preyantechnosys.com/">
+		<form role="search" method="get" class="search-form" action="/industico/">
 			<label>
 			<span class="screen-reader-text">Search for:</span>
 			<input type="search" class="search-field" placeholder="Search …" value="" name="s">
@@ -408,15 +408,15 @@
 		<h3 class="widget-title">Recent Posts</h3>
 		<ul class="prt-recent-post-list">
 			<li class="prt-recent-post-list-li">
-				<a href="/industico/blog/2022/06/07/software-may-be-best-bet-to-conquer-final-mile/"><img width="1200" height="800" src="https://industico.preyantechnosys.com/wp-content/uploads/2022/06/04.jpg" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="https://industico.preyantechnosys.com/wp-content/uploads/2022/06/04.jpg 1200w, https://industico.preyantechnosys.com/wp-content/uploads/2022/06/04-300x200.jpg 300w, https://industico.preyantechnosys.com/wp-content/uploads/2022/06/04-1024x683.jpg 1024w, https://industico.preyantechnosys.com/wp-content/uploads/2022/06/04-768x512.jpg 768w, https://industico.preyantechnosys.com/wp-content/uploads/2022/06/04-85x57.jpg 85w, https://industico.preyantechnosys.com/wp-content/uploads/2022/06/04-650x433.jpg 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3991"></a>
+				<a href="/industico/blog/2022/06/07/software-may-be-best-bet-to-conquer-final-mile/"><img width="1200" height="800" src="{% static 'industico/uploads/2022/06/04.jpg' %}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/06/04.jpg 1200w, {% static 'industico/uploads/2022/06/04-300x200.jpg 300w, {% static 'industico/uploads/2022/06/04-1024x683.jpg 1024w, {% static 'industico/uploads/2022/06/04-768x512.jpg 768w, {% static 'industico/uploads/2022/06/04-85x57.jpg 85w, {% static 'industico/uploads/2022/06/04-650x433.jpg 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3991"></a>
 				<div class="post-detail"><span class="post-date"><i class="kw_industico flaticon-calendar"></i>7 June, 2022</span><a href="/industico/blog/2022/06/07/software-may-be-best-bet-to-conquer-final-mile/">The 9 Best Guideline For The industry and Petrolium and Oil Refinery</a></div>
 			</li>
 			<li class="prt-recent-post-list-li">
-				<a href="/industico/blog/2022/05/20/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-4/"><img width="1200" height="800" src="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/05.jpg" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/05.jpg 1200w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/05-300x200.jpg 300w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/05-1024x683.jpg 1024w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/05-768x512.jpg 768w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/05-85x57.jpg 85w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/05-650x433.jpg 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3976"></a>
+				<a href="/industico/blog/2022/05/20/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-4/"><img width="1200" height="800" src="{% static 'industico/uploads/2022/05/05.jpg' %}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/05/05.jpg 1200w, {% static 'industico/uploads/2022/05/05-300x200.jpg 300w, {% static 'industico/uploads/2022/05/05-1024x683.jpg 1024w, {% static 'industico/uploads/2022/05/05-768x512.jpg 768w, {% static 'industico/uploads/2022/05/05-85x57.jpg 85w, {% static 'industico/uploads/2022/05/05-650x433.jpg 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3976"></a>
 				<div class="post-detail"><span class="post-date"><i class="kw_industico flaticon-calendar"></i>20 May, 2022</span><a href="/industico/blog/2022/05/20/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-4/">Why is the topic of new mobility retail important now?</a></div>
 			</li>
 			<li class="prt-recent-post-list-li">
-				<a href="/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/"><img width="1200" height="800" src="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/02-1.jpg" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/02-1.jpg 1200w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/02-1-300x200.jpg 300w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/02-1-1024x683.jpg 1024w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/02-1-768x512.jpg 768w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/02-1-85x57.jpg 85w, https://industico.preyantechnosys.com/wp-content/uploads/2022/05/02-1-650x433.jpg 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3975"></a>
+				<a href="/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/"><img width="1200" height="800" src="{% static 'industico/uploads/2022/05/02-1.jpg' %}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/05/02-1.jpg 1200w, {% static 'industico/uploads/2022/05/02-1-300x200.jpg 300w, {% static 'industico/uploads/2022/05/02-1-1024x683.jpg 1024w, {% static 'industico/uploads/2022/05/02-1-768x512.jpg 768w, {% static 'industico/uploads/2022/05/02-1-85x57.jpg 85w, {% static 'industico/uploads/2022/05/02-1-650x433.jpg 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3975"></a>
 				<div class="post-detail"><span class="post-date"><i class="kw_industico flaticon-calendar"></i>19 May, 2022</span><a href="/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/">A Reflecting on 2022 global LNG and European pipeline flows</a></div>
 			</li>
 		</ul>
@@ -432,7 +432,7 @@
 		<div class="textwidget widget-text">
 			<div class="prt-banner-blog">
 				<div class="prt-img-blog">
-					<img src="https://industico.preyantechnosys.com/wp-content/uploads/2022/05/p7.jpg">
+					<img src="{% static 'industico/uploads/2022/05/p7.jpg' %}">
 				</div>
 				<div class="prt-full-round">
 					<div class="prt-head-sidebar">
