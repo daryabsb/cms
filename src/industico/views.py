@@ -396,3 +396,85 @@ def blog_2_column_right_sidebar(request):
 
     }
     return render(request, template_name, context)
+
+
+# Projects
+
+
+def project_2_column(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/2-columns-modern.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "2 Columns - Modern",
+
+    }
+    return render(request, template_name, context)
+
+
+def project_3_column(request):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/3-columns-standard.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "3 Columns – Standard",
+
+    }
+    return render(request, template_name, context)
+
+
+def project_4_column(request):
+
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/4-columns-full-standard.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "4 Columns – Full Standard",
+
+    }
+    return render(request, template_name, context)
+
+
+def project_4_column_grid(request):
+
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/4-columns-full-grid.html"
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "4 Columns – Full Grid",
+
+    }
+    return render(request, template_name, context)
+
+
+def project_portfolio(request, slug):
+    # config_data = setup_config.loadConfig()
+    # config_data.get('Theme', {}).get('value', 'theme5')
+    theme_value = 'industico'
+    template_name = f"{theme_value}/portfolio/project_details.html"
+    print("Slug = ", slug)
+    context = {
+        "blogs": [],
+        "banner_title": "Blogs",
+        "query": 'query',
+        "page_title": "Team Member",
+        "page_title": "Oil Plant Project",
+    }
+    return render(request, template_name, context)
+
