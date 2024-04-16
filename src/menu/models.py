@@ -12,6 +12,7 @@ class Menus(models.Model):
                              on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=255, blank=False)
     slug = models.SlugField(max_length=255, unique=True, null=True)
+    link = models.CharField(max_length=255, blank=True, default="")
     # Automatically set the field to now when the object is first created.
     created_at = models.DateTimeField(auto_now_add=True)
     # Automatically set the field to now every time the object is saved.
@@ -33,7 +34,8 @@ class Menus(models.Model):
 class Items(MPTTModel):
     parent = TreeForeignKey('self', on_delete=models.CASCADE,
                             null=True, blank=True, related_name='children')
-    menu = models.ForeignKey(Menus, on_delete=models.CASCADE, null=True)
+    menu = models.ForeignKey(
+        Menus, on_delete=models.CASCADE, null=True, related_name='children')
     title = models.CharField(max_length=255, blank=False)
     item_id = models.IntegerField(null=True, blank=True)
     type = models.CharField(max_length=255, blank=True, null=True)

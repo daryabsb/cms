@@ -22,9 +22,9 @@ def getdata(json_data, args):
             logger.success("*"*50)
             print()
             logger.debug("Function Name:> {} ",
-                        myfunc.__name__, feature="f-strings")
+                         myfunc.__name__, feature="f-strings")
             logger.debug("Module Name:> {} ",
-                        myfunc.__module__, feature="f-strings")
+                         myfunc.__module__, feature="f-strings")
             logger.debug("URL_Path:> {} ", args, feature="f-strings")
             func_name = myfunc.__name__
             print()
@@ -35,6 +35,7 @@ def getdata(json_data, args):
 
     return json_data.get(func_name)
 
+
 register.filter('getdata', getdata)
 
 
@@ -42,13 +43,27 @@ register.filter('getdata', getdata)
 
 def getMenu(menu_slug):
     menu_items = []
+    print("Menu slug? ", menu_slug)
     if Menus.objects.filter(slug=menu_slug).exists():
         menu_object = Menus.objects.get(slug=menu_slug)
         menu_items = Items.objects.filter(menu=menu_object)
-    return menu_items
+    Menus.objects.filter(slug=menu_slug)
+    return Menus.objects.all()
+    # return menu_items
 
 
 register.filter('getMenu', getMenu)
+
+
+@register.filter(name='is_active_node')
+def is_active_node(node_id, request_path):
+    try:
+        node = Menus.objects.get(id=node_id)
+        is_active = node.link == request_path or node.children.filter(
+            link=request_path).exists()
+        return is_active
+    except Menus.DoesNotExist:
+        return False
 
 
 def getMenuItemUrl(item_type, id):
@@ -72,6 +87,7 @@ def getMenuItemUrl(item_type, id):
             base_url = '#'
 
     return base_url
+
 
 register.filter('getMenuItemUrl', getMenuItemUrl)
 
