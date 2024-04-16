@@ -1,0 +1,18 @@
+{% if blog %}
+<div class="entry-meta prt-entry-meta prt-entry-meta-blogclassic">
+    <span class="prt-meta-line byline">By:<i class="prt-industico-icon-user"></i> 
+        <span class="author vcard">
+            <span class="screen-reader-text prt-hide">Author </span>
+            <a class="url fn n" href="/industico/author/admin/">{{ blog.user.name }}</a>
+        </span>
+    </span>
+    <span class="prt-meta-line posted-on"><i class="kw_industico flaticon-calendar"></i> 
+        <span class="screen-reader-text prt-hide">Posted on </span>
+        <span class="entry-date published" datetime="{{ blog.publish_on}}">{{ blog.publish_on|date:'d F, Y'}}</span>
+        <span class="updated prt-hide" datetime="{{ blog.updated }}">{{ blog.updated|date:'d F, Y'}}</span>
+    </span>
+    <span class="prt-meta-line comments-link"><i class="prt-industico-icon-comment-1"></i> 
+        <a href="/industico/blog/2022/05/19/a-reflecting-on-2022-global-lng-and-european-pipeline-flows/#respond">0 Comments</a>
+    </span>
+</div>
+{% endif %}

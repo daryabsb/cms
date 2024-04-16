@@ -1,4 +1,6 @@
-<footer id="colophon" class="site-footer">			
+
+{% load static %}
+	<footer id="colophon" class="site-footer">			
 	<div class="footer_inner_wrapper footer prt-bg prt-bgcolor-custom prt-bgimage-yes">
 		<div class="site-footer-bg-layer prt-bg-layer"></div>
 		<div class="site-footer-w">					
@@ -14,7 +16,8 @@
 								<div class="row multi-columns-row">
 
 									<div class="widget-area col-xs-12 col-sm-3 col-md-3 col-lg-3 first-widget-area">
-					<aside id="enhancedtextwidget-3" class="widget widget_text enhanced-text-widget"><div class="textwidget widget-text"><div class="footer_logo"><img src="https://industico.preyantechnosys.com/wp-content/uploads/2022/06/final-logo-light.svg" alt="">
+					<aside id="enhancedtextwidget-3" class="widget widget_text enhanced-text-widget"><div class="textwidget widget-text"><div class="footer_logo">
+						<img src="{% static 'industico/uploads/2022/06/final-logo-light.svg' %}" alt="">
 						</div>
 						<p>Industico is widely considered as the largest 
 						global providers of oil & gas refineries for the

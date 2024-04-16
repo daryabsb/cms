@@ -31,7 +31,7 @@
 						<div class="breadcrumb-wrapper">
 							<div class="container">
 								<div class="breadcrumb-wrapper-inner">
-									<!-- Breadcrumb NavXT output --><span><a rel="v:url" title="Go to Industico." href="https://industico.preyantechnosys.com" class="home">&nbsp;Home<span class="hide">Industico</span></a></span><span class="tm-bread-sep"> // </span><span><span class="post post-page current-item">{{ page_title }}</span></span>
+									<!-- Breadcrumb NavXT output --><span><a rel="v:url" title="Go to Industico." href="/industico/" class="home">&nbsp;Home<span class="hide">Industico</span></a></span><span class="tm-bread-sep"> // </span><span><span class="post post-page current-item">{{ page_title }}</span></span>
 								</div>
 							</div>
 						</div>
@@ -52,14 +52,16 @@
     <main id="main" class="site-main">
         <article id="post-467" class="preyantechnosys-box-blog-classic post-467 post type-post status-publish format-standard has-post-thumbnail hentry category-event tag-art-craft tag-decoration tag-insects-bugs">
             <div class="prt-featured-outer-wrapper prt-post-featured-outer-wrapper">
-                <div class="prt-featured-wrapper prt-post-featured-wrapper prt-post-format-"><img width="1200" height="800" src="{{ blog.feature_image.url }}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/05/02-1.jpg' %} 1200w, {% static 'industico/uploads/2022/05/02-1-300x200.jpg' %} 300w, {% static 'industico/uploads/2022/05/02-1-1024x683.jpg' %} 1024w, {% static 'industico/uploads/2022/05/02-1-768x512.jpg' %} 768w, {% static 'industico/uploads/2022/05/02-1-85x57.jpg' %} 85w, {% static 'industico/uploads/2022/05/02-1-650x433.jpg' %} 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3975"></div>
+                <div class="prt-featured-wrapper prt-post-featured-wrapper prt-post-format-">
+					<img width="1200" height="800" src="{{ blog.feature_image.url }}" 
+					class="attachment-full size-full wp-post-image" alt="" loading="lazy" 
+					srcset="{{ blog.feature_image.url }} 1200w, {{ blog.feature_image.url }} 300w, {{ blog.feature_image.url }} 1024w, {{ blog.feature_image.url }} 768w, {{ blog.feature_image.url }} 85w, {{ blog.feature_image.url }} 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3975"></div>
             </div>
-
             <div class="prt-blog-classic-box-content">
-                <h2 class="entry-title"><a href="/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/" rel="bookmark">A Reflecting on 2022 global LNG and European pipeline flows</a></h2>
+                <h2 class="entry-title"><a href="{{ blog.get_absolute_url }}" rel="bookmark">A Reflecting on 2022 global LNG and European pipeline flows</a></h2>
                 <div class="prt-classic-post-meta">
                     <div class="prt-entry-meta-wrapper">
-                        <div class="entry-meta prt-entry-meta prt-entry-meta-blogclassic"><span class="prt-meta-line byline">By:<i class="prt-industico-icon-user"></i> <span class="author vcard"><span class="screen-reader-text prt-hide">Author </span><a class="url fn n" href="/industico/author/admin/">John Doe</a></span></span><span class="prt-meta-line posted-on"><i class="kw_industico flaticon-calendar"></i> <span class="screen-reader-text prt-hide">Posted on </span><span class="entry-date published" datetime="2022-05-19T11:12:00+00:00">19 May, 2022</span><span class="updated prt-hide" datetime="2022-06-24T09:48:05+00:00">24 June, 2022</span></span><span class="prt-meta-line comments-link"><i class="prt-industico-icon-comment-1"></i> <a href="/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/#respond">0 Comments</a></span></div>
+						{% include './snippets/blog-entry-meta.html' with blog=blog %}
                     </div>
                 </div>
                 <div class="entry-content">
@@ -86,16 +88,16 @@
                         <div class="prt-social-share-links">
                             <ul>
                                 <li class="prt-social-share prt-social-share-facebook">
-                                    <a href="javascript:void(0)" onclick="TMSocialWindow=window.open('//web.facebook.com/sharer/sharer.php?u=https%3A%2F%2Findustico.preyantechnosys.com%2Fblog%2F2022%2F05%2F19%2Frisus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5%2F&amp;_rdr','TMSocialWindow',width=600,height=100); return false;"><i class="prt-industico-icon-facebook"></i></a>
+                                    <a href="javascript:void(0)" onclick="TMSocialWindow=window.open('//web.facebook.com/sharer/sharer.php?u=https%3A%2F%2Findustico.preyantechnosys.com%2Fblog%2F2022%2F05%2F19%2Fa-reflecting-on-2022-global-lng-and-european-pipeline-flows%2F&amp;_rdr','TMSocialWindow',width=600,height=100); return false;"><i class="prt-industico-icon-facebook"></i></a>
                                 </li>
                                 <li class="prt-social-share prt-social-share-twitter">
-                                    <a href="javascript:void(0)" onclick="TMSocialWindow=window.open('//twitter.com/share?url=/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/','TMSocialWindow',width=600,height=100); return false;"><i class="prt-industico-icon-twitter"></i></a>
+                                    <a href="javascript:void(0)" onclick="TMSocialWindow=window.open('//twitter.com/share?url=/industico/blog/2022/05/19/a-reflecting-on-2022-global-lng-and-european-pipeline-flows/','TMSocialWindow',width=600,height=100); return false;"><i class="prt-industico-icon-twitter"></i></a>
                                 </li>
                                 <li class="prt-social-share prt-social-share-pinterest">
-                                    <a href="javascript:void(0)" onclick="TMSocialWindow=window.open('//www.pinterest.com/pin/create/button/?url=/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/','TMSocialWindow',width=600,height=100); return false;"><i class="prt-industico-icon-pinterest"></i></a>
+                                    <a href="javascript:void(0)" onclick="TMSocialWindow=window.open('//www.pinterest.com/pin/create/button/?url=/industico/blog/2022/05/19/a-reflecting-on-2022-global-lng-and-european-pipeline-flows/','TMSocialWindow',width=600,height=100); return false;"><i class="prt-industico-icon-pinterest"></i></a>
                                 </li>
                                 <li class="prt-social-share prt-social-share-linkedin">
-                                    <a href="javascript:void(0)" onclick="TMSocialWindow=window.open('//www.linkedin.com/shareArticle?mini=true&amp;url=/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/','TMSocialWindow',width=600,height=100); return false;"><i class="prt-industico-icon-linkedin"></i></a>
+                                    <a href="javascript:void(0)" onclick="TMSocialWindow=window.open('//www.linkedin.com/shareArticle?mini=true&amp;url=/industico/blog/2022/05/19/a-reflecting-on-2022-global-lng-and-european-pipeline-flows/','TMSocialWindow',width=600,height=100); return false;"><i class="prt-industico-icon-linkedin"></i></a>
                                 </li>
                             </ul>
                         </div>
@@ -109,7 +111,7 @@
         <div class="prt-blog-classic-box-comment">
             <div id="comments" class="comments-area">
                 <div id="respond" class="comment-respond">
-                    <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/#respond" style="display:none;">Cancel reply</a></small></h3>
+                    <h3 id="reply-title" class="comment-reply-title">Leave a Reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/blog/2022/05/19/a-reflecting-on-2022-global-lng-and-european-pipeline-flows/#respond" style="display:none;">Cancel reply</a></small></h3>
                     <form action="/industico/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate="">
                         <p class="comment-notes">Your email address will not be published. Required fields are marked * </p>
                         <p class="comment-form-comment"><label class="prt-hide" for="comment">Comment</label><textarea id="comment" placeholder="Your Comment*" name="comment" cols="45" rows="8" aria-required="true"></textarea></p>
@@ -153,16 +155,16 @@
 		<h3 class="widget-title">Recent Posts</h3>
 		<ul class="prt-recent-post-list">
 			<li class="prt-recent-post-list-li">
-				<a href="/industico/blog/2022/06/07/software-may-be-best-bet-to-conquer-final-mile/"><img width="1200" height="800" src="{% static 'industico/uploads/2022/06/04.jpg' %}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/06/04.jpg' %} 1200w, {% static 'industico/uploads/2022/06/04-300x200.jpg' %} 300w, {% static 'industico/uploads/2022/06/04-1024x683.jpg' %} 1024w, {% static 'industico/uploads/2022/06/04-768x512.jpg' %} 768w, {% static 'industico/uploads/2022/06/04-85x57.jpg' %} 85w, {% static 'industico/uploads/2022/06/04-650x433.jpg' %} 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3991"></a>
-				<div class="post-detail"><span class="post-date"><i class="kw_industico flaticon-calendar"></i>7 June, 2022</span><a href="/industico/blog/2022/06/07/software-may-be-best-bet-to-conquer-final-mile/">The 9 Best Guideline For The industry and Petrolium and Oil Refinery</a></div>
+				<a href="/industico/blog/right/2024/04/15/the-9-best-guideline-for-the-industry-and-petrolium-and-oil-refinery/"><img width="1200" height="800" src="{% static 'industico/uploads/2022/06/04.jpg' %}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/06/04.jpg' %} 1200w, {% static 'industico/uploads/2022/06/04-300x200.jpg' %} 300w, {% static 'industico/uploads/2022/06/04-1024x683.jpg' %} 1024w, {% static 'industico/uploads/2022/06/04-768x512.jpg' %} 768w, {% static 'industico/uploads/2022/06/04-85x57.jpg' %} 85w, {% static 'industico/uploads/2022/06/04-650x433.jpg' %} 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3991"></a>
+				<div class="post-detail"><span class="post-date"><i class="kw_industico flaticon-calendar"></i>7 June, 2022</span><a href="/industico/blog/right/2024/04/15/the-9-best-guideline-for-the-industry-and-petrolium-and-oil-refinery/">The 9 Best Guideline For The industry and Petrolium and Oil Refinery</a></div>
 			</li>
 			<li class="prt-recent-post-list-li">
-				<a href="/industico/blog/2022/05/20/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-4/"><img width="1200" height="800" src="{% static 'industico/uploads/2022/05/05.jpg' %}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/05/05.jpg' %} 1200w, {% static 'industico/uploads/2022/05/05-300x200.jpg' %} 300w, {% static 'industico/uploads/2022/05/05-1024x683.jpg' %} 1024w, {% static 'industico/uploads/2022/05/05-768x512.jpg' %} 768w, {% static 'industico/uploads/2022/05/05-85x57.jpg' %} 85w, {% static 'industico/uploads/2022/05/05-650x433.jpg' %} 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3976"></a>
-				<div class="post-detail"><span class="post-date"><i class="kw_industico flaticon-calendar"></i>20 May, 2022</span><a href="/industico/blog/2022/05/20/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-4/">Why is the topic of new mobility retail important now?</a></div>
+				<a href="/industico/blog/left/2024/04/16/why-is-the-topic-of-new-mobility-retail-important-now/"><img width="1200" height="800" src="{% static 'industico/uploads/2022/05/05.jpg' %}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/05/05.jpg' %} 1200w, {% static 'industico/uploads/2022/05/05-300x200.jpg' %} 300w, {% static 'industico/uploads/2022/05/05-1024x683.jpg' %} 1024w, {% static 'industico/uploads/2022/05/05-768x512.jpg' %} 768w, {% static 'industico/uploads/2022/05/05-85x57.jpg' %} 85w, {% static 'industico/uploads/2022/05/05-650x433.jpg' %} 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3976"></a>
+				<div class="post-detail"><span class="post-date"><i class="kw_industico flaticon-calendar"></i>20 May, 2022</span><a href="/industico/blog/left/2024/04/16/why-is-the-topic-of-new-mobility-retail-important-now/">Why is the topic of new mobility retail important now?</a></div>
 			</li>
 			<li class="prt-recent-post-list-li">
-				<a href="/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/"><img width="1200" height="800" src="{% static 'industico/uploads/2022/05/02-1.jpg' %}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/05/02-1.jpg' %} 1200w, {% static 'industico/uploads/2022/05/02-1-300x200.jpg' %} 300w, {% static 'industico/uploads/2022/05/02-1-1024x683.jpg' %} 1024w, {% static 'industico/uploads/2022/05/02-1-768x512.jpg' %} 768w, {% static 'industico/uploads/2022/05/02-1-85x57.jpg' %} 85w, {% static 'industico/uploads/2022/05/02-1-650x433.jpg' %} 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3975"></a>
-				<div class="post-detail"><span class="post-date"><i class="kw_industico flaticon-calendar"></i>19 May, 2022</span><a href="/industico/blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/">A Reflecting on 2022 global LNG and European pipeline flows</a></div>
+				<a href="/industico/blog/2022/05/19/a-reflecting-on-2022-global-lng-and-european-pipeline-flows/"><img width="1200" height="800" src="{% static 'industico/uploads/2022/05/02-1.jpg' %}" class="attachment-full size-full wp-post-image" alt="" loading="lazy" srcset="{% static 'industico/uploads/2022/05/02-1.jpg' %} 1200w, {% static 'industico/uploads/2022/05/02-1-300x200.jpg' %} 300w, {% static 'industico/uploads/2022/05/02-1-1024x683.jpg' %} 1024w, {% static 'industico/uploads/2022/05/02-1-768x512.jpg' %} 768w, {% static 'industico/uploads/2022/05/02-1-85x57.jpg' %} 85w, {% static 'industico/uploads/2022/05/02-1-650x433.jpg' %} 650w" sizes="(max-width: 1200px) 100vw, 1200px" data-id="3975"></a>
+				<div class="post-detail"><span class="post-date"><i class="kw_industico flaticon-calendar"></i>19 May, 2022</span><a href="/industico/blog/2022/05/19/a-reflecting-on-2022-global-lng-and-european-pipeline-flows/">A Reflecting on 2022 global LNG and European pipeline flows</a></div>
 			</li>
 		</ul>
 	</aside>

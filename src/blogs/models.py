@@ -94,22 +94,23 @@ class Blogs(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
-    
-    def _str_(self):
-        return self.slug
+
+    def __str__(self):
+        return self.title
 
     def get_absolute_url(self):
         """
         Returns the absolute URL for a blog instance.
         Example: /blog/2022/05/19/risus-commodo-viverra-maecenas-accumsan-lacus-vel-facilisis-5/
         """
-        from django.urls import reverse
-        return reverse('blog_detail', kwargs={
-            'year': self.publish_on.year,
-            'month': self.publish_on.month,
-            'day': self.publish_on.day,
-            'slug': self.slug
-        })
+        # from django.urls import reverse
+        # return reverse('blog_detail', kwargs={
+        #     'year': self.publish_on.year,
+        #     'month': self.publish_on.month,
+        #     'day': self.publish_on.day,
+        #     'slug': self.slug
+        # })
+        return f'/industico/blog/{self.publish_on.year}/{self.publish_on.month}/{self.publish_on.day}/{self.slug}' 
 
 
 class Metas(models.Model):

@@ -1,1 +1,13 @@
-.elementor-7237 .elementor-element.elementor-element-660c0b3{padding:92px 0px 60px 0px;}.elementor-7237 .elementor-element.elementor-element-067239b .prt-heading-subheading{text-align:left;}@media(max-width:1024px){.elementor-7237 .elementor-element.elementor-element-660c0b3{padding:50px 0px 50px 0px;}}
+.elementor-7237 .elementor-element.elementor-element-660c0b3 {
+    padding: 92px 0px 60px 0px;
+}
+
+.elementor-7237 .elementor-element.elementor-element-067239b .prt-heading-subheading {
+    text-align: left;
+}
+
+@media(max-width:1024px) {
+    .elementor-7237 .elementor-element.elementor-element-660c0b3 {
+        padding: 50px 0px 50px 0px;
+    }
+}
