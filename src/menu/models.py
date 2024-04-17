@@ -4,15 +4,16 @@ from django.db import models
 from django.utils.text import slugify
 from django.db import models
 from django.conf import settings
-from mptt.models import MPTTModel, TreeForeignKey
+from mptt.models import MPTTModel
+from mptt.fields import TreeForeignKey
 
 
 class Menus(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL,
-                             on_delete=models.CASCADE, null=True)
+                                on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=255, blank=False)
     slug = models.SlugField(max_length=255, unique=True, null=True)
-    link = models.CharField(max_length=255, blank=True, default="")
+    link = models.CharField(max_length=255, blank=True, default="#")
     # Automatically set the field to now when the object is first created.
     created_at = models.DateTimeField(auto_now_add=True)
     # Automatically set the field to now every time the object is saved.

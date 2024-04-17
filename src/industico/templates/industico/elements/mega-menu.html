@@ -88,7 +88,9 @@
                     {% if node.id|is_active_node:request.path %} mega-current-menu-ancestor mega-current-menu-parent {% endif %}
                     mega-menu-item-{{ node.id }}' 
             id='mega-menu-item-{{ node.id }}'>
-			<a class="mega-menu-link" href="#" aria-haspopup="true" aria-expanded="false" tabindex="0">{{node.title|truncatechars:20}}<span class="mega-indicator"></span></a>
+			<a class="mega-menu-link" 
+			{% if node.link %}href="{{ node.link }}" {% else %} href="#" {% endif %}
+			aria-haspopup="true" aria-expanded="false" tabindex="0">{{node.title|truncatechars:20}}<span class="mega-indicator"></span></a>
 			{% if node.children.exists %}
             <ul class="mega-sub-menu">
                 {% for child in node.children.all %}
