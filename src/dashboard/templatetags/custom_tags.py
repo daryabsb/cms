@@ -43,13 +43,13 @@ register.filter('getdata', getdata)
 
 def getMenu(menu_slug):
     menu_items = []
-    print("Menu slug? ", menu_slug)
     if Menus.objects.filter(slug=menu_slug).exists():
         menu_object = Menus.objects.get(slug=menu_slug)
         menu_items = Items.objects.filter(menu=menu_object)
-    Menus.objects.filter(slug=menu_slug)
-    return Menus.objects.all()
-    # return menu_items
+    else:
+        # Menus.objects.filter(slug=menu_slug)
+        return Menus.objects.all()
+    return menu_items
 
 
 register.filter('getMenu', getMenu)
@@ -58,11 +58,13 @@ register.filter('getMenu', getMenu)
 @register.filter(name='is_active_node')
 def is_active_node(node_id, request_path):
     try:
-        node = Menus.objects.get(id=node_id)
+        node = Items.objects.get(id=node_id)
         is_active = node.link == request_path or node.children.filter(
             link=request_path).exists()
+        print("Is Active? ", is_active)
         return is_active
-    except Menus.DoesNotExist:
+    except Items.DoesNotExist:
+        print("Menus.DoesNotExist? ", 'YES')
         return False
 
 
