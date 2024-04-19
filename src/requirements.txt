@@ -8,6 +8,7 @@ asgiref==3.8.1
     # via
     #   django
     #   django-cors-headers
+    #   django-htmx
 certifi==2024.2.2
     # via requests
 charset-normalizer==3.3.2
@@ -23,6 +24,7 @@ django==5.0.3
     #   django-ckeditor
     #   django-cors-headers
     #   django-extensions
+    #   django-htmx
     #   django-js-asset
     #   django-rosetta
     #   djangorestframework
@@ -31,6 +33,8 @@ django-ckeditor==6.5.1
 django-cors-headers==4.3.1
     # via -r src/requirements/requirements.in
 django-extensions==3.2.3
+    # via -r src/requirements/requirements.in
+django-htmx==1.17.3
     # via -r src/requirements/requirements.in
 django-js-asset==2.2.0
     # via

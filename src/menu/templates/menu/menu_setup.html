@@ -1,17 +1,14 @@
 {% extends 'dashboard/dashboard_base.html' %}
 {% load static mptt_tags custom_tags %}
-
 {% block additional_css %}
 {% endblock %}
-
 {% block content %}
-
 <div class="row">
 	<div class="accordion" id="accordion_screen_options">
 		<div class="accordion-item card">
 			<h2 class="accordion-header border-0" id="headingOne">
 				<button class="accordion-button d-flex justify-content-between align-items-center collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseScreenOption" aria-expanded="false" aria-controls="collapseScreenOption">
-					<span class="acc-heading">Screen Options</span>
+				<span class="acc-heading">Screen Options</span>
 				</button>
 			</h2>
 			<div id="collapseScreenOption" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion_screen_options" style="">
@@ -36,11 +33,11 @@
 							</div>
 						</div>
 						<!-- <div class="col-lg-2 col-md-3">
-								<div class="form-check custom-checkbox mb-3">
-									<input type="checkbox" id="AllowCategories" class="mr-1 allowField AllowCategories form-check-input" rel="Categories" disabled>
-									<label class="form-check-label" for="AllowCategories">Categories</label>
-								</div>
-						</div> -->
+							<div class="form-check custom-checkbox mb-3">
+								<input type="checkbox" id="AllowCategories" class="mr-1 allowField AllowCategories form-check-input" rel="Categories" disabled>
+								<label class="form-check-label" for="AllowCategories">Categories</label>
+							</div>
+							</div> -->
 						<div class="col-lg-2 col-md-3">
 							<div class="form-check custom-checkbox mb-3">
 								<input type="checkbox" id="AllowTitleAttribute" class="mr-1 allowField AllowTitleAttribute form-check-input" rel="TitleAttribute">
@@ -71,7 +68,6 @@
 		</div>
 	</div>
 </div>
-
 <div class="page-titles">
 	<div class="row">
 		<div class="col-12">
@@ -79,77 +75,48 @@
 				<div class="card-header">
 					<h4>Menu</h4>
 					{% if perms.menu.add_menus %}
-						<a href="javascript:void(0);" class="CreateNewMenu fw-bold btn btn-primary light"><i class="fa fa-plus"></i>&nbsp; Add menu</a>
+					<a href="javascript:void(0);" class="CreateNewMenu fw-bold btn btn-primary light"><i class="fa fa-plus"></i>&nbsp; Add menu</a>
 					{% endif %}
-				</div>
-				<div class="card-body row">
-				<div class="row">
-						<div class="col-sm-6">
-							<h4 class="text-dark">Select a menu to edit</h4>
-						</div>
-						<div class="col-sm-4 MenuSelectDiv">
-							<select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
-								{% if not menu_obj %}
-								<option value="" selected>Choose Menu</option> 
-								{% endif %}
-								{% for menu in menus %}
-									<option value="{{menu.id}}" 
-								{% if menu_obj %}
-									{% if menu.id == menu_obj.id %}
-									selected
-									{% endif %}
-								{% endif %}
-									>{{menu.title}}</option>
-								{% endfor %}
-							</select>
-						</div>
-						<div class="col-sm-2 text-end">
-							<button type="button" class="btn btn-primary MenuSelectbtn" title="Select Menu">Select</button>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <!-- row -->
-
 <!-- Nestable -->
 <div class="row">
 	<div class="col-12">
 		<div class="card">
 			<div class="card-header">
-				
-					<div>
-						<h4 class="text-dark">Select a menu to edit</h4>
-					</div>
-					<div class=" MenuSelectDiv">
-						<select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
-							{% if not menu_obj %}
-							<option value="" selected>Choose Menu</option> 
-							{% endif %}
-							{% for menu in menus %}
-								<option value="{{menu.id}}" 
-							{% if menu_obj %}
-								{% if menu.id == menu_obj.id %}
-								selected
-								{% endif %}
-							{% endif %}
-								>{{menu.title}}</option>
-							{% endfor %}
-						</select>
-					</div>
-					<div class="text-end">
-						<button type="button" class="btn btn-primary MenuSelectbtn" title="Select Menu">Select</button>
-					</div>
-				
+				<div>
+					<h4 class="text-dark">Select a menu to edit</h4>
+				</div>
+				<div class=" MenuSelectDiv">
+					<select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
+						{% if not menu_obj %}
+						<option value="" selected>Choose Menu</option>
+						{% endif %}
+						{% for menu in menus %}
+						<option value="{{menu.id}}" 
+						{% if menu_obj %}
+						{% if menu.id == menu_obj.id %}
+						selected
+						{% endif %}
+						{% endif %}
+						>{{menu.title}}</option>
+						{% endfor %}
+					</select>
+				</div>
+				<div class="text-end">
+					<button type="button" class="btn btn-primary MenuSelectbtn" title="Select Menu">Select</button>
+				</div>
 			</div>
 			<div class="card-body">
 				<div class="row">
 					<div class="col-md-4">
 						<div class="card">
 							<div class="card-header bg-primary">
-								<h6 class="text-white">Menu Name</h6>
+								<h6 class="text-white">Menu Name 111</h6>
 							</div>
 							<div class="card-body border-bottom border-start border-end border-primary">
 								{% if menu_type_view %}
@@ -157,7 +124,7 @@
 									<div class="accordion-item">
 										<h2 class="accordion-header">
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseOne" aria-expanded="true" aria-controls="default-collapseOne">
-												Page
+											Page
 											</button>
 										</h2>
 										<div id="default-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
@@ -178,19 +145,19 @@
 															<div class="tab-pane fade show active" id="page__tab1" role="tabpanel">
 																<div class="basic-form">
 																	<div class="form-group">
-																	{% recursetree pages %}
+																		{% recursetree pages %}
 																		<div class="form-check mb-2">
 																			<input 
-																			type="checkbox" 
-																			class="form-check-input" 
-																			name="MenuItem[]" value="{{node.id}}"
-																			>
+																				type="checkbox" 
+																				class="form-check-input" 
+																				name="MenuItem[]" value="{{node.id}}"
+																				>
 																			<label class="form-check-label" for="check1">{{node.title}}</label>
 																		</div>
 																		{% if not node.is_leaf_node %}
-																			<ul class="pages-checkbox-list">
-																				{{children}}
-																			</ul>
+																		<ul class="pages-checkbox-list">
+																			{{children}}
+																		</ul>
 																		{% endif %}
 																		{% endrecursetree %}
 																	</div>
@@ -225,7 +192,7 @@
 									<div class="accordion-item">
 										<h2 class="accordion-header">
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseTwo" aria-expanded="false" aria-controls="default-collapseTwo">
-												Blog
+											Blog
 											</button>
 										</h2>
 										<div id="default-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
@@ -246,13 +213,13 @@
 															<div class="tab-pane fade show active" id="blog__tab1" role="tabpanel">
 																<div class="basic-form">
 																	<div class="form-group">
-																	{% for blog in blogs %}
+																		{% for blog in blogs %}
 																		<div class="form-check mb-2">
 																			<input 
-																			type="checkbox" 
-																			class="form-check-input" 
-																			name="MenuItem[]" value="{{blog.id}}"
-																			>
+																				type="checkbox" 
+																				class="form-check-input" 
+																				name="MenuItem[]" value="{{blog.id}}"
+																				>
 																			<label class="form-check-label" for="check1">{{ blog.title }}</label>
 																		</div>
 																		{% endfor %}
@@ -289,30 +256,27 @@
 									<div class="accordion-item">
 										<h2 class="accordion-header">
 											<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#default-collapseThree" aria-expanded="false" aria-controls="#default-collapseThree">
-												Custom Links
+											Custom Links
 											</button>
 										</h2>
 										<div id="default-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordion-one">
 											<div class="accordion-body card-body pt-0">
-													<div class="my-3">
-														<form action="{% url 'dashboard:menu:add_link_to_menu' %}" method="post" id="MenuAjaxAddLinkForm">
-															{% csrf_token %}
-
-																<input type="hidden" name="menu_id" class="LinkMenu" id="LinkMenuId" value="{{menu_obj.id}}">
-
-															<div class="mb-3">
-																<label  class="form-label">URL</label>
-																<input type="url" name="link" class="form-control MenuLinkUrl"  >
-															</div>
-															<div class="mb-3 ">
-																<label  class="form-label">Label</label>
-																
-																<input type="text" name="linktitle" class="form-control MenuLinkTitle" >
-															</div>
-															<button type="button" title="Add Menu" class="btn btn-primary LinksAddToMenu" menu-type="custom-link" menu-id="{{menu_obj.id}}">Add to Menu</button>
-														</form>
-													</div>
+												<div class="my-3">
+													<form action="{% url 'dashboard:menu:add_link_to_menu' %}" method="post" id="MenuAjaxAddLinkForm">
+														{% csrf_token %}
+														<input type="hidden" name="menu_id" class="LinkMenu" id="LinkMenuId" value="{{menu_obj.id}}">
+														<div class="mb-3">
+															<label  class="form-label">URL</label>
+															<input type="url" name="link" class="form-control MenuLinkUrl"  >
+														</div>
+														<div class="mb-3 ">
+															<label  class="form-label">Label</label>
+															<input type="text" name="linktitle" class="form-control MenuLinkTitle" >
+														</div>
+														<button type="button" title="Add Menu" class="btn btn-primary LinksAddToMenu" menu-type="custom-link" menu-id="{{menu_obj.id}}">Add to Menu</button>
+													</form>
 												</div>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -325,7 +289,7 @@
 					<div class="col-md-8">
 						<div class="card">
 							<div class="card-header bg-primary">
-								<h6 class="text-white">Menu Name</h6>
+								<h6 class="text-white">Menu Name 222</h6>
 								<input 
 									type="text" id="MenuNameEdit" class="form-control w-auto"  
 									value="{{ menu_obj.title }}">
@@ -334,9 +298,9 @@
 								{% endif %}
 							</div>
 							<div class="card-body border-start border-end border-primary">
-							<div class="dd" id="nestable">
+								<div class="dd" id="nestable">
 									<ol class="dd-list">
-									{% recursetree menu_items %}
+										{% recursetree menu_items %}
 										<li class="dd-item menu-ac-item" data-id="{{node.id}}">
 											<!-- <div class="dd-handle"></div> -->
 											<div class="accordion" id="accordion-{{node.id}}">
@@ -355,53 +319,48 @@
 																<div class="col-xl-12">
 																	<form>
 																		<div class="mb-3">
-																		<label class="form-label">URL</label>
-																		<input type="text" class="form-control" placeholder="https://bodyclub.dexignzone.com/xhtml/about-us.html">
-																		</div>
-																	</form>													
-																</div>
-																<div class="col-xl-6">
-																	<form>
-																		<div class="mb-3">
-																		<label class="form-label">Navigation Label</label>
-																		<input type="text" class="form-control" placeholder="Contact Us">
+																			<label class="form-label">URL</label>
+																			<input type="text" class="form-control" placeholder="https://bodyclub.dexignzone.com/xhtml/about-us.html">
 																		</div>
 																	</form>
 																</div>
 																<div class="col-xl-6">
 																	<form>
 																		<div class="mb-3">
-																		<label class="form-label">Title Attribute</label>
-																		<input type="text" class="form-control" placeholder="Contact Us">
+																			<label class="form-label">Navigation Label</label>
+																			<input type="text" class="form-control" placeholder="Contact Us">
+																		</div>
+																	</form>
+																</div>
+																<div class="col-xl-6">
+																	<form>
+																		<div class="mb-3">
+																			<label class="form-label">Title Attribute</label>
+																			<input type="text" class="form-control" placeholder="Contact Us">
 																		</div>
 																	</form>
 																</div>
 																<div class="d-flex align-items-center">
 																	<a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
-																	
 																	<a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
 																	Cancel
 																	</a>
 																</div>
-															</div>												
+															</div>
 														</div>
 													</div>
 												</div>
 												<!-- Accordion body -->
-												
-
 											</div>
 										</li>
 										{% endrecursetree %} 
 									</ol>
 								</div>
-						
-						</div>
+							</div>
 							<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">
 								<div class="card-footer-link mb-4 mb-sm-0">
 									<p class="card-text text-dark d-inline">Last updated 3 mins ago</p>
 								</div>
-
 								<a href="javascript:void()" class="btn btn-primary">Save menu</a>
 							</div>
 						</div>
@@ -411,19 +370,17 @@
 		</div>
 	</div>
 </div>
-
 {% comment %} {% block extra_scripts %} {% endcomment %}
-    <!--**********************************
-        Scripts
-    ***********************************-->
-    <!-- Required vendors -->
-
+<!--**********************************
+	Scripts
+	***********************************-->
+<!-- Required vendors -->
 <script type="text/javascript">
 	var CSRF_TOKEN = '{{ csrf_token }}';
-
+	
 	var screenOptionArray = JSON.stringify({{ ScreenOption|safe }});
 	console.log(screenOptionArray);
-
+	
 	var search_menus_url = '{% url 'dashboard:menu:search_menu' %}';
 	var menu_item_update_url = '/dashboard/menus/menu_item_update/';
 	var menu_item_delete_url = '{% url 'dashboard:menu:menu_item_delete' %}'; 
@@ -433,11 +390,8 @@
 	var page_add_to_menu_url = '/dashboard/menus/page_add_to_menu/';
 	var menu_structure_save_url = '{% url 'dashboard:menu:menu_structure_save' %}';
 	var menu_delete_url = '{% url 'dashboard:menu:menu_delete' %}';
-
+	
 </script>
-
-
 {% endblock content %}
-
 {% block additional_js %}
 {% endblock additional_js %}
