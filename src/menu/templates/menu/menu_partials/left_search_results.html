@@ -1,0 +1,15 @@
+{% if objects %}
+<div class="form-group">
+	{% for object in objects %}
+	<div class="form-check mb-2">
+		<input 
+			type="checkbox" 
+			class="form-check-input" 
+			name="MenuItem[]" value="{{object.id}}"
+			>
+		<label class="form-check-label" for="check1">{{object.title}}</label>
+	</div>
+	{% endif %}
+	{% endfor %}
+</div>
+{% endif %}

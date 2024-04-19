@@ -172,15 +172,30 @@
 															</div>
 															<div class="tab-pane fade" id="page__tab2">
 																<div class="mb-3 mt-3">
+																	<form hx-post="/csrf-demo/checker/"
+																		hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+          																hx-target="#search_content">
 																	<label  class="form-label">Search</label>
-																	<input type="text" class="form-control SearchForMenu" placeholder="type here">
+																	{% comment %} <input type="text" class="form-control SearchForMenu" placeholder="type here"> {% endcomment %}
 																	<input type="hidden" class="search_type" value="Page">
+																	<input id="keyup-input"
+																		class="form-control SearchForMenu"
+																		name="keyup_input"
+																		type="text"
+																		placeholder="Type something..."
+																		autocomplete="off"
+																		hx-trigger="keyup changed delay:100ms" />
+																		{% comment %} hx-post="/middleware-tester/table/" {% endcomment %}
+																</form>
 																</div>
-																<div class="searchContentDiv"> </div>
+
+																<div id="search_content" class="searchContentDiv"> </div>
+
 															</div>
 															<div class="row">
 																<div class="col-md-12 text-right pt-2">
-																	<button type="button" class="btn btn-primary AddToMenu"  menu-type="Page" menu-id="{{menu_obj.id}}"  >Add to Menu</button>
+																	<button type="button" class="btn btn-primary AddToMenu"  
+																	menu-type="Page" menu-id="{{menu_obj.id}}" >Add to Menu</button>
 																</div>
 															</div>
 														</div>
