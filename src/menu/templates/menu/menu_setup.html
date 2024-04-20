@@ -152,6 +152,7 @@
 																	<div class="form-group">
 																		{% recursetree pages %}
 																		<div class="form-check mb-2">
+																		<input type="hidden" class="search_type" value="Page">
 																			<input 
 																				type="checkbox" 
 																				class="form-check-input" 
@@ -311,7 +312,8 @@
 							</div>
 							<div id="menu_items" class="card-body border-start border-end border-primary">
 								
-								{% include 'menu/menu_partials/menu_nestable.html' with slug=menu_obj.slug %}
+								{% include 'menu/menu_partials/menu_nestable.html' with slug='mega-menu' %}
+								
 								
 							</div>
 							<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">

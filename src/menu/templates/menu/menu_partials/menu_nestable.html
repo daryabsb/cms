@@ -1,9 +1,11 @@
 {% load static mptt_tags custom_tags %}
-{% with menu_items=slug|getMenu %}
-
+{% if done %}
+{{ done }}
+{% endif %}
 <div class="dd" id="nestable">
     <ol class="dd-list">
-        {% recursetree menu_items %}
+        {% with menu_items=slug|getMenu %}
+		    {% recursetree menu_items %}
         
         <li class="dd-item menu-ac-item" data-id="{{node.id}}">
             <!-- <div class="dd-handle"></div> -->
@@ -17,7 +19,8 @@
                         {{ node.title}}
                         </button>
                     </div>
-                    <div id="collapse-{{node.id}}" class="accordion-collapse collapse" aria-labelledby="heading-{{node.id}}" data-bs-parent="#accordion-{{node.id}}">
+                    <div id="collapse-{{node.id}}" class="accordion-collapse collapse" 
+                    aria-labelledby="heading-{{node.id}}" data-bs-parent="#accordion-{{node.id}}">
                         <div class="accordion-body">
                             <div class="row">
                                 <div class="col-xl-12">
@@ -57,7 +60,7 @@
                 <!-- Accordion body -->
             </div>
         </li>
-        {% endrecursetree %} 
+        {% endrecursetree %}
+		{% endwith %}
     </ol>
 </div>
-{% endwith %}

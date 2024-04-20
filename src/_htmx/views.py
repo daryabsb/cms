@@ -2,16 +2,18 @@ from django.shortcuts import render
 from django.http import HttpRequest
 from django.http import HttpResponse
 from django.views.decorators.http import (require_POST, require_GET,)
-from django.contrib.auth.decorators import (login_required, permission_required,)
+from django.contrib.auth.decorators import (
+    login_required, permission_required,)
 
 from django_htmx.middleware import HtmxDetails
 from src._htmx.forms import SearchForm
 
 # Typing pattern recommended by django-stubs:
 # https://github.com/typeddjango/django-stubs#how-can-i-create-a-httprequest-thats-guaranteed-to-have-an-authenticated-user
+
+
 class HtmxHttpRequest(HttpRequest):
     htmx: HtmxDetails
-
 
 
 @require_POST
@@ -26,6 +28,7 @@ def search_pages2(request: HtmxHttpRequest) -> HttpResponse:
         "menu/menu_partials/left_search_results.html",
         {"form": form, "search_keywords": search_keywords},
     )
+
 
 @require_GET
 def search_pages(request: HtmxHttpRequest) -> HttpResponse:
@@ -59,44 +62,57 @@ def csrf_demo_checker(request: HtmxHttpRequest) -> HttpResponse:
 
 @login_required(login_url='dashboard:login')
 @permission_required({'menu.view_items', 'menu.add_items'}, raise_exception=True)
+@require_POST
 def add_menu_content(request: HtmxHttpRequest) -> HttpResponse:
     from src.pages.models import Page
     from src.blogs.models import Blogs, Categories
     from src.menu.models import Menus, Items
-    print("Adding new item!")
 
-    if request.method == 'POST':
-        item_ids = request.POST.getlist('MenuItem[]')
-        menu_type = request.POST.get('menu_type')
-        menu_id = request.POST.get('menu_id')
-        menu_obj = Menus.objects.get(id=menu_id)
-        allItems = []
-        new_menu_item = {}
-        if menu_type == 'Page':
-            allItems = Page.objects.filter(id__in=item_ids)
-            linkType = 'Page'
+    item_ids = request.POST.getlist('MenuItem[]')
+    menu_type = request.POST.get('menu_type')
+    menu_id = request.POST.get('menu_id')
+    menu_obj = Menus.objects.get(id=menu_id)
+    allItems = []
+    new_menu_item = {}
 
-        if menu_type == 'Blog':
-            allItems = Blogs.objects.filter(id__in=item_ids)
-            linkType = 'Blog'
+    print("Item IDs = ", item_ids)
+    print("menu_type = ", menu_type)
+    print("menu_obj = ", menu_obj)
 
-        if menu_type == 'Category':
-            allItems = Categories.objects.filter(id__in=item_ids)
-            linkType = 'Category'
+    if item_ids:
+        allItems = Page.objects.filter(id__in=item_ids)
+        linkType = 'Page'
 
-        if allItems:
-            for item_obj in allItems:
-                new_menu_item = Items(
-                    menu=menu_obj,
-                    title=item_obj.title,
-                    item_id=item_obj.id,  # item_id
-                    type=linkType,
+    if allItems:
+        for item_obj in allItems:
+            new_menu_item = Items(
+                menu=menu_obj,
+                title=item_obj.title,
+                item_id=item_obj.id,  # item_id
+                type=linkType,
 
-                )
-                new_menu_item.save()
-        return render(
+            )
+            new_menu_item.save()
+
+    return render(
         request,
         'menu/menu_partials/menu_nestable.html',
-        {"new_menu_item": new_menu_item},
-            )
+        {
+            "new_menu_item": new_menu_item,
+            "done": "This is rendered!",
+            "menu_obj": menu_obj,
+            "slug": menu_obj.slug
+        },
+    )
 
+    # if menu_type == 'Page':
+    #     allItems = Page.objects.filter(id__in=item_ids)
+    #     linkType = 'Page'
+
+    # if menu_type == 'Blog':
+    #     allItems = Blogs.objects.filter(id__in=item_ids)
+    #     linkType = 'Blog'
+
+    # if menu_type == 'Category':
+    #     allItems = Categories.objects.filter(id__in=item_ids)
+    #     linkType = 'Category'
