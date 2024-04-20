@@ -172,9 +172,9 @@
 															</div>
 															<div class="tab-pane fade" id="page__tab2">
 																<div class="mb-3 mt-3">
-																	<form hx-post="/csrf-demo/checker/"
+																	<form hx-post="/csrf-demo/checker/" 
 																		hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-          																hx-target="#search_content">
+																		hx-target="#search_content">
 																	<label  class="form-label">Search</label>
 																	{% comment %} <input type="text" class="form-control SearchForMenu" placeholder="type here"> {% endcomment %}
 																	<input type="hidden" class="search_type" value="Page">

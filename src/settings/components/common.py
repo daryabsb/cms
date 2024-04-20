@@ -50,6 +50,9 @@ LOCAL_APPS = [
 
     # Frontends
     'src.industico',
+
+    # APIs
+    'src._htmx',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
