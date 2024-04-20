@@ -25,7 +25,7 @@
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'dashboard/images/favicon.png' %}">
 
-	<script src="{% static 'js/htmx.min.js' %}" defer></script>
+	<script src="{% static 'js/htmx.js' %}" defer></script>
 
 <!-- Module css -->
 {% for cssurl in dz_array.pagelevel.css|getdata:request.path %}
@@ -860,7 +860,7 @@
     {% endfor %}
     
   
-  {% django_htmx_script %}
+	{% django_htmx_script %}
     
     {% block additional_js %}
     {% endblock %}

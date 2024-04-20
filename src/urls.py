@@ -25,6 +25,7 @@ urlpatterns = [
     path('industico/', include('src.industico.urls')),
 
     path('ckeditor/', include('ckeditor_uploader.urls')),
+    path('htmx/', include('src._htmx.urls')),
 
 ]
 

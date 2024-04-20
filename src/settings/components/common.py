@@ -19,8 +19,8 @@ DJANGO_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
     "django_htmx",
+    'django.contrib.staticfiles',
 
 ]
 THIRD_PARTY_APPS = [
@@ -64,9 +64,9 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    "django_htmx.middleware.HtmxMiddleware",
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    "django_htmx.middleware.HtmxMiddleware",
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
