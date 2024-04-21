@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         for (var i = 0; i < sortables.length; i++) {
             var sortable = sortables[i];
             var sortableInstance = new Sortable(sortable, {
-                animation: 150,
+                animation: 350,
                 ghostClass: 'blue-background-class',
 
                 // Make the `.htmx-indicator` unsortable
@@ -49,4 +49,12 @@ document.addEventListener("DOMContentLoaded", function () {
         }).join("\n");
     }
 
+
 });
+document
+    .querySelector('.MenuSelectbtn')
+    .addEventListener('click', function () {
+        var id = document.getElementById('MenuSelect').value //$("#MenuSelect option:selected").val();
+        console.log("got menu id: ", id)
+        if (id != "") { window.location.href = "/dashboard/menus/setup/" + id + "/"; }
+    });

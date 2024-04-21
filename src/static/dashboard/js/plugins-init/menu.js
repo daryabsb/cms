@@ -145,37 +145,37 @@ $(document).ready(function () {
 
 
         html_data = ` 
-<div class="row">
-    <div class"col-md-12">
-        <form action="" method="post">
-            <input type="hidden" name="csrfmiddlewaretoken" value="${CSRF_TOKEN}">
-            <div class="card">
-            <div class="card-header bg-primary flex-wrap" >
-                <p class="text-white h4">Menu Name</p>
-                <div class="menuinput">
-                    <input type="text" name="menu_create" class="form-control w-auto mb-1">
+            <div class="row">
+                <div class"col-md-12">
+                    <form action="" method="post">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="${CSRF_TOKEN}">
+                        <div class="card">
+                        <div class="card-header bg-primary flex-wrap" >
+                            <p class="text-white h4">Menu Name</p>
+                            <div class="menuinput">
+                                <input type="text" name="menu_create" class="form-control w-auto mb-1">
+                            </div>
+                            <div class='actions'>
+                                <button type="submit" class="btn btn-secondary mb-1 disabled">Create Menu</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="nestable">
+                                <div class="dd" id="nestable">
+                                <p>Give your menu a name, then click Create Menu.</p>
+                                </div>
                 </div>
-                <div class='actions'>
-                    <button type="submit" class="btn btn-secondary mb-1 disabled">Create Menu</button>
+                        </div>
+                        <div class="card-footer d-sm-flex justify-content-between align-items-center">
+                            <div class='actions'>
+                                <button type="submit" class="btn btn-primary disabled">Create Menu</button>
+                            </div>
+                        </div>
+                        </div>
+                    </form>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="nestable">
-                    <div class="dd" id="nestable">
-                    <p>Give your menu a name, then click Create Menu.</p>
-                    </div>
-    </div>
-            </div>
-            <div class="card-footer d-sm-flex justify-content-between align-items-center">
-                <div class='actions'>
-                    <button type="submit" class="btn btn-primary disabled">Create Menu</button>
-                </div>
-            </div>
-            </div>
-        </form>
-    </div>
-</div>
-`
+            `
         $("#MenuTypeDiv").addClass("disable_menu");
         $('#MenuAndMenuItem').replaceWith(html_data);
 

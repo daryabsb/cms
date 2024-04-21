@@ -161,7 +161,7 @@
 <div class="row">
 	<div class="col-12">
 		<div class="card">
-			<div class="card-header">
+			{% comment %} <div class="card-header">
 				<div>
 					<h4 class="text-dark">Select a menu to edit</h4>
 				</div>
@@ -184,7 +184,7 @@
 						</div>
 					</form>
 				</div>
-			</div>
+			</div> {% endcomment %}
 			<div class="card-header">
 				<div>
 					<h4 class="text-dark">Select a menu to edit</h4>
@@ -206,8 +206,9 @@
 						{% endfor %}
 					</select>
 				</div>
+				
 				<div class="text-end">
-					<button class="btn btn-primary MenuSelectbtn" hx-get="/dashboard/menus/setup/{{ menu.id }}/" hx-target="this" hx-swap="outerHTML">Select</button>
+					<button class="btn btn-primary MenuSelectbtn" >Select</button>
 					{% comment %} <button type="button" class="MenuSelectbtn" title="Select Menu">Select</button> {% endcomment %}
 				</div>
 			</div>
@@ -412,9 +413,9 @@
 							</div>
 							<div id="menu_items" class="card-body border-start border-end border-primary">
 								
-								{% include 'menu/menu_partials/menu_nestable.html' with slug='mega-menu' %}
-								{% include 'menu/menu_partials/drag-test.html' %}
-								{% include 'menu/menu_partials/menu_sortable.html' with menu_obj=menu_obj slug='mega-menu' %}
+								{% comment %} {% include 'menu/menu_partials/menu_nestable.html' with slug=menu_obj.slug %} {% endcomment %}
+								{% include 'menu/menu_partials/menu_sortable.html' with slug=menu_obj.slug %}
+								{% comment %} {% include 'menu/menu_partials/drag-test.html' with slug=menu_obj.slug %} {% endcomment %}
 
 								<div>
 
@@ -440,23 +441,6 @@
 	Scripts
 	***********************************-->
 <!-- Required vendors -->
-<script type="text/javascript">
-	var CSRF_TOKEN = '{{ csrf_token }}';
-	
-	var screenOptionArray = JSON.stringify({{ ScreenOption|safe }});
-	console.log(screenOptionArray);
-	
-	var search_menus_url = '{% url 'dashboard:menu:search_menu' %}';
-	var menu_item_update_url = '/dashboard/menus/menu_item_update/';
-	var menu_item_delete_url = '{% url 'dashboard:menu:menu_item_delete' %}'; 
-	var custom_link_add_to_menu_url = '/dashboard/menus/custom_link_add_to_menu/';
-	var category_add_to_menu_url = '/dashboard/menus/category_add_to_menu/';
-	var blog_add_to_menu_url = '/dashboard/menus/blog_add_to_menu/';
-	var page_add_to_menu_url = '/dashboard/menus/page_add_to_menu/';
-	var menu_structure_save_url = '{% url 'dashboard:menu:menu_structure_save' %}';
-	var menu_delete_url = '{% url 'dashboard:menu:menu_delete' %}';
-	
-</script>
 {% endblock content %}
 {% block additional_js %}
 <script>
