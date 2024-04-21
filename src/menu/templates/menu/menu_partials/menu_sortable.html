@@ -1,0 +1,27 @@
+{% load static mptt_tags custom_tags %}
+
+<div id="demo-canvas">
+
+    <form id="example1" class="list-group col sortable" 
+        hx-post="{% url '_htmx:menu-structure-save' %}"
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' 
+        hx-trigger="end">
+    <div class="htmx-indicator" style="cursor: default">Updating...</div>
+
+    {% with menu_items=slug|getMenu %}
+    {% recursetree menu_items %}
+        <div 
+            style="border:1px solid #DEDEDE; padding:12px; margin: 8px;cursor: grab" 
+            ondrag="this.style.cursor = 'grabbing'"
+            >
+            <input type="hidden" name="menu_data" value="{{menu_obj.slug}}">
+            <input type="hidden" name="item[]" value="{{node.id}}">{{ node.title }}
+        </div>
+        {% endrecursetree %}
+    {% endwith %} 
+        {% comment %} <div style="border:1px solid #DEDEDE; padding:12px; margin: 8px; width:200px; cursor: grab" ondrag="this.style.cursor = 'grabbing'"><input type="hidden" name="item[]" value="5"> Item 5</div>
+        <div style="border:1px solid #DEDEDE; padding:12px; margin: 8px; width:200px; cursor: grab" ondrag="this.style.cursor = 'grabbing'"><input type="hidden" name="item[]" value="1"> Item 1</div>
+        <div style="border:1px solid #DEDEDE; padding:12px; margin: 8px; width:200px; cursor: grab" ondrag="this.style.cursor = 'grabbing'"><input type="hidden" name="item[]" value="3"> Item 3</div>
+        <div style="border:1px solid #DEDEDE; padding:12px; margin: 8px; width:200px; cursor: grab" ondrag="this.style.cursor = 'grabbing'"><input type="hidden" name="item[]" value="4"> Item 4</div> {% endcomment %}
+    </form>
+</div>

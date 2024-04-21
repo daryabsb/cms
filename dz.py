@@ -376,7 +376,9 @@ dz_array = {
                 f"{foldername_d}/vendor/sweetalert2/dist/sweetalert2.min.js",
                 # f"{foldername_d}/js/plugins-init/menu.js",
                 f"{foldername_d}/vendor/nestable2/js/jquery.nestable.min.js",
-                f"{foldername_d}/js/plugins-init/nestable-init.js",
+                f"{foldername_d}/vendor/sortable/sortable.min.js",
+                f"{foldername_d}/js/plugins-init/htmx-init.js",
+                # f"{foldername_d}/js/plugins-init/nestable-init.js",
 
             ],
             "cms_blog_list": [

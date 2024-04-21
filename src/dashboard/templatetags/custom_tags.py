@@ -11,7 +11,6 @@ import json
 
 register = template.Library()
 
-
 # This the custom filter, name is getitems
 
 def getdata(json_data, args):
@@ -53,6 +52,13 @@ def getMenu(menu_slug):
 
 
 register.filter('getMenu', getMenu)
+
+def getRange(value):
+
+    return ['1','2','3','4','5']
+
+
+register.filter('getRange', getRange)
 
 
 @register.filter(name='is_active_node')

@@ -6,6 +6,8 @@ from typing import Any
 
 BASE_DIR = Path(__file__).parent
 
+print('BASE_DIR_85 = ', BASE_DIR)
+
 DEBUG = os.environ.get("DEBUG", "") == "1"
 
 SECRET_KEY = ")w%-67b9lurhzs*o2ow(e=n_^(n2!0_f*2+g+1*9tcn6_k58(f"
@@ -46,4 +48,5 @@ USE_TZ = True
 
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "static"
+# STATICFILES_DIRS = [BASE_DIR / "static"]

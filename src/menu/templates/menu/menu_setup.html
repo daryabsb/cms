@@ -1,6 +1,80 @@
 {% extends 'dashboard/dashboard_base.html' %}
 {% load static mptt_tags custom_tags %}
 {% block additional_css %}
+<style>
+    #team-members {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+        max-width: 550px;
+        margin: auto;
+        padding: 50px;
+        background: rgba(255, 255, 255, 0.25);
+        -webkit-backdrop-filter: blur(var(--blur));
+                backdrop-filter: blur(var(--blur));
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        filter: drop-shadow(0px 20px 10px rgba(0, 0, 0, var(--shadow-opacity)));
+        }
+        
+        .team-member {
+        position: relative;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+        min-height: 60px;
+        padding: 16px;
+        background-color: var(--white);
+        border-radius: 24px;
+        font-size: 16px;
+        z-index: 1;
+        }
+        .team-member:hover {
+        cursor: -webkit-grab;
+        cursor: grab;
+        }
+        .team-member-avatar {
+        width: 3.75rem;
+        height: 3.75rem;
+        -o-object-fit: cover;
+            object-fit: cover;
+        border-radius: 50%;
+        }
+        .team-member-name {
+        display: grid;
+        gap: 0.125rem;
+        }
+        .team-member-name h3 {
+        font-size: large;
+        }
+        .team-member-name p {
+        font-size: smaller;
+        }
+        .team-member-chosen {
+        box-shadow: 8px 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .team-member-drag {
+        opacity: 0;
+        }
+        
+        .social-links {
+        display: flex;
+        flex-direction: row;
+        gap: 6px;
+        margin-left: auto;
+        padding: 0;
+        list-style-type: none;
+        }
+        .social-links i {
+        width: 1.25rem;
+        height: 1.25rem;
+        font-size: 1.25rem;
+        }
+
+</style>
+
 {% endblock %}
 {% block content %}
 <div class="row">
@@ -91,24 +165,24 @@
 				<div>
 					<h4 class="text-dark">Select a menu to edit</h4>
 				</div>
-				<div class=" MenuSelectDiv">
-					<select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
-						{% if not menu_obj %}
-						<option value="" selected>Choose Menu</option>
-						{% endif %}
-						{% for menu in menus %}
-						<option value="{{menu.id}}" 
-						{% if menu_obj %}
-						{% if menu.id == menu_obj.id %}
-						selected
-						{% endif %}
-						{% endif %}
-						>{{menu.title}}</option>
-						{% endfor %}
-					</select>
-				</div>
-				<div class="text-end">
-					<button type="button" class="btn btn-primary MenuSelectbtn" title="Select Menu">Select</button>
+				<div class="MenuSelectDiv">
+					<form id="menuForm" hx-post="/dashboard/menus/setup/" hx-target="this" hx-swap="outerHTML">
+						<select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
+							{% if not menu_obj %}
+							<option value="" selected>Choose Menu</option>
+							{% endif %}
+							{% for menu in menus %}
+							<option value="{{menu.id}}" {% if menu_obj %}
+							{% if menu.id == menu_obj.id %}
+							selected
+							{% endif %}
+							{% endif %}>{{menu.title}}</option>
+							{% endfor %}
+						</select>
+						<div class="text-end">
+							<button type="submit" class="btn btn-primary">Select</button>
+						</div>
+					</form>
 				</div>
 			</div>
 			<div class="card-body">
@@ -313,7 +387,13 @@
 							<div id="menu_items" class="card-body border-start border-end border-primary">
 								
 								{% include 'menu/menu_partials/menu_nestable.html' with slug='mega-menu' %}
-								
+								{% include 'menu/menu_partials/drag-test.html' %}
+								{% include 'menu/menu_partials/menu_sortable.html' with menu_obj=menu_obj slug='mega-menu' %}
+
+								<div>
+
+										
+									
 								
 							</div>
 							<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">
@@ -353,4 +433,19 @@
 </script>
 {% endblock content %}
 {% block additional_js %}
+<script>
+
+    const dragAndDropItems = document.getElementById('team-members');
+
+    new Sortable(dragAndDropItems, {
+        animation: 350,
+        chosenClass: 'team-member-chosen',
+        dragClass: 'team-member-drag'
+    });
+
+</script>
 {% endblock additional_js %}
+
+
+
+

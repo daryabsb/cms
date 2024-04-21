@@ -26,6 +26,9 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'dashboard/images/favicon.png' %}">
 
 	<script src="{% static 'js/htmx.js' %}" defer></script>
+	<script src="{% static 'js/preload.js' %}" defer></script>
+	<script src="{% static 'js/ext/debug.js' %}" defer></script>
+	<script src="{% static 'js/ext/event-header.js' %}" defer></script>
 
 <!-- Module css -->
 {% for cssurl in dz_array.pagelevel.css|getdata:request.path %}
@@ -844,6 +847,7 @@
     <!--**********************************
         Scripts
     ***********************************-->
+	{% django_htmx_script %}
     {% for jsurl in dz_array.global.js.top %}
     <script src="{% static jsurl %}"></script>
     {% endfor %}
@@ -860,7 +864,7 @@
     {% endfor %}
     
   
-	{% django_htmx_script %}
+	
     
     {% block additional_js %}
     {% endblock %}
