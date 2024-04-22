@@ -402,33 +402,38 @@
 					</div>
 					<div class="col-md-8">
 						<div class="card">
-							<div class="card-header bg-primary">
-								<h6 class="text-white">Menu Name 222</h6>
-								<input 
-									type="text" id="MenuNameEdit" class="form-control w-auto"  
-									value="{{ menu_obj.title }}">
-								{% if perms.menu.change_items and perms.menu.change_menus %}
-								<button type="button" title="Save Menu" class="btn btn-primary light SaveMenu" rel="{{menu_obj.id}}">Save Menu</button>
-								{% endif %}
-							</div>
-							<div id="menu_items" class="card-body border-start border-end border-primary">
+							<form
+								hx-post="{% url '_htmx:menu-structure-save' %}"
+								hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+								hx-target="#demo-canvas"
+								hx-vals='{"key1": "value1", "key2": "value2"}'
+								>
 								
-								{% comment %} {% include 'menu/menu_partials/menu_nestable.html' with slug=menu_obj.slug %} {% endcomment %}
-								{% include 'menu/menu_partials/menu_sortable.html' with slug=menu_obj.slug %}
-								{% comment %} {% include 'menu/menu_partials/drag-test.html' with slug=menu_obj.slug %} {% endcomment %}
-
-								<div>
-
-										
-									
-								
-							</div>
-							<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">
-								<div class="card-footer-link mb-4 mb-sm-0">
-									<p class="card-text text-dark d-inline">Last updated 3 mins ago</p>
+								<div class="card-header bg-primary">
+									<h6 class="text-white">Menu Name 222</h6>
+									<input type="text" id="MenuNameEdit" class="form-control w-auto" value="{{ menu_obj.title }}">
+									{% if perms.menu.change_items and perms.menu.change_menus %}
+									<button type="button" title="Save Menu" class="btn btn-primary light SaveMenu" rel="{{menu_obj.id}}">Save Menu</button>
+									{% endif %}
 								</div>
-								<a href="javascript:void()" class="btn btn-primary">Save menu</a>
-							</div>
+								<div id="menu_items" class="card-body border-start border-end border-primary">
+									
+									{% comment %} {% include 'menu/menu_partials/menu_nestable.html' with slug=menu_obj.slug %} {% endcomment %}
+									{% with menu_items=menu_obj.slug|getMenu %}
+									{% include 'menu/menu_partials/menu_sortable.html' with menu_items=menu_items slug=menu_obj.slug %}
+									{% endwith %}
+									{% comment %} {% include 'menu/menu_partials/drag-test.html' with slug=menu_obj.slug %} {% endcomment %}
+
+									<div>
+
+								</div>
+								<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">
+									<div class="card-footer-link mb-4 mb-sm-0">
+										<p class="card-text text-dark d-inline">Last updated 3 mins ago</p>
+									</div>
+									<button type="submit" id="SaveMenu3" class="btn btn-primary">Save menu</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -444,6 +449,22 @@
 {% endblock content %}
 {% block additional_js %}
 <script>
+	var CSRF_TOKEN = '{{ csrf_token }}';
+	
+	var screenOptionArray = JSON.stringify({{ ScreenOption|safe }});
+	console.log(screenOptionArray);
+
+	var menuId = {{ menu_obj.id }}
+	
+	var search_menus_url = '{% url 'dashboard:menu:search_menu' %}';
+	var menu_item_update_url = '/dashboard/menus/menu_item_update/';
+	var menu_item_delete_url = '{% url 'dashboard:menu:menu_item_delete' %}'; 
+	var custom_link_add_to_menu_url = '/dashboard/menus/custom_link_add_to_menu/';
+	var category_add_to_menu_url = '/dashboard/menus/category_add_to_menu/';
+	var blog_add_to_menu_url = '/dashboard/menus/blog_add_to_menu/';
+	var page_add_to_menu_url = '/dashboard/menus/page_add_to_menu/';
+	var menu_structure_save_url = '{% url '_htmx:menu-structure-save' %}';
+	var menu_delete_url = '{% url 'dashboard:menu:menu_delete' %}';
 
     const dragAndDropItems = document.getElementById('team-members');
 
@@ -459,3 +480,16 @@
 
 
 
+menu_data=mega-menu&
+item%5B%5D=12&
+item%5B%5D=1&
+item%5B%5D=3&
+item%5B%5D=4&
+item%5B%5D=6&
+item%5B%5D=10&
+item%5B%5D=11&
+item%5B%5D=2&
+item%5B%5D=7&
+item%5B%5D=8 
+
+HTTP/1.1" 200 110139

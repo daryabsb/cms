@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from django.urls import path
+from django.conf.urls.static import static
+from django.conf import settings
 
 from example import views
 
@@ -15,3 +17,9 @@ urlpatterns = [
     path("middleware-tester/table/", views.middleware_tester_table),
     path("partial-rendering/", views.partial_rendering),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL,
+                          document_root=settings.MEDIA_ROOT)

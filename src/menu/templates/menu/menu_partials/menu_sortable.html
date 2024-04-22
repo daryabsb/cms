@@ -1,76 +1,78 @@
 {% load static mptt_tags custom_tags %}
 
+{% if slug and not done %}
+<input type="hidden" name="menu_data" value="{{slug}}">
+{% else %}
+<input type="hidden" name="menu_data" value="{{menu_slug}}">
+{% endif %}
 <div id="demo-canvas">
-
-    <form id="example1" class="list-group col sortable" 
-        hx-post="{% url '_htmx:menu-structure-save' %}"
-        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' 
-        hx-trigger="end">
     <div class="htmx-indicator" style="cursor: default">Updating...</div>
-
-    {% with menu_items=slug|getMenu %}
-    {% recursetree menu_items %}
-        <div class="accordion" id="accordion-{{node.id}}">
-            <input type="hidden" name="menu_data" value="{{menu_obj.slug}}">
-            <input type="hidden" name="item[]" value="{{node.id}}">
-            <div class="accordion-item">
-                <div class="accordion-header p-0" id="heading-{{node.id}}" 
-                    style="border:1px solid #DEDEDE; margin: 8px;cursor: grab; position: relative; display: flex;">
-                    <div class="move-media dd-handle" ondrag="this.style.cursor = 'grabbing'">
-                        <i class="fa-solid fa-arrows-up-down-left-right"></i>
+    <ol class="sortable">
+        {% recursetree menu_items %}
+        <li>
+            <div class="accordion" id="accordion-{{node.id}}">
+                
+                <input type="hidden" name="item[]" value="{{node.id}}">
+                <div class="accordion-item">
+                    <div class="accordion-header p-0" id="heading-{{node.id}}" 
+                        style="border:1px solid #DEDEDE; margin: 8px;cursor: grab; position: relative; display: flex;">
+                        <div class="move-media dd-handle" ondrag="this.style.cursor = 'grabbing'">
+                            <i class="fa-solid fa-arrows-up-down-left-right"></i>
+                        </div>
+                        <button class="accordion-button contact collapsed" type="button" 
+                            data-bs-toggle="collapse" data-bs-target="#collapse-{{node.id}}" 
+                            aria-expanded="false" aria-controls="collapse-{{node.id}}">
+                        {{ node.title}}
+                        </button>
                     </div>
-                    <button class="accordion-button contact collapsed" type="button" 
-                        data-bs-toggle="collapse" data-bs-target="#collapse-{{node.id}}" 
-                        aria-expanded="false" aria-controls="collapse-{{node.id}}">
-                    {{ node.title}}
-                    </button>
-                </div>
-                <div id="collapse-{{node.id}}" class="accordion-collapse collapse" 
-                    aria-labelledby="heading-{{node.id}}" 
-                    data-bs-parent="#accordion-{{node.id}}">
-                    <div class="accordion-body">
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <form>
-                                    <div class="mb-3">
-                                        <label class="form-label">URL</label>
-                                        <input type="text" class="form-control" placeholder="{{ node.link }}">
-                                    </div>
-                                </form>
+                    <div id="collapse-{{node.id}}" class="accordion-collapse collapse" 
+                        aria-labelledby="heading-{{node.id}}" 
+                        data-bs-parent="#accordion-{{node.id}}">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label class="form-label">URL</label>
+                                            <input type="text" class="form-control" placeholder="{{ node.link }}">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-xl-6">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label class="form-label">Attributes</label>
+                                            <input type="text" class="form-control" placeholder="{{ node.attributes }}">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-xl-6">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label class="form-label">Title Attribute</label>
+                                            <input type="text" class="form-control" placeholder="Contact Us">
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
+                                    <a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
+                                    Cancel
+                                    </a>
+                                </div>
                             </div>
-                            <div class="col-xl-6">
-                                <form>
-                                    <div class="mb-3">
-                                        <label class="form-label">Attributes</label>
-                                        <input type="text" class="form-control" placeholder="{{ node.attributes }}">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-xl-6">
-                                <form>
-                                    <div class="mb-3">
-                                        <label class="form-label">Title Attribute</label>
-                                        <input type="text" class="form-control" placeholder="Contact Us">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="d-flex align-items-center">
-                                <a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
-                                <a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
-                                Cancel
-                                </a>
+                            <div class="row">
+                                {% if not node.is_leaf_node %}
+                                <ol class="sortable3">
+                                {{ children }}
+                                </ol>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-          
-        </div>
+        <li>
         {% endrecursetree %}
-    {% endwith %} 
-        {% comment %} <div style="border:1px solid #DEDEDE; padding:12px; margin: 8px; width:200px; cursor: grab" ondrag="this.style.cursor = 'grabbing'"><input type="hidden" name="item[]" value="5"> Item 5</div>
-        <div style="border:1px solid #DEDEDE; padding:12px; margin: 8px; width:200px; cursor: grab" ondrag="this.style.cursor = 'grabbing'"><input type="hidden" name="item[]" value="1"> Item 1</div>
-        <div style="border:1px solid #DEDEDE; padding:12px; margin: 8px; width:200px; cursor: grab" ondrag="this.style.cursor = 'grabbing'"><input type="hidden" name="item[]" value="3"> Item 3</div>
-        <div style="border:1px solid #DEDEDE; padding:12px; margin: 8px; width:200px; cursor: grab" ondrag="this.style.cursor = 'grabbing'"><input type="hidden" name="item[]" value="4"> Item 4</div> {% endcomment %}
-    </form>
+    <ol>
 </div>

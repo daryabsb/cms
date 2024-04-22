@@ -56,4 +56,4 @@ class Items(MPTTModel):
         order_insertion_by = ['order']
 
     def __str__(self):
-        return self.title
+        return f"{self.order}: {self.title} [{self.menu.title}]"

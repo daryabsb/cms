@@ -126,19 +126,47 @@ def add_menu_content(request: HtmxHttpRequest) -> HttpResponse:
 # @permission_required({'menu.view_menus','menu.view_items','menu.change_menus','menu.change_items'}, raise_exception=True)
 @require_POST
 def cms_menu_structure_save(request: HtmxHttpRequest) -> HttpResponse:
-
+    menu_slug = ''
     items = request.POST.getlist('item[]', [])
     menu_slug = request.POST.get('menu_data', None)
+    vals = request.POST.get('hx-vals', '{}')
 
-    print("items = ", items)
-    order_no = 0
+    print("vals: ", vals)
+
     menu = Menus.objects.get(slug=menu_slug)
-    for item in items:
-        print("Current item is: ", item)
-        menu_item = Items.objects.filter(menu=menu, id=item).first()
-        if menu_item:
-            menu_item.order = order_no + 1
-            menu_item.save()
+    all_items = Items.objects.filter(menu=menu).order_by('mptt_level')
+
+    # Re-order items based on their position in the POST data
+    order_count = 1
+    for item_id in items:
+        item = Items.objects.get(pk=item_id)
+        if item.parent is None:  # Check if it's a top-level item
+            item.order = order_count
+            order_count += 1
+        item.save()  # Save the updated order even for children (handled below)
+
+    # Loop through all items again to fix child item ordering
+    order_count = 1
+    for item in all_items:
+        if item.parent is not None:  # Skip top-level items
+            parent_item = item.parent
+            # siblings = list(Items.objects.filter(parent=parent_item).order_by('order'))  # Convert siblings to a list
+            # item_position = siblings.index(item)  # Find position using index
+            item.order = order_count  # Set order based on sibling position
+            order_count += 1
+            item.save()
+    menu_items = Items.objects.filter(menu=menu)
+
+    return render(
+        request,
+        'menu/menu_partials/menu_sortable.html',
+        {
+            "done": "This is rendered!",
+            # "menu_obj": menu,
+            "menu_items": menu_items,
+            "menu_slug": menu.slug
+        },
+    )
 
     '''
 
@@ -209,12 +237,3 @@ def cms_menu_structure_save(request: HtmxHttpRequest) -> HttpResponse:
 
     '''
 
-    return render(
-        request,
-        'menu/menu_partials/menu_sortable.html',
-        {
-            "done": "This is rendered!",
-            "menu_obj": menu,
-            "slug": menu.slug
-        },
-    )

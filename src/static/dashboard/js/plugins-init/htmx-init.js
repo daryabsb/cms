@@ -11,20 +11,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 // Make the `.htmx-indicator` unsortable
                 filter: ".htmx-indicator",
-                onMove: function (evt) {
-                    return evt.related.className.indexOf('htmx-indicator') === -1;
-                },
+                // onMove: function (evt) {
+                //     return evt.related.className.indexOf('htmx-indicator') === -1;
+                // },
 
                 // Disable sorting on the `end` event
-                onEnd: function (evt) {
-                    this.option("disabled", true);
-                }
+                // onEnd: function (evt) {
+                //     this.option("disabled", true);
+                // }
             });
 
             // Re-enable sorting on the `htmx:afterSwap` event
-            sortable.addEventListener("htmx:afterSwap", function () {
-                sortableInstance.option("disabled", false);
-            });
+            // sortable.addEventListener("htmx:afterSwap", function () {
+            //     sortableInstance.option("disabled", false);
+            // });
         }
     })
 
@@ -50,6 +50,21 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    const saveMenuBtn = document.getElementById('SaveMenu');
+    const menuNameInput = document.getElementById('MenuNameEdit');
+    const menuItemForms = document.querySelectorAll('form[id^="MenuItem"]');
+
+    saveMenuBtn.addEventListener('click', function () {
+        console.log("SAVE MENU CLICKED");
+        console.log("CSRF_TOKEN = ", CSRF_TOKEN);
+        const data = gatherMenuData(menuNameInput, menuItemForms);
+        sendMenuData(data);
+    });
+
+
+
+
+
 });
 document
     .querySelector('.MenuSelectbtn')
@@ -58,3 +73,35 @@ document
         console.log("got menu id: ", id)
         if (id != "") { window.location.href = "/dashboard/menus/setup/" + id + "/"; }
     });
+
+function gatherMenuData(menuNameInput, menuItemForms) {
+
+    // const menuId = this.dataset.menuId;  // Assuming you have a data-menu-id attribute on the button 
+    const menuData = {
+        menu_id: menuId,
+        menu_name: menuNameInput.value
+    };
+    const formData = new FormData();
+    menuItemForms.forEach(form => formData.append(...form.elements));
+    const ddData = JSON.stringify($('.dd').nestable('toArray')); // Assuming you're using nestable.js
+    return { menuData, formData, ddData };
+}
+
+function sendMenuData(data) {
+    data.formData.append('menu_data', JSON.stringify(data.menuData));
+    data.formData.append('dd_data', data.ddData);
+    fetch(menu_structure_save_url, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': CSRF_TOKEN
+        },
+        body: data.formData
+    })
+        .then(response => response.json())
+        .then(data => {
+            // Handle response data (success/error)
+        })
+        .catch(error => {
+            console.error('Error sending menu data:', error);
+        });
+}
