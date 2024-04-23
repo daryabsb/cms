@@ -50,16 +50,16 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-    const saveMenuBtn = document.getElementById('SaveMenu');
-    const menuNameInput = document.getElementById('MenuNameEdit');
-    const menuItemForms = document.querySelectorAll('form[id^="MenuItem"]');
+    // const saveMenuBtn = document.getElementById('SaveMenu');
+    // const menuNameInput = document.getElementById('MenuNameEdit');
+    // const menuItemForms = document.querySelectorAll('form[id^="MenuItem"]');
 
-    saveMenuBtn.addEventListener('click', function () {
-        console.log("SAVE MENU CLICKED");
-        console.log("CSRF_TOKEN = ", CSRF_TOKEN);
-        const data = gatherMenuData(menuNameInput, menuItemForms);
-        sendMenuData(data);
-    });
+    // saveMenuBtn.addEventListener('click', function () {
+    //     console.log("SAVE MENU CLICKED");
+    //     console.log("CSRF_TOKEN = ", CSRF_TOKEN);
+    //     const data = gatherMenuData(menuNameInput, menuItemForms);
+    //     sendMenuData(data);
+    // });
 
 
 

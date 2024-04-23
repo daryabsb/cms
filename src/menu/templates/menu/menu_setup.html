@@ -1,5 +1,5 @@
 {% extends 'dashboard/dashboard_base.html' %}
-{% load static mptt_tags custom_tags %}
+{% load static mptt_tags custom_tags humanize %}
 {% block additional_css %}
 <style>
     #team-members {
@@ -406,9 +406,13 @@
 								hx-post="{% url '_htmx:menu-structure-save' %}"
 								hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
 								hx-target="#demo-canvas"
-								hx-vals='{"key1": "value1", "key2": "value2"}'
+								hx-vals='
+								{
+									"menu_id": {{ menu_obj.id }}, 
+									"key2": "value2"}
+								'
+								hx-trigger="end"
 								>
-								
 								<div class="card-header bg-primary">
 									<h6 class="text-white">Menu Name 222</h6>
 									<input type="text" id="MenuNameEdit" class="form-control w-auto" value="{{ menu_obj.title }}">
@@ -429,7 +433,7 @@
 								</div>
 								<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">
 									<div class="card-footer-link mb-4 mb-sm-0">
-										<p class="card-text text-dark d-inline">Last updated 3 mins ago</p>
+										<p class="card-text text-dark d-inline">Last updated {{ menu_obj.updated_at|timesince}} ago</p>
 									</div>
 									<button type="submit" id="SaveMenu3" class="btn btn-primary">Save menu</button>
 								</div>

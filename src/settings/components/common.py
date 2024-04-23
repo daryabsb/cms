@@ -21,6 +21,7 @@ DJANGO_APPS = [
     'django.contrib.messages',
     "django_htmx",
     'django.contrib.staticfiles',
+    'django.contrib.humanize',
 
 ]
 THIRD_PARTY_APPS = [

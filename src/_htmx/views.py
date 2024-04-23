@@ -128,12 +128,16 @@ def add_menu_content(request: HtmxHttpRequest) -> HttpResponse:
 def cms_menu_structure_save(request: HtmxHttpRequest) -> HttpResponse:
     menu_slug = ''
     items = request.POST.getlist('item[]', [])
-    menu_slug = request.POST.get('menu_data', None)
-    vals = request.POST.get('hx-vals', '{}')
+    menu_id = request.POST.get('menu_id', None)
+    key2 = request.POST.get('key2', None)
 
-    print("vals: ", vals)
+    print("menu_id: ", menu_id)
 
-    menu = Menus.objects.get(slug=menu_slug)
+    if menu_slug:
+        menu = Menus.objects.get(id=menu_id)
+    else:
+        menu = Menus.objects.get(slug='mega-menu')
+
     all_items = Items.objects.filter(menu=menu).order_by('mptt_level')
 
     # Re-order items based on their position in the POST data
@@ -236,4 +240,3 @@ def cms_menu_structure_save(request: HtmxHttpRequest) -> HttpResponse:
         response = JsonResponse({"success": 'Menu  Update successfully'})
 
     '''
-

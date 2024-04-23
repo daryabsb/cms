@@ -6,6 +6,7 @@
 <input type="hidden" name="menu_data" value="{{menu_slug}}">
 {% endif %}
 <div id="demo-canvas">
+{% if menu_items %}
     <div class="htmx-indicator" style="cursor: default">Updating...</div>
     <ol class="sortable">
         {% recursetree menu_items %}
@@ -63,7 +64,7 @@
                             </div>
                             <div class="row">
                                 {% if not node.is_leaf_node %}
-                                <ol class="sortable3">
+                                <ol class="sortable2">
                                 {{ children }}
                                 </ol>
                                 {% endif %}
@@ -75,4 +76,8 @@
         <li>
         {% endrecursetree %}
     <ol>
+    
+{% else %}
+There is nothing to show here!
+{% endif %}
 </div>
