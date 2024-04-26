@@ -161,30 +161,6 @@
 <div class="row">
 	<div class="col-12">
 		<div class="card">
-			{% comment %} <div class="card-header">
-				<div>
-					<h4 class="text-dark">Select a menu to edit</h4>
-				</div>
-				<div class="MenuSelectDiv">
-					<form id="menuForm" hx-post="/dashboard/menus/setup/" hx-target="this" hx-swap="outerHTML">
-						<select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
-							{% if not menu_obj %}
-							<option value="" selected>Choose Menu</option>
-							{% endif %}
-							{% for menu in menus %}
-							<option value="{{menu.id}}" {% if menu_obj %}
-							{% if menu.id == menu_obj.id %}
-							selected
-							{% endif %}
-							{% endif %}>{{menu.title}}</option>
-							{% endfor %}
-						</select>
-						<div class="text-end">
-							<button type="submit" class="btn btn-primary">Select</button>
-						</div>
-					</form>
-				</div>
-			</div> {% endcomment %}
 			<div class="card-header">
 				<div>
 					<h4 class="text-dark">Select a menu to edit</h4>
@@ -214,11 +190,11 @@
 			</div>
 			<div class="card-body">
 				<div class="row">
-					<!-- Menu List -->
+					<!-- Add To Menu List -->
 					<div class="col-md-6">
 						<div class="card">
 							<div class="card-header bg-primary">
-								<h6 class="text-white">Menu Types</h6>
+								<h6 class="text-white">Menu Name 111</h6>
 							</div>
 							<div class="card-body border-bottom border-start border-end border-primary">
 								{% if menu_type_view %}
@@ -236,19 +212,7 @@
 					<!-- Menu List -->
 					<div class="col-md-6">
 						<div class="card">
-							
-								<div class="card-header bg-primary" style="padding: 0.65rem 1.875rem;">
-									<form>
-										<div class="input-group align-items-center min-w650">
-											<h6 class="me-sm-5 text-white">Menu name</h6>
-											<input type="text" class="form-control w-auto" value="{{ menu_obj.title }}">
-										{% if perms.menu.change_items and perms.menu.change_menus %}
-											<button class="btn btn-primary light" type="button" rel="{{menu_obj.id}}">Save Menu</button>
-										{% endif %}
-										</div>
-									</form>
-								</div>
-								<form
+							<form
 								hx-post="{% url '_htmx:menu-structure-save' %}"
 								hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
 								hx-target="#demo-canvas"
@@ -259,6 +223,13 @@
 								'
 								hx-trigger="end"
 								>
+								<div class="card-header bg-primary">
+									<h6 class="text-white">Menu Name 222</h6>
+									<input type="text" id="MenuNameEdit" class="form-control w-auto" value="{{ menu_obj.title }}">
+									{% if perms.menu.change_items and perms.menu.change_menus %}
+									<button type="button" title="Save Menu" class="btn btn-primary light SaveMenu" rel="{{menu_obj.id}}">Save Menu</button>
+									{% endif %}
+								</div>
 								<div id="menu_items" class="card-body border-start border-end border-primary">
 									
 									{% comment %} {% include 'menu/menu_partials/menu_nestable.html' with slug=menu_obj.slug %} {% endcomment %}
@@ -268,7 +239,7 @@
 									{% comment %} {% include 'menu/menu_partials/drag-test.html' with slug=menu_obj.slug %} {% endcomment %}
 
 									<div>
-								</form>
+
 								</div>
 								<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">
 									<div class="card-footer-link mb-4 mb-sm-0">
@@ -276,7 +247,7 @@
 									</div>
 									<button type="submit" id="SaveMenu3" class="btn btn-primary">Save Items</button>
 								</div>
-						
+							</form>
 						</div>
 					</div>
 				</div>
@@ -318,5 +289,21 @@
     });
 
 </script>
-
 {% endblock additional_js %}
+
+
+
+
+menu_data=mega-menu&
+item%5B%5D=12&
+item%5B%5D=1&
+item%5B%5D=3&
+item%5B%5D=4&
+item%5B%5D=6&
+item%5B%5D=10&
+item%5B%5D=11&
+item%5B%5D=2&
+item%5B%5D=7&
+item%5B%5D=8 
+
+HTTP/1.1" 200 110139

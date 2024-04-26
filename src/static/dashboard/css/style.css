@@ -2629,7 +2629,7 @@ progress {
   min-height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.5rem;
   font-size: 0.76563rem;
-  border-radius: 0.25rem;
+  /* border-radius: 0.25rem; */
 }
 
 @media (min-width: 1200px) {
@@ -43537,8 +43537,20 @@ table.dataTable.no-footer {
   border-bottom: 0;
 }
 
+.min-w650 {
+  min-width: 650px;
+}
+
+.min-w750 {
+  min-width: 750px;
+}
+
 .min-w850 {
   min-width: 850px;
+}
+
+.min-w-full {
+  min-width: 100%;
 }
 
 .rounded-lg {
