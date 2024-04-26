@@ -135,7 +135,8 @@ def cms_page_create(request):
             "form_page_seo": PageSeoForm(prefix='seo'),
             "ScreenOption": json.dumps(ScreenOption),
             "pages": Page.objects.all(),
-            "users": User.objects.filter(is_superuser=False),
+            # "users": User.objects.filter(is_superuser=False),
+            "users": User.objects.all(),
             "edit": False,
             "page_title": "Create Page"
         }
@@ -161,7 +162,8 @@ def cms_page_edit(request, id):
             "form_page_seo": PageSeoForm(request.POST, prefix='seo', instance=pageseo),
             "ScreenOption": json.dumps(ScreenOption),
             "pages": Page.objects.all(),
-            "users": User.objects.filter(is_superuser=False),
+            # "users": User.objects.filter(is_superuser=False),
+            "users": User.objects.all(),
             "edit": True,
             "page_title": "Edit Page"
         }

@@ -12,10 +12,10 @@
 
 
 <div class="page-titles">
-    <h4>Nestable</h4>
+    <h4>Pages</h4>
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="javascript:void(0)">Advanced</a></li>
-        <li class="breadcrumb-item active"><a href="javascript:void(0)">Nestable</a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+        <li class="breadcrumb-item active"><a href="javascript:void(0)">Add Page</a></li>
     </ol>
 </div>
 <div class="custome-accordion">
@@ -90,22 +90,8 @@
         </div>
     </div>
 </div>
-
 <!--END Screen Options-->
-<div class="row page-titles mx-0 mb-3">
-    <div class="col-sm-6 p-md-0">
-        <div class="welcome-text">
-            <h4>Pages</h4>
-            <span>Add Page </span>
-        </div>
-    </div>
-    <div class="col-sm-6 p-md-0 justify-content-sm-end mt-2 mt-sm-0 d-flex">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{% url 'dashboard:pages:pages' %}">Pages</a></li>
-            <li class="breadcrumb-item active"><a href="{% url 'dashboard:pages:page_create' %}">Add Page</a></li>
-        </ol>
-    </div>
-</div>
+
 <form method="post" enctype="multipart/form-data" novalidate autocomplete="off" class="mb-5">
     {% csrf_token %}
     <div class="row">
@@ -113,14 +99,11 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header d-block">
-                            <h4 class="card-title">Crate Page</h4>
-                        </div>
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        <label for="exampleFormControlInput1" class="form-label">Title</label>
+                                        {% comment %} <label for="exampleFormControlInput1" class="form-label">Title</label> {% endcomment %}
                                         <!-- {{ form_page.title|attr:"type:text"|attr:"class:form-control"|attr:"onload:convertToSlug(this.value)"|attr:"onkeyup=convertToSlug(this.value)"|attr:"placeholder:Title" }} -->
                                         {{ form_page.title|attr:"type:text"|attr:"class:form-control"|attr:"id:ContentTitle"|attr:"placeholder:Title" }}
                                         {% if form_page.title.errors %}
@@ -149,7 +132,7 @@
                                         {% comment %} <span class="ms-auto">(1/110)</span> {% endcomment %}
                                 </button>
                                 </h2>
-                                <div id="with-excerpt" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-excerpt" style="">
+                                <div id="with-excerpt" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-excerpt" style="">
                                 <div class="accordion-body card-body pt-0">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
@@ -165,6 +148,7 @@
                 </div>
                 <!--End Page Excerpt--> 
                 <!--START Page Custom Field--> 
+                {% comment %} 
                 <div class="col-md-12">
                     <div class="custome-accordion XCustomFields" >
                         <div class="accordion" id="accordion-customfield">
@@ -175,67 +159,68 @@
                                         <span class="acc-heading">Custom Fields</span>
                                 </button>
                                 </h2>
-                                <div id="with-customfield" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-customfield" style="">
-                                <div class="accordion-body card-body pt-0">
-                                    <div class="row">
-                                        <div id="cfield-form-list">
-                                            {{ page_meta_formset.management_form }}
-                                            {% for meta_form in page_meta_formset %}
-                                                <div id="form-{{forloop.counter0}}" class="cfield-form xrow">
-                                                    <div class="col-md-12 mb-3">
-                                                        <div class="row d-flex align-items-center">
-                                                            <div class="col-md-5">
-                                                                <label class="form-label">Name</label>
-                                                                {{ meta_form.name|attr:"class:form-control"|attr:"type:text" }}
-                                                            </div>
-                                                            <div class="col-md-5">
-                                                                <label class="form-label">Value</label>
-                                                                {{ meta_form.value|attr:"class:form-control"|attr:"rows:2" }}
-                                                            </div>
-                                                            <div class="col-md-2">
-                                                                <div class="form-check custom-checkbox mb-3 checkbox-primary">
-                                                                    {{ meta_form.DELETE|attr:"class:form-check-input"|attr:"type:checkbox" }}
-                                                                    <label class="form-check-label" for="customCheckBox2">Delete</label>
+                                <div id="with-customfield" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-customfield" style="">
+                                    <div class="accordion-body card-body pt-0">
+                                        <div class="row">
+                                            <div id="cfield-form-list">
+                                                {{ page_meta_formset.management_form }}
+                                                {% for meta_form in page_meta_formset %}
+                                                    <div id="form-{{forloop.counter0}}" class="cfield-form xrow">
+                                                        <div class="col-md-12 mb-3">
+                                                            <div class="row d-flex align-items-center">
+                                                                <div class="col-md-5">
+                                                                    <label class="form-label">Name</label>
+                                                                    {{ meta_form.name|attr:"class:form-control"|attr:"type:text" }}
+                                                                </div>
+                                                                <div class="col-md-5">
+                                                                    <label class="form-label">Value</label>
+                                                                    {{ meta_form.value|attr:"class:form-control"|attr:"rows:2" }}
+                                                                </div>
+                                                                <div class="col-md-2">
+                                                                    <div class="form-check custom-checkbox mb-3 checkbox-primary">
+                                                                        {{ meta_form.DELETE|attr:"class:form-check-input"|attr:"type:checkbox" }}
+                                                                        <label class="form-check-label" for="customCheckBox2">Delete</label>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+                                                        {{meta_form.id}}
                                                     </div>
-                                                    {{meta_form.id}}
-                                                </div>
-                                            {% endfor %}
-                                        </div>
-                                        <div id="empty_form">
-                                            <div class="col-md-12 mb-3">
-                                                <div class="row d-flex align-items-center">
-                                                    <div class="col-md-5">
-                                                        <label  class="form-label">Name</label>
-                                                        {{ page_meta_formset.empty_form.name|attr:"type:text"|attr:"class:form-control" }}
-                                                    </div>
-                                                    <div class="col-md-5">
-                                                        <label  class="form-label">Value</label>
-                                                        {{ page_meta_formset.empty_form.value|attr:"class:form-control"|attr:"rows:2" }}
-                                                    </div>
-                                                    <div class="col-md-2">
-                                                        <div class="form-check custom-checkbox mt-4 checkbox-primary">
-                                                            <i class="fa-sharp fa-solid fa-xmark remove_cfield fs-2 text-primary"></i>
-                                                            {% comment %} {{ page_meta_formset.empty_form.DELETE|attr:"class:form-check-input remove_cfield"|attr:"type:checkbox" }}
-                                                            <label class="form-check-label" for="customCheckBox2">Delete</label> {% endcomment %}
+                                                {% endfor %}
+                                            </div>
+                                            <div id="empty_form">
+                                                <div class="col-md-12 mb-3">
+                                                    <div class="row d-flex align-items-center">
+                                                        <div class="col-md-5">
+                                                            <label  class="form-label">Name</label>
+                                                            {{ page_meta_formset.empty_form.name|attr:"type:text"|attr:"class:form-control" }}
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <label  class="form-label">Value</label>
+                                                            {{ page_meta_formset.empty_form.value|attr:"class:form-control"|attr:"rows:2" }}
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div class="form-check custom-checkbox mt-4 checkbox-primary">
+                                                                <i class="fa-sharp fa-solid fa-xmark remove_cfield fs-2 text-primary"></i>
+                                                                {{ page_meta_formset.empty_form.DELETE|attr:"class:form-check-input remove_cfield"|attr:"type:checkbox" }}
+                                                                <label class="form-check-label" for="customCheckBox2">Delete</label>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                            <input type="hidden" name="form-id-count" value="0" id="form-id-count">
+                                            <div class="col-md-12">
+                                                <button type="button" id="add-cfield" class="btn btn-primary mb-3 mt-3 ">Add Custom Field</button>
+                                            </div>                
                                         </div>
-                                        <input type="hidden" name="form-id-count" value="0" id="form-id-count">
-                                        <div class="col-md-12">
-                                            <button type="button" id="add-cfield" class="btn btn-primary mb-3 mt-3 ">Add Custom Field</button>
-                                        </div>                
                                     </div>
-                                </div>
                                 </div>  
                             </div>
                         </div>
                     </div>
                 </div>
+                {% endcomment %}
                 <!--END Page Custom Field-->
                 <!--START Page Discussion-->
                 <div class="col-md-12">
@@ -248,7 +233,7 @@
                                         
                                 </button>
                                 </h2>
-                                <div id="with-discussion" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-discussion" style="">
+                                <div id="with-discussion" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-discussion" style="">
                                 <div class="accordion-body card-body pt-0">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
@@ -278,7 +263,7 @@
                                         
                                 </button>
                                 </h2>
-                                <div id="with-slug" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-Slug" style="">
+                                <div id="with-slug" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-Slug" style="">
                                 <div class="accordion-body card-body pt-0">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
@@ -312,16 +297,17 @@
                                     
                                 </button>
                                 </h2>
-                                <div id="with-author" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-Author" style="">
+                                <div id="with-author" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-Author" style="">
                                 <div class="accordion-body card-body pt-0">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <label class="form-label">Author</label>
                                                                                     
-                                                                                                                                                                        
+                                                      {{ users }}                                                                                                                  
                                             <select name="user_id"  class="default-select form-control wide mb-3 form-control-lg">
                                                 
                                                 {% for user in users %}
+                                                {{ user.name }}
                                                     {% if form_page.user_id.value %}
                                                     <option {% if user.id == form_page.user_id.value %} selected {% endif %} value="{{user.id}}">{{ user.username }} </option>
                                                     {% else %}
@@ -355,7 +341,7 @@
                                     
                                 </button>
                                 </h2>
-                                <div id="with-seo" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-SEO" style="">
+                                <div id="with-seo" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-SEO" style="">
                                 <div class="accordion-body card-body pt-0">
                                     <div class="row">
                                         <div class="row">
@@ -401,7 +387,7 @@
                                     
                                 </button>
                                 </h2>
-                                <div id="with-publish" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-publish" style="">
+                                <div id="with-publish" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-publish" style="">
                                 <div class="accordion-body card-body pt-0">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
@@ -449,7 +435,7 @@
                                     
                                 </button>
                                 </h2>
-                                <div id="with-parent" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-parent" style="">
+                                <div id="with-parent" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-parent" style="">
                                 <div class="accordion-body card-body pt-0">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
@@ -489,7 +475,7 @@
                                     
                                 </button>
                                 </h2>
-                                <div id="with-pagetype" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-pagetype" style="">
+                                <div id="with-pagetype" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-pagetype" style="">
                                 <div class="accordion-body card-body pt-0">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
@@ -510,12 +496,11 @@
                         <div class="accordion" id="accordion-FeaturedImage">
                             <div class="accordion-item card">
                                 <h2 class="accordion-header border-0" id="headingOne">
-                                <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#with-featuredimage" aria-expanded="true" aria-controls="with-featuredimage">
+                                <button class="accordion-button d-flex justify-content-between align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#with-featuredimage" aria-expanded="false" aria-controls="with-featuredimage">
                                         <span class="acc-heading">Featured Image</span>
-                                        {% comment %} <span class="ms-auto">(1/110)</span> {% endcomment %}
                                 </button>
                                 </h2>
-                                <div id="with-featuredimage" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordion-FeaturedImage" style="">
+                                <div id="with-featuredimage" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-FeaturedImage" style="">
                                 <div class="accordion-body card-body pt-0">
                                     <div class="row">
                                         <div class="col-md-12 mb-3">

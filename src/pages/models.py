@@ -11,6 +11,7 @@ def user_directory_path(instance, filename):
 class Page(MPTTModel):
     PAGE_TYPE_CHOICES = (
         ('Page', 'Page'),
+        ('Section', 'Section'),
         ('Widget', 'Widget')
     )
     PAGE_STATUS_CHOICES = (
