@@ -158,7 +158,7 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CKEDITOR_CONFIGS = {
+CKEDITOR_CONFIGS2 = {
     'default': {
         'skin': 'moono-lisa',
         # 'skin': 'office2013',
@@ -167,9 +167,11 @@ CKEDITOR_CONFIGS = {
         'toolbar_Basic': [
             ['Source', '-', 'Bold', 'Italic']
         ],
-        "removePlugins": "stylesheetparser",
+        # "removePlugins": "stylesheetparser",
         'toolbar_YourCustomToolbarConfig': [
-            {'name': 'document', 'items': [
+            {
+                'name': 'document', 
+                'items': [
                 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
             {'name': 'clipboard', 'items': [
                 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
@@ -216,17 +218,17 @@ CKEDITOR_CONFIGS = {
             # your extra plugins here
             'div',
             # 'section',
-            'autolink',
-            'autoembed',
-            'embedsemantic',
-            'autogrow',
+            # 'autolink',
+            # 'autoembed',
+            # 'embedsemantic',
+            # 'autogrow',
             # 'devtools',
-            'widget',
-            'lineutils',
-            'clipboard',
-            'dialog',
-            'dialogui',
-            'elementspath',
+            # 'widget',
+            # 'lineutils',
+            # 'clipboard',
+            # 'dialog',
+            # 'dialogui',
+            # 'elementspath',
             # 'a11yhelp',
             # 'about',
             # 'adobeair',

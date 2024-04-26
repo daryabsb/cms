@@ -1,5 +1,6 @@
 from django import forms
 from dashboard.cms.pages.models import Page, PageMeta, PageSeo
+from ckeditor.widgets import CKEditorWidget
 
 class PageForm(forms.ModelForm):
   class Meta:
@@ -22,6 +23,7 @@ class PageForm(forms.ModelForm):
               )
     widgets = {
             'feature_image': forms.FileInput(),
+            'content': CKEditorWidget()
         }
         
 class PageMetaForm(forms.ModelForm):
