@@ -1,5 +1,6 @@
 import json
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
+from django.http import HttpResponseRedirect
 from django.http import HttpRequest
 from django.http import HttpResponse
 from django.views.decorators.http import (require_POST, require_GET,)
@@ -171,6 +172,23 @@ def cms_menu_structure_save(request: HtmxHttpRequest) -> HttpResponse:
             "menu_slug": menu.slug
         },
     )
+
+@require_POST
+def update_menu_name(request, menu_id):
+
+    menu_name = request.POST.get('menu_name', None)
+    menu_obj = get_object_or_404(Menus, id=menu_id)
+    menus = Menus.objects.all()
+
+    if menu_name:
+        menu_obj.title = menu_name
+        menu_obj.save()
+    
+    context = {
+        'menu_obj': menu_obj,
+        'menus': menus,
+    }
+    return render(request, 'menu/renders/update_menu.html',context)
 
     '''
 

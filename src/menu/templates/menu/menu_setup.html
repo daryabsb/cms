@@ -189,7 +189,7 @@
 				<div>
 					<h4 class="text-dark">Select a menu to edit</h4>
 				</div>
-				<div class="MenuSelectDiv">
+				<div id="menu-select-div" class="MenuSelectDiv">
 				
 					<select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
 						{% if not menu_obj %}
@@ -215,9 +215,9 @@
 			<div class="card-body">
 				<div class="row">
 					<!-- Menu List -->
-					<div class="col-md-6">
+					<div class="col-lg-6">
 						<div class="card">
-							<div class="card-header bg-primary">
+							<div class="card-header bg-primary border border-primary">
 								<h6 class="text-white">Menu Types</h6>
 							</div>
 							<div class="card-body border-bottom border-start border-end border-primary">
@@ -234,16 +234,23 @@
 						</div>
 					</div>
 					<!-- Menu List -->
-					<div class="col-md-6">
+					<div class="col-lg-6">
 						<div class="card">
 							
-								<div class="card-header bg-primary" style="padding: 0.65rem 1.875rem;">
-									<form>
-										<div class="input-group align-items-center min-w650">
-											<h6 class="me-sm-5 text-white">Menu name</h6>
-											<input type="text" class="form-control w-auto" value="{{ menu_obj.title }}">
+								<div class="card-header bg-primary border border-primary">
+									<form
+									hx-post="{% url '_htmx:menu-update-name' menu_obj.id %}"
+									hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+									hx-target="#menu_name"
+									>
+									<div class="input-group align-items-center justify-content-between ">
+										<h6 class="me-md-2 text-white">Menu name</h6>
+										
+										{% include 'menu/includes/menu-name-input.html' %}
 										{% if perms.menu.change_items and perms.menu.change_menus %}
-											<button class="btn btn-primary light" type="button" rel="{{menu_obj.id}}">Save Menu</button>
+											<button 
+											class="btn btn-primary light" 
+											type="submit" rel="{{menu_obj.id}}">Save Menu</button>
 										{% endif %}
 										</div>
 									</form>
@@ -270,14 +277,13 @@
 									<div>
 								</form>
 								</div>
-								<div class="card-footer d-sm-flex justify-content-between align-items-center border-bottom border-start border-end border-primary">
-									<div class="card-footer-link mb-4 mb-sm-0">
-										<p class="card-text text-dark d-inline">Last updated {{ menu_obj.updated_at|timesince}} ago</p>
-									</div>
-									<button type="submit" id="SaveMenu3" class="btn btn-primary">Save Items</button>
+							</div>
+							<div class="card-footer d-sm-flex justify-content-between align-items-center border border-bottom border-start border-end border-primary">
+								<div class="card-footer-link mb-4 mb-sm-0">
+									<p class="card-text text-dark d-inline">Updated {{ menu_obj.updated_at|timesince}} ago</p>
 								</div>
-						
-						</div>
+								<button type="submit" id="SaveMenu3" class="btn btn-primary">Save Items</button>
+							</div>
 					</div>
 				</div>
 			</div>

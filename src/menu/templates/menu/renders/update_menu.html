@@ -1,0 +1,19 @@
+{% include 'menu/includes/menu-name-input.html' %}
+
+<div hx-swap-oob="true" id="menu-select-div" class="MenuSelectDiv">
+				
+    <select name="MenuSelect" id="MenuSelect" class="default-select form-control wide">
+        {% if not menu_obj %}
+        <option value="" selected>Choose Menu</option>
+        {% endif %}
+        {% for menu in menus %}
+        <option value="{{menu.id}}" 
+        {% if menu_obj %}
+        {% if menu.id == menu_obj.id %}
+        selected
+        {% endif %}
+        {% endif %}
+        >{{menu.title}}</option>
+        {% endfor %}
+    </select>
+</div>

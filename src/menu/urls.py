@@ -17,7 +17,7 @@ app_name = 'menu'
 urlpatterns = [
     path('setup/', cms_menu_setup, name='setup'),
     path('setup2/', cms_menu_setup2, name='setup2'),
-    path('setup/<int:id>/', cms_menu_setup, name='setup'),
+    path('setup/<int:id>/', cms_menu_setup, name='setup-detail'),
     path('menu_item_delete/', cms_menu_item_delete, name='menu_item_delete'),
     path('menu_structure_save/', cms_menu_structure_save,
          name='menu_structure_save'),
