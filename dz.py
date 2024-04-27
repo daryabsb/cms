@@ -366,6 +366,12 @@ dz_array = {
             "filter_config": [
                 # f"{foldername_d}/css/homepage.css",
             ],
+            "cms_page_create": [
+                'django_prose_editor2/material-icons.css',
+                'django_prose_editor2/editor.css',
+                'django_prose_editor2/editor.js',
+                'django_prose_editor2/init.js',
+            ],
             "courses": [
                 f"{foldername_d}/vendor/swiper/css/swiper-bundle.min.css",
             ],
@@ -385,6 +391,10 @@ dz_array = {
                 f"{foldername_d}/vendor/datatables/js/jquery.dataTables.min.js",
                 f"{foldername_d}/js/plugins-init/datatables.init.js",
 
+            ],
+            "cms_page_create": [
+                f"/ckeditor/ckeditor-init.js"
+                
             ],
             "courses": [
                 f"{foldername_d}/vendor/swiper/js/swiper-bundle.min.js",

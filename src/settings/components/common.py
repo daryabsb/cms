@@ -32,6 +32,8 @@ THIRD_PARTY_APPS = [
     'mptt',
     'ckeditor',
     'ckeditor_uploader',
+    "django_prose_editor",
+    'after_response',
 ]
 LOCAL_APPS = [
     'src.accounts',
@@ -158,7 +160,11 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CKEDITOR_CONFIGS2 = {
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+
+
+CKEDITOR_CONFIGS = {
     'default': {
         'skin': 'moono-lisa',
         # 'skin': 'office2013',

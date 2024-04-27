@@ -1,14 +1,8 @@
 from django import forms
 from src.pages.models import Page, PageMeta, PageSeo
-from ckeditor.widgets import CKEditorWidget
-from django.conf.urls.static import static
-class ContentWidget(CKEditorWidget):
-  template_name = "dashboard/widgets/widget.html"
-  class Media:
-      css = {
-          "all": ["pretty.css"],
-      }
-      js = [static('ckeditor/ckeditor/ckeditor.js')]
+from django_prose_editor.sanitized import SanitizedProseEditorField
+from django_prose_editor.widgets import ProseEditorWidget
+
 
 class PageForm(forms.ModelForm):
   class Meta:
@@ -21,6 +15,7 @@ class PageForm(forms.ModelForm):
               'slug',
               'excerpt',
               'content',
+              'content2',
               'comment',
               'password',
               'status',
@@ -31,7 +26,9 @@ class PageForm(forms.ModelForm):
               )
     widgets = {
             'feature_image': forms.FileInput(),
-            'content': ContentWidget()
+            'content2': ProseEditorWidget(
+                      config={"types": ["strong", "em", "sub", "sup"]},
+                      )
         }
         
 class PageMetaForm(forms.ModelForm):

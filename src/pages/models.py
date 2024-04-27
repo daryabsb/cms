@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.text import slugify
 from mptt.models import MPTTModel, TreeForeignKey
 from ckeditor_uploader.fields import RichTextUploadingField
+from django_prose_editor.fields import ProseEditorField
 
 
 def user_directory_path(instance, filename):
@@ -31,6 +32,7 @@ class Page(MPTTModel):
         max_length=255, choices=PAGE_TYPE_CHOICES, default=PAGE_TYPE_CHOICES[0][0])
     title = models.CharField(max_length=255, blank=False)
     content = RichTextUploadingField(null=True, blank=True)
+    content2 = ProseEditorField(null=True, blank=True)
     slug = models.SlugField(max_length=255, unique=True, null=True)
     excerpt = models.TextField(null=True, blank=True)
     comment = models.BooleanField(default=True)

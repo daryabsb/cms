@@ -7,6 +7,8 @@ django-ckeditor==6.5.1
 django-mptt>=0.9.0
 django-rosetta
 django-htmx
+django-prose-editor
+django-after-response
 dj-database-url
 django-split-settings
 loguru
@@ -19,3 +21,4 @@ pickles
 python-gettext
 psycopg
 python-decouple
+nh3

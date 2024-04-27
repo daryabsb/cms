@@ -9,15 +9,6 @@
 {% block additonal_css %}{% endblock %}
 {% block content %}
 
-
-
-<div class="page-titles">
-    <h4>Pages</h4>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-        <li class="breadcrumb-item active"><a href="javascript:void(0)">Add Page</a></li>
-    </ol>
-</div>
 {% include 'dashboard/elements/screen_options.html' %}
 <!--END Screen Options-->
 
@@ -32,9 +23,8 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="mb-3">
-                                        {% comment %} <label for="exampleFormControlInput1" class="form-label">Title</label> {% endcomment %}
-                                        <!-- {{ form_page.title|attr:"type:text"|attr:"class:form-control"|attr:"onload:convertToSlug(this.value)"|attr:"onkeyup=convertToSlug(this.value)"|attr:"placeholder:Title" }} -->
-                                        {{ form_page.title|attr:"type:text"|attr:"class:form-control"|attr:"id:ContentTitle"|attr:"placeholder:Title" }}
+                                    <label for="exampleFormControlInput1" class="form-label">Title</label> 
+                                    {{ form_page.title|attr:"type:text"|attr:"class:form-control"|attr:"id:ContentTitle"|attr:"placeholder:Title" }}
                                         {% if form_page.title.errors %}
                                         <div class="text-danger w-100 d-block mt-1">
                                             {{ form_page.title.errors }}
@@ -42,16 +32,23 @@
                                         {% endif %}
                                     </div>
                                 </div>
-                                {{ form_page.media }}
-                                {{ form_page.content }}
-                                {% comment %} 
-                                <div class="col-md-12 mb-3">
-                                </div> 
-                                {% endcomment %}
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-md-12">
+                    <div class="card mb-3">
+                        <div class="card-body pt-0">
+                            <div class="row">
+                                <div class="col-md-12 p-3">
+                                    {{ form_page.media }}
+                                    {{ form_page.content2|attr:"class:border" }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+ 
                 <!--START Page Excerpt --> 
                 <div class="col-md-12">
                     <div class="custome-accordion XExcerpt" >
