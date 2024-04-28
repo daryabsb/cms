@@ -3,6 +3,7 @@ from src.blogs.views import (
     cms_blog_list, cms_blog_delete, cms_blog_create, cms_blog_add_category,
     cms_blog_edit, delete_multiple_blogs, blogCategory, blogCategoryDelete,
     blogCategoryEdit, blogTag, blogTagEdit, blogTagDelete,
+    crm_blog_list,
     # cms_blog_custom_field_delete,
     )
 
@@ -24,4 +25,8 @@ urlpatterns = [
     path('tags/',blogTag, name='blogTag'),
     path('tag-edit/<int:id>/',blogTagEdit, name='blogTagEdit'),
     path('tag-delete/<int:id>/',blogTagDelete, name='blogTagDelete'),
+
+    # CRM URLS
+    path('list/', crm_blog_list, name='blogs'),
+
 ]

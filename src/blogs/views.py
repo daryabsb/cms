@@ -14,6 +14,69 @@ from django.db import IntegrityError
 import datetime
 
 
+# Dashboard views
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'blog.view_blogs'}, raise_exception=True)
+def crm_blog_list(request):
+    template_name = 'crm/cms/blogs/list.html'
+    blog_list = None
+    filter_form_data = {}
+    message = ''
+    blogs = None
+    status = [
+        {"label": "Select Status", "value": ""},
+        {"label": "Published", "value": "Published"},
+        {"label": "Draft", "value": "Draft"},
+        {"label": "Pending", "value": "Pending"}
+    ]
+
+    if request.method == 'POST':
+        filter_title = request.POST.get('filter-blog-title').strip()
+        filter_status = request.POST.get('filter-blog-status')
+        filter_date = request.POST.get('filter-blog-bydate').strip()
+        print('blog_title: ', filter_title)
+        print('blog_status: ', filter_status)
+        print('blog_date: ', filter_status)
+
+        filter_form_data = {
+            "filter_title": filter_title,
+            "filter_status": filter_status,
+            "filter_date": filter_date
+        }
+        blog_list = utils.data_filter(filter_form_data, Blogs)
+
+        if filter_form_data:
+            request.session['blog_filter_data'] = filter_form_data
+    else:
+        if 'blog_filter_data' in list(request.session.keys()) and 'page' in list(request.GET.keys()):
+            session_data = request.session.get('blog_filter_data')
+            blog_list = utils.data_filter(session_data, Blogs)
+            filter_form_data = request.session.get('blog_filter_data')
+        else:
+            blog_list = Blogs.objects.all()
+            if 'blog_filter_data' in list(request.session.keys()):
+                del request.session['blog_filter_data']
+
+    if blog_list:
+        paginator = Paginator(blog_list, utils.nodes_per_page())
+        blogs = paginator.get_page(request.GET.get('page'))
+    else:
+        message = 'Data Not Found'
+    context = {
+        "blogs": blogs,
+        "status": status,
+        "form_data": filter_form_data,
+        'message': message,
+        "page_title": "Blogs"
+    }
+    return render(request, template_name, context)
+
+
+
+# Dashboard views
+
 @login_required(login_url='dashboard:login')
 @permission_required({'blog.view_tags', 'blog.delete_tags'}, raise_exception=True)
 def blogTagDelete(request, id):

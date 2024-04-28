@@ -38,6 +38,7 @@ THIRD_PARTY_APPS = [
 LOCAL_APPS = [
     'src.accounts',
     'src.core',
+    'src.crm',
     # DASHBOARD APPS
     'src.dashboard',
     'src.dashboard.cms',
@@ -83,6 +84,7 @@ TEMPLATES = [
 
             PROJECT_PATH + 'templates',
             PROJECT_PATH + 'accounts' + 'templates',
+            PROJECT_PATH + 'crm' + 'templates',
             PROJECT_PATH + 'dashboard' + 'templates',
             PROJECT_PATH + 'pages' + 'templates',
             PROJECT_PATH + 'blogs' + 'templates',
