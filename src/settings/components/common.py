@@ -176,9 +176,9 @@ CKEDITOR_CONFIGS = {
         # "removePlugins": "stylesheetparser",
         'toolbar_YourCustomToolbarConfig': [
             {
-                'name': 'document', 
+                'name': 'document',
                 'items': [
-                'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
+                    'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates']},
             {'name': 'clipboard', 'items': [
                 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo']},
             {'name': 'editing', 'items': [

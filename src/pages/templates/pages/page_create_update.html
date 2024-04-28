@@ -40,9 +40,19 @@
                     <div class="card mb-3">
                         <div class="card-body pt-0">
                             <div class="row">
-                                <div class="col-md-12 p-3">
+                            <style>
+                                .ProseMirror {
+                                    padding-top: 15px !important;
+                                    padding-left: 15px !important;
+                                    margin-top: 85px !important;
+                                    background-color: #ededed !important;
+                                    min-height: 20rem;
+                                    line-height: 1 !important;
+                                }
+                            </style>
+                                <div class="col-md-12 p-3 pt-4">
                                     {{ form_page.media }}
-                                    {{ form_page.content2|attr:"class:border" }}
+                                    {{ form_page.content2|attr:"style:background-color:red;"|attr:"rows:40" }}
                                 </div>
                             </div>
                         </div>
