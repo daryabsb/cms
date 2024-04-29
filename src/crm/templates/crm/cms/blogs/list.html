@@ -66,89 +66,57 @@ Blogs
                     <table class="table table-bordered table-striped table-condensed flip-content">
                         <thead>
                             <tr>
-                                <th class="text-black">S.No</th>
+                                <th style="width:20px;">
+                                    <div class="form-check custom-checkbox checkbox-success check-lg me-3">
+                                        <input type="checkbox" class="form-check-input" id="checkAll" required="">
+                                        <label class="form-check-label" for="checkAll"></label>
+                                    </div>
+                                </th>
                                 <th class="text-black">Title</th>
                                 <th class="text-black">Status</a></th>
+                                <th class="text-black">Visibility</a></th>
                                 <th class="text-black">Modified</a></th>
                                 <th class="text-black text-end">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
+                            {% csrf_token %}
+				            {% for blog in blogs %}
                             <tr>
-                                <td>1</td>
-                                <td>Title of first blog post entry</td>
-                                <td>Published</td>
-                                <td>09 Jan, 2024</td>
+                                <td style="width:50px;">
+                                    <div class="form-check custom-checkbox checkbox-success check-lg me-3">
+                                        <input name="blog_id[]" type="checkbox" class="form-check-input" value="{{ blog.id }}" id="{{ blog.id }}" required="">
+                                        <label class="form-check-label" for="customCheckBox2"></label>
+                                    </div>
+                                </td>
+                                <td>{{ blog.title|truncatechars:30  }}</td>
+                                <td>{{ blog.status }}</td>
+                                <td>
+                                {% if blog.visibility == 'PP' %}
+                                    <span class="label label-warning">Password Protected</span>
+                                {% endif %}
+                                {% if blog.visibility == 'Pu' %}
+                                    <span class="label label-success">Public</span>
+                                {% endif %}
+                                {% if blog.visibility == 'Pr' %}
+                                    <span class="label label-info">Private</span>
+                                {% endif %}
+                                </td>
+                                <td>{{ blog.publish_on }}</td>
                                 <td class="text-end">
-                                    <a href="javascript:void(0);" class="btn btn-warning btn-sm content-icon">
+                                    {% if perms.blog.change_blogs %}
+                                    <a href="{% url 'crm:blog:blog-edit' id=blog.id %}" class="btn btn-warning btn-sm content-icon">
                                         <i class="fa-solid fa-pen-to-square"></i>
                                     </a>
-                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm content-icon">
+								    {% endif %}
+								    {% if perms.blog.delete_blogs %}
+                                    <a href="dashboard:blog:blog_delete' id=blog.id %}" class="btn btn-danger btn-sm content-icon">
                                         <i class="fa-solid fa-trash"></i>
                                     </a>
+								{% endif %}
                                 </td>
                             </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Why Go For A VFX Course?</td>
-                                <td>Published</td>
-                                <td>13 May, 20224</td>
-                                <td class="text-end">
-                                    <a href="javascript:void(0);" class="btn btn-warning btn-sm content-icon">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm content-icon">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td>3</td>
-                                <td>Reasons To Choose Animation Courses</td>
-                                <td>Published</td>
-                                <td>13 Apr, 2024</td>
-                                <td class="text-end">
-                                    <a href="javascript:void(0);" class="btn btn-warning btn-sm content-icon">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm content-icon">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td>4</td>
-                                <td>Blue Screen Vs. Green Screen For VFX</td>
-                                <td>Published</td>
-                                <td>13 June, 2024</td>
-                                <td class="text-end">
-                                    <a href="javascript:void(0);" class="btn btn-warning btn-sm content-icon">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm content-icon">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </td>
-                                
-                            </tr>
-                            <tr>
-                                <td>5</td>
-                                <td>All About Animation</td>
-                                <td>Published</td>
-                                <td>13 Apr, 2024</td>
-                                <td class="text-end">
-                                    <a href="javascript:void(0);" class="btn btn-warning btn-sm content-icon">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </a>
-                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm content-icon">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </a>
-                                </td>
-                                
-                            </tr>
-                            
+                            {% endfor %}
                         </tbody>
                     </table>
                     <div class="d-flex align-items-center justify-content-lg-between justify-content-center flex-wrap">

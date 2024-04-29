@@ -130,6 +130,8 @@ Add Page
 
 
 {% block crm_content %}
+<form method="post" action="/crm/blogs/edit/{{ page.id }}/" enctype="multipart/form-data" novalidate autocomplete="off">
+    {% csrf_token %}
 <div class="col-xl-12">
     <div class="mb-3">
         <ul class="d-flex align-items-center flex-wrap">
@@ -219,20 +221,32 @@ Add Page
     </div>
     <div class="mb-3 ">
         <label  class="form-label">Title</label>
-        <input type="text" class="form-control w-50" placeholder="Title">
+        {{ blog_form.title|attr:"type:text"|attr:"class:form-control w-50"|attr:"id:BlogTitle"|attr:"placeholder:Title" }}
     </div>
+                <style>
+                .ProseMirror {
+                    padding-top: 15px !important;
+                    padding-left: 15px !important;
+                    margin-top: 85px !important;
+                    background-color: #ededed !important;
+                    min-height: 20rem;
+                    line-height: 1 !important;
+                }
+            </style>
     <div class="row">
         <div class="col-xl-8">
             <div class="card h-auto">
                 <div class="card-body pt-3">
-                    <div id="ckeditor"></div>
+                     {{ blog_form.media }}
+                    {{ blog_form.content2|attr:"style:background-color:red;"|attr:"rows:40" }}
                 </div>
             </div>
                 
             
             <div class="filter cm-content-box box-primary">
                 <div class="content-title">
-                    <div class="cpa">		Excerpt
+                    <div class="cpa">		
+                    Excerpt
                     </div>
                     <div class="tools">
                         <a href="javascript:void(0);" class="expand SlideToolHeader"><i class="fal fa-angle-down"></i></a>
@@ -242,7 +256,7 @@ Add Page
                     <div class="card-body">
                         <div class="mb-3">
                             <label class="form-label">Excerpt</label>
-                            <textarea class="form-control" rows="3"></textarea>	     	
+                            {{ blog_form.excerpt|attr:"class:form-control"|attr:"rows:3" }}    	
                             <div class="form-text">Excerpts are optional hand-crafted summaries of your content that can be used in your theme. </div>
                         </div>
                     </div>
@@ -283,13 +297,14 @@ Add Page
                         Discussion							
                     </div>
                     <div class="tools">
-                        <a href="javascript:void(0);" class="expand SlideToolHeader"><i class="fal fa-angle-down"></i></a>
+                        <a href="javascript:void(0);" class="expand SlideToolHeader">
+                        <i class="fal fa-angle-down"></i></a>
                     </div>
                 </div>
                 <div class="cm-content-body form excerpt">
                     <div class="card-body">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-15">
+                            {{ blog_form.comment|attr:"class:form-check-input"|attr:"type:checkbox"|attr:"id:flexCheckDefault" }}
                             <label class="form-check-label" for="flexCheckDefault-15">
                                 Allow comments.
                             </label>
@@ -567,6 +582,7 @@ Add Page
         </div>
     </div>
 </div>
+</form>
 {% endblock crm_content %}
 
 {% block crm_additional_js %}

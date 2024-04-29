@@ -1,6 +1,6 @@
 from django import forms
 from src.blogs.models import Categories, Blogs, Tags, Metas, Seo
-from mptt.forms import TreeNodeMultipleChoiceField,TreeNodeChoiceField
+from mptt.forms import TreeNodeMultipleChoiceField, TreeNodeChoiceField
 
 
 class BlogForm(forms.ModelForm):
@@ -8,10 +8,10 @@ class BlogForm(forms.ModelForm):
 
     class Meta:
         model = Blogs
-        fields = (  
+        fields = (
             'title',
             'slug',
-            'content',
+            'content2',
             'excerpt',
             'comment',
             'password',
@@ -21,10 +21,11 @@ class BlogForm(forms.ModelForm):
             'feature_image',
             'video_url',
             'user'
-            )
+        )
         widgets = {
-        'feature_image': forms.FileInput(),
+            'feature_image': forms.FileInput(),
         }
+
 
 class MetaForm(forms.ModelForm):
     class Meta:
@@ -32,7 +33,9 @@ class MetaForm(forms.ModelForm):
         fields = (
             'title',
             'value',
-            )
+        )
+
+
 class SeoForm(forms.ModelForm):
     class Meta:
         model = Seo
@@ -40,19 +43,23 @@ class SeoForm(forms.ModelForm):
             'title',
             'meta_keywords',
             'meta_descriptions',
-            
+
         )
+
+
 class TagForm(forms.ModelForm):
     class Meta:
         model = Tags
         fields = (
-            'name',           
+            'name',
         )
+
 
 class CategoriesForm(forms.ModelForm):
 
-    parent = TreeNodeChoiceField(queryset=Categories.objects.all(), level_indicator='+--',required=False)
-        
+    parent = TreeNodeChoiceField(
+        queryset=Categories.objects.all(), level_indicator='+--', required=False)
+
     class Meta:
         model = Categories
-        fields = ('title','parent')
+        fields = ('title', 'parent')

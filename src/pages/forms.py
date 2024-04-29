@@ -12,7 +12,7 @@ class PageForm(forms.ModelForm):
             'title',
             'slug',
             'excerpt',
-            'content',
+            # 'content',
             'content2',
             'comment',
             'password',
