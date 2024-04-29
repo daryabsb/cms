@@ -1,7 +1,18 @@
 {% extends 'crm/crm_base.html' %}
 {% load static widget_tweaks %}
 
+
+{% block page_title %}
+{% if edit %}
+Edit Page
+{% else %}
+Add Page
+{% endif %}
+{% endblock page_title %}
+
+
 {% block crm_content %}
+
 <form method="post" action="/crm/pages/edit/{{ page.id }}/" enctype="multipart/form-data" novalidate autocomplete="off">
     {% csrf_token %}
 <div class="col-xl-12">
@@ -199,15 +210,23 @@
                 <div class="cm-content-body form excerpt">
                     <div class="card-body">
                         <label class="form-label">User</label>
-                        <select class="default-select form-control">
+                        <label class="form-label">
+                        {% comment %} {% if form_page.user_id.value %} {% endcomment %}
+                            Value is: {{ form_page.user_id.value }}
+                        {% comment %} {% endif %} {% endcomment %}
+                        </label>
+                        <select name="user_id" class="default-select form-control">
                             {% for user in users %}
-                            {% if form_page.user_id.value %}
+                            {% if form_page.user_id %}
                             <option {% if user.id == form_page.user_id.value %} selected {% endif %} value="{{ user.id }}"> {% if user.name %}{{ user.name }}{% else %}{{ user.email }} {% endif %}</option>
                             {% else %}
                             <option {% if request.user.id == user.id %} selected {% endif %} value="{{ user.id }}"> {% if user.name %}{{ user.name }}{% else %}{{ user.email }} {% endif %}</option>
                             {% endif %}
                             {% endfor %}
                         </select>
+                         <div class="text-danger w-100 d-block mt-1">
+                            {{ form_page.slug.errors }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -229,7 +248,7 @@
                         <div class="row">
                             <div class="col-xl-6 col-sm-6">
                                 <label class="form-label">Keywords</label>
-                                {{ form_page_seo.meta_keywords|attr:"class:form-control mb-3 mb-sm-0"|attr:"type:text"|attr:"id:SEOPageTitle"|attr:"placeholder:Enter meta Keywords"}}
+                                {{ form_page_seo.meta_keywords|attr:"class:form-control mb-3 mb-sm-0"|attr:"type:text"|attr:"id:SEOPageKeyword"|attr:"placeholder:Enter meta Keywords"}}
                             </div>
                             <div class="col-xl-6 col-sm-6">
                                 <label class="form-label">Descriptions</label>

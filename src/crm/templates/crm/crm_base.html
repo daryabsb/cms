@@ -1135,8 +1135,8 @@
 		<!--**********************************
             Header end ti-comment-alt
         ***********************************-->
-
-
+		<!-- Modal -->
+		{% block crm_modal %}{% endblock %}
 
 		<!--**********************************
             Sidebar start
@@ -1685,7 +1685,12 @@
 			<div class="page-titles">
 				<ol class="breadcrumb">
 					<li>
-						<h5 class="bc-title">{{ title }}</h5>
+						<h5 class="bc-title">
+						{% block page_title %}
+						Home
+						{% endblock page_title %}
+						
+						</h5>
 					</li>
 					<li class="breadcrumb-item"><a href="javascript:void(0)">
 							<svg width="17" height="17" viewBox="0 0 17 17" fill="none"
@@ -2067,7 +2072,7 @@
 	<script src="{% static 'crm/vendor/apexchart/apexchart.js' %}"></script>
 
 	<!-- Dashboard 1 -->
-	<script src="{% static 'crm/js/dashboard/dashboard-1.js' %}"></script>
+	{% comment %} <script src="{% static 'crm/js/dashboard/dashboard-1.js' %}"></script> {% endcomment %}
 	<script src="{% static 'crm/vendor/draggable/draggable.js' %}"></script>
 
 
@@ -2087,12 +2092,12 @@
 
 
 	<!-- Vectormap -->
-	<script src="{% static 'crm/vendor/jqvmap/js/jquery.vmap.min.js' %}"></script>
+	{% comment %} <script src="{% static 'crm/vendor/jqvmap/js/jquery.vmap.min.js' %}"></script>
 	<script src="{% static 'crm/vendor/jqvmap/js/jquery.vmap.world.js' %}"></script>
-	<script src="{% static 'crm/vendor/jqvmap/js/jquery.vmap.usa.js' %}"></script>
+	<script src="{% static 'crm/vendor/jqvmap/js/jquery.vmap.usa.js' %}"></script> {% endcomment %}
 	<script src="{% static 'crm/js/custom.js' %}"></script>
 	<script src="{% static 'crm/js/deznav-init.js' %}"></script>
-	<script src="{% static 'crm/js/demo.js' %}"></script>
+	{% comment %} <script src="{% static 'crm/js/demo.js' %}"></script> {% endcomment %}
 	<script src="{% static 'crm/js/styleSwitcher.js' %}"></script>
 
     {% block crm_additional_js %}

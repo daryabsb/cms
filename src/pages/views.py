@@ -66,6 +66,7 @@ def crm_page_list(request):
     }
     return render(request, template_name, context)
 
+
 @login_required(login_url='dashboard:login')
 @permission_required({'pages.view_page', 'pages.add_page'}, raise_exception=True)
 def crm_page_create(request):
@@ -116,6 +117,7 @@ def crm_page_create(request):
                 messages.warning(request, 'Somthing went wrong in SEO Fields')
                 return render(request, template_name, context)
         else:
+            print(form_page.errors)
             messages.warning(request, 'Somthing went wrong in Page')
     else:
         context = {
@@ -131,25 +133,34 @@ def crm_page_create(request):
         }
     return render(request, template_name, context)
 
+
 @login_required(login_url='dashboard:login')
 @permission_required({'pages.view_page', 'pages.change_page'}, raise_exception=True)
 def crm_page_edit(request, id):
     template_name = 'crm/cms/pages/create.html'
+
+    page = get_object_or_404(Page, id=id)
     PageMetaFormSet = modelformset_factory(
         PageMeta, form=PageMetaForm, extra=0, can_delete=True)
-    page = get_object_or_404(Page, id=id)
+
     pageseo = PageSeo.objects.get(page=page)
+
     pagemeta_queryset = PageMeta.objects.filter(
         page=page).order_by('created_at')
 
     if request.method == 'POST':
         page_form = PageForm(request.POST, request.FILES, instance=page)
-        page_meta_formset = PageMetaFormSet(request.POST, queryset=pagemeta_queryset),
-        form_page_seo = PageSeoForm(request.POST, prefix='seo', instance=pageseo),
-        # ScreenOption = json.dumps(ScreenOption)
+        page_meta_formset = PageMetaFormSet(
+            request.POST, queryset=pagemeta_queryset)
+        form_page_seo = PageSeoForm(
+            request.POST, prefix='seo', instance=pageseo)
+        # screen_option = json.dumps(ScreenOption)
+        screen_option = request.POST.getlist('form-check-input')
+
+        print(screen_option)
 
         if page_form.is_valid():
-            page_obj = form_page.save(commit=False)
+            page_obj = page_form.save(commit=False)
             if page_obj.visibility == 'Pu' or page_obj.visibility == 'Pr':
                 page_obj.password = None
             page_obj.save()
@@ -165,13 +176,12 @@ def crm_page_edit(request, id):
             "edit": True,
             "page_title": "Edit Page",
             "page": page,
+            "title": "Update Page",
         }
-        form_page = context.get('form_page')
-        form_page_seo = context.get('form_page_seo')
-        page_meta_formset = context.get('page_meta_formset')
 
-        if form_page.is_valid():
-            page_obj = form_page.save(commit=False)
+        if page_form.is_valid():
+            page_obj = page_form.save(commit=False)
+
             if page_obj.visibility == 'Pu' or page_obj.visibility == 'Pr':
                 page_obj.password = None
             page_obj.save()
@@ -202,6 +212,8 @@ def crm_page_edit(request, id):
                 messages.warning(request, 'Somthing went wrong in SEO Fields')
                 return render(request, template_name, context)
         else:
+            for err in page_form.errors:
+                print(err)
             messages.warning(request, 'Somthing went wrong in Page Fields')
 
     else:
@@ -211,18 +223,53 @@ def crm_page_edit(request, id):
             "form_page_seo": PageSeoForm(prefix='seo', instance=pageseo),
             "ScreenOption": json.dumps(ScreenOption),
             "pages": Page.objects.all(),
-            "users": User.objects.filter(is_superuser=False),
+            # "users": User.objects.filter(is_superuser=False),
+            "users": User.objects.all(),
             "edit": True,
             "page_title": "Edit Page",
             "page": page,
+            "title": "Update Page",
         }
     return render(request, template_name, context)
 
 
+page_form = [
+    'Meta',
+    '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',
+    '__ge__', '__getattribute__', '__getitem__', '__getstate__', '__gt__', '__hash__', '__html__',
+    '__init__', '__init_subclass__', '__iter__', '__le__', '__lt__', '__module__', '__ne__',
+    '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__',
+    '__subclasshook__', '__weakref__', '_bound_fields_cache', '_bound_items', '_clean_fields',
+    '_clean_form', '_errors', '_get_validation_exclusions', '_meta', '_post_clean',
+    '_save_m2m', '_update_errors', '_validate_unique', '_widget_data_value',
 
-
+    'add_error', 'add_initial_prefix', 'add_prefix', 'as_div', 'as_p', 'as_table', 'as_ul',
+    'auto_id', 'base_fields', 'changed_data', 'clean', 'data', 'declared_fields',
+    'default_renderer', 'empty_permitted', 'error_class', 'errors', 'field_order',
+    'fields', 'files', 'full_clean', 'get_context', 'get_initial_for_field', 'has_changed',
+    'has_error', 'hidden_fields', 'initial', 'instance', 'is_bound', 'is_multipart',
+    'is_valid', 'label_suffix', 'media', 'non_field_errors', 'order_fields', 'prefix',
+    'render', 'renderer', 'save', 'template_name', 'template_name_div', 'template_name_label',
+    'template_name_p', 'template_name_table', 'template_name_ul', 'use_required_attribute',
+    'validate_unique', 'visible_fields'
+]
+QueryDict = {
+    'csrfmiddlewaretoken': ['RIeIHn2XvXWy2FS8MJqOwpSZ5LzZU4gMASI12rQNaYDsFtTCedEPTGgNrJoOoTSN'],
+    'title': ['About Us'],
+    'content2': [''],
+    'slug': ['about-us'],
+    'seo-title': ['about-us-seos'],
+    'seo-meta_keywords': ['about, us, about us, who we are'],
+    'seo-meta_descriptions': [''],
+    'status': ['Published'],
+    'visibility': ['Pu'],
+    'password': [''],
+    'publish_on': ['2024-04-05'],
+    'type': ['Page'],
+    'feature_image': ['']}
 
 # For Dashboard
+
 
 @login_required(login_url='dashboard:login')
 @permission_required({'pages.view_page'}, raise_exception=True)

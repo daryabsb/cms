@@ -1,6 +1,10 @@
 {% extends 'crm/crm_base.html' %}
 {% load static %}
 
+{% block page_title %}
+Blogs
+{% endblock page_title %}
+
 {% block crm_content %}
 
 <div class="col-xl-12">
@@ -42,7 +46,7 @@
     </div>
     <div class="mb-3">
         <ul class="d-flex align-items-center flex-wrap">
-            <li><a href="add-blog.html" class="btn btn-primary ">Add Blog</a></li>
+            <li><a href="{% url 'crm:blog:blogs-add' %}" class="btn btn-primary ">Add Blog</a></li>
             <li><a href="blog-category.html" class="btn btn-primary mx-1">Blog Category</a></li>
             <li><a href="blog-category.html" class="btn btn-primary mt-sm-0 mt-1">Add Blog Category</a></li>
         </ul>
