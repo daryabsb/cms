@@ -22,6 +22,7 @@ django==5.0.3
     #   -r src/requirements/requirements.in
     #   dj-database-url
     #   django-after-response
+    #   django-appconf
     #   django-ckeditor
     #   django-cors-headers
     #   django-extensions
@@ -29,9 +30,12 @@ django==5.0.3
     #   django-js-asset
     #   django-prose-editor
     #   django-rosetta
+    #   django-select2
     #   djangorestframework
 django-after-response==0.2.2
     # via -r src/requirements/requirements.in
+django-appconf==1.0.6
+    # via django-select2
 django-ckeditor==6.5.1
     # via -r src/requirements/requirements.in
 django-cors-headers==4.3.1
@@ -49,6 +53,8 @@ django-mptt==0.16.0
 django-prose-editor==0.3.4
     # via -r src/requirements/requirements.in
 django-rosetta==0.10.0
+    # via -r src/requirements/requirements.in
+django-select2==8.1.2
     # via -r src/requirements/requirements.in
 django-split-settings==1.3.0
     # via -r src/requirements/requirements.in

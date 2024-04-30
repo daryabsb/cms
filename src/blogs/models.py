@@ -33,7 +33,7 @@ class Categories(MPTTModel):
             self.slug = slugify(self.title)
         return super().save(*args, **kwargs)
 
-    def _str_(self):
+    def __str__(self):
         return self.title
 
 
@@ -54,7 +54,7 @@ class Tags(models.Model):
             self.slug = slugify(self.name)
         return super().save(*args, **kwargs)
 
-    def _str_(self):
+    def __str__(self):
         return self.name
 
 

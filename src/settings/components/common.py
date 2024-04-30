@@ -34,6 +34,7 @@ THIRD_PARTY_APPS = [
     'ckeditor_uploader',
     "django_prose_editor",
     'after_response',
+    'django_select2',
 ]
 LOCAL_APPS = [
     'src.accounts',

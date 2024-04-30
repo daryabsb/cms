@@ -176,32 +176,38 @@ def crm_blog_create(request):
 def crm_blog_edit(request, id):
     template_name = 'crm/cms/blogs/create.html'
     blog_obj = get_object_or_404(Blogs, id=id)
+
     seo_obj = Seo.objects.get(blog=blog_obj)
+
+    blog_seo_form = SeoForm(request.POST, prefix='seo', instance=seo_obj)
+
     Blog_MetaFormSet = modelformset_factory(
         Metas, form=MetaForm, extra=0, can_delete=True)
     Blog_MetaQuerySet = Metas.objects.filter(
         blog=blog_obj).order_by('-updated')
+    blog_meta_formset = Blog_MetaFormSet(request.POST, queryset=Blog_MetaQuerySet)
 
     if request.method == 'POST':
+        blog_form = BlogForm(request.POST, request.FILES, instance=blog_obj)
+        selected_categories = list(blog_obj.categories.all())
+
         context = {
-            "blog_form": BlogForm(request.POST, request.FILES, instance=blog_obj),
+            "blog_form": BlogForm(instance=blog_obj),
             "category_form": CategoriesForm(prefix='category'),
             "categories": Categories.objects.all(),
+            "tags": Tags.objects.all(),
             "selected_categories": list(blog_obj.categories.all()),
-            "blog_meta_formset": Blog_MetaFormSet(request.POST, queryset=Blog_MetaQuerySet),
-            "blog_seo_form": SeoForm(request.POST, prefix='seo', instance=seo_obj),
+            "blog_meta_formset": Blog_MetaFormSet(queryset=Blog_MetaQuerySet),
+            "blog_seo_form": SeoForm(prefix='seo', instance=seo_obj),
             "blog_videourl": Blogs.objects.all(),
-            "str_tags": request.POST.get('input-tags').strip('').strip(','),
+            "str_tags": ','.join(blog_obj.tags.all().values_list('name', flat=True)),
             "ScreenOption": json.dumps(ScreenOption),
-            "users": User.objects.filter(is_superuser=False),
+            # "users": User.objects.filter(is_superuser=False),
+            "users": User.objects.all(),
             "edit": True,
             "page_title": "Edit Blog",
             "blog_obj": blog_obj,
         }
-        blog_form = context.get('blog_form')
-        blog_meta_formset = context.get('blog_meta_formset')
-        blog_seo_form = context.get('blog_seo_form')
-        str_tags = context.get('str_tags')
 
         if blog_form.is_valid():
             blog_obj = blog_form.save(commit=False)
@@ -219,16 +225,6 @@ def crm_blog_edit(request, id):
                     blog_obj.categories.add(Categories.objects.get(id=int(id)))
             blog_obj.save()
 
-            if str_tags != '' and str_tags != None:
-                for input_tag in str_tags.split(','):
-                    input_tag = input_tag.lower()
-                    if utils.slugify(input_tag) not in Tags.objects.all().values_list('slug', flat=True):
-                        blog_obj.tags.create(name=input_tag)
-                    else:
-                        blog_obj.tags.add(Tags.objects.get(
-                            slug=utils.slugify(input_tag)))
-                    blog_obj.save()
-
             if blog_meta_formset.is_valid():
                 for metaform in blog_meta_formset:
                     print('######CLEAN DATA######')
@@ -241,6 +237,7 @@ def crm_blog_edit(request, id):
                         else:
                             meta_obj.save()
             else:
+                print(blog_meta_formset.errors)
                 messages.warning(
                     request, 'Somthing want wrong in Add Custom Fields')
                 return render(request, template_name, context)
@@ -250,7 +247,7 @@ def crm_blog_edit(request, id):
 
                 blog_seo_obj.blog = blog_obj
                 blog_seo_obj.save()
-                return redirect('dashboard:blog:blogs')
+                return redirect('crm:blog:blogs-list')
             else:
                 messages.warning(request, 'Somthing want wrong in SEO Fields')
                 return render(request, template_name, context)
@@ -262,13 +259,15 @@ def crm_blog_edit(request, id):
             "blog_form": BlogForm(instance=blog_obj),
             "category_form": CategoriesForm(prefix='category'),
             "categories": Categories.objects.all(),
+            "tags": Tags.objects.all(),
             "selected_categories": list(blog_obj.categories.all()),
             "blog_meta_formset": Blog_MetaFormSet(queryset=Blog_MetaQuerySet),
             "blog_seo_form": SeoForm(prefix='seo', instance=seo_obj),
             "blog_videourl": Blogs.objects.all(),
             "str_tags": ','.join(blog_obj.tags.all().values_list('name', flat=True)),
             "ScreenOption": json.dumps(ScreenOption),
-            "users": User.objects.filter(is_superuser=False),
+            # "users": User.objects.filter(is_superuser=False),
+            "users": User.objects.all(),
             "edit": True,
             "page_title": "Edit Blog",
             "blog_obj": blog_obj,

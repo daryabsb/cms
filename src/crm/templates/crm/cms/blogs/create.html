@@ -1,5 +1,5 @@
 {% extends 'crm/crm_base.html' %}
-{% load static widget_tweaks %}
+{% load static widget_tweaks mptt_tags %}
 
 <!-- Modal -->
 {% block crm_modal %}
@@ -128,9 +128,12 @@ Add Page
 {% endif %}
 {% endblock page_title %}
 
+{% block crm_additional_css %}
+<link href="{% static 'crm/vendor/select2/css/select2.min.css' %}" rel="stylesheet">
+{% endblock crm_additional_css %}
 
 {% block crm_content %}
-<form method="post" action="/crm/blogs/edit/{{ page.id }}/" enctype="multipart/form-data" novalidate autocomplete="off">
+<form method="post" action="/crm/blogs/edit/{{ blog_obj.id }}/" enctype="multipart/form-data" novalidate autocomplete="off">
     {% csrf_token %}
 <div class="col-xl-12">
     <div class="mb-3">
@@ -237,7 +240,7 @@ Add Page
         <div class="col-xl-8">
             <div class="card h-auto">
                 <div class="card-body pt-3">
-                     {{ blog_form.media }}
+                    {{ blog_form.media }}
                     {{ blog_form.content2|attr:"style:background-color:red;"|attr:"rows:40" }}
                 </div>
             </div>
@@ -274,18 +277,28 @@ Add Page
                 <div class="cm-content-body form excerpt">
                     <div class="card-body"> 
                         <h6>Add New Custom Field:</h6>
+                        {{ blog_meta_formset.management_form }}
+                        {% for meta_form in blog_meta_formset %}
                         <div class="row">
                             <div class="col-xl-6 col-sm-6">
                                 <div class="mb-3">
                                 <label  class="form-label">Title</label>
-                                <input type="text" class="form-control" placeholder="Title">
+                                {{ meta_form.title|attr:"class:form-control"|attr:"type:text"|attr:"placeholder:Title" }}
                                 </div>
                             </div>
                             <div class="col-xl-6 col-sm-6">
                                 <label  class="form-label">Value</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                {{ meta_form.value|attr:"class:form-control"|attr:"rows:3" }}
                             </div>
-                        </div>	
+                            <div class="col-md-2">
+                                <div class="form-check custom-checkbox mb-3 checkbox-primary">
+                                    {{ meta_form.DELETE|attr:"class:form-check-input"|attr:"type:checkbox" }}
+                                    <label class="form-check-label" for="customCheckBox2">Delete</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% endfor %}
                         <button type="button" class="btn btn-primary btn-sm mt-3 mt-sm-0">Add Custom Field</button>
                         <span class="mt-3 d-block">Custom fields can be used to extra metadata to a post that you can use in your theme.</span>
                     </div>
@@ -323,7 +336,13 @@ Add Page
                 <div class="cm-content-body form excerpt">
                     <div class="card-body">
                         <label class="form-label">Slug</label>
-                        <input type="text" class="form-control">
+                        {{ blog_form.slug|attr:"class:form-control slug"|attr:"type:text"|attr:"id:slug" }}
+                                            
+                        {% if blog_form.slug.errors %}
+                        <div class="text-danger w-100 d-block mt-1">
+                            {{ blog_form.slug.errors }}
+                        </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -339,12 +358,14 @@ Add Page
                 <div class="cm-content-body form excerpt">
                     <div class="card-body">
                         <label class="form-label">User</label>
-                        <select class="js-example-disabled">
-                            <option value="AL">admin@gmail.com</option>
-                            <option value="WY">India</option>
-                            <option value="WY">Information</option>
-                            <option value="WY">New Menu</option>
-                            <option value="WY">Page Menu</option>
+                        <select name="user" class="default-select form-control">
+                            {% for user in users %}
+                            {% if blog_form.user.value %}
+                            <option {% if user.id == blog_form.user.value %} selected {% endif %} value="{{user.id}}">{% if user.name %}{{ user.name }}{% else %}{{ user.email }}{% endif %}</option>
+                            {% else %}
+                            <option {% if request.user.id == user.id %} selected {% endif %} value="{{user.id}}">{% if user.name %}{{ user.name }}{% else %}{{ user.email }}{% endif %}</option>
+                            {% endif %}
+                            {% endfor %}
                         </select>
                             
                     </div>
@@ -360,15 +381,18 @@ Add Page
                 <div class="cm-content-body form excerpt">
                     <div class="card-body">
                         <label class="form-label">Page Title</label>
-                        <input type="text" class="form-control mb-3" placeholder="Page title">
+                        {{ blog_seo_form.title|attr:"class:form-control mb-3"|attr:"type:text"|attr:"id:SEOBlogTitle"|attr:"placeholder:Page title"}}
+                        <div class="text-danger w-100 d-block mt-1">
+                            {{ blog_seo_form.title.errors }}
+                        </div>
                         <div class="row">
                             <div class="col-xl-6 col-sm-6">
                                 <label class="form-label">Keywords</label>
-                                <input type="text" class="form-control mb-sm-0 mb-3 " placeholder="Enter meta Keywords">
+                                {{ blog_seo_form.meta_keywords|attr:"class:form-control mb-sm-0 mb-3"|attr:"type:text"|attr:"placeholder:Enter meta Keywords"}}
                             </div>
                             <div class="col-xl-6 col-sm-6">
                                 <label class="form-label">Descriptions</label>
-                                <textarea  class="form-control" placeholder="Enter meta Keywords" rows="3"></textarea>
+                                {{ blog_seo_form.meta_descriptions|attr:"class:form-control"|attr:"rows:3"|attr:"placeholder:Enter meta Keywords"}}
                             </div>
                         </div>
                             
@@ -400,14 +424,15 @@ Add Page
                                 <div class="accordion-body-text border rounded">
                                 <div class="mb-2">
                                     <label class="from-label w-100">Content Type</label>
-                                    <select class="publish-drop default-select">
+                                    {{ blog_form.status|attr:"class:publish-drop default-select"|attr:"id:ContentStatus"  }}
+                                    {% comment %} <select class="publish-drop default-select">
                                         <option selected>Select Status</option>
                                         <option value="1">Published</option>
                                         <option value="2">Draft</option>
                                         <option value="3">Trash</option>
                                         <option value="4">Private</option>
                                         <option value="5">Pending</option>
-                                    </select> 
+                                    </select>  {% endcomment %}
                                 </div>
                                 <div>
                                     <button class="btn btn-primary btn-sm me-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
@@ -423,13 +448,18 @@ Add Page
                             <ul class="d-flex align-items-center mb-2">
                                 <li><a href="javascript:void(0);"><i class="fa-solid fa-eye"></i></a></li>
                                 <li><a href="javascript:void(0);" class="ms-2">Status:</a></li>
-                                <li><strong><a href="javascript:void(0);" class="mx-2">Public</a></strong></li>
+                                <li><strong><a href="javascript:void(0);" class="mx-2">Visibility</a></strong></li>
                                 <li><a href="javascript:void(0);" class="accordion accordion-primary"  id="headingtwo" data-bs-toggle="collapse" data-bs-target="#collapsetwo" aria-controls="collapsetwo"   aria-expanded="true" role="button">Edit</a></li>
                             </ul>
                             <div id="collapsetwo" class="collapse" aria-labelledby="headingtwo" data-bs-parent="#accordion-one">
                                 <div class="accordion-body-text border rounded">
                                 <div class="basic-form">
-                                    <form>
+                                    {{ blog_form.visibility|attr:"class:default-select form-control wide mb-3"|attr:"id:ContentVisibility"  }}
+                                        <div class="col-md-12 mb-3" id="PublicPasswordTextbox" {% if form_page.password.value == None %} style="display: none;"{% endif %}>
+                                            <label class="form-label">Password</label>
+                                            {{ form_page.password|attr:"class:form-control"|attr:"type:password"|attr:"id:ContentPassword" }}
+                                        </div>
+                                    {% comment %} <form>
                                         <div class="mb-3 mb-0">
                                             <div class="radio">
                                                 <label class="form-check-label"><input type="radio" name="optradio" class="form-check-input"> Public</label>
@@ -441,7 +471,7 @@ Add Page
                                                 <label class="form-check-label"><input type="radio" name="optradio" class="form-check-input" > Private</label>
                                             </div>
                                         </div>
-                                    </form>
+                                    </form> {% endcomment %}
                                 </div>
                                 <div>
                                 <button class="btn btn-primary btn-sm me-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapsetwo" aria-expanded="false" aria-controls="collapsetwo">
@@ -463,7 +493,7 @@ Add Page
                             <div id="collapsethree" class="collapse" aria-labelledby="headingthree" data-bs-parent="#accordion-one">
                                 <div class="accordion-body-text border rounded">
                                 <div class="basic-form mb-2">
-                                    <input type="date" name="datepicker" class=" form-control" >
+                                    {{ blog_form.publish_on|attr:"class:form-control"|attr:"type:date"|attr:"id:PublishDateTimeTextbox" }}
                                 </div>
                                 <button class="btn btn-primary btn-sm me-2" type="button" data-bs-toggle="collapse" data-bs-target="#collapsethree" aria-expanded="false" aria-controls="collapsethree">
                                     Ok
@@ -476,7 +506,7 @@ Add Page
                         </div>
                             <hr class="mx-2">
                         <div class="card-footer border-0 pt-0 text-end">
-                            <a href="javascript:void(0);" class="btn btn-primary btn-sm">Publish</a>
+                            <button type="submit" class="btn btn-primary btn-sm">Publish</button>
                         </div>
                     </div>
                 </div>
@@ -492,42 +522,38 @@ Add Page
                     <div class="cm-content-body publish-content form excerpt">
                         <div class="card-body">
                             <div class="border p-3 mb-3">
+                                <ul>
+                                {% recursetree categories %}
+                                <li>
                                 <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-10">
+                                        <input 
+                                            class="form-check-input" 
+                                            type="checkbox" 
+                                            name="cat_checks[]" 
+                                            value="{{node.id}}" 
+                                            {% if selected_categories %}
+                                                {% if node in selected_categories %}
+                                                    checked
+                                                {% endif %}
+                                            {% endif %}>
                                         <label class="form-check-label" for="flexCheckDefault-10">
-                                        Beauty
+                                            {{node.title}}
                                         </label>
                                 </div>
-                                <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-11">
-                                        <label class="form-check-label" for="flexCheckDefault-11">
-                                        Fashion
-                                        </label>
-                                </div>
-                                <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-12">
-                                        <label class="form-check-label" for="flexCheckDefault-12">
-                                            Lifestyle
-                                        </label>
-                                </div>
-                                <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-13">
-                                        <label class="form-check-label" for="flexCheckDefault-13">
-                                        Food
-                                        </label>
-                                </div>
-                                <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-14">
-                                        <label class="form-check-label" for="flexCheckDefault-14">
-                                        Beauty
-                                        </label>
-                                </div>
+                                {% if not node.is_leaf_node %}
+                                <ul>{{ children}}</ul>
+                                {% endif %}
+                            </li>
+                                {% endrecursetree %}
                             </div>
                             <a href="javascript:void(0);"><i class="fa-solid fa-plus"></i> Add New Categories</a>
-                            <div class="input-group mt-3">
-                                    <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                                <div class="input-group mt-3">
+                                        {{ category_form.parent|attr:"class:form-control"|attr:"type:text" }}
+                                </div>
+                                <div class="input-group mt-3">
+                                    {{ category_form.title|attr:"class:form-control"|attr:"type:text" }}
                                     <span class="input-group-text" id="basic-addon1"><a href="javascript:void(0);">Add New</a></span>
-                            </div>
+                                </div>
                         </div>
                             
                     </div>
@@ -543,11 +569,7 @@ Add Page
                     </div>
                     <div class="cm-content-body  form excerpt">
                         <div class="card-body">
-                            <select id="multi-value-select" multiple="multiple">
-                                <option selected="selected">orange</option>
-                                <option>white</option>
-                                <option selected="selected">purple</option>
-                            </select>
+                            {{ blog_form.tags|attr:"multiple:multiple"|attr:"id:multi-value-select" }}
                         </div>
                             
                     </div>
@@ -566,15 +588,36 @@ Add Page
                             <div class="avatar-upload d-flex align-items-center">
                                 <div class=" position-relative ">
                                     <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url(images/no-img-avatar.png);"> 			
+                                        <div id="imagePreview" style="background-image: url({% static 'crm/images/no-img-avatar.png' %});"> 			
                                         </div>
                                     </div>
                                     <div class="change-btn d-flex align-items-center flex-wrap">
-                                        <input type='file' class="form-control d-none"  id="imageUpload" accept=".png, .jpg, .jpeg">
+                                        <input type='file' class="form-control d-none" id="imageUpload" accept=".png, .jpg, .jpeg">
+                                        {{ blog_form.feature_image|attr:"type:file"|attr:"class:form-control d-none"|attr:"id:imageUpload"|attr:"accept:.png, .jpg, .jpeg" }}
                                         <label for="imageUpload" class="btn btn-light ms-0">Select Image</label>
                                     </div>
                                 </div>		
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter cm-content-box box-primary">
+                    <div class="content-title">
+                        <div class="cpa">	Video URL												
+                        </div>
+                        <div class="tools">
+                            <a href="javascript:void(0);" class="expand SlideToolHeader"><i class="fal fa-angle-down"></i></a>
+                        </div>
+                    </div>
+                    <div class="cm-content-body form excerpt">
+                        <div class="card-body">
+                            <label class="form-label">Video URL</label>
+                            {{ blog_form.video_url|attr:"type:text"|attr:"class:form-control"|attr:"placeholder:URL" }} 
+                            {% if blog_form.video_url.errors %}
+                            <div class="text-danger w-100 d-block mt-1">
+                                {{ blog_form.video_url.errors }}
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>	
@@ -586,6 +629,8 @@ Add Page
 {% endblock crm_content %}
 
 {% block crm_additional_js %}
+<script src="{% static 'crm/vendor/select2/js/select2.full.min.js' %}"></script>
+<script src="{% static 'crm/js/plugins-init/select2-init.js' %}"></script>
 <script>
 const titleInput = document.querySelector('input[name=title');
 const slugInput = document.querySelector('.slug');

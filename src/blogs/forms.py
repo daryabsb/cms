@@ -1,6 +1,7 @@
 from django import forms
 from src.blogs.models import Categories, Blogs, Tags, Metas, Seo
 from mptt.forms import TreeNodeMultipleChoiceField, TreeNodeChoiceField
+from django_select2.forms import Select2Widget
 
 
 class BlogForm(forms.ModelForm):
@@ -13,6 +14,7 @@ class BlogForm(forms.ModelForm):
             'slug',
             'content2',
             'excerpt',
+            'tags',
             'comment',
             'password',
             'status',
@@ -24,6 +26,7 @@ class BlogForm(forms.ModelForm):
         )
         widgets = {
             'feature_image': forms.FileInput(),
+            'tags': Select2Widget(),
         }
 
 
