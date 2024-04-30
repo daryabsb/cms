@@ -185,7 +185,8 @@ def crm_blog_edit(request, id):
         Metas, form=MetaForm, extra=0, can_delete=True)
     Blog_MetaQuerySet = Metas.objects.filter(
         blog=blog_obj).order_by('-updated')
-    blog_meta_formset = Blog_MetaFormSet(request.POST, queryset=Blog_MetaQuerySet)
+    blog_meta_formset = Blog_MetaFormSet(
+        request.POST, queryset=Blog_MetaQuerySet)
 
     if request.method == 'POST':
         blog_form = BlogForm(request.POST, request.FILES, instance=blog_obj)
@@ -195,12 +196,12 @@ def crm_blog_edit(request, id):
             "blog_form": BlogForm(instance=blog_obj),
             "category_form": CategoriesForm(prefix='category'),
             "categories": Categories.objects.all(),
-            "tags": Tags.objects.all(),
+            # "tags": Tags.objects.all(),
             "selected_categories": list(blog_obj.categories.all()),
             "blog_meta_formset": Blog_MetaFormSet(queryset=Blog_MetaQuerySet),
             "blog_seo_form": SeoForm(prefix='seo', instance=seo_obj),
             "blog_videourl": Blogs.objects.all(),
-            "str_tags": ','.join(blog_obj.tags.all().values_list('name', flat=True)),
+            # "str_tags": ','.join(blog_obj.tags.all().values_list('name', flat=True)),
             "ScreenOption": json.dumps(ScreenOption),
             # "users": User.objects.filter(is_superuser=False),
             "users": User.objects.all(),
@@ -209,8 +210,12 @@ def crm_blog_edit(request, id):
             "blog_obj": blog_obj,
         }
 
+        # print("This is working!, ", blog_form.data)
+
+        print('###### WE ARE HERE ######')
         if blog_form.is_valid():
             blog_obj = blog_form.save(commit=False)
+            blog_form.save_m2m()
 
             blog_obj.user = User.objects.get(id=int(request.POST.get('user')))
             if blog_obj.visibility == 'Pu' or blog_obj.visibility == 'Pr':
@@ -252,6 +257,8 @@ def crm_blog_edit(request, id):
                 messages.warning(request, 'Somthing want wrong in SEO Fields')
                 return render(request, template_name, context)
         else:
+            for err in blog_form.errors:
+                print(err)
             messages.warning(request, 'Somthing want wrong in Blog')
 
     else:
@@ -259,12 +266,12 @@ def crm_blog_edit(request, id):
             "blog_form": BlogForm(instance=blog_obj),
             "category_form": CategoriesForm(prefix='category'),
             "categories": Categories.objects.all(),
-            "tags": Tags.objects.all(),
+            # "tags": Tags.objects.all(),
             "selected_categories": list(blog_obj.categories.all()),
             "blog_meta_formset": Blog_MetaFormSet(queryset=Blog_MetaQuerySet),
             "blog_seo_form": SeoForm(prefix='seo', instance=seo_obj),
             "blog_videourl": Blogs.objects.all(),
-            "str_tags": ','.join(blog_obj.tags.all().values_list('name', flat=True)),
+            # "str_tags": ','.join(blog_obj.tags.all().values_list('name', flat=True)),
             "ScreenOption": json.dumps(ScreenOption),
             # "users": User.objects.filter(is_superuser=False),
             "users": User.objects.all(),
@@ -275,7 +282,86 @@ def crm_blog_edit(request, id):
     return render(request, template_name, context)
 
 
+@login_required(login_url='dashboard:login')
+@permission_required({'blog.view_categories'}, raise_exception=True)
+def crm_blog_category(request):
+    template_name = 'crm/cms/blogs/category.html'
+    left_side_view = False
+    query = request.GET.get('category-search')
+    if request.method == 'POST':
+        category_form = CategoriesForm(request.POST)
+        if category_form.is_valid():
+            category_form.save()
+        else:
+            messages.warning(request, category_form.errors)
+    if query:
+        categories = Categories.objects.filter(title__icontains=query)
+    else:
+        categories = Categories.objects.all()
+
+    category_form = CategoriesForm()
+    categories_for_select = Categories.objects.all()
+
+    paginator = Paginator(categories, utils.nodes_per_page())
+    categories = paginator.get_page(request.GET.get('page'))
+
+    if request.user.has_perm('blog.add_categories'):
+        left_side_view = True
+
+    context = {
+        "page_title": "Categories",
+        "categories": categories,
+        "category_form": category_form,
+        "categories_for_select": categories_for_select,
+        "edit": False,
+        "left_side_view": left_side_view,
+        "query": query
+    }
+    return render(request, template_name, context)
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'blog.view_categories', 'blog.change_categories'}, raise_exception=True)
+def crm_blog_category_edit(request, id):
+    template_name = 'crm/cms/blogs/category.html'
+    left_side_view = False
+    category = Categories.objects.get(id=id)
+    query = request.GET.get('category-search')
+
+    if request.method == 'POST':
+        category_form = CategoriesForm(request.POST, instance=category)
+
+        if category_form.is_valid():
+            category_form.save()
+            return redirect("dashboard:blog:blogCategory")
+        else:
+            messages.warning(request, category_form.errors)
+
+    if query:
+        categories = Categories.objects.filter(title__icontains=query)
+    else:
+        categories = Categories.objects.all()
+
+    category_form = CategoriesForm(instance=category)
+    categories_for_select = Categories.objects.all().exclude(id=id)
+
+    paginator = Paginator(categories, utils.nodes_per_page())
+    categories = paginator.get_page(request.GET.get('page'))
+    if request.user.has_perm('blog.change_categories'):
+        left_side_view = True
+    context = {
+        "page_title": "Categories",
+        "categories": categories,
+        "category_form": category_form,
+        "categories_for_select": categories_for_select,
+        "edit": True,
+        "left_side_view": left_side_view,
+        "query": query
+    }
+    return render(request, template_name, context)
+
 # Dashboard views
+
 
 @login_required(login_url='dashboard:login')
 @permission_required({'blog.view_tags', 'blog.delete_tags'}, raise_exception=True)
@@ -370,6 +456,19 @@ def blogTagEdit(request, id):
     }
 
     return render(request, template_name, context)
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'blog.view_categories', 'blog.delete_categories'}, raise_exception=True)
+def crm_blog_category_delete(request, id):
+    category = Categories.objects.get(id=id)
+    if category:
+        category.delete()
+        messages.success(request, 'Category Delete Successfully')
+    else:
+        messages.warning(request, 'Category Does Not Exist')
+    return redirect('crm:blog:blog-category')
+
 
 # Categories
 
@@ -807,3 +906,30 @@ def delete_multiple_blogs(request):
                 response = JsonResponse({"warning": f'Id {id} is not valid'})
 
     return response
+
+
+QueryDict = {
+    'csrfmiddlewaretoken': ['RxqqLAo69oBjJ9W4uvLRuhmkFEVmWr7gAHUJ6EcWOpidmXXyWZZSRyK81CKbqgJh'],
+    'title': ['The 9 Best Guideline For The Industry And Petrolium And Oil Refinery'],
+    'content2': ['<p>The copisrelit, a aliqua.</p>'],
+    'excerpt': ['The company specialishemical industry, both onshore and offshore...'],
+    'form-TOTAL_FORMS': ['0'],
+    'form-INITIAL_FORMS': ['0'],
+    'form-MIN_NUM_FORMS': ['0'],
+    'form-MAX_NUM_FORMS': ['1000'],
+    'comment': ['on'],
+    'slug': ['software-may-be-best-bet-to-conquer-final-mile'],
+    'user': ['1'],
+    'seo-title': ['new blog'],
+    'seo-meta_keywords': ['blogs, new blog'],
+    'seo-meta_descriptions': [''],
+    'status': ['Published'],
+    'visibility': ['Pu'],
+    'publish_on': ['2022-06-07'],
+    'cat_checks[]': ['1'],
+    'category-parent': [''],
+    'category-title': [''],
+    'tags': ['1'],
+    'feature_image': [''],
+    'video_url': ['']
+}

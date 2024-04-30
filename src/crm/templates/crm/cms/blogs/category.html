@@ -1,0 +1,267 @@
+{% extends 'crm/crm_base.html' %}
+{% load static widget_tweaks custom_tags %}
+
+
+{% block page_title %}
+Blog Categories
+{% endblock page_title %}
+
+
+{% block crm_content %}
+<div class="col-xl-12">
+    <div class="row">
+    {% if left_side_view  %}
+        <div class="col-xl-4">
+            <div class="filter cm-content-box box-primary">
+                <div class="content-title">
+                    <div class="cpa">
+                        Add Blog Category
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:void(0);" class="expand SlideToolHeader"><i class="fal fa-angle-down"></i></a>
+                    </div>
+                </div>
+                <div class="cm-content-body  form excerpt">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label  class="form-label">Name</label>
+                            <input type="text" class="form-control" placeholder="Name">
+                        </div>
+                        <div class="mb-3">
+                            <label  class="form-label">Slug</label>
+                            <input type="text" class="form-control" placeholder="Slug">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+                        </div>
+                        <div>
+                            <button type="button" class="btn btn-primary">Save</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <div class="col-xl-8">
+            <div class="filter cm-content-box box-primary">
+                <div class="content-title">
+                    <div class="cpa">
+                        Blog List
+                    </div>
+                    <div class="tools">
+                        <a href="javascript:void(0);" class="expand SlideToolHeader"><i class="fal fa-angle-down"></i></a>
+                    </div>
+                </div>
+                <div class="cm-content-body publish-content form excerpt">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped verticle-middle table-responsive-sm">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="text-black">Name</th>
+                                        <th scope="col" class="text-black">Created</th>
+                                        <th scope="col" class="text-black">Slug</th>
+                                        {% if perms.blog.delete_categories or perms.blog.change_categories  %}
+                                        <th scope="col" class="text-black text-end">Actions</th>
+                                        {% endif %}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                {% recursetree categories %}
+                                    <tr>
+                                        <td>
+                                        {% if node.is_child_node %}
+                                            {{'+--'|multiply:node.level}}{{node.title}}
+                                        {% else %}  
+                                            {{node.title}}  
+                                        {% endif %}
+                                        </td>
+                                        <td>{{node.created_at|date}}</td>
+                                        <td>{{node.slug}}</td>
+                                        <td class="text-end">
+                                        {% if  perms.blog.change_categories %}
+                                            <a href="{% url 'crm:blog:blog-category-edit' id=node.id %}">Edit</a>
+                                            <span>|</span>
+                                            {% endif %}
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            {% if  perms.blog.delete_categories %}
+                                            <a href="{% url 'crm:blog:blog-category-delete' id=node.id %}">delete</a>
+                                            <span>|</span>
+                                            {% endif %}
+                                        </td>
+                                        {% endif %}
+                                    </tr>
+                                    {% if not node.is_leaf_node %}
+                                        {{ children }}
+                                    {% endif %}
+                                {% endrecursetree %} 
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Fashion</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Lifestyle</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Food</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Beauty</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Fashion</td>
+                                        <td class="text-end">
+                                            <div>
+                                                <a href="javascript:void(0);">Edit</a>
+                                                <span>|</span>
+                                                <a href="javascript:void(0);">Up</a>
+                                                <span>|</span>
+                                                <a href="javascript:void(0);">down</a>
+                                                <span>|</span>
+                                                <a href="javascript:void(0);">delete</a>
+                                                <span>|</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>Lifestyle</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>Food</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>9</td>
+                                        <td>Lifestyle</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>10</td>
+                                        <td>Food</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>11</td>
+                                        <td>Fashion</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>12</td>
+                                        <td>Lifestyle</td>
+                                        <td class="text-end">
+                                            <a href="javascript:void(0);">Edit</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">Up</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">down</a>
+                                            <span>|</span>
+                                            <a href="javascript:void(0);">delete</a>
+                                            <span>|</span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock crm_content %}

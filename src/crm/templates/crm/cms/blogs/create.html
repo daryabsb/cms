@@ -571,7 +571,9 @@ Add Page
                         <div class="card-body">
                             {{ blog_form.tags|attr:"multiple:multiple"|attr:"id:multi-value-select" }}
                         </div>
-                            
+                        <div class="text-danger w-100 d-block mt-1">
+                            {{ blog_seo_form.tags.errors }}
+                        </div> 
                     </div>
                 </div>
                 <div class="filter cm-content-box box-primary">
@@ -588,7 +590,11 @@ Add Page
                             <div class="avatar-upload d-flex align-items-center">
                                 <div class=" position-relative ">
                                     <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url({% static 'crm/images/no-img-avatar.png' %});"> 			
+                                        {% if blog_obj.feature_image.url %}
+                                        <div id="imagePreview" style="background-image: url({{ blog_obj.feature_image.url }});"> 
+                                        {% else %}
+                                        <div id="imagePreview" style="background-image: url({% static 'crm/images/no-img-avatar.png' %});"> 
+                                        {% endif %}	
                                         </div>
                                     </div>
                                     <div class="change-btn d-flex align-items-center flex-wrap">

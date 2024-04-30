@@ -139,20 +139,29 @@ Add Page
                 <div class="cm-content-body form excerpt">
                     <div class="card-body">
                         <h6>Add New Custom Field:</h6>
+                        {{ page_meta_formset.management_form }}
+                        {% for meta_form in page_meta_formset %}
                         <div class="row">
                             <div class="col-xl-6 col-sm-6">
                                 <form>
                                     <div class="mb-3">
                                     <label  class="form-label">Title</label>
-                                    <input type="text" class="form-control" placeholder="Title">
+                                    {{ meta_form.name|attr:"class:form-control"|attr:"type:text"|attr:"placeholder:Title" }}
                                     </div>
                                 </form>
                             </div>
                             <div class="col-xl-6 col-sm-6">
                                 <label  class="form-label">Value</label>
-                                <textarea class="form-control" rows="2"></textarea>
+                                {{ meta_form.value|attr:"class:form-control"|attr:"rows:2" }}
                             </div>
-                        </div>	
+                            <div class="col-md-2">
+                                <div class="form-check custom-checkbox mb-3 checkbox-primary">
+                                    {{ meta_form.DELETE|attr:"class:form-check-input"|attr:"type:checkbox" }}
+                                    <label class="form-check-label" for="customCheckBox2">Delete</label>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
                         <button type="button" class="btn btn-primary btn-sm mt-3 mt-sm-0">Add Custom Field</button>
                         <span class="mt-3 d-block">Custom fields can be used to extra metadata to a post that you can use in your theme.</span>
                     </div>
@@ -413,8 +422,11 @@ Add Page
                             <div class="avatar-upload d-flex align-items-center">
                                 <div class=" position-relative ">
                                     <div class="avatar-preview">
-                                        <div id="imagePreview" style="background-image: url({% static 'crm/images/no-img-avatar.png' %});"> 			
-                                        </div>
+                                    {% if page.feature_image.url %}
+                                        <div id="imagePreview" style="background-image: url({{ page.feature_image.url }});"> </div>
+                                        {% else %}
+                                        <div id="imagePreview" style="background-image: url({% static 'crm/images/no-img-avatar.png' %});"> </div>
+                                        {% endif %}
                                     </div>
                                     <div class="change-btn d-flex align-items-center flex-wrap">
                                         {{ form_page.feature_image|attr:"type:file"|attr:"class:form-control d-none"|attr:"id:imageUpload"|attr:"accept=.png, .jpg, .jpeg" }}

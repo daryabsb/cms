@@ -26,7 +26,7 @@ class BlogForm(forms.ModelForm):
         )
         widgets = {
             'feature_image': forms.FileInput(),
-            'tags': Select2Widget(),
+            # 'tags': Select2Widget(),
         }
 
 

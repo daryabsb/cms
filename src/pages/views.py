@@ -207,7 +207,7 @@ def crm_page_edit(request, id):
                 page_seo_obj = form_page_seo.save(commit=False)
                 page_seo_obj.page = page_obj
                 page_seo_obj.save()
-                return redirect('dashboard:pages:pages')
+                return redirect('crm:pages:pages-list')
             else:
                 messages.warning(request, 'Somthing went wrong in SEO Fields')
                 return render(request, template_name, context)
