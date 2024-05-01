@@ -3,8 +3,8 @@ from src.blogs.views import (
     cms_blog_list, cms_blog_delete, cms_blog_create, cms_blog_add_category,
     cms_blog_edit, delete_multiple_blogs, blogCategory, blogCategoryDelete,
     blogCategoryEdit, blogTag, blogTagEdit, blogTagDelete,
-    crm_blog_list, crm_blog_create, crm_blog_edit, crm_blog_category,
-    crm_blog_category_edit, crm_blog_category_delete,
+    crm_blog_list, crm_blog_create, crm_blog_edit,
+    crm_blog_category, crm_blog_category_edit, crm_blog_category_add, crm_blog_category_delete,
     # cms_blog_custom_field_delete,
 )
 
@@ -21,9 +21,10 @@ urlpatterns = [
          name='delete-multiple-blogs'),
 
     path('categories/', blogCategory, name='blogCategory'),
-    path('category-delete/<int:id>/',
+    path('blog-category-delete/<int:id>/',
          blogCategoryDelete, name='blogCategoryDelete'),
-    path('category-edit/<int:id>/', blogCategoryEdit, name='blogCategoryEdit'),
+    path('blog-category-edit/<int:id>/',
+         blogCategoryEdit, name='blogCategoryEdit'),
 
     path('tags/', blogTag, name='blogTag'),
     path('tag-edit/<int:id>/', blogTagEdit, name='blogTagEdit'),
@@ -33,10 +34,14 @@ urlpatterns = [
     path('list/', crm_blog_list, name='blogs-list'),
     path('add/', crm_blog_create, name='blogs-add'),
     path('edit/<int:id>/', crm_blog_edit, name='blog-edit'),
-    path('category/', crm_blog_category, name='blog-category'),
+
     path('category/', crm_blog_category, name='blog-category'),
     path('category-edit/<int:id>/', crm_blog_category_edit,
          name='blog-category-edit'),
+    path('category-edit/<int:id>/', crm_blog_category_edit,
+         name='blog-category-edit'),
+    path('category-add/', crm_blog_category_add,
+         name='blog-category-add'),
     path('category-delete/<int:id>/', crm_blog_category_delete,
          name='blog-category-delete'),
 

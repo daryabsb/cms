@@ -333,7 +333,7 @@ def crm_blog_category_edit(request, id):
 
         if category_form.is_valid():
             category_form.save()
-            return redirect("dashboard:blog:blogCategory")
+            return redirect("crm:blog:blog-category")
         else:
             messages.warning(request, category_form.errors)
 
@@ -356,9 +356,77 @@ def crm_blog_category_edit(request, id):
         "categories_for_select": categories_for_select,
         "edit": True,
         "left_side_view": left_side_view,
-        "query": query
+        "query": query,
+        "category": category
     }
     return render(request, template_name, context)
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'blog.view_categories', 'blog.delete_categories'}, raise_exception=True)
+def crm_blog_category_add(request):
+    if request.method == 'POST':
+        print(request.POST)
+        title = request.POST['title']
+        slug = request.POST['slug']
+        parent = request.POST['parent']
+
+        if parent == '':
+            parent = None
+        else:
+            parent = Categories.objects.get(pk=parent)
+
+        if not Categories.objects.filter(slug=slug).exists():
+            category_obj = Categories(title=title, slug=slug, parent=parent)
+            category_obj.save()
+            print(category_obj.is_root_node())
+            # print(category_obj.is_leaf_node())
+            # print(category_obj.is_child_node())
+            # print(dir(category_obj))
+
+            if category_obj.is_root_node():
+                html_data = f'''<li class="BlogCategory{category_obj.id}">
+                                        <div class="form-check custom-checkbox">
+                                            <input type="checkbox" name="cat_checks[]" value="{category_obj.id}" class="form-check-input blog_categories">
+                                            <label class="form-check-label">{category_obj.title}</label>
+                                        </div>
+                                    </li>'''
+            else:
+                html_data = f'''<ul class="category-checkbox-list">                      
+                                        <li class="BlogCategory{category_obj.id}">
+                                            <div class="form-check custom-checkbox">
+                                                <input type="checkbox" name="cat_checks[]" value="{category_obj.id}" class="form-check-input blog_categories">
+                                                <label class="form-check-label">{category_obj.title}</label>
+                                            </div>
+                                        </li>
+                                    </ul>'''
+
+            # for cat in Categories.objects.all():
+            #     print(cat.title)
+            #     print(cat.level)
+            indent = '+--'
+            select_option_html = f'<option value="{category_obj.id}">{category_obj.level * indent }{category_obj.title}</option>'
+
+            response = JsonResponse(
+                {"success": {'html_data': html_data, 'select_option_html': select_option_html}})
+        else:
+            print('category already exits')
+            response = JsonResponse({"warning": 'Category already exists'})
+
+        return redirect('crm:blog:blog-category')
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'blog.view_categories', 'blog.delete_categories'}, raise_exception=True)
+def crm_blog_category_delete(request, id):
+    category = Categories.objects.get(id=id)
+    if category:
+        category.delete()
+        messages.success(request, 'Category Delete Successfully')
+    else:
+        messages.warning(request, 'Category Does Not Exist')
+    return redirect('crm:blog:blog-category')
+
 
 # Dashboard views
 
