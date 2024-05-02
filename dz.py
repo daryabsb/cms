@@ -1,5 +1,6 @@
 # Static Folder Name
 foldername_d = "dashboard"
+foldername_e = "crm"
 
 
 dz_array = {
@@ -10,6 +11,58 @@ dz_array = {
         "og_description": "W3CMS  : Django CMS With Dashboard & FrontEnd Template",
         "og_image": "https://w3cms.dexignzone.com/django/social-image.png",
         "title": "W3CMS  : Django CMS With Dashboard & FrontEnd Template",
+    },
+    "crm": {
+
+        "htmx": [
+            f"js/htmx.js",
+            f"js/preload.js",
+            f"js/ext/debug.js",
+            f"js/ext/event-header.js",
+        ],
+        "global_top": {
+            "css": [
+
+                f"{foldername_e}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css",
+            ],
+            "js": [
+                f"{foldername_e}/vendor/global/global.min.js",
+                f"{foldername_e}/vendor/global/global.min.js",
+                f"{foldername_e}/vendor/bootstrap-select/dist/js/bootstrap-select.min.js",
+                # f"{foldername_e}/js/dashboard/cms.js",
+            ],
+        },
+        "global_down": {
+            "css": [
+                f"{foldername_e}/css/style.css",
+            ],
+            "js": [
+                f"{foldername_e}/js/dashboard/cms.js",
+                f"{foldername_e}/js/custom.js",
+                f"{foldername_e}/js/deznav-init.js",
+                f"{foldername_e}/js/demo.js",
+                f"{foldername_e}/js/styleSwitcher.js",
+            ],
+        },
+        "page_level": {
+            "css": {
+                # Menu views css
+                "crm_menu_setup": [
+                    f"{foldername_e}/vendor/datatables/css/jquery.dataTables.min.css",
+                    f"{foldername_e}/vendor/nestable2/css/jquery.nestable.min.css",
+                    f"{foldername_e}/vendor/tagify/dist/tagify.css",
+                ],
+            },
+            "js": {
+                # Menu views css
+                "crm_menu_setup": [
+                    f"{foldername_e}/vendor/tagify/dist/tagify.js",
+                    f"{foldername_e}/vendor/nestable2/js/jquery.nestable.min.js",
+                    # f"{foldername_e}/js/plugins-init/nestable-init.js",
+                    f"{foldername_e}/js/plugins-init/htmx-init.js",
+                ],
+            },
+        }
     },
     "global": {
         "css": [
@@ -394,7 +447,7 @@ dz_array = {
             ],
             "cms_page_create": [
                 f"/ckeditor/ckeditor-init.js"
-                
+
             ],
             "courses": [
                 f"{foldername_d}/vendor/swiper/js/swiper-bundle.min.js",

@@ -1,0 +1,25 @@
+
+  {% load static custom_tags %}
+
+<!-- CRM HEAD LOAD CSS -->
+    {% for htmx_url in dz_array.crm.htmx %}
+    <script src="{% static htmx_url %}" defer></script>
+	{% endfor %}
+
+    {% for cssurl in dz_array.crm.global_top.css %}
+    <link rel="stylesheet" href="{% static cssurl %}">
+	{% endfor %}
+    {% for cssurl in dz_array.crm.page_level.css|getdata:request.path %}
+    <link rel="stylesheet" href="{% static cssurl %}" >
+	{% endfor %} 
+    {% for cssurl in dz_array.crm.global_down.css %}
+    <link rel="stylesheet" href="{% static cssurl %}">
+	{% endfor %}
+    {% block additional_css %}
+    {% endblock %}
+
+ {% block additional_data %}
+    {% endblock %} 
+
+<!-- CRM HEAD LOAD CSS END -->
+

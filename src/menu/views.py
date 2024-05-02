@@ -17,6 +17,58 @@ type_dict = {
     "CustomLink": "CustomLink"
 }
 
+# CRM VIEWS
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'menu.view_menus'}, raise_exception=True)
+def crm_menu_setup(request, id=None):
+    template_name = 'crm/cms/menu/menu-setup.html'
+    menu_type_view = False
+
+    # Create Menu
+    if request.method == 'POST':
+        menu_name = request.POST.get('menu_create').strip()
+        # print('menu_name')
+        # print(menu_name)
+        if menu_name:
+            menu_obj = Menus(title=menu_name, user=request.user)
+            menu_obj.save()
+
+            return redirect(f'/dashboard/menus/setup/{menu_obj.id}/')
+    # Create Menu END
+
+    if id == None:
+        menu_count = Menus.objects.all().count()
+        if menu_count > 0:
+            menu_obj = Menus.objects.all().first()
+            menu_items = Items.objects.filter(menu=menu_obj)
+        else:
+            menu_obj = None
+            menu_items = None
+    else:
+        menu_obj = Menus.objects.get(id=id)
+        menu_items = Items.objects.filter(menu=menu_obj)
+
+    if request.user.has_perm('menu.add_items'):
+        menu_type_view = True
+    print("user has perm: ", menu_type_view)
+
+    context = {
+        "menu_items": menu_items,
+        "menu_obj": menu_obj,
+        "menus": Menus.objects.all(),
+        "pages": Page.objects.filter(status='Published'),
+        "blogs": Blogs.objects.filter(status='Published'),
+        "categories": Categories.objects.all(),
+        "ScreenOption": json.dumps(ScreenOption),
+        "page_title": "Menu Setup",
+        "menu_type_view": menu_type_view
+    }
+    return render(request, template_name, context)
+
+
+# DASHBOARD VIEWS
 
 @login_required(login_url='dashboard:login')
 @permission_required({'menu.view_menus'}, raise_exception=True)

@@ -7,10 +7,15 @@
 	{% include 'crm/includes/metas.html' %}
 	<!-- PAGE TITLE HERE -->
 	<!-- FAVICONS ICON -->
+
+
+	{% include 'crm/includes/head-links.html' %}
+
+
 	<link rel="shortcut icon" type="image/png" href="{% static 'crm/images/favicon.png' %}">
 	{% block crm_additional_css %}
 	{% endblock crm_additional_css %}
-	<link href="{% static 'crm/vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
+	{% comment %} <link href="{% static 'crm/vendor/bootstrap-select/dist/css/bootstrap-select.min.css' %}" rel="stylesheet">
 	<link href="{% static 'crm/vendor/swiper/css/swiper-bundle.min.css' %}" rel="stylesheet">
 	<link href="{% static 'crm/vendor/googleapis/css2.css' %}" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'crm/vendor/nouislider/nouislider.min.css' %}">
@@ -18,12 +23,12 @@
 	<link href="{% static 'crm/vendor/jvmap/jquery-jvectormap.css' %}" rel="stylesheet">
 	<link href="{% static 'crm/vendor/datatables/buttons/1.6.4/css/buttons.dataTables.min.css' %}" rel="stylesheet">
 	<link href="{% static 'crm/vendor/bootstrap-datetimepicker/css/bootstrap-datetimepicker.min.css' %}" rel="stylesheet">
-	
 	<!-- tagify-css -->
 	<link href="{% static 'crm/vendor/tagify/dist/tagify.css' %}" rel="stylesheet">
-	
 	<!-- Style css -->
-	<link href="{% static 'crm/css/style.css' %}" rel="stylesheet">
+	<link href="{% static 'crm/css/style.css' %}" rel="stylesheet"> {% endcomment %}
+	
+	
 	<title>{{ title }}</title>
 
 </head>
@@ -2066,63 +2071,11 @@
 	<!--**********************************
         Scripts
     ***********************************-->
+{% load django_htmx %}
+	{% django_htmx_script %}
+	{% include 'crm/includes/bottom-links.html' %}
+
 	<!-- Required vendors -->
-	<script src="{% static 'crm/vendor/global/global.min.js' %}"></script>
-	<script src="{% static 'crm/vendor/chart.js/Chart.bundle.min.js' %}"></script>
-	<script src="{% static 'crm/vendor/bootstrap-select/dist/js/bootstrap-select.min.js' %}"></script>
-	<script src="{% static 'crm/vendor/apexchart/apexchart.js' %}"></script>
-
-    
-
-	<!-- Dashboard 1 -->
-	{% comment %} <script src="{% static 'crm/js/dashboard/dashboard-1.js' %}"></script> {% endcomment %}
-	<script src="{% static 'crm/vendor/draggable/draggable.js' %}"></script>
-
-
-	<!-- tagify -->
-	<script src="{% static 'crm/vendor/tagify/dist/tagify.js' %}"></script>
-
-	<script src="{% static 'crm/vendor/datatables/js/jquery.dataTables.min.js' %}"></script>
-	<script src="{% static 'crm/vendor/datatables/js/dataTables.buttons.min.js' %}"></script>
-	<script src="{% static 'crm/vendor/datatables/js/buttons.html5.min.js' %}"></script>
-	<script src="{% static 'crm/vendor/datatables/js/jszip.min.js' %}"></script>
-	<script src="{% static 'crm/js/plugins-init/datatables.init.js' %}"></script>
-
-	<!-- Apex Chart -->
-
-	<script src="{% static 'crm/vendor/bootstrap-datetimepicker/js/moment.js' %}"></script>
-	<script src="{% static 'crm/vendor/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js' %}"></script>
-
-
-	<!-- Vectormap -->
-	{% comment %} <script src="{% static 'crm/vendor/jqvmap/js/jquery.vmap.min.js' %}"></script>
-	<script src="{% static 'crm/vendor/jqvmap/js/jquery.vmap.world.js' %}"></script>
-	<script src="{% static 'crm/vendor/jqvmap/js/jquery.vmap.usa.js' %}"></script> {% endcomment %}
-	<script src="{% static 'crm/js/dashboard/cms.js' %}"></script>
-	<script src="{% static 'crm/js/custom.js' %}"></script>
-	<script src="{% static 'crm/js/deznav-init.js' %}"></script>
-	{% comment %} <script src="{% static 'crm/js/demo.js' %}"></script> {% endcomment %}
-	<script src="{% static 'crm/js/styleSwitcher.js' %}"></script>
-
-	<script>
-		const titleInput = document.querySelector('input[name=title');
-		const slugInput = document.querySelector('.slug');
-		if (titleInput && slugInput){
-			const slugify = (val) => {
-				return val.toString().toLowerCase().trim()
-					.replace(/&/g, '-and-') // replacing & with '-and-'
-					.replace(/[\s\W-]+/g, '-') //replcaing spaces, non-word chars and dashes with a single '-'
-			};
-
-			titleInput.addEventListener('keyup', (e) => {
-				slugInput.setAttribute('value', slugify(titleInput.value));
-			});
-		}
-	</script>
-
-    {% block crm_additional_js %}
-
-    {% endblock crm_additional_js %}
 
 </body>
 

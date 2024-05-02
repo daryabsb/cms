@@ -9,7 +9,9 @@ from src.menu.views import (
     cms_menu_delete,
     cms_search_menu,
     add_menu_content,
-    add_link_to_menu
+    add_link_to_menu,
+
+    crm_menu_setup,
 
 )
 
@@ -28,5 +30,10 @@ urlpatterns = [
 
     path('add_content_to_menu/', add_menu_content, name='add_content_to_menu'),
     path('add_link_to_menu/', add_link_to_menu, name='add_link_to_menu'),
+
+    # CRM URLS
+    path('menu-setup/', crm_menu_setup, name='menu-setup'),
+    path('menu-setup/<int:id>/', crm_menu_setup, name='menu-setup-detail')
+
 
 ]
