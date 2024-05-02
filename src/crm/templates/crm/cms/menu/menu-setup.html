@@ -283,13 +283,17 @@ Menu Setup
     </div>
 </div>
 
+<script>
+var CSRF_TOKEN = '{{ csrf_token }}';
+var menu_id = '{{ menu_obj.id }}';
+let menu_data = {
+            "menu_id": '{{ menu_obj.id }}',
+            "menu_name": '{{ menu_obj.title }}'
+        };
+</script>
 {% endblock crm_content %}
 
  {% block additional_data %}
-<script>
-var CSRF_TOKEN = '{{ csrf_token }}';
-var menu_id = 12;
-</script>
 {% endblock %} 
 
 {% block additional_js %}

@@ -15,29 +15,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log("Menu id from additional = ", menu_id);
             // Send AJAX request to server to save the new structure
-            var menu_id = jQuery(this).attr('rel');
+            // var menu_id = jQuery(this).attr('rel');
             var form_data = $("#MenuItem" + menu_id + "Form").serializeArray();
-            var menu_data = {};
 
-            // Extracting menu_data from form_data
-            form_data.forEach(function (input) {
-                if (input.name === 'menu_data') {
-                    menu_data = JSON.parse(input.value);
-                }
-            });
-
-            console.log("Menu_id = ", menu_id);
-            console.log("Menu_data = ", menu_data);
-            console.log("Form_data = ", form_data);
 
             var menu_name = $('#MenuNameEdit').val();
 
             menu_data.menu_id = menu_id; // Update menu_id in menu_data
             menu_data.menu_name = menu_name; // Update menu_name in menu_data
 
-            console.log("Updated Menu_data = ", menu_data);
 
             var dd_data = JSON.stringify(data); // Serialize Nestable data
+
+            console.log("Menu_id = ", menu_id);
+            console.log("Menu_data = ", JSON.stringify(menu_data));
+            console.log("Form_data = ", form_data);
+            console.log("dd_data = ", dd_data);
 
             $.ajax({
                 headers: {
