@@ -23,7 +23,7 @@ Menu Setup
                     <div class="col-xl-3 col-xxl-3 mb-xl-0 mb-3">
                         <h6 class="mb-0">Select a menu to edit: <span class="required">* </span></h6>
                     </div>
-                    <div class="col-xl-6 col-xxl-5 mb-xl-0 mb-3">
+                    <div class="col-xl-6 col-xxl-5 mb-xl-0 mb-3 MenuSelectDiv">
                         <select 
                          name="MenuSelect" id="MenuSelect"
                         class="form-control default-select dashboard-select-2 h-auto wide">
@@ -178,94 +178,7 @@ Menu Setup
                     <div class="card-body">
                         <h6 class="mb-0">Menus Structure</h6>
                         <p>Add Menus items from the column on the left.</p>
-                            <div id="menu_nestable" class="col-xl-7">
-                                <div class="dd" id="nestable">
-
-                        <form
-                            hx-post="{% url '_htmx:menu-structure-save' %}"
-                            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
-                            hx-target="#menu_nestable"
-                            hx-vals='
-                            {
-                                "menu_id": {{ menu_obj.id }}, 
-                                "key2": "value2"}
-                            '
-                            id="MenuItem{{menu_obj.id}}Form"
-                            hx-trigger="end"
-                            rel="{{menu_obj.id}}"
-                            >
-                                {% if slug and not done %}
-                                <input type="hidden" name="menu_data" value="{{slug}}">
-                                {% else %}
-                                <input type="hidden" name="menu_data" value="{{menu_slug}}">
-                                {% endif %}
-                                {% with menu_items=menu_obj.slug|getMenu %}
-                                    <div class="htmx-indicator" style="cursor: default">Updating...</div>
-                                    <ol class="dd-list">
-                                        {% recursetree menu_items %}
-                                        <li class="dd-item menu-ac-item" data-id="{{node.id}}">
-                                            <input type="hidden" name="item[]" value="{{node.id}}">
-                                            <!-- <div class="dd-handle"></div> -->
-                                            <div class="accordion" id="accordion-{{node.id}}">
-                                                <div class="accordion-item">
-                                                    <div class="accordion-header p-0" id="heading-{{node.id}}">
-                                                        <div class="move-media dd-handle">
-                                                            <i class="fa-solid fa-arrows-up-down-left-right"></i>
-                                                        </div>
-                                                        <button class="accordion-button contact collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-{{node.id}}" aria-expanded="true" aria-controls="collapse-{{node.id}}">
-                                                        {{ node.title}}
-                                                        </button>
-                                                    </div>
-                                                    <div id="collapse-{{node.id}}" class="accordion-collapse collapse" aria-labelledby="heading-{{node.id}}" data-bs-parent="#accordion-{{node.id}}">
-                                                        <div class="accordion-body">
-                                                            <div class="row">
-                                                                <div class="col-xl-12">
-                                                                    <form>
-                                                                        <div class="mb-3">
-                                                                            <label  class="form-label">URL</label>
-                                                                            <input type="text" class="form-control" value="{{ node.link }}">
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div class="col-xl-6">
-                                                                    <form>
-                                                                        <div class="mb-3">
-                                                                            <label  class="form-label">Navigation Label</label>
-                                                                            <input type="text" class="form-control" value="{{ node.title }}">
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div class="col-xl-6">
-                                                                    <form>
-                                                                        <div class="mb-3">
-                                                                            <label  class="form-label">Title Attribute</label>
-                                                                            <input type="text" class="form-control" value="{{ node.attributes }}" >
-                                                                        </div>
-                                                                    </form>
-                                                                </div>
-                                                                <div class="d-flex align-items-center">
-                                                                    <a href="javascript:void(0);">Remove</a><span class="mx-2">|</span>
-                                                                    <a href="javascript:void(0);" data-bs-toggle="collapse" data-bs-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
-                                                                    Cancel
-                                                                    </a>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            {% if not node.is_leaf_node %}
-                                            <ol class="dd-list">
-                                                {{ children }}
-                                            </ol>
-                                            {% endif %}
-                                        </li>
-                                        {% endrecursetree %}
-                                    </ol>
-                                </div>
-                                {% endwith %}
-                        </form>
-                            </div>
+                        {% include 'crm/cms/menu/partials/menu-nestable.html' with menu_obj=menu_obj menu_items=menu_items %}
                     </div>
                 </div>
                 <div class="filter cm-content-box box-primary style-1 mb-0 border-0">
@@ -274,7 +187,7 @@ Menu Setup
                             Delete Menu
                         </div>
                         <button 
-                        type="button" class="btn btn-secondary light my-2">Save Menu</button>
+                        type="button" class="SaveMenu btn btn-secondary light my-2">Save Menu</button>
                     </div>
                 </div>
 
@@ -282,8 +195,26 @@ Menu Setup
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	var CSRF_TOKEN = 'dFtj1lGUXrVlotX2RZtq2q7fcbQe6TF5L6XDCpblIZGDJlynAHoV8DOyq7IVxXWe';
 
+	var screenOptionArray = JSON.stringify({"Page": {"visibility": true}, "Blog": {"visibility": true}, "CustomLink": {"visibility": true}, "TitleAttribute": {"visibility": true}, "ClassAttribute": {"visibility": true}, "TargetAttribute": {"visibility": true}, "Description": {"visibility": true}});
+	console.log(screenOptionArray);
+
+	var search_menus_url = '/en/dashboard/menus/search_menu/';
+	var menu_item_update_url = '/dashboard/menus/menu_item_update/';
+	var menu_item_delete_url = '/en/dashboard/menus/menu_item_delete/'; 
+	var custom_link_add_to_menu_url = '/dashboard/menus/custom_link_add_to_menu/';
+	var category_add_to_menu_url = '/dashboard/menus/category_add_to_menu/';
+	var blog_add_to_menu_url = '/dashboard/menus/blog_add_to_menu/';
+	var page_add_to_menu_url = '/dashboard/menus/page_add_to_menu/';
+	var menu_structure_save_url = '{% url '_htmx:menu-structure-save' %}';
+	var menu_delete_url = '/en/dashboard/menus/menu_delete/';
+
+   
+</script>
 <script>
+var saveStructureURL = '{% url '_htmx:menu-structure-save' %}'
 var CSRF_TOKEN = '{{ csrf_token }}';
 var menu_id = '{{ menu_obj.id }}';
 let menu_data = {
@@ -291,14 +222,15 @@ let menu_data = {
             "menu_name": '{{ menu_obj.title }}'
         };
 </script>
+
 {% endblock crm_content %}
 
  {% block additional_data %}
+    <script>
+    "use strict";
+    console.log("Additional Head DATA loaded!");
+    </script>
 {% endblock %} 
 
 {% block additional_js %}
-<script>
-var saveStructureURL = '{% url '_htmx:menu-structure-save' %}'
-
-</script>
 {% endblock %} 

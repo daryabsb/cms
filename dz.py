@@ -23,11 +23,12 @@ dz_array = {
         "global_top": {
             "css": [
 
+                f"{foldername_e}/vendor/sweetalert2/dist/sweetalert2.min.css",
                 f"{foldername_e}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css",
             ],
             "js": [
                 f"{foldername_e}/vendor/global/global.min.js",
-                f"{foldername_e}/vendor/global/global.min.js",
+                f"{foldername_e}/vendor/sweetalert2/dist/sweetalert2.min.js",
                 f"{foldername_e}/vendor/bootstrap-select/dist/js/bootstrap-select.min.js",
                 # f"{foldername_e}/js/dashboard/cms.js",
             ],
@@ -58,8 +59,9 @@ dz_array = {
                 "crm_menu_setup": [
                     f"{foldername_e}/vendor/tagify/dist/tagify.js",
                     f"{foldername_e}/vendor/nestable2/js/jquery.nestable.min.js",
-                    # f"{foldername_e}/js/plugins-init/nestable-init.js",
-                    f"{foldername_e}/js/plugins-init/htmx-init.js",
+                    f"{foldername_e}/js/plugins-init/nestable-init.js",
+                    f"{foldername_e}/js/plugins-init/crm-menu.js",
+                    # f"{foldername_e}/js/plugins-init/htmx-init.js",
                 ],
             },
         }

@@ -8,6 +8,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         "use strict";
 
+
+        $("#nestable").nestable({
+            group: 1,
+        }).on("change", e)
+
+        var e = function (e) {
+            var t = e.length ? e : $(e.target);
+            console.log('#someButton was clicked');
+            var structure = $(this).nestable('serialize');
+            saveStructure(structure);
+        };
+
         /*******************
         Nestable
         *******************/
@@ -73,15 +85,6 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
 
-        var e = function (e) {
-            var t = e.length ? e : $(e.target);
-            console.log('#someButton was clicked');
-            var structure = $(this).nestable('serialize');
-            saveStructure(structure);
-        };
-        $("#nestable").nestable({
-            group: 1,
-        }).on("change", e)
         // ,
         //     $("#nestable2").nestable({
         //         group: 1

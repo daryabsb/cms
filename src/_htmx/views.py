@@ -24,6 +24,96 @@ class HtmxHttpRequest(HttpRequest):
     htmx: HtmxDetails
 
 
+# CRM VIEWS
+@require_POST
+def crm_menu_structure_save(request: HtmxHttpRequest) -> HttpResponse:
+
+    order_no = 0
+
+    form_data_dict = {}
+    form_data_list = json.loads(request.POST.get('form_data'))
+
+    for field in form_data_list:
+        form_data_dict[field["name"]] = field["value"]
+
+    # Start Save Menu Structure
+    dd_data_list = json.loads(request.POST.get('dd_data'))
+    menu_data = json.loads(request.POST.get('menu_data'))
+    if type(menu_data) == str:
+        menu_data = dict(menu_data)
+    print("tyype menu_data = ", type(menu_data) == str)
+    print("tyype menu_data = ", type(menu_data))
+    print("menu_data = ", menu_data)
+    if type(menu_data) == dict and 'menu_id' in menu_data:
+        menu_obj = Menus.objects.get(id=menu_data.get('menu_id'))
+    else:
+        menu_obj = Menus.objects.first()
+
+    menu_obj.title = menu_data.get('menu_name')
+    menu_obj.save()
+    # print("dd_data_list = ", dd_data_list)
+
+    for dd_item_data in dd_data_list:
+        item_obj = Items.objects.get(id=int(dd_item_data.get('id')))
+    #     # Save ItemForm
+        attributes = {}
+        # item_obj.title = form_data_dict.get(f'item_label{item_obj.id}')
+
+        title_attribute = form_data_dict.get(
+            f'item_title_attribute{item_obj.id}')
+        class_attribute = form_data_dict.get(
+            f'item_class_attribute{item_obj.id}')
+        target_attribute = form_data_dict.get(
+            f'item_target_attribute{item_obj.id}')
+
+        attributes["title"] = title_attribute
+        attributes["class"] = class_attribute
+        attributes["target"] = target_attribute
+
+        item_obj.attributes = attributes
+
+        item_obj.description = form_data_dict.get(
+            f'item_description{item_obj.id}')
+        item_url = form_data_dict.get(f'item_url{item_obj.id}')
+
+        order_no += 1
+        item_obj.order = order_no
+
+        if item_url:
+            item_obj.link = item_url
+
+    #     # End ItemForm
+
+        parent_id = dd_item_data.get('parent_id')
+        if parent_id:
+            parent_obj = Items.objects.get(id=int(parent_id))
+            item_obj.parent = parent_obj
+            item_obj.save()
+        else:
+            item_obj.parent = None
+            item_obj.save()
+    # End Save Menu Structure
+
+    response = JsonResponse({"success": 'Menu  Update successfully'})
+
+    response.status_code = 200
+    menu_items = Items.objects.filter(menu=menu_obj)
+    return render(
+        request,
+        'crm/cms/menu/partials/menu-nestable.html',
+        {
+            "done": "This is rendered!",
+            "success": 'Menu  Update successfully',
+            # "menu_obj": menu,
+            "menu_items": menu_items,
+            "menu_slug": menu_obj.slug
+        },
+    )
+
+
+# CMS VIEWS
+
+
 @require_POST
 def search_pages2(request: HtmxHttpRequest) -> HttpResponse:
     print("This view was called")
@@ -173,6 +263,7 @@ def cms_menu_structure_save(request: HtmxHttpRequest) -> HttpResponse:
         },
     )
 
+
 @require_POST
 def update_menu_name(request, menu_id):
 
@@ -183,12 +274,12 @@ def update_menu_name(request, menu_id):
     if menu_name:
         menu_obj.title = menu_name
         menu_obj.save()
-    
+
     context = {
         'menu_obj': menu_obj,
         'menus': menus,
     }
-    return render(request, 'menu/renders/update_menu.html',context)
+    return render(request, 'menu/renders/update_menu.html', context)
 
     '''
 
