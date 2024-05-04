@@ -25,7 +25,7 @@ Menu Setup
                     </div>
                     <div id="menu-select-div" class="col-xl-6 col-xxl-5 mb-xl-0 mb-3 MenuSelectDiv">
                         <select 
-                            name="MenuSelect" id="MenuSelect"
+                            name="MenuSelect" id="menu-select"
                             class="form-control default-select dashboard-select-2 h-auto wide">
                             {% if not menu_obj %}
                             <option value="" selected>Choose Menu</option>
@@ -42,7 +42,7 @@ Menu Setup
                         </select>
                     </div>
                     <div class="col-xl-3 col-xxl-4">
-                        <a href="javascript:void(0);" class="btn btn-primary">Select</a>
+                        <button class="btn btn-primary menu-select-btn">Select</button>
                         <span class="mx-2">or</span>
                         <a href="javascript:void(0);" class="text-primary">create new menu</a>
                     </div>

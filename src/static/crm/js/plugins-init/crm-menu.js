@@ -196,6 +196,14 @@ $(document).ready(function () {
 
     ///////////////////////////////
 
+    document
+        .querySelector('.menu-select-btn')
+        .addEventListener('click', function () {
+            var id = document.getElementById('menu-select').value //$("#MenuSelect option:selected").val();
+            console.log("got menu id: ", id)
+            if (id != "") { window.location.href = "/crm/menu/menu-setup/" + id + "/"; }
+        });
+
 
     setScreenOption();
     allowBlock();
@@ -286,7 +294,6 @@ function saveStructure() {
     }
 }
 
-
 function selectAll() {
     jQuery('.SelectAllItems').click(function () {
         jQuery(this).parents('.ItemsCheckboxSec').find('input[type="checkbox"]').prop("checked", true);
@@ -295,7 +302,6 @@ function selectAll() {
         jQuery(this).parents('.ItemsCheckboxSec').find('input[type="checkbox"]').prop("checked", false);
     });
 }
-
 
 function setScreenOption() {
 
@@ -331,6 +337,7 @@ function setScreenOption() {
         });
     });
 }
+
 function allowBlock() {
     jQuery(document).on('click', '.allowField', function () {
         var result = jQuery(this).attr('rel');
@@ -361,7 +368,6 @@ function cancelMenuObject() {
 
 }
 
-
 function checkboxUtility() {
     jQuery(document).on('click', '.checkboxUtility', function () {
 
@@ -369,10 +375,6 @@ function checkboxUtility() {
 
     });
 }
-
-////////////////////////////////////////////////AddMenu/////////////////////////////
-
-
 
 function AddToMenu() {
     jQuery(document).on('click', '.AddToMenu', function () {
@@ -426,8 +428,6 @@ function AddToMenu() {
 
     });
 }
-
-
 
 function LinksAddToMenu() {
     jQuery(document).on('click', '.LinksAddToMenu', function () {
@@ -501,7 +501,6 @@ function LinksAddToMenu() {
     });
 }
 
-
 function SearchForMenu() {
 
     jQuery(document).on('keyup', '.SearchForMenu', function () {
@@ -547,8 +546,6 @@ function SearchForMenu() {
 
     });
 }
-
-
 
 $('.sweet-delete-menu-cancel').on('click', function (event) {
     event.preventDefault();
