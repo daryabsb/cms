@@ -123,6 +123,7 @@ def crm_update_menu_name(request, menu_id):
     }
     return render(request, 'crm/cms/menu/renders/update_menu.html', context)
 
+
 @require_GET
 def crm_search_pages(request: HtmxHttpRequest) -> HttpResponse:
     from src.pages.models import Page
@@ -136,6 +137,16 @@ def crm_search_pages(request: HtmxHttpRequest) -> HttpResponse:
         "crm/cms/menu/partials/left_search_results.html",
         {"objects": objects},
     )
+
+
+def crm_add_new_menu(request: HtmxHttpRequest) -> HttpResponse:
+    menu_title = request.POST.get('menu_title')
+    menu_link = request.POST.get('menu_link')
+    print(menu_title, menu_link)
+
+    response = JsonResponse({'success': True})
+    response.status_code = 200
+    return response
 
 
 @login_required(login_url='dashboard:login')
@@ -202,8 +213,6 @@ def crm_add_menu_content(request: HtmxHttpRequest) -> HttpResponse:
     # if menu_type == 'Category':
     #     allItems = Categories.objects.filter(id__in=item_ids)
     #     linkType = 'Category'
-
-
 
 
 # CMS VIEWS

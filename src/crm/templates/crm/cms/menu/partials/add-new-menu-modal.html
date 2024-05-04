@@ -1,0 +1,39 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn tp-btn-light btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">
+<h6 class="text-primary">Create new menu</h6>
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <form
+        hx-post="{% url '_htmx:add-new-menu' %}"
+        hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+        >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Insert a new menu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Title</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="menu_title" class="form-control" placeholder="Enter a name.." required>
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Link</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="menu_link" class="form-control" placeholder="Link to your menu..">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

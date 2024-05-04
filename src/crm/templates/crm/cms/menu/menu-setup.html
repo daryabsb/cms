@@ -44,7 +44,8 @@ Menu Setup
                     <div class="col-xl-3 col-xxl-4">
                         <button class="btn btn-primary menu-select-btn">Select</button>
                         <span class="mx-2">or</span>
-                        <a href="javascript:void(0);" class="text-primary">create new menu</a>
+                        {% comment %} <a href="javascript:void(0);" class="text-primary">create new menu</a> {% endcomment %}
+                        {% include 'crm/cms/menu/partials/add-new-menu-modal.html' %}
                     </div>
                 </div>
             </div>
