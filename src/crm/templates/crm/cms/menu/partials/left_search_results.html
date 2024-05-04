@@ -1,0 +1,12 @@
+{% if objects %}
+{% for object in objects %}
+<div class="form-check">
+	<input class="form-check-input" type="checkbox" 
+	name="PageItem[]" value="{{object.id}}" id="flexCheckDefault-{{object.id}}"
+	>
+	<label class="form-check-label" for="flexCheckDefault">
+		{{object.title}}
+	</label>
+</div>
+{% endfor %}
+{% endif %}

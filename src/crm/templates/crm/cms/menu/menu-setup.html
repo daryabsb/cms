@@ -23,13 +23,13 @@ Menu Setup
                     <div class="col-xl-3 col-xxl-3 mb-xl-0 mb-3">
                         <h6 class="mb-0">Select a menu to edit: <span class="required">* </span></h6>
                     </div>
-                    <div class="col-xl-6 col-xxl-5 mb-xl-0 mb-3 MenuSelectDiv">
+                    <div id="menu-select-div" class="col-xl-6 col-xxl-5 mb-xl-0 mb-3 MenuSelectDiv">
                         <select 
-                         name="MenuSelect" id="MenuSelect"
-                        class="form-control default-select dashboard-select-2 h-auto wide">
+                            name="MenuSelect" id="MenuSelect"
+                            class="form-control default-select dashboard-select-2 h-auto wide">
                             {% if not menu_obj %}
                             <option value="" selected>Choose Menu</option>
-						    {% endif %}
+                            {% endif %}
                             {% for menu in menus %}
                             <option 
                             {% if menu_obj %}
@@ -63,6 +63,7 @@ Menu Setup
                 </div>
                 <div class="cm-content-body form excerpt">
                     <div class="card-body">
+                        {% include 'crm/cms/menu/includes/menu-types-tree.html' %}
                         <div class="filter cm-content-box box-primary border">
                             <div class="content-title border-0">
                                 <div class="cpa">
@@ -167,18 +168,28 @@ Menu Setup
         <div class="col-xl-8">
             <div class="filter cm-content-box box-primary">
             
+                <form
+                    hx-post="{% url '_htmx:crm-menu-update-name' menu_obj.id %}"
+                    hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+                    hx-target="#menu_name"
+                    >
                 <div class="content-title flex-wrap">
-                    <div class="cpa d-flex align-items-center flex-wrap">
-                        Menu Name
-                        <input type="text" class="form-control w-auto ms-2" placeholder="{{ menu_obj.title }}">
+                        <div class="cpa d-flex align-items-center flex-wrap">
+                            Menu Name:
+                            {% include 'crm/cms/menu/includes/menu-name-input.html' %}
+                        </div>
+                        {% if perms.menu.change_items and perms.menu.change_menus %}
+                        <button type="submit" class="btn btn-secondary light ms-sm-auto mb-2 mb-sm-0">Save Menu Name</button>
+                        {% endif %}
                     </div>
-                    <button type="button" class="btn btn-secondary light ms-sm-auto mb-2 mb-sm-0">Save Menu</button>
-                </div>
+                </form>
                 <div class="cm-content-body form excerpt rounded-0">
-                    <div class="card-body">
+                    <div id="menu_items" class="card-body">
                         <h6 class="mb-0">Menus Structure</h6>
                         <p>Add Menus items from the column on the left.</p>
-                        {% include 'crm/cms/menu/partials/menu-nestable.html' with menu_obj=menu_obj menu_items=menu_items %}
+                        {% with menu_items=menu_obj.slug|getMenu %}
+                        {% include 'crm/cms/menu/partials/menu-nestable.html' with menu_items=menu_items slug=menu_obj.slug %}
+                        {% endwith %}
                     </div>
                 </div>
                 <div class="filter cm-content-box box-primary style-1 mb-0 border-0">
@@ -217,10 +228,10 @@ Menu Setup
 var saveStructureURL = '{% url '_htmx:menu-structure-save' %}'
 var CSRF_TOKEN = '{{ csrf_token }}';
 var menu_id = '{{ menu_obj.id }}';
-let menu_data = {
+let menu_data = JSON.stringify({
             "menu_id": '{{ menu_obj.id }}',
             "menu_name": '{{ menu_obj.title }}'
-        };
+        });
 </script>
 
 {% endblock crm_content %}

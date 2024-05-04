@@ -1,8 +1,16 @@
 {% comment %} {% load static mptt_tags custom_tags %} {% endcomment %}
-{% load mptt_tags %}
+{% load mptt_tags custom_tags %}
+
+{% if slug and not done %}
+<input type="hidden" name="menu_data" value="{{slug}}">
+{% else %}
+<input type="hidden" name="menu_data" value="{{menu_slug}}">
+{% endif %}
+
 <div id="menu_nestable" class="col-xl-7">
     <form method="post" id="MenuItem{{menu_obj.id}}Form">
         <div class="dd menu_items" id="nestable">
+            <div class="htmx-indicator" style="cursor: default">Updating...</div>
             <ol class="dd-list" id="setMenu">
                 {% recursetree menu_items %}
                 <li class="dd-item menu-ac-item" data-id="{{node.id}}">
@@ -67,3 +75,10 @@
         </div>
     </form>
 </div>
+{% if done %}
+Initiated
+<script>
+        console.log("Initiate ...")
+        initializeNestable()
+</script>
+{% endif %}

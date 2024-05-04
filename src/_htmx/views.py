@@ -38,16 +38,10 @@ def crm_menu_structure_save(request: HtmxHttpRequest) -> HttpResponse:
 
     # Start Save Menu Structure
     dd_data_list = json.loads(request.POST.get('dd_data'))
+
     menu_data = json.loads(request.POST.get('menu_data'))
-    if type(menu_data) == str:
-        menu_data = dict(menu_data)
-    print("tyype menu_data = ", type(menu_data) == str)
-    print("tyype menu_data = ", type(menu_data))
-    print("menu_data = ", menu_data)
-    if type(menu_data) == dict and 'menu_id' in menu_data:
-        menu_obj = Menus.objects.get(id=menu_data.get('menu_id'))
-    else:
-        menu_obj = Menus.objects.first()
+
+    menu_obj = Menus.objects.get(id=menu_data.get('menu_id'))
 
     menu_obj.title = menu_data.get('menu_name')
     menu_obj.save()
@@ -97,18 +91,119 @@ def crm_menu_structure_save(request: HtmxHttpRequest) -> HttpResponse:
     response = JsonResponse({"success": 'Menu  Update successfully'})
 
     response.status_code = 200
+    return response
+    # menu_items = Items.objects.filter(menu=menu_obj)
+    # return render(
+    #     request,
+    #     'crm/cms/menu/partials/menu-nestable.html',
+    #     {
+    #         "done": "This is rendered!",
+    #         "success": 'Menu  Update successfully',
+    #         # "menu_obj": menu,
+    #         "menu_items": menu_items,
+    #         "menu_slug": menu_obj.slug
+    #     },
+    # )
+
+
+@require_POST
+def crm_update_menu_name(request, menu_id):
+
+    menu_name = request.POST.get('menu_name', None)
+    menu_obj = get_object_or_404(Menus, id=menu_id)
+    menus = Menus.objects.all()
+
+    if menu_name:
+        menu_obj.title = menu_name
+        menu_obj.save()
+
+    context = {
+        'menu_obj': menu_obj,
+        'menus': menus,
+    }
+    return render(request, 'crm/cms/menu/renders/update_menu.html', context)
+
+@require_GET
+def crm_search_pages(request: HtmxHttpRequest) -> HttpResponse:
+    from src.pages.models import Page
+    search_keywords = request.GET.get("search_keywords", None)
+    objects = []
+    if search_keywords:
+        objects = Page.objects.filter(title__icontains=search_keywords)
+
+    return render(
+        request,
+        "crm/cms/menu/partials/left_search_results.html",
+        {"objects": objects},
+    )
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'menu.view_items', 'menu.add_items'}, raise_exception=True)
+@require_POST
+def crm_add_menu_content(request: HtmxHttpRequest) -> HttpResponse:
+
+    item_ids = request.POST.getlist('PageItem[]')
+    menu_type = request.POST.get('menu_type')
+    menu_id = request.POST.get('menu_id')
+    menu_obj = Menus.objects.get(id=menu_id)
+    allItems = []
+    new_menu_item = {}
+
+    print("Item IDs = ", item_ids)
+    print("menu_type = ", menu_type)
+    print("menu_obj = ", menu_obj)
+
+    if menu_type == 'Page':
+        allItems = Page.objects.filter(id__in=item_ids)
+        linkType = 'Page'
+
+    if menu_type == 'Blog':
+        allItems = Blogs.objects.filter(id__in=item_ids)
+        linkType = 'Blog'
+
+    if menu_type == 'Category':
+        allItems = Categories.objects.filter(id__in=item_ids)
+        linkType = 'Category'
+
+    if allItems:
+        for item_obj in allItems:
+            new_menu_item = Items(
+                menu=menu_obj,
+                title=item_obj.title,
+                item_id=item_obj.id,  # item_id
+                type=linkType,
+                order=Items.objects.count() + 2
+
+            )
+            new_menu_item.save()
     menu_items = Items.objects.filter(menu=menu_obj)
+
     return render(
         request,
         'crm/cms/menu/partials/menu-nestable.html',
         {
+            "new_menu_item": new_menu_item,
             "done": "This is rendered!",
-            "success": 'Menu  Update successfully',
-            # "menu_obj": menu,
+            "menu_obj": menu_obj,
             "menu_items": menu_items,
-            "menu_slug": menu_obj.slug
+            "slug": menu_obj.slug
         },
     )
+
+    # if menu_type == 'Page':
+    #     allItems = Page.objects.filter(id__in=item_ids)
+    #     linkType = 'Page'
+
+    # if menu_type == 'Blog':
+    #     allItems = Blogs.objects.filter(id__in=item_ids)
+    #     linkType = 'Blog'
+
+    # if menu_type == 'Category':
+    #     allItems = Categories.objects.filter(id__in=item_ids)
+    #     linkType = 'Category'
+
+
 
 
 # CMS VIEWS
