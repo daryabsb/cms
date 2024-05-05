@@ -29,7 +29,7 @@ class Menus(models.Model):
         return super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.title
+        return f"{self.id}: {self.title}"
 
 
 class Items(MPTTModel):

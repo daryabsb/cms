@@ -1,6 +1,7 @@
 
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from src.blogs.models import Blogs, Categories
 from src.menu.models import Menus, Items
 from src.pages.models import Page
@@ -47,7 +48,12 @@ def crm_menu_setup(request, id=None):
             menu_obj = None
             menu_items = None
     else:
-        menu_obj = Menus.objects.get(id=id)
+        menu_obj = Menus.objects.filter(id=id).first()
+        if not menu_obj:
+            menu_obj = Menus.objects.first()
+            menu_items = Items.objects.filter(menu=menu_obj)
+            return redirect(reverse('crm:menu:menu-setup-detail', args=[menu_obj.id]))
+
         menu_items = Items.objects.filter(menu=menu_obj)
 
     if request.user.has_perm('menu.add_items'):
@@ -173,11 +179,11 @@ def add_link_to_menu(request):
 
     if request.method == 'POST':
         new_menu_item = Items(menu=menu_obj,
-                              title=request.POST.get('linktitle').strip(),
-                              type='Link',
+                title=request.POST.get('linktitle').strip(),
+                type='Link',
 
-                              link=request.POST.get('link')
-                              )
+                link=request.POST.get('link')
+            )
         new_menu_item.save()
         html_data = f'''
                 <li class="dd-item menu-ac-item xLi_{new_menu_item.id}" data-id="{new_menu_item.id}">

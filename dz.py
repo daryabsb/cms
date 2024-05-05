@@ -23,11 +23,13 @@ dz_array = {
         "global_top": {
             "css": [
 
+                f"{foldername_e}/vendor/toastr/css/toastr.min.css",
                 f"{foldername_e}/vendor/sweetalert2/dist/sweetalert2.min.css",
                 f"{foldername_e}/vendor/bootstrap-select/dist/css/bootstrap-select.min.css",
             ],
             "js": [
                 f"{foldername_e}/vendor/global/global.min.js",
+                f"{foldername_e}/vendor/toastr/js/toastr.min.js",
                 f"{foldername_e}/vendor/sweetalert2/dist/sweetalert2.min.js",
                 f"{foldername_e}/vendor/bootstrap-select/dist/js/bootstrap-select.min.js",
                 # f"{foldername_e}/js/dashboard/cms.js",

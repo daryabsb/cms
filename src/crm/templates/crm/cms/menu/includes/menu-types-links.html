@@ -1,0 +1,39 @@
+{% load mptt_tags %}
+<div class="filter cm-content-box box-primary border">
+    <div class="content-title border-0">
+        <div class="cpa">
+            Links 
+        </div>
+        <div class="tools">
+            <a href="javascript:void(0);" class="expand SlideToolHeader"><i class="fal fa-angle-down"></i></a>
+        </div>
+    </div>
+    <div class="cm-content-body form excerpt border-top">
+        <div class="card-body">
+            <form 
+            hx-post="{% url '_htmx:crm-add-link-to-menu' %}" 
+            hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+            hx-target="#menu_items">
+                <input type="hidden" name="menu_id" value="{{menu_obj.id}}">
+                <div class="row align-items-center">
+                    <div class="col-xl-4">
+                        <h6>URL</h6>
+                    </div>
+                    <div class="col-xl-8">
+                        <input name="linkurl" type="text" class="form-control mb-2" placeholder="">
+                    </div>
+                    <div class="col-xl-4">
+                        <h6 class="mb-xl-0 text-nowrap ">Link Text</h6>
+                    </div>
+                    <div class="col-xl-8">
+                        <input name="linktitle" type="text" class="form-control mb-2" placeholder="Menu items">
+                    </div>
+                    <div class="col-xl-12">
+                        <button type="submit" title="Add Link To Menu" class="btn btn-primary btn-sm dz-menu-btn" menu-type="custom-link">Add Link to Menu</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+

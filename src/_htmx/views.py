@@ -1,4 +1,5 @@
 import json
+from django.contrib import messages
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponseRedirect
 from django.http import HttpRequest
@@ -141,11 +142,26 @@ def crm_search_pages(request: HtmxHttpRequest) -> HttpResponse:
 
 def crm_add_new_menu(request: HtmxHttpRequest) -> HttpResponse:
     menu_title = request.POST.get('menu_title')
-    menu_link = request.POST.get('menu_link')
+    menu_link = request.POST.get('menu_link', '#')
     print(menu_title, menu_link)
 
-    response = JsonResponse({'success': True})
-    response.status_code = 200
+    if menu_title:
+        menu_obj = Menus(title=menu_title, user=request.user)
+        menu_obj.link = menu_link
+        menu_obj.save()
+
+        response = JsonResponse({
+            'title': 'Menu added',
+            'message': "You successfully added a new menu, congrats!"
+            })
+        response.status_code = 200
+    else:
+        response = JsonResponse({
+            'title': 'Menu failed',
+            'message': "A title is essential in order to create a menu!"
+            })
+        response.status_code = 400
+
     return response
 
 
@@ -214,6 +230,58 @@ def crm_add_menu_content(request: HtmxHttpRequest) -> HttpResponse:
     #     allItems = Categories.objects.filter(id__in=item_ids)
     #     linkType = 'Category'
 
+
+@login_required(login_url='dashboard:login')
+@permission_required({'menu.view_items', 'menu.add_items'}, raise_exception=True)
+@require_POST
+def crm_add_link_to_menu(request: HtmxHttpRequest) -> HttpResponse:
+    menu_id = request.POST.get('menu_id')
+    title = request.POST.get('linktitle').strip()
+    link=request.POST.get('linkurl')
+
+    print(f"Title={title} - Link= {link} - MenuID = {menu_id}")
+
+    menu_obj = Menus.objects.get(id=request.POST.get('menu_id'))
+
+    
+    new_menu_item = Items(menu=menu_obj,
+            title = request.POST.get('linktitle').strip(),
+            type='Link',
+            attributes='{"title": "", "class": "", "target": ""}',
+            link=request.POST.get('linkurl')
+        )
+    new_menu_item.save()
+
+    if new_menu_item:
+        response = JsonResponse({
+            'title': 'Link To Menu Added',
+            'message': "You successfully added a new link to menu, congrats!"
+            })
+        response.status_code = 200
+    else:
+        response = JsonResponse({
+            'title': 'Link To Menu Failed',
+            'message': "A title or link is essential in order to create a link!"
+            })
+        response.status_code = 400
+
+    response.status_code = 200
+    menu_items = Items.objects.filter(menu=menu_obj)
+    # return response
+    return render(
+        request,
+        'crm/cms/menu/renders/insert_menu.html',
+        {
+            "new_menu_item": new_menu_item,
+            "done": "This is rendered!",
+            "menu_obj": menu_obj,
+            "menu_items": menu_items,
+            "slug": menu_obj.slug,
+            "success": True,
+            'success_title': 'Link To Menu Added',
+            'success_message': "You successfully added a new link to menu, congrats!"
+        },
+    )
 
 # CMS VIEWS
 

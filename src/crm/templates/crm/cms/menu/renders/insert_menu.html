@@ -1,0 +1,28 @@
+{% include 'crm/cms/menu/partials/menu-nestable.html' %}
+
+<div hx-swap-oob="true" id='show-toastr'>
+    {% if success %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener('htmx:afterRequest', function(event) {
+            toastr.options = {
+                positionClass: "toast-top-full-width",
+            }
+            toastr.success('{{ success_message }}', '{{ success_title }}');
+        });
+    });
+    </script>
+    {% else %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener('htmx:afterRequest', function(event) {
+            toastr.options = {
+                positionClass: "toast-top-full-width",
+            }
+            toastr.error('{{ success_message }}', '{{ success_title }}');
+        });
+    });
+    </script>
+
+    {% endif %}
+</div>

@@ -65,103 +65,8 @@ Menu Setup
                 <div class="cm-content-body form excerpt">
                     <div class="card-body">
                         {% include 'crm/cms/menu/includes/menu-types-tree.html' %}
-                        <div class="filter cm-content-box box-primary border">
-                            <div class="content-title border-0">
-                                <div class="cpa">
-                                    page
-                                </div>
-                                <div class="tools">
-                                    <a href="javascript:void(0);" class="expand SlideToolHeader"><i class="fal fa-angle-down"></i></a>
-                                </div>
-                            </div>
-                            <div class="cm-content-body form excerpt border-top">
-                                <div class="card-body ItemsCheckboxSec">
-                                    <ul class=" tab-my nav nav-tabs" id="myTab" role="tablist">
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link active" id="Viewall-tab" data-bs-toggle="tab" data-bs-target="#Viewall-tab-pane" type="button" role="tab" aria-controls="Viewall-tab-pane" aria-selected="true">View All</button>
-                                        </li>
-                                        <li class="nav-item" role="presentation">
-                                            <button class="nav-link" id="Search-tab" data-bs-toggle="tab" data-bs-target="#Search-tab-pane" type="button" role="tab" aria-controls="Search-tab-pane" aria-selected="false">Search</button>
-                                        </li>
-                                    </ul>
-                                    <div class="tab-content" id="myTabContent">
-                                        <div class="tab-pane fade show active" id="Viewall-tab-pane" role="tabpanel" aria-labelledby="Viewall-tab" tabindex="0">
-                                            <div class="menu-tabs">
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                    Privacy Policy 
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-1">
-                                                    <label class="form-check-label" for="flexCheckDefault-1">
-                                                    Contact Us 
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-2">
-                                                    <label class="form-check-label" for="flexCheckDefault-2">
-                                                    Important Information 
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-3">
-                                                    <label class="form-check-label" for="flexCheckDefault-3">
-                                                    About Us 
-                                                    </label>
-                                                </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault-4">
-                                                    <label class="form-check-label" for="flexCheckDefault-4">
-                                                    Dummy Co 
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="Search-tab-pane" role="tabpanel" aria-labelledby="Search-tab" tabindex="0">
-                                            <div class="menu-tabs">
-                                                <label for="exampleFormControlInput{{ menu_obj.id }}" class="form-label">Search</label>
-                                                <input type="text" class="form-control" id="{{ menu_obj.id }}" placeholder="Enter Page Name">
-                                            </div>
-                                        </div>
-                                        <div class="d-flex align-items-center flex-wrap">
-                                            <a href="javascript:void(0);" class="checkAllInput">Select All</a><span class="mx-2">|</span>
-                                            <a href="javascript:void(0);" class="unCheckAllInput">Deselect All</a>
-                                        </div>
-                                        <a  class="btn btn-primary btn-sm dz-menu-btn">Add to Menu</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter cm-content-box box-primary border">
-                            <div class="content-title border-0">
-                                <div class="cpa">
-                                    Links 
-                                </div>
-                                <div class="tools">
-                                    <a href="javascript:void(0);" class="expand SlideToolHeader"><i class="fal fa-angle-down"></i></a>
-                                </div>
-                            </div>
-                            <div class="cm-content-body form excerpt border-top">
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-xl-4">
-                                            <h6>URL</h6>
-                                        </div>
-                                        <div class="col-xl-8">
-                                            <input type="text" class="form-control mb-2" placeholder="">
-                                        </div>
-                                        <div class="col-xl-4">
-                                            <h6 class="mb-xl-0 text-nowrap ">Link Text</h6>
-                                        </div>
-                                        <div class="col-xl-8">
-                                            <input type="text" class="form-control" placeholder="Menu items">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        {% include 'crm/cms/menu/includes/menu-types-blogs.html' %}
+                        {% include 'crm/cms/menu/includes/menu-types-links.html' %}
                     </div>
                 </div>
             </div>
@@ -208,7 +113,7 @@ Menu Setup
     </div>
 </div>
 <script type="text/javascript">
-	var CSRF_TOKEN = 'dFtj1lGUXrVlotX2RZtq2q7fcbQe6TF5L6XDCpblIZGDJlynAHoV8DOyq7IVxXWe';
+	var CSRF_TOKEN = '{{ csrf_token }}';
 
 	var screenOptionArray = JSON.stringify({"Page": {"visibility": true}, "Blog": {"visibility": true}, "CustomLink": {"visibility": true}, "TitleAttribute": {"visibility": true}, "ClassAttribute": {"visibility": true}, "TargetAttribute": {"visibility": true}, "Description": {"visibility": true}});
 	console.log(screenOptionArray);
