@@ -14,42 +14,40 @@
             hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
             hx-target="#menu_items">
                 <input type="hidden" name="menu_id" value="{{menu_obj.id}}">
-                <input type="hidden" name="menu_type" value="Page">
+                <input type="hidden" name="menu_type" value="Blog">
                 <ul class=" tab-my nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="Viewall-tab" data-bs-toggle="tab" data-bs-target="#Viewall-tab-pane" type="button" role="tab" aria-controls="Viewall-tab-pane" aria-selected="true">View All</button>
+                        <button class="nav-link active" id="Viewall-tab" data-bs-toggle="tab" data-bs-target="#View-all-blog-tab-pane" type="button" role="tab" aria-controls="View-all-blog-tab-pane" aria-selected="true">View All</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="Search-tab" data-bs-toggle="tab" data-bs-target="#Search-tab-pane" type="button" role="tab" aria-controls="Search-tab-pane" aria-selected="false">Search</button>
+                        <button class="nav-link" id="Search-tab" data-bs-toggle="tab" data-bs-target="#blog-search-tab-pane" type="button" role="tab" aria-controls="blog-search-tab-pane" aria-selected="false">Search</button>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
-                    <div class="tab-pane fade show active" id="Viewall-tab-pane" role="tabpanel" aria-labelledby="Viewall-tab" tabindex="0">
+                    <div class="tab-pane fade show active" id="View-all-blog-tab-pane" role="tabpanel" aria-labelledby="Viewall-tab" tabindex="0">
                         <div class="menu-tabs">
                             {% for blog in blogs %}
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" 
                                 name="PageItem[]" value="{{blog.id}}" id="flexCheckDefault-{{blog.id}}"
                                 >
-                                <label class="form-check-label" for="flexCheckDefault">
-                                    {{blog.title}} 
-                                </label>
+                                <label class="form-check-label" for="flexCheckDefault">{{blog.title}}</label>
                             </div>
                             {% endfor %}
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="Search-tab-pane" role="tabpanel" aria-labelledby="Search-tab" tabindex="0">
+                    <div class="tab-pane fade" id="blog-search-tab-pane" role="tabpanel" aria-labelledby="Search-tab" tabindex="0">
                         <div class="menu-tabs">
                             <label for="exampleFormControlInput{{ menu_obj.id }}" class="form-label">Search</label>
                             <input type="text" class="form-control"
                             id="keyup-input" type="text" name="search_keywords"
-                            hx-get="{% url '_htmx:crm-search-pages' %}"
+                            hx-get="{% url '_htmx:crm-search-blogs' %}"
                             hx-trigger="keyup changed delay:500ms"
-                            hx-target="#search-results"
+                            hx-target="#blog-search-results"
                             placeholder="Search..."
                             >
 
-                            <div id="search-results" class="form-check mt-3">
+                            <div id="blog-search-results" class="form-check mt-3">
                                 
                             </div>
                         </div>

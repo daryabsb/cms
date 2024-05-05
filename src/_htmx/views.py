@@ -138,6 +138,19 @@ def crm_search_pages(request: HtmxHttpRequest) -> HttpResponse:
         "crm/cms/menu/partials/left_search_results.html",
         {"objects": objects},
     )
+@require_GET
+def crm_search_blogs(request: HtmxHttpRequest) -> HttpResponse:
+    from src.blogs.models import Blogs
+    search_keywords = request.GET.get("search_keywords", None)
+    objects = []
+    if search_keywords:
+        objects = Blogs.objects.filter(title__icontains=search_keywords)
+
+    return render(
+        request,
+        "crm/cms/menu/partials/left_search_results.html",
+        {"objects": objects},
+    )
 
 
 def crm_add_new_menu(request: HtmxHttpRequest) -> HttpResponse:
