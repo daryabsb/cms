@@ -1,0 +1,91 @@
+{% extends 'crm/accounts/accounts-base.html' %}
+{% load static %}
+
+
+{% block crm_content %}
+<!-- list of users -->
+<div class="col-xl-12">
+    <div class="card">
+        <div class="card-body p-0">
+            <div class="table-responsive active-projects style-1">
+            <div class="tbl-caption">
+                <h4 class="heading mb-0">Users</h4>
+                <div>
+                    <a class="btn btn-primary btn-sm" data-bs-toggle="offcanvas" href="#offcanvasExample" role="button" aria-controls="offcanvasExample">+ Add Employee</a>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                        + Invite User
+                    </button>
+                </div>
+            </div>
+                <table id="empoloyees-tblwrapper" class="table">
+                    <thead>
+                        <!--
+                            <th>Department</th><td><span>Computer Science</span></td>
+                            <th>Gender</th><td><span>Male</span></td>	
+                            <th>Location</th><td><span>Delhi</span></td>
+                        -->
+                        <tr>
+                            <th>User ID</th>
+                            <th>User Name</th>
+                            <th>Email Address</th>
+                            <th>Contact Number</th>
+                            <th>Is Active</th>
+                            <th>Is Staff</th>
+                            <th>Is Superuser</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <td><span>{{ user.id }}</span></td>
+                            <td>
+                                <div class="products">
+                                    <img src="{{ user.image.url }}" class="avatar avatar-md" alt="">
+                                    <div>
+                                        <h6>{{ user.name }}</h6>
+                                        <span>Web Designer</span>	
+                                    </div>	
+                                </div>
+                            </td>
+
+                            <td><span class="text-primary">{{ user.email }}</span></td>
+                            <td>
+                                <span>{{ user.phone_number }}</span>
+                            </td>
+
+                            <td>
+                                {% if user.is_active %}
+                                <span class="badge badge-success light border-0">Active</span>
+                                {% else %}
+                                <span class="badge badge-danger light border-0">Inactive</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if user.is_staff %}
+                                <span class="badge badge-success light border-0">Is Staff</span>
+                                {% else %}
+                                <span class="badge badge-danger light border-0">Not Staff</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if user.is_superuser %}
+                                <span class="badge badge-success light border-0">Is Superuser</span>
+                                {% else %}
+                                <span class="badge badge-danger light border-0">Not Superuser</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                    
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock crm_content %}
+
+{% block offcanvas %}
+{% include 'crm/accounts/users/partials/add-employee-offcanvas.html' %}          
+{% include 'crm/accounts/users/partials/invite-employee-offcanvas.html' %}          
+{% endblock offcanvas %}

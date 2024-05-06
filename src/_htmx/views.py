@@ -296,8 +296,44 @@ def crm_add_link_to_menu(request: HtmxHttpRequest) -> HttpResponse:
         },
     )
 
-# CMS VIEWS
 
+@login_required(login_url='dashboard:login')
+@permission_required({'auth.view_group'}, raise_exception=True)
+def crm_groups_list(request):
+    from django.contrib.auth.models import Group
+    from django.db.models import Count
+    context = {
+        "groups": Group.objects.annotate(
+            user_count=Count('user', distinct=True)).annotate(
+                perms_count=Count('permissions', distinct=True)),
+        "colors": {'primary': 'primary', 'success': 'success', 'dark': 'dark'},
+        "page_title": "Groups"
+    }
+
+    return render(request, 'crm/accounts/groups/list.html', context)
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'auth.view_permission'}, raise_exception=True)
+def crm_permissions_list(request):
+    from django.contrib.auth.models import Permission
+    from django.core.paginator import Paginator
+    from src.accounts import utils
+
+    permission_list = Permission.objects.all()
+    # Show 5 permission per page.
+    paginator = Paginator(permission_list, utils.nodes_per_page())
+    context = {
+        "permissions": paginator.get_page(request.GET.get('page')),
+        "page_title": "Permissions"
+    }
+
+    return render(request, 'crm/accounts/permissions/list.html', context)
+
+
+
+
+# CMS VIEWS
 
 @require_POST
 def search_pages2(request: HtmxHttpRequest) -> HttpResponse:

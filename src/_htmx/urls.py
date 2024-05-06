@@ -14,6 +14,8 @@ from src._htmx.views import (
      crm_add_menu_content,
      crm_add_new_menu,
      crm_add_link_to_menu,
+
+     crm_permissions_list,
 )
 
 
@@ -39,5 +41,7 @@ urlpatterns = [
           name='crm-add-content-to-menu'),
      path('add-new-menu/', crm_add_new_menu, name='add-new-menu'),
      path('crm-add-link-to-menu/', crm_add_link_to_menu, name='crm-add-link-to-menu'),
+     
+     path('crm-permissions-list/', crm_permissions_list, name='crm-permissions-list'),
 
 ]

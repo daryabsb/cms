@@ -32,6 +32,115 @@ from django.contrib.auth.models import Group
 from src.accounts import utils
 
 
+# CRM ACCOUNTS
+@login_required(login_url='dashboard:login')
+@permission_required({'users.view_user'}, raise_exception=True)
+def crm_users(request):
+    template_name = "crm/accounts/users/list.html",
+    user_list = None
+    filter_form_data = {}
+    message = ''
+    users = None
+    if request.method == 'POST':
+        filter_email = request.POST.get('filter-user-email').strip()
+        filter_mobile = request.POST.get('filter-user-mobile').strip()
+        filter_group = request.POST.get('filter-user-group').strip()
+
+        if filter_group != '':
+            filter_group = int(filter_group)
+
+        filter_form_data = {
+            "filter_email": filter_email,
+            "filter_mobile": filter_mobile,
+            "filter_group": filter_group
+        }
+        user_list = utils.data_filter(
+            filter_form_data, User).filter(is_superuser=False)
+        if filter_form_data:
+            request.session['user_filter_data'] = filter_form_data
+
+    else:
+        if 'user_filter_data' in list(request.session.keys()) and 'page' in list(request.GET.keys()):
+            session_data = request.session.get('user_filter_data')
+            user_list = utils.data_filter(
+                session_data, User).filter(is_superuser=False)
+            filter_form_data = request.session.get('user_filter_data')
+        else:
+            # user_list = User.objects.filter(is_superuser=False)
+            user_list = User.objects.all()
+            if 'user_filter_data' in list(request.session.keys()):
+                del request.session['user_filter_data']
+
+    if user_list:
+        paginator = Paginator(user_list, utils.nodes_per_page())
+        users = paginator.get_page(request.GET.get('page'))
+    else:
+        message = 'Data Not Found'
+    context = {
+        "users": users,
+        "page_title": "Users",
+        "form_data": filter_form_data,
+        'message': message,
+        'groups': Group.objects.all()
+    }
+    return render(request, template_name, context)
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'auth.view_group'}, raise_exception=True)
+def crm_groups_list(request):
+    context = {
+        "groups": Group.objects.annotate(
+            user_count=Count('user', distinct=True)).annotate(
+                perms_count=Count('permissions', distinct=True)),
+        "colors": {'primary': 'primary', 'success': 'success', 'dark': 'dark'},
+        "page_title": "Groups"
+    }
+
+    return render(request, 'crm/accounts/groups/list.html', context)
+
+
+@login_required(login_url='dashboard:login')
+@permission_required({'auth.view_permission'}, raise_exception=True)
+def crm_permissions_list(request):
+    permission_list = Permission.objects.all()
+    # Show 5 permission per page.
+    paginator = Paginator(permission_list, utils.nodes_per_page())
+    print(paginator.count)
+    '''
+    paginator.count = num of objects in the list
+    
+    '''
+    context = {
+        "permissions": paginator.get_page(request.GET.get('page')),
+        "page_title": "Permissions",
+        "num_pages": range(1,5)
+    }
+
+    return render(request, 'crm/accounts/permissions/list.html', context)
+
+request = ['__abstractmethods__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__dict__', 
+           '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getstate__',
+           '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__module__',
+           '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__setattr__', '__sizeof__',
+           '__slots__', '__str__', '__subclasshook__', '__weakref__', '_abc_impl', 
+           
+           'count', 'end_index', 'has_next', 'has_other_pages', 'has_previous', 'index', 'next_page_number', 
+           'number', 'object_list', 'paginator', 'previous_page_number', 'start_index'
+           ]
+paginator = ['ELLIPSIS', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', 
+             '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', 
+             '__init_subclass__', '__iter__', '__le__', '__lt__', '__module__', '__ne__', '__new__', 
+             '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', 
+             '__subclasshook__', '__weakref__', 
+             '_check_object_list_is_ordered', '_get_page', 
+
+             'allow_empty_first_page', 'count', 'default_error_messages', 'error_messages', 
+             'get_elided_page_range', 'get_page', 'num_pages', 'object_list', 'orphans', 'page', 
+             'page_range', 'per_page', 'validate_number'
+             ]
+
+# DASHBOARD ACCOUNTS
 @login_required(login_url='dashboard:login')
 def password_change(request):
     if request.method == 'POST':

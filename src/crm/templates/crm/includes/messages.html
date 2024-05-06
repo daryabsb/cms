@@ -1,24 +1,27 @@
 
-<div hx-swap-oob="true" id='show-toastr'>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-        document.addEventListener('htmx:afterRequest', function(event) {
-            // Check if the request was successful
-            console.log(event.detail.successful)
-            toastr.options = {
-                positionClass: "toast-top-full-width",
-            }
-            if (event.detail.successful) {
-                var successTitle = JSON.parse(event.detail.xhr.responseText).title
-                var successMessage = JSON.parse(event.detail.xhr.responseText).message
-                // Handle the successful response here
-                toastr.success(successMessage, successTitle);
-            } else {
-                // Handle other status codes or errors
-                toastr.error(successMessage, successTitle);
-            }
-        });
-        
-    })
-</script>
+<div style="height: 3.125rem; width: 40rem; display: inline-block; text-align: center; position: fixed; 
+            top: 1.5rem; left: 50%; transition: all .2s ease; z-index: 6; transform: translate(-50%);">
+    <div id='show-toastr'>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener('htmx:afterRequest', function(event) {
+                // Check if the request was successful
+                console.log(event.detail.successful)
+                toastr.options = {
+                    positionClass: "toast-top-full-width",
+                }
+                if (event.detail.successful) {
+                    var successTitle = JSON.parse(event.detail.xhr.responseText).title
+                    var successMessage = JSON.parse(event.detail.xhr.responseText).message
+                    // Handle the successful response here
+                    toastr.success(successMessage, successTitle);
+                } else {
+                    // Handle other status codes or errors
+                    toastr.error(successMessage, successTitle);
+                }
+            });
+            
+        })
+    </script>
+    </div>
 </div>
