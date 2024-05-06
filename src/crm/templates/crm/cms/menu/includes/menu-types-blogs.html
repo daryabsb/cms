@@ -31,7 +31,11 @@
                                 <input class="form-check-input" type="checkbox" 
                                 name="PageItem[]" value="{{blog.id}}" id="flexCheckDefault-{{blog.id}}"
                                 >
-                                <label class="form-check-label" for="flexCheckDefault">{{blog.title}}</label>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                <a href="{% url 'crm:blog:blog-edit' blog.id %}">
+                                {{blog.title}}
+                                </a>
+                                </label>
                             </div>
                             {% endfor %}
                         </div>

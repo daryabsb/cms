@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponseRedirect
 from src.blogs.models import Blogs, Metas, Tags, Categories, Seo
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -252,7 +253,9 @@ def crm_blog_edit(request, id):
 
                 blog_seo_obj.blog = blog_obj
                 blog_seo_obj.save()
+
                 return redirect('crm:blog:blogs-list')
+                # return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
             else:
                 messages.warning(request, 'Somthing want wrong in SEO Fields')
                 return render(request, template_name, context)
@@ -330,10 +333,12 @@ def crm_blog_category_edit(request, id):
 
     if request.method == 'POST':
         category_form = CategoriesForm(request.POST, instance=category)
-
+        print(request)
         if category_form.is_valid():
             category_form.save()
-            return redirect("crm:blog:blog-category")
+            # return redirect("crm:blog:blog-category")
+            # Redirect to homepage if no referer is found
+            return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
         else:
             messages.warning(request, category_form.errors)
 
@@ -349,6 +354,7 @@ def crm_blog_category_edit(request, id):
     categories = paginator.get_page(request.GET.get('page'))
     if request.user.has_perm('blog.change_categories'):
         left_side_view = True
+
     context = {
         "page_title": "Categories",
         "categories": categories,
