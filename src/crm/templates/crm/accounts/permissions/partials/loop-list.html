@@ -22,5 +22,15 @@
 <tr>
 </tr>                        
 {% endfor %}
+<tr 
+  hx-get="{% url 'crm:accounts:permissions-list' %}?page={{ page |add:1 }}"
+  hx-trigger="intersect once"
+  hx-swap="afterend"
+  data-hx-revealed="true">
+<td></td>
+<td>Loading...</td>
+</tr>
+
+
 
 {% endif %}
