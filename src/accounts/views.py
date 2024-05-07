@@ -31,6 +31,8 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group
 from src.accounts import utils
 
+from django.views.decorators.http import (require_POST, require_GET,)
+
 
 # CRM ACCOUNTS
 @login_required(login_url='dashboard:login')
@@ -102,45 +104,56 @@ def crm_groups_list(request):
 
 @login_required(login_url='dashboard:login')
 @permission_required({'auth.view_permission'}, raise_exception=True)
+@require_GET
 def crm_permissions_list(request):
+    from django.core.paginator import EmptyPage
     permission_list = Permission.objects.all()
     # Show 5 permission per page.
-    paginator = Paginator(permission_list, utils.nodes_per_page())
-    print(paginator.count)
-    '''
-    paginator.count = num of objects in the list
-    
-    '''
+    paginator = Paginator(permission_list, 25)
+
+    page = int(request.GET.get('page', 1))
+
+    try:
+        permissions = paginator.page(page)
+    except EmptyPage:
+        return HttpResponse('')
+
     context = {
-        "permissions": paginator.get_page(request.GET.get('page')),
+        "permissions": permissions,
+        "page": page,
         "page_title": "Permissions",
-        "num_pages": range(1,5)
     }
+
+    if request.htmx:
+        return render(request, 'crm/accounts/permissions/partials/loop-list.html', context)
 
     return render(request, 'crm/accounts/permissions/list.html', context)
 
-request = ['__abstractmethods__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__dict__', 
+
+request = ['__abstractmethods__', '__class__', '__class_getitem__', '__contains__', '__delattr__', '__dict__',
            '__dir__', '__doc__', '__eq__', '__format__', '__ge__', '__getattribute__', '__getitem__', '__getstate__',
            '__gt__', '__hash__', '__init__', '__init_subclass__', '__iter__', '__le__', '__len__', '__lt__', '__module__',
            '__ne__', '__new__', '__reduce__', '__reduce_ex__', '__repr__', '__reversed__', '__setattr__', '__sizeof__',
-           '__slots__', '__str__', '__subclasshook__', '__weakref__', '_abc_impl', 
-           
-           'count', 'end_index', 'has_next', 'has_other_pages', 'has_previous', 'index', 'next_page_number', 
+           '__slots__', '__str__', '__subclasshook__', '__weakref__', '_abc_impl',
+
+           'count', 'end_index', 'has_next', 'has_other_pages', 'has_previous', 'index', 'next_page_number',
            'number', 'object_list', 'paginator', 'previous_page_number', 'start_index'
            ]
-paginator = ['ELLIPSIS', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__', 
-             '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__', 
-             '__init_subclass__', '__iter__', '__le__', '__lt__', '__module__', '__ne__', '__new__', 
-             '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__', 
-             '__subclasshook__', '__weakref__', 
-             '_check_object_list_is_ordered', '_get_page', 
+paginator = ['ELLIPSIS', '__class__', '__delattr__', '__dict__', '__dir__', '__doc__', '__eq__', '__format__',
+             '__ge__', '__getattribute__', '__getstate__', '__gt__', '__hash__', '__init__',
+             '__init_subclass__', '__iter__', '__le__', '__lt__', '__module__', '__ne__', '__new__',
+             '__reduce__', '__reduce_ex__', '__repr__', '__setattr__', '__sizeof__', '__str__',
+             '__subclasshook__', '__weakref__',
+             '_check_object_list_is_ordered', '_get_page',
 
-             'allow_empty_first_page', 'count', 'default_error_messages', 'error_messages', 
-             'get_elided_page_range', 'get_page', 'num_pages', 'object_list', 'orphans', 'page', 
+             'allow_empty_first_page', 'count', 'default_error_messages', 'error_messages',
+             'get_elided_page_range', 'get_page', 'num_pages', 'object_list', 'orphans', 'page',
              'page_range', 'per_page', 'validate_number'
              ]
 
 # DASHBOARD ACCOUNTS
+
+
 @login_required(login_url='dashboard:login')
 def password_change(request):
     if request.method == 'POST':

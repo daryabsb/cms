@@ -138,6 +138,8 @@ def crm_search_pages(request: HtmxHttpRequest) -> HttpResponse:
         "crm/cms/menu/partials/left_search_results.html",
         {"objects": objects},
     )
+
+
 @require_GET
 def crm_search_blogs(request: HtmxHttpRequest) -> HttpResponse:
     from src.blogs.models import Blogs
@@ -166,13 +168,13 @@ def crm_add_new_menu(request: HtmxHttpRequest) -> HttpResponse:
         response = JsonResponse({
             'title': 'Menu added',
             'message': "You successfully added a new menu, congrats!"
-            })
+        })
         response.status_code = 200
     else:
         response = JsonResponse({
             'title': 'Menu failed',
             'message': "A title is essential in order to create a menu!"
-            })
+        })
         response.status_code = 400
 
     return response
@@ -250,32 +252,31 @@ def crm_add_menu_content(request: HtmxHttpRequest) -> HttpResponse:
 def crm_add_link_to_menu(request: HtmxHttpRequest) -> HttpResponse:
     menu_id = request.POST.get('menu_id')
     title = request.POST.get('linktitle').strip()
-    link=request.POST.get('linkurl')
+    link = request.POST.get('linkurl')
 
     print(f"Title={title} - Link= {link} - MenuID = {menu_id}")
 
     menu_obj = Menus.objects.get(id=request.POST.get('menu_id'))
 
-    
     new_menu_item = Items(menu=menu_obj,
-            title = request.POST.get('linktitle').strip(),
-            type='Link',
-            attributes='{"title": "", "class": "", "target": ""}',
-            link=request.POST.get('linkurl')
-        )
+                          title=request.POST.get('linktitle').strip(),
+                          type='Link',
+                          attributes='{"title": "", "class": "", "target": ""}',
+                          link=request.POST.get('linkurl')
+                          )
     new_menu_item.save()
 
     if new_menu_item:
         response = JsonResponse({
             'title': 'Link To Menu Added',
             'message': "You successfully added a new link to menu, congrats!"
-            })
+        })
         response.status_code = 200
     else:
         response = JsonResponse({
             'title': 'Link To Menu Failed',
             'message': "A title or link is essential in order to create a link!"
-            })
+        })
         response.status_code = 400
 
     response.status_code = 200
@@ -315,6 +316,7 @@ def crm_groups_list(request):
 
 @login_required(login_url='dashboard:login')
 @permission_required({'auth.view_permission'}, raise_exception=True)
+@require_GET
 def crm_permissions_list(request):
     from django.contrib.auth.models import Permission
     from django.core.paginator import Paginator
@@ -323,14 +325,21 @@ def crm_permissions_list(request):
     permission_list = Permission.objects.all()
     # Show 5 permission per page.
     paginator = Paginator(permission_list, utils.nodes_per_page())
+
+    page = int(request.GET.get('page', '1'))
+
+    try:
+        permissions = paginator.get_page(page)
+    except:
+        return HttpResponse('')
+
     context = {
-        "permissions": paginator.get_page(request.GET.get('page')),
-        "page_title": "Permissions"
+        "permissions": permissions,
+        "page": page,
+        "page_title": "Permissions",
     }
 
-    return render(request, 'crm/accounts/permissions/list.html', context)
-
-
+    return render(request, 'crm/accounts/permissions/partials/loop-list.html', context)
 
 
 # CMS VIEWS

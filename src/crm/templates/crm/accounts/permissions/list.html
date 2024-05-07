@@ -17,77 +17,38 @@
                         </button>
                 </div>
             </div>
-            <table id="empoloyees-tblwrapper" class="table">
+            <div class="table-responsive">
+                <table hx-indicator="#spinner" class="table table-bordered table-striped verticle-middle table-responsive-sm">
                     <thead>
                         <tr>
-                            <th>Group ID</th>
-                            <th>Group Name</th>
-                            <th>User Count</th>
-                            <th>Permissions Count</th>
+                            <th>ID</th>
+                            <th>Permission Name</th>
+                            <th>Code Name</th>
+                            <th>Content Object</th>
+                            <th>Content App</th>
                             <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for group in permissions %}
-                        <tr>
-                            <td><span>{{ group.id }}</span></td>
-                            <td><h6>{{ group.name }}</h6></td>
-                            <td>
-                            {% if group.user_count > 0 %}
-                                <span class="badge badge-success" data-toggle="tooltip" data-html="true" 
-                                title="{% for user in group.user_set.all %}{{ user.name }}{% endfor %}"
-                                ><i class="fa fa-users" aria-hidden="true"></i> &nbsp;{{ group.user_count }}</span>
-                            {% else %}
-                            <span class="badge badge-danger" data-toggle="tooltip"><i class="fa fa-users" aria-hidden="true"></i> &nbsp;{{ group.user_count }}</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                            {% if group.perms_count > 0 %}
-                                <span class="badge badge-success" data-html="true" 
-                                title="{% for user in group.permissions.all %}{{ user.name }}||{% endfor %}"
-                                ><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;{{ group.perms_count }}</span>
-                            {% else %}
-                            <span class="badge badge-danger"><i class="fa fa-lock" aria-hidden="true"></i> &nbsp;{{ group.perms_count }}</span>
-                                {% endif %}
-                            </td>
-                            <td>
-                                <span class="badge badge-success light border-0">Active</span>
-                            </td>
-                        </tr>                        
-                        {% endfor %}
+                        {% include 'crm/accounts/permissions/partials/loop-list.html' %}
                     </tbody>
                 </table>
-                    <div class="dataTables_paginate paging_simple_numbers" 
-                    id="example_paginate">
-                    index is: {{ permissions.paginator }}
-                    <nav>
-                        <ul class="pagination">
-                            
-                            <li class="page-item page-indicator {% if not permissions.has_previous %}disabled {% endif %}" >
-                                <a class="page-link" href="?page={{ page|add:'-1' }}">
-                                    <i class="la la-angle-left"></i></a>
-                                </li>
-                            {% for page in num_pages %}
-                            <li class="page-item {% if page == permissions.number %} active {% endif %}"><a class="page-link" href="?page={{ page }}">{{ page }}</a>
-                            </li>
-                            {% endfor %}
-
-                            <li class="page-item"><a class="page-link" href="?page={{ page|add:'1' }}">{{ page|add:"1" }}</a></li>
-                            <li class="page-item"><a class="page-link" href="?page={{ page|add:'2' }}">{{ page|add:"2" }}</a></li>
-                            <li class="page-item"><a class="page-link" href="javascript:void(0)">4</a></li>
-                            {% if permissions.has_next %}
-                            <li class="page-item page-indicator">
-                                <a class="page-link" href="javascript:void(0)">
-                                    <i class="la la-angle-right"></i></a>
-                                </li>
-                            {% endif %}
-                        </ul>
-                    </nav>
-                    </div>
-                </div>
+            </div>
         </div>
     </div>
 </div>
+<style>
+    .htmx-indicator{
+        opacity:0;
+        transition: opacity 500ms ease-in;
+    }
+    .htmx-request .htmx-indicator{
+        opacity:1
+    }
+    .htmx-request.htmx-indicator{
+        opacity:1
+    }
+</style>
 {% endblock crm_content %}
 
 {% block offcanvas %}

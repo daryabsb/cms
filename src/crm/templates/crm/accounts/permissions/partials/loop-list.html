@@ -1,0 +1,26 @@
+
+{% load static %}
+{% if permissions %}
+{% for perm in permissions %}
+    {% if loop.last %}
+      <tr 
+      hx-get="{% url 'crm:accounts:permissions-list' %}?page={{page|add:1}}"
+    hx-trigger="revealed"
+    hx-swap="afterend"
+      >
+        {% else %}
+<tr>
+    {% endif %}
+    <td><span>{{ perm.id }}</span></td>
+    <td><h6>{{ perm.name }}</h6></td>
+    <td><h6>{{ perm.codename }}</h6></td>
+    <td><h6>{{ perm.content_type.model|capfirst }}</h6></td>
+    <td><h6>{{ perm.content_type.app_label|capfirst }}</h6></td>
+    <td>
+        <span class="badge badge-success light border-0">Active</span>
+    </td>
+<tr>
+</tr>                        
+{% endfor %}
+
+{% endif %}

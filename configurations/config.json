@@ -208,7 +208,7 @@
         },
         "nodes_per_page": {
             "name": "Reading.nodes_per_page",
-            "value": "5",
+            "value": "15",
             "title": "Node Per Page",
             "description": "",
             "input_type": "text",
