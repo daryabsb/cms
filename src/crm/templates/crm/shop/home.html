@@ -1,0 +1,44 @@
+{% extends 'crm/accounts/accounts-base.html' %}
+{% load static %}
+
+
+{% block crm_content %}
+<style>
+    /* Optional styling for the grid */
+    #myGrid {
+        height: 300px;
+        width: 100%;
+    }
+</style>
+<!-- Your grid container -->
+<div id="myGrid" class="ag-theme-quartz" style="height: 500px"></div>
+
+
+{% endblock crm_content %}
+{% block additional_js%}
+<script src="https://unpkg.com/ag-grid-community/dist/ag-grid-community.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var gridDiv = document.querySelector('#myGrid');
+
+        var columnDefs = [
+            { headerName: 'Make', field: 'make' },
+            { headerName: 'Model', field: 'model' },
+            { headerName: 'Price', field: 'price' }
+        ];
+
+        var rowData = [
+            { make: 'Toyota', model: 'Celica', price: 35000 },
+            { make: 'Ford', model: 'Mondeo', price: 32000 },
+            { make: 'Porsche', model: 'Boxster', price: 72000 }
+        ];
+
+        var gridOptions = {
+            columnDefs: columnDefs,
+            rowData: rowData
+        };
+
+        new agGrid.Grid(gridDiv, gridOptions);
+    });
+</script>
+{% endblock additional_js%}

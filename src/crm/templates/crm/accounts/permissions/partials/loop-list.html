@@ -1,8 +1,10 @@
 
 {% load static %}
 {% if permissions %}
+<div class="basic-list-group">
+  <ul class="list-group">
 {% for perm in permissions %}
-    {% if loop.last %}
+    {% comment %} {% if loop.last %}
       <tr 
       hx-get="{% url 'crm:accounts:permissions-list' %}?page={{page|add:1}}"
     hx-trigger="revealed"
@@ -20,17 +22,15 @@
         <span class="badge badge-success light border-0">Active</span>
     </td>
 <tr>
-</tr>                        
-{% endfor %}
-<tr 
-  hx-get="{% url 'crm:accounts:permissions-list' %}?page={{ page |add:1 }}"
+</tr>                         {% endcomment %}
+    <li class="list-group-item">{{ perm.name }}</li>
+    {% endfor %}
+    <li 
+    hx-get="{% url 'crm:accounts:permissions-list' %}?page={{ page |add:1 }}"
   hx-trigger="intersect once"
   hx-swap="afterend"
-  data-hx-revealed="true">
-<td></td>
-<td><div id="spinner">Loading...</div></td>
-</tr>
-
-
-
+  data-hx-revealed="true"
+    class="list-group-item">{{ perm.name }}</li>
+  </ul>
+</div>
 {% endif %}

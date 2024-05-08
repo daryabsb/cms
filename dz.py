@@ -57,6 +57,10 @@ dz_array = {
                     f"{foldername_e}/vendor/nestable2/css/jquery.nestable.min.css",
                     f"{foldername_e}/vendor/tagify/dist/tagify.css",
                 ],
+                "crm_shop_index": [
+                    f"{foldername_e}/vendor//ag-grid-community/dist/ag-grid-community.min.js",
+
+                ],
             },
             "js": {
                 # Menu views css

@@ -53,6 +53,7 @@ LOCAL_APPS = [
     'src.sliders',
     'src.subscribe',
     'src.pages',
+    'src.shop',
 
     # Frontends
     'src.industico',

@@ -10,4 +10,5 @@ urlpatterns = [
     path('pages/', include('src.pages.urls', namespace='crm-pages')),
     path('blogs/', include('src.blogs.urls', namespace='crm-blogs')),
     path('menu/', include('src.menu.urls', namespace='crm-menu')),
+    path('shop/', include('src.shop.urls', namespace='crm-shop')),
 ]
