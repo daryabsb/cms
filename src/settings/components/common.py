@@ -22,6 +22,7 @@ DJANGO_APPS = [
     "django_htmx",
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    "django_components",
 
 ]
 THIRD_PARTY_APPS = [
@@ -99,7 +100,7 @@ TEMPLATES = [
             # Frontend templates
             PROJECT_PATH + 'industico' + 'templates',
         ],
-        'APP_DIRS': True,
+        # 'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -108,6 +109,19 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'custom_context_processor.dz_static',
                 'custom_context_processor.site_config',
+            ],
+            "loaders": [
+                (
+                    "django.template.loaders.cached.Loader",
+                    [
+                        "django.template.loaders.filesystem.Loader",
+                        "django.template.loaders.app_directories.Loader",
+                        "django_components.template_loader.Loader",
+                    ],
+                )
+            ],
+            "builtins": [
+                "django_components.templatetags.component_tags",
             ],
         },
     },

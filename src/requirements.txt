@@ -24,6 +24,7 @@ django==5.0.3
     #   django-after-response
     #   django-appconf
     #   django-ckeditor
+    #   django-components
     #   django-cors-headers
     #   django-extensions
     #   django-htmx
@@ -37,6 +38,8 @@ django-after-response==0.2.2
 django-appconf==1.0.6
     # via django-select2
 django-ckeditor==6.5.1
+    # via -r src/requirements/requirements.in
+django-components==0.72
     # via -r src/requirements/requirements.in
 django-cors-headers==4.3.1
     # via -r src/requirements/requirements.in

@@ -12,6 +12,7 @@ django-after-response
 django-select2
 dj-database-url
 django-split-settings
+django-components
 loguru
 Pillow
 gunicorn
