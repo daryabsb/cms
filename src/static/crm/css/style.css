@@ -8870,8 +8870,24 @@ fieldset:disabled .btn {
   height: 25% !important;
 }
 
+.h-30 {
+  height: 30% !important;
+}
+
+.h-35 {
+  height: 35% !important;
+}
+
+.h-40 {
+  height: 40% !important;
+}
+
 .h-50 {
   height: 50% !important;
+}
+
+.h-60 {
+  height: 60% !important;
 }
 
 .h-75 {
@@ -8896,6 +8912,26 @@ fieldset:disabled .btn {
 
 .min-vh-100 {
   min-height: 100vh !important;
+}
+
+.min-vh-75 {
+  min-height: 75vh !important;
+}
+
+.min-vh-80 {
+  min-height: 80vh !important;
+}
+
+.max-vh-100 {
+  max-height: 100vh !important;
+}
+
+.max-vh-75 {
+  max-height: 75vh !important;
+}
+
+.max-vh-80 {
+  max-height: 80vh !important;
 }
 
 .flex-fill {
@@ -35732,8 +35768,10 @@ input#checkAll.form-check-input:checked {
   min-height: 3.75rem;
   padding: 0.5rem 0.75rem;
   font-size: 1.09375rem;
-  border-radius: 0.5rem;
-  height: calc(1.5em + 1rem + 2px);
+  border-radius: 0.25rem;
+  width: 100%;
+  width: calc(100% - 6rem);
+  /* height: calc(1.5em + 1rem + 2px); */
 }
 
 .form-control-sm {
@@ -40006,7 +40044,6 @@ button:focus {
   font-weight: 400;
   border-radius: 0.25rem;
   line-height: 18px;
-  border-radius: 0.25rem;
 }
 
 .btn-md {

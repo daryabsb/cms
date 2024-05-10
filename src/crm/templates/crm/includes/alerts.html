@@ -1,0 +1,26 @@
+{% if messages %}
+{% for message in messages %}
+<div class="alert fade show mb-4 alert-dismissible ai-header-alert
+alert-{% if message.tags %}{{ message.tags }}{% endif %} 
+border-{% if message.tags %}{{ message.tags }}{% endif %} 
+"
+>
+    {{ message }}
+    <button type="button" class="btn-close  ms-auto" data-bs-dismiss="alert" aria-label="btn-close">
+        <svg class="" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_58_5949)">
+                <path d="M10.0003 18.3337C14.6027 18.3337 18.3337 14.6027 18.3337 10.0003C18.3337 5.39795 14.6027 1.66699 10.0003 1.66699C5.39795 1.66699 1.66699 5.39795 1.66699 10.0003C1.66699 14.6027 5.39795 18.3337 10.0003 18.3337Z" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M12.5 7.5L7.5 12.5" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M7.5 7.5L12.5 12.5" stroke="gray" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </g>
+            <defs>
+                <clipPath id="clip0_58_5949">
+                    <rect width="20" height="20" fill="white"/>
+                </clipPath>
+            </defs>
+        </svg>
+    </button>
+</div>
+{% endfor %}
+{% endif %}
+
