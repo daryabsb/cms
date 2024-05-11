@@ -3,7 +3,7 @@
 {% block crm_content %}
 <div class="col-xl-12">
 	<div class="row">
-		<div class="col-md-6" style="height: 40rem;">
+		<div class="col-xl-6 col-lg-8">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="input-group mb-3 input-primary gap-1">
@@ -14,206 +14,105 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-sm-12 overflow-auto" style="height: 38rem;">
+				<div class="col-sm-12 overflow-auto">
 					<div class="card table-responsive border border-success">
 						<div class="card-header">
 						<div class="profile-skills offset-1 gap-3">
 							<a href="javascript:void();;" class="btn btn-primary light btn-sm mb-1 p-3">Admin</a>
 							<a href="javascript:void();;" class="btn btn-primary light btn-sm mb-1 p-3">Dashboard</a>
 							<a href="javascript:void();;" class="btn btn-primary light btn-sm mb-1 p-3">Photoshop</a>
-							<a href="javascript:void();;" class="btn btn-primary light btn-sm mb-1 p-3">Bootstrap</a>
-							<a href="javascript:void();;" class="btn btn-primary light btn-sm mb-1 p-3">Responsive</a>
 							<a href="javascript:void();;" class="btn btn-primary light btn-sm mb-1 p-3">Crypto</a>
 						</div>
 						</div>
 						<div class="card-body table-responsive overflow-auto">
-							<table class="table table-sm mb-0">
-								<thead class="text-white">
-									<tr>
-										<th class="align-middle">
-											<div class="form-check custom-checkbox">
-												<input type="checkbox" class="form-check-input" id="checkAll">
-												<label class="form-check-label" for="checkAll"></label>
-											</div>
-										</th>
-										<th class="align-middle">Order</th>
-										<th class="align-middle pe-7">Qty</th>
-										<th class="align-middle text-end">Status</th>
-										<th class="align-middle text-end">Amount</th>
-										<th class="no-sort"></th>
-									</tr>
-								</thead>
-								<tbody id="orders">
-								{% for item in items %}
-									{% include 'crm/shop/orders/order-item.html' %}
-								{% endfor %}
-									<tr class="btn-reveal-trigger">
-										<td class="py-2">
-											<div class="form-check custom-checkbox checkbox-success">
-												<input type="checkbox" class="form-check-input" id="checkbox">
-												<label class="form-check-label" for="checkbox"></label>
-											</div>
-										</td>
-										<td class="py-2">
-											<a href="#">
-											<span class="order">#181</span></a> by <span class="">Ricky
-											Antony</span><br><a href="mailto:ricky@example.com">ricky@example.com</a>
-										</td>
-										<td class="py-2">20/04/2020</td>
-										<td class="py-2 text-end"><span class="badge badge-success badge-sm">Completed<span class="ms-1 fa fa-check"></span></span>
-										</td>
-										<td class="py-2 text-end font-w600">$99
-										</td>
-										<td class="py-2 text-end">
-											<div class="dropdown text-sans-serif">
-												<button class="btn btn-primary tp-btn-light sharp" type="button" id="order-dropdown-0" data-bs-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
-													<span>
-														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
-															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																<rect x="0" y="0" width="24" height="24"></rect>
-																<circle fill="#000000" cx="12" cy="5" r="2"></circle>
-																<circle fill="#000000" cx="12" cy="12" r="2"></circle>
-																<circle fill="#000000" cx="12" cy="19" r="2"></circle>
-															</g>
-														</svg>
-													</span>
-												</button>
-												<div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="order-dropdown-0">
-													<div class="py-2">
-														<a class="dropdown-item" href="javascript:void(0);">Completed</a><a class="dropdown-item" href="javascript:void(0);">Processing</a><a class="dropdown-item" href="javascript:void(0);">On Hold</a><a class="dropdown-item" href="javascript:void(0);">Pending</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									
-									<tr class="btn-reveal-trigger">
-										<td class="py-2">
-											<div class="form-check custom-checkbox ">
-												<input type="checkbox" class="form-check-input" id="checkbox1">
-												<label class="form-check-label" for="checkbox1"></label>
-											</div>
-										</td>
-										<td class="py-2">
-											<a href="#">
-											<span class="order">#182</span></a> by <span class="order">Kin Rossow</span><br><a href="mailto:kin@example.com">kin@example.com</a>
-										</td>
-										<td class="py-2">20/04/2020</td>
-										<td class="py-2 text-end"><span class="badge badge-primary badge-sm">Processing<span class="ms-1 fa fa-redo"></span></span>
-										</td>
-										<td class="py-2 text-end font-w600">$120
-										</td>
-										<td class="py-2 text-end">
-											<div class="dropdown text-sans-serif">
-												<button class="btn btn-primary tp-btn-light sharp" type="button" id="order-dropdown-1" data-bs-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
-													<span>
-														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
-															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																<rect x="0" y="0" width="24" height="24"></rect>
-																<circle fill="#000000" cx="12" cy="5" r="2"></circle>
-																<circle fill="#000000" cx="12" cy="12" r="2"></circle>
-																<circle fill="#000000" cx="12" cy="19" r="2"></circle>
-															</g>
-														</svg>
-													</span>
-												</button>
-												<div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="order-dropdown-1">
-													<div class="py-2">
-														<a class="dropdown-item" href="javascript:void(0);">Completed</a><a class="dropdown-item" href="javascript:void(0);">Processing</a><a class="dropdown-item" href="javascript:void(0);">On Hold</a><a class="dropdown-item" href="javascript:void(0);">Pending</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr class="btn-reveal-trigger">
-										<td class="py-2">
-											<div class="form-check custom-checkbox checkbox-secondary">
-												<input type="checkbox" class="form-check-input" id="checkbox2">
-												<label class="form-check-label" for="checkbox2"></label>
-											</div>
-										</td>
-										<td class="py-2">
-											<a href="#">
-											<span class="order">#183</span></a> by <span class="order">Merry
-											Diana</span><br><a href="mailto:merry@example.com">merry@example.com</a>
-										</td>
-										<td class="py-2">30/04/2020</td>
-										<td class="py-2 text-end"><span class="badge badge-secondary  badge-sm">On
-											Hold<span class="ms-1 fa fa-ban"></span></span>
-										</td>
-										<td class="py-2 text-end font-w600">$70
-										</td>
-										<td class="py-2 text-end">
-											<div class="dropdown text-sans-serif">
-												<button class="btn btn-primary tp-btn-light sharp" type="button" id="order-dropdown-2" data-bs-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
-													<span>
-														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
-															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																<rect x="0" y="0" width="24" height="24"></rect>
-																<circle fill="#000000" cx="12" cy="5" r="2"></circle>
-																<circle fill="#000000" cx="12" cy="12" r="2"></circle>
-																<circle fill="#000000" cx="12" cy="19" r="2"></circle>
-															</g>
-														</svg>
-													</span>
-												</button>
-												<div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="order-dropdown-2">
-													<div class="py-2">
-														<a class="dropdown-item" href="javascript:void(0);">Completed</a><a class="dropdown-item" href="javascript:void(0);">Processing</a><a class="dropdown-item" href="javascript:void(0);">On Hold</a><a class="dropdown-item" href="javascript:void(0);">Pending</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-									<tr class="btn-reveal-trigger">
-										<td class="py-2">
-											<div class="form-check custom-checkbox  checkbox-warning">
-												<input type="checkbox" class="form-check-input" id="checkbox3">
-												<label class="form-check-label" for="checkbox3"></label>
-											</div>
-										</td>
-										<td class="py-2">
-											<a href="#">
-											<span class="order">#184</span></a> by <span class="order">Bucky
-											Robert</span><br><a href="mailto:bucky@example.com">bucky@example.com</a>
-										</td>
-										<td class="py-2">30/04/2020</td>
-										<td class="py-2 text-end"><span class="badge badge-warning badge-sm">Pending<span class="ms-1 fas fa-stream"></span></span>
-										</td>
-										<td class="py-2 text-end font-w600">$92
-										</td>
-										<td class="py-2 text-end">
-											<div class="dropdown text-sans-serif">
-												<button class="btn btn-primary tp-btn-light sharp" type="button" id="order-dropdown-3" data-bs-toggle="dropdown" data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
-													<span>
-														<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1">
-															<g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-																<rect x="0" y="0" width="24" height="24"></rect>
-																<circle fill="#000000" cx="12" cy="5" r="2"></circle>
-																<circle fill="#000000" cx="12" cy="12" r="2"></circle>
-																<circle fill="#000000" cx="12" cy="19" r="2"></circle>
-															</g>
-														</svg>
-													</span>
-												</button>
-												<div class="dropdown-menu dropdown-menu-end border py-0" aria-labelledby="order-dropdown-3">
-													<div class="py-2">
-														<a class="dropdown-item" href="javascript:void(0);">Completed</a><a class="dropdown-item" href="javascript:void(0);">Processing</a><a class="dropdown-item" href="javascript:void(0);">On Hold</a><a class="dropdown-item" href="javascript:void(0);">Pending</a>
-														<div class="dropdown-divider"></div>
-														<a class="dropdown-item text-danger" href="javascript:void(0);">Delete</a>
-													</div>
-												</div>
-											</div>
-										</td>
-									</tr>
-								</tbody>
-							</table>
+							<div class="table-responsive" style="height: 35rem;">
+                                <table class="table table-responsive-md">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="form-check custom-checkbox checkbox-success check-lg me-3">
+                                                    <input type="checkbox" class="form-check-input" id="checkAll" required="">
+                                                    <label class="form-check-label" for="checkAll"></label>
+                                                </div>
+                                            </th>
+                                            <th><strong>ID</strong></th>
+                                            <th><strong>NAME</strong></th>
+                                            <th><strong>Qty</strong></th>
+                                            <th><strong>Unit</strong></th>
+                                            <th><strong>Subtotal</strong></th>
+                                            <th><strong></strong></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in items %}
+                                        {% include 'crm/shop/orders/order-item.html' %}
+                                        {% endfor %}
+                                        <tr>
+                                            <td>
+                                                <div class="form-check custom-checkbox checkbox-success check-lg me-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+                                                    <label class="form-check-label" for="customCheckBox2"></label>
+                                                </div>
+                                            </td>
+                                            <td><strong>542</strong></td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="{% static 'crm/images/avatar/1.jpg' %}" class="rounded-lg me-2" width="24" alt="">
+                                                    <span class="w-space-no">Dr. Jackson</span>
+                                                </div>
+                                            </td>
+                                            <td>2	</td>
+                                            <td>IQD 2500</td>
+                                            <td><div class="d-flex align-items-center"><i class="fa fa-circle text-success me-1"></i>IQD 5000</div></td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                    <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check custom-checkbox checkbox-success check-lg me-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox3" required="">
+                                                    <label class="form-check-label" for="customCheckBox3"></label>
+                                                </div>
+                                            </td>
+                                            <td><strong>542</strong></td>
+                                            <td><div class="d-flex align-items-center"><img src="{% static 'crm/images/avatar/2.jpg' %}" class="rounded-lg me-2" width="24" alt=""> <span class="w-space-no">Dr. Jackson</span></div></td>
+                                            <td>2	</td>
+                                            <td>IQD 2500</td>
+                                            <td><div class="d-flex align-items-center"><i class="fa fa-circle text-danger me-1"></i>IQD 5000</div></td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                    <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-check custom-checkbox checkbox-success check-lg me-3">
+                                                    <input type="checkbox" class="form-check-input" id="customCheckBox4" required="">
+                                                    <label class="form-check-label" for="customCheckBox4"></label>
+                                                </div>
+                                            </td>
+                                            <td><strong>542</strong></td>
+                                            <td><div class="d-flex align-items-center"><img src="{% static 'crm/images/avatar/3.jpg' %}" class="rounded-lg me-2" width="24" alt=""> <span class="w-space-no">Dr. Jackson</span></div></td>
+                                            <td>2	</td>
+                                            <td>IQD 2500</td>
+                                            <td><div class="d-flex align-items-center"><i class="fa fa-circle text-warning me-1"></i>IQD 5000</div></td>
+                                            <td>
+                                                <div class="d-flex">
+                                                    <a href="#" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                    <a href="#" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
 							</div>
 						<div class="card-footer">
 							<div class="row">
@@ -235,10 +134,70 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-md-6">
-			<div class="right-sidebar-sticky" style="height: 40rem;">
+		<div class="col-xl-6 col-lg-4">
+            <div class="row">
+                <ul class="nav nav-tabs style-1 mb-2" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a href="auto-write.html" class="nav-link">Auto Writer</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="scheduled.html" class="nav-link active border-s-1">Scheduler</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="repurpose.html" class="nav-link">Repurpose</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a href="rss.html" class="nav-link">RSS</a>
+                    </li>
+                </ul>
+            </div>
+			<div class="right-sidebar-sticky">
+                <div class="row mb-3 ml-2 overflow-y-auto overflow-x-hidden">
+                    <div class="file-list row dz-scroll gap-2">
+                        <div class="text-center col-xl-2 col-4 filie-l-icon border border-success">
+                            <img src="{% static 'crm/images/iconly/light/Calendar.svg' %}"/>
+                            <h6 class="mt-2">document</h6>
+                        </div>
+                        <div class="text-center col-xl-2 col-4 filie-l-icon border border-success">
+                            <img src="{% static 'crm/images/chat/play-button1.png' %}" alt="">
+                            <h6 class="mt-2">document</h6>
+                        </div>
+                        <div class="text-center col-xl-2 col-4 filie-l-icon border border-success">
+                            <img src="{% static 'crm/images/chat/music-notes1.png' %}" alt="">
+                            <h6 class="mt-2">document</h6>
+                        </div>
+                        <div class="text-center col-xl-2 col-4 filie-l-icon  border border-success">
+                            <img src="{% static 'crm/images/chat/pdf.png' %}" alt="">
+                            <h6 class="mt-2">Project 01</h6>
+                        </div>
+                        <div class="text-center col-xl-2 col-4 filie-l-icon  border border-success">
+                            <img src="{% static 'crm/images/chat/music-notes1.png' %}" alt="">
+                            <h6 class="mt-2">document</h6>
+                        </div>
+                        <div class="text-center col-xl-2 col-4 filie-l-icon  border border-success">
+                            <img src="{% static 'crm/images/chat/google-docs1.png' %}" alt="">
+                            <h6 class="mt-2">document</h6>
+                        </div>
+                        <div class="text-center col-xl-2 col-4 filie-l-icon  border border-success">
+                            <img src="{% static 'crm/images/chat/music-notes1.png' %}" alt="">
+                            <h6 class="mt-2">document</h6>
+                        </div>
+                        <div class="text-center col-xl-2 col-4 filie-l-icon  border border-success">
+                            <img src="{% static 'crm/images/chat/pdf.png' %}" alt="">
+                            <h6 class="mt-2">Project 01</h6>
+                        </div>
+                        <div class="text-center col-xl-2 col-4 filie-l-icon  border border-success">
+                            <img src="{% static 'crm/images/chat/music-notes1.png' %}" alt="">
+                            <h6 class="mt-2">document</h6>
+                        </div>
+                        <div class="text-center col-xl-2 col-4 filie-l-icon  border border-success">
+                            <img src="{% static 'crm/images/chat/pdf.png' %}" alt="">
+                            <h6 class="mt-2">Project 01</h6>
+                        </div>
+                    </div>
+                </div>
 				<div class="row">
-					<div class="col-sm-6">
+					<div class="col-xl-6">
 						<div class="card">
 							<div class="card-header border-0 pb-0">
 								<h2 class="card-title">Order Summary</h2>
@@ -252,10 +211,6 @@
 									<li class="list-group-item d-flex px-0 justify-content-between">
 										<strong>VAT - 5%</strong>
 										<span class="mb-0">IQD 1725</span>
-									</li>
-									<li class="list-group-item d-flex px-0 justify-content-between">
-										<strong>Total</strong>
-										<span class="mb-0">120</span>
 									</li>
 								</ul>
 							</div>
@@ -277,7 +232,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-sm-6">
+					<div class="col-xl-6">
 						<div class="card overflow-hidden">
 							<div class="card-body">
 								<div class="text-center">
@@ -285,7 +240,6 @@
 										<img src="{% static 'crm/images/profile/profile.png' %}" width="100" class="img-fluid rounded-circle" alt="">
 									</div>
 									<h3 class="mt-4 mb-1">Deangelo Sena</h3>
-									<a class="btn btn-outline-primary btn-rounded mt-3 px-5" href="javascript:void();">Folllow</a>
 								</div>
 							</div>
 							<div class="card-footer pt-0 pb-0 text-center">
@@ -307,49 +261,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="file-list h-40 row offset-1 dz-scroll gap-3">
-					<div class="text-center col-xl-4 col-6 filie-l-icon border border-success">
-						<img src="{% static 'crm/images/iconly/light/Calendar.svg' %}"/>
-						<h5>document.doc</h5>
-					</div>
-					<div class="text-center col-xl-4 col-6 filie-l-icon border border-success">
-						<img src="{% static 'crm/images/chat/play-button1.png' %}" alt="">
-						<h5>document.doc</h5>
-					</div>
-					<div class="text-center col-xl-4 col-6 filie-l-icon border border-success">
-						<img src="{% static 'crm/images/chat/music-notes1.png' %}" alt="">
-						<h5>document.doc</h5>
-					</div>
-					<div class="text-center col-xl-4 col-6 filie-l-icon  border border-success">
-						<img src="{% static 'crm/images/chat/pdf.png' %}" alt="">
-						<h5>Project 01</h5>
-					</div>
-					<div class="text-center col-xl-4 col-6 filie-l-icon  border border-success">
-						<img src="{% static 'crm/images/chat/music-notes1.png' %}" alt="">
-						<h5>document.doc</h5>
-					</div>
-					<div class="text-center col-xl-4 col-6 filie-l-icon  border border-success">
-						<img src="{% static 'crm/images/chat/google-docs1.png' %}" alt="">
-						<h5>document.doc</h5>
-					</div>
-					<div class="text-center col-xl-4 col-6 filie-l-icon  border border-success">
-						<img src="{% static 'crm/images/chat/music-notes1.png' %}" alt="">
-						<h5>document.doc</h5>
-					</div>
-					<div class="text-center col-xl-4 col-6 filie-l-icon  border border-success">
-						<img src="{% static 'crm/images/chat/pdf.png' %}" alt="">
-						<h5>Project 01</h5>
-					</div>
-					<div class="text-center col-xl-4 col-6 filie-l-icon  border border-success">
-						<img src="{% static 'crm/images/chat/music-notes1.png' %}" alt="">
-						<h5>document.doc</h5>
-					</div>
-					<div class="text-center col-xl-4 col-6 filie-l-icon  border border-success">
-						<img src="{% static 'crm/images/chat/pdf.png' %}" alt="">
-						<h5>Project 01</h5>
-					</div>
-				</div>
+
 			</div>
+
 		</div>
 	</div>
 </div>
