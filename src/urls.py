@@ -22,6 +22,7 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('crm/', include('src.crm.urls')),
+    path('hud/', include('src.hud.urls')),
     path('dashboard/', include('src.dashboard.urls')),
     path('industico/', include('src.industico.urls')),
 

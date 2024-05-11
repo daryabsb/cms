@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 
@@ -8,8 +10,8 @@
 	<meta name="description" content>
 	<meta name="author" content>
 
-	<link href="assets/css/vendor.min.css" rel="stylesheet">
-	<link href="assets/css/app.min.css" rel="stylesheet">
+	<link href="{% static 'hud/css/vendor.min.css' %}" rel="stylesheet">
+	<link href="{% static 'hud/css/app.min.css' %}" rel="stylesheet">
 
 </head>
 
@@ -150,6 +152,31 @@
 					<div class="pos-content">
 						<div class="pos-content-container h-100 p-4" data-scrollbar="true" data-height="100%">
 							<div class="row gx-4">
+								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="burger">
+
+									<div class="card h-100">
+										<div class="card-body h-100 p-1">
+											<a href="#" class="pos-product" data-bs-toggle="modal"
+												data-bs-target="#modalPosItem">
+												<div class="img"
+													style="background-image: url({% static 'hud/img/pos/product-17.jpg' %})"></div>
+												<div class="info">
+													<div class="title">Cheese Burger</div>
+													<div class="desc">Dill pickle, cheddar cheese, tomato, red onion,
+														ground chuck beef</div>
+													<div class="price">$12.99</div>
+												</div>
+											</a>
+										</div>
+										<div class="card-arrow">
+											<div class="card-arrow-top-left"></div>
+											<div class="card-arrow-top-right"></div>
+											<div class="card-arrow-bottom-left"></div>
+											<div class="card-arrow-bottom-right"></div>
+										</div>
+									</div>
+
+								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
 
 									<div class="card h-100">
@@ -157,7 +184,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-1.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-1.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Grill Chicken Chop&reg;</div>
 													<div class="desc">chicken, egg, mushroom, salad</div>
@@ -181,7 +208,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-2.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-2.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Grill Pork Chop&reg;</div>
 													<div class="desc">pork, egg, mushroom, salad</div>
@@ -205,7 +232,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-3.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-3.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Capellini Tomato Sauce&reg;</div>
 													<div class="desc">spaghetti, tomato, mushroom </div>
@@ -229,7 +256,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-4.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-4.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Vegan Salad Bowl&reg;</div>
 													<div class="desc">apple, carrot, tomato </div>
@@ -252,7 +279,7 @@
 										<div class="card-body h-100 p-1">
 											<div class="pos-product not-available">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-5.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-5.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Hawaiian Pizza&reg;</div>
 													<div class="desc">pizza, crab meat, pineapple </div>
@@ -279,7 +306,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-17.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-17.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Perfect Burger</div>
 													<div class="desc">Dill pickle, cheddar cheese, tomato, red onion,
@@ -304,7 +331,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-6.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-6.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Avocado Shake</div>
 													<div class="desc">avocado, milk, vanilla</div>
@@ -328,7 +355,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-7.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-7.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Coffee Latte</div>
 													<div class="desc">espresso, milk</div>
@@ -352,7 +379,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-8.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-8.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Vita C Detox Juice</div>
 													<div class="desc">apricot, apple, carrot and ginger juice</div>
@@ -376,7 +403,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-9.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-9.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Pancake</div>
 													<div class="desc">Non dairy, egg, baking soda, sugar, all purpose
@@ -401,7 +428,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-10.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-10.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Mushroom soup</div>
 													<div class="desc">Evaporated milk, marsala wine, beef cubes, chicken
@@ -426,7 +453,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-11.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-11.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Baked chicken wing</div>
 													<div class="desc">Chicken wings, a1 steak sauce, honey, cayenne
@@ -451,7 +478,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-12.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-12.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Veggie Spaghetti</div>
 													<div class="desc">Yellow squash, pasta, roasted red peppers,
@@ -476,7 +503,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-13.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-13.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Vanilla Ice Cream</div>
 													<div class="desc">Heavy whipping cream, white sugar, vanilla extract
@@ -501,7 +528,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-15.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-15.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Perfect Yeast Doughnuts</div>
 													<div class="desc">Chocolate hazelnut spread, bread flour, doughnuts,
@@ -526,7 +553,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-14.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-14.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Macarons</div>
 													<div class="desc">Almond flour, egg whites, heavy cream, food
@@ -551,7 +578,7 @@
 											<a href="#" class="pos-product" data-bs-toggle="modal"
 												data-bs-target="#modalPosItem">
 												<div class="img"
-													style="background-image: url(assets/img/pos/product-16.jpg)"></div>
+													style="background-image: url({% static 'hud/img/pos/product-16.jpg' %})"></div>
 												<div class="info">
 													<div class="title">Perfect Vanilla Cupcake</div>
 													<div class="desc">Baking powder, all purpose flour, plain kefir,
@@ -584,7 +611,7 @@
 										<i class="bi bi-chevron-left"></i>
 									</button>
 								</div>
-								<div class="icon"><img src="assets/img/pos/icon-table-black.svg" class="invert-dark"
+								<div class="icon"><img src="{% static 'hud/img/pos/icon-table-black.svg' %}" class="invert-dark"
 										alt></div>
 								<div class="title">Table 01</div>
 								<div class="order">Order: <b>#0056</b></div>
@@ -612,7 +639,7 @@
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
-												style="background-image: url(assets/img/pos/product-2.jpg)"></div>
+												style="background-image: url({% static 'hud/img/pos/product-2.jpg' %})"></div>
 											<div class="flex-1">
 												<div class="h6 mb-1">Grill Pork Chop</div>
 												<div class="small">$12.99</div>
@@ -637,7 +664,7 @@
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
-												style="background-image: url(assets/img/pos/product-8.jpg)"></div>
+												style="background-image: url({% static 'hud/img/pos/product-8.jpg' %})"></div>
 											<div class="flex-1">
 												<div class="h6 mb-1">Orange Juice</div>
 												<div class="small">$5.00</div>
@@ -677,7 +704,7 @@
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
-												style="background-image: url(assets/img/pos/product-1.jpg)"></div>
+												style="background-image: url({% static 'hud/img/pos/product-1.jpg' %})"></div>
 											<div class="flex-1">
 												<div class="h6 mb-1">Grill chicken chop</div>
 												<div class="small">$10.99</div>
@@ -705,7 +732,7 @@
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
-												style="background-image: url(assets/img/pos/product-5.jpg)"></div>
+												style="background-image: url({% static 'hud/img/pos/product-5.jpg' %})"></div>
 											<div class="flex-1">
 												<div class="h6 mb-1">Hawaiian Pizza</div>
 												<div class="small">$15.00</div>
@@ -733,7 +760,7 @@
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
-												style="background-image: url(assets/img/pos/product-10.jpg)"></div>
+												style="background-image: url({% static 'hud/img/pos/product-10.jpg' %})"></div>
 											<div class="flex-1">
 												<div class="h6 mb-1">Mushroom Soup</div>
 												<div class="small">$3.99</div>
@@ -848,7 +875,7 @@
 								<div class="col-6">
 									<a href="javascript:;" data-toggle="theme-mode-selector" data-theme-mode="dark"
 										class="app-theme-mode-link active">
-										<div class="img"><img src="assets/img/mode/dark.jpg" class="object-fit-cover"
+										<div class="img"><img src="{% static 'hud/img/mode/dark.jpg' %}" class="object-fit-cover"
 												height="76" width="76" alt="Dark Mode"></div>
 										<div class="text">Dark</div>
 									</a>
@@ -856,7 +883,7 @@
 								<div class="col-6">
 									<a href="javascript:;" data-toggle="theme-mode-selector" data-theme-mode="light"
 										class="app-theme-mode-link">
-										<div class="img"><img src="assets/img/mode/light.jpg" class="object-fit-cover"
+										<div class="img"><img src="{% static 'hud/img/mode/light.jpg' %}" class="object-fit-cover"
 												height="76" width="76" alt="Light Mode"></div>
 										<div class="text">Light</div>
 									</a>
@@ -948,63 +975,63 @@
 							<div class="app-theme-cover">
 								<div class="app-theme-cover-item active">
 									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url(assets/img/cover/cover-thumb-1.jpg);"
+										style="background-image: url({% static 'hud/img/cover/cover-thumb-1.jpg' %});"
 										data-theme-cover-class data-toggle="theme-cover-selector"
 										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
 										data-bs-title="Default">&nbsp;</a>
 								</div>
 								<div class="app-theme-cover-item">
 									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url(assets/img/cover/cover-thumb-2.jpg);"
+										style="background-image: url({% static 'hud/img/cover/cover-thumb-2.jpg' %});"
 										data-theme-cover-class="bg-cover-2" data-toggle="theme-cover-selector"
 										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
 										data-bs-title="Cover 2">&nbsp;</a>
 								</div>
 								<div class="app-theme-cover-item">
 									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url(assets/img/cover/cover-thumb-3.jpg);"
+										style="background-image: url({% static 'hud/img/cover/cover-thumb-3.jpg' %});"
 										data-theme-cover-class="bg-cover-3" data-toggle="theme-cover-selector"
 										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
 										data-bs-title="Cover 3">&nbsp;</a>
 								</div>
 								<div class="app-theme-cover-item">
 									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url(assets/img/cover/cover-thumb-4.jpg);"
+										style="background-image: url({% static 'hud/img/cover/cover-thumb-4.jpg' %});"
 										data-theme-cover-class="bg-cover-4" data-toggle="theme-cover-selector"
 										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
 										data-bs-title="Cover 4">&nbsp;</a>
 								</div>
 								<div class="app-theme-cover-item">
 									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url(assets/img/cover/cover-thumb-5.jpg);"
+										style="background-image: url({% static 'hud/img/cover/cover-thumb-5.jpg' %});"
 										data-theme-cover-class="bg-cover-5" data-toggle="theme-cover-selector"
 										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
 										data-bs-title="Cover 5">&nbsp;</a>
 								</div>
 								<div class="app-theme-cover-item">
 									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url(assets/img/cover/cover-thumb-6.jpg);"
+										style="background-image: url({% static 'hud/img/cover/cover-thumb-6.jpg' %});"
 										data-theme-cover-class="bg-cover-6" data-toggle="theme-cover-selector"
 										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
 										data-bs-title="Cover 6">&nbsp;</a>
 								</div>
 								<div class="app-theme-cover-item">
 									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url(assets/img/cover/cover-thumb-7.jpg);"
+										style="background-image: url({% static 'hud/img/cover/cover-thumb-7.jpg' %});"
 										data-theme-cover-class="bg-cover-7" data-toggle="theme-cover-selector"
 										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
 										data-bs-title="Cover 7">&nbsp;</a>
 								</div>
 								<div class="app-theme-cover-item">
 									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url(assets/img/cover/cover-thumb-8.jpg);"
+										style="background-image: url({% static 'hud/img/cover/cover-thumb-8.jpg' %});"
 										data-theme-cover-class="bg-cover-8" data-toggle="theme-cover-selector"
 										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
 										data-bs-title="Cover 8">&nbsp;</a>
 								</div>
 								<div class="app-theme-cover-item">
 									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url(assets/img/cover/cover-thumb-9.jpg);"
+										style="background-image: url({% static 'hud/img/cover/cover-thumb-9.jpg' %});"
 										data-theme-cover-class="bg-cover-9" data-toggle="theme-cover-selector"
 										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
 										data-bs-title="Cover 9">&nbsp;</a>
@@ -1040,7 +1067,7 @@
 						<a href="#" data-bs-dismiss="modal" class="btn-close position-absolute top-0 end-0 m-4"></a>
 						<div class="modal-pos-product">
 							<div class="modal-pos-product-img">
-								<div class="img" style="background-image: url(assets/img/pos/product-1.jpg)"></div>
+								<div class="img" style="background-image: url({% static 'hud/img/pos/product-1.jpg' %})"></div>
 							</div>
 							<div class="modal-pos-product-info">
 								<div class="h4 mb-2">Grill Chicken Chop</div>
@@ -1146,13 +1173,13 @@
 	</div>
 
 
-	<script src="assets/js/vendor.min.js" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
-	<script src="assets/js/app.min.js" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
+	<script src="{% static 'hud/js/vendor.min.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
+	<script src="{% static 'hud/js/app.min.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
 
 
-	<script src="assets/js/demo/pos-customer-order.demo.js" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
+	<script src="{% static 'hud/js/demo/pos-customer-order.demo.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
 
-	<script src="assets/js/rocket-loader.min.js" data-cf-settings="6a9f65d44ad9696aba2f6178-|49" defer></script>
+	<script src="{% static 'hud/js/rocket-loader.min.js' %}" data-cf-settings="6a9f65d44ad9696aba2f6178-|49" defer></script>
 </body>
 
 </html>

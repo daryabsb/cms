@@ -54,6 +54,7 @@ LOCAL_APPS = [
     'src.subscribe',
     'src.pages',
     'src.shop',
+    'src.hud',
 
     # Frontends
     'src.industico',
@@ -88,6 +89,7 @@ TEMPLATES = [
             PROJECT_PATH + 'templates',
             PROJECT_PATH + 'accounts' + 'templates',
             PROJECT_PATH + 'crm' + 'templates',
+            PROJECT_PATH + 'hud' + 'templates',
             PROJECT_PATH + 'dashboard' + 'templates',
             PROJECT_PATH + 'pages' + 'templates',
             PROJECT_PATH + 'blogs' + 'templates',
