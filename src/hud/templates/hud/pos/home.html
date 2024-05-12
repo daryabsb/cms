@@ -38,7 +38,7 @@
 							<div data-scrollbar="true" data-height="100%" data-skip-mobile="true">
 								<ul class="nav nav-tabs">
 									<li class="nav-item">
-										<a class="nav-link active" href="#" data-filter="all">
+										<a class="nav-link" href="#" data-filter="all">
 											<div class="card">
 												<div class="card-body">
 													<i class="fa fa-fw fa-utensils"></i> All Dishes
@@ -52,6 +52,23 @@
 											</div>
 										</a>
 									</li>
+									{% for group in groups %}
+									<li class="nav-item">
+										<a class="nav-link active" href="#" data-filter="{{ group.id }}">
+											<div class="card">
+												<div class="card-body">
+													<i class="fa fa-fw fa-shopping-basket"></i> {{ group.name }}
+												</div>
+												<div class="card-arrow">
+													<div class="card-arrow-top-left"></div>
+													<div class="card-arrow-top-right"></div>
+													<div class="card-arrow-bottom-left"></div>
+													<div class="card-arrow-bottom-right"></div>
+												</div>
+											</div>
+										</a>
+									</li>
+									{% endfor %}
 									<li class="nav-item">
 										<a class="nav-link" href="#" data-filter="meat">
 											<div class="card">
@@ -164,19 +181,20 @@
 							</div>
 						</div>
 							<div class="row gx-4">
-								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="burger">
 
+								{% for product in products%}
+								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="{{ product.parent_group.id }}">
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
-												data-bs-target="#modalPosItem">
+												data-bs-target="#modal-{{ product.id }}">
 												<div class="img"
-													style="background-image: url({% static 'hud/img/pos/product-17.jpg' %})"></div>
+													style="background-image: url({{ product.image.url }})"></div>
 												<div class="info">
-													<div class="title">Cheese Burger</div>
+													<div class="title">{{ product.name }}</div>
 													<div class="desc">Dill pickle, cheddar cheese, tomato, red onion,
 														ground chuck beef</div>
-													<div class="price">$12.99</div>
+													<div class="price">{{ product.currency.name }} {{ product.price|floatformat:"0" }}</div>
 												</div>
 											</a>
 										</div>
@@ -187,10 +205,10 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
+								{% include 'hud/pos/product-modal.html' with product=product %}
+								{% endfor %}
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -214,7 +232,6 @@
 
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -235,10 +252,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -259,10 +274,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -283,10 +296,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="pizza">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<div class="pos-product not-available">
@@ -309,10 +320,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="burger">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -334,10 +343,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="drinks">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -358,10 +365,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="drinks">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -382,10 +387,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="drinks">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -406,10 +409,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="snacks">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -431,10 +432,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="snacks">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -456,10 +455,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="snacks">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -481,10 +478,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -506,10 +501,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="desserts">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -531,10 +524,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="desserts">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -556,10 +547,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="desserts">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -581,10 +570,8 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="desserts">
-
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
 											<a href="#" class="pos-product" data-bs-toggle="modal"
@@ -606,7 +593,6 @@
 											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
-
 								</div>
 							</div>
 						</div>
@@ -1068,120 +1054,6 @@
 
 		<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
 
-	</div>
-
-
-	<div class="modal modal-pos fade" id="modalPosItem">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content border-0">
-				<div class="card">
-					<div class="card-body p-0">
-						<a href="#" data-bs-dismiss="modal" class="btn-close position-absolute top-0 end-0 m-4"></a>
-						<div class="modal-pos-product">
-							<div class="modal-pos-product-img">
-								<div class="img" style="background-image: url({% static 'hud/img/pos/product-1.jpg' %})"></div>
-							</div>
-							<div class="modal-pos-product-info">
-								<div class="h4 mb-2">Grill Chicken Chop</div>
-								<div class="text-inverse text-opacity-50 mb-2">
-									chicken, egg, mushroom, salad
-								</div>
-								<div class="h4 mb-3">$10.99</div>
-								<div class="d-flex mb-3">
-									<a href="#" class="btn btn-outline-theme"><i class="fa fa-minus"></i></a>
-									<input type="text"
-										class="form-control w-50px fw-bold mx-2 bg-inverse bg-opacity-15 border-0 text-center"
-										name="qty" value="1">
-									<a href="#" class="btn btn-outline-theme"><i class="fa fa-plus"></i></a>
-								</div>
-								<hr class="mx-n4">
-								<div class="mb-2">
-									<div class="fw-bold">Size:</div>
-									<div class="option-list">
-										<div class="option">
-											<input type="radio" id="size3" name="size" class="option-input" checked>
-											<label class="option-label" for="size3">
-												<span class="option-text">Small</span>
-												<span class="option-price">+0.00</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="radio" id="size1" name="size" class="option-input">
-											<label class="option-label" for="size1">
-												<span class="option-text">Large</span>
-												<span class="option-price">+3.00</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="radio" id="size2" name="size" class="option-input">
-											<label class="option-label" for="size2">
-												<span class="option-text">Medium</span>
-												<span class="option-price">+1.50</span>
-											</label>
-										</div>
-									</div>
-								</div>
-								<div class="mb-2">
-									<div class="fw-bold">Add On:</div>
-									<div class="option-list">
-										<div class="option">
-											<input type="checkbox" name="addon[sos]" value="true" class="option-input"
-												id="addon1">
-											<label class="option-label" for="addon1">
-												<span class="option-text">More BBQ sos</span>
-												<span class="option-price">+0.00</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="checkbox" name="addon[ff]" value="true" class="option-input"
-												id="addon2">
-											<label class="option-label" for="addon2">
-												<span class="option-text">Extra french fries</span>
-												<span class="option-price">+1.00</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="checkbox" name="addon[ms]" value="true" class="option-input"
-												id="addon3">
-											<label class="option-label" for="addon3">
-												<span class="option-text">Mushroom soup</span>
-												<span class="option-price">+3.50</span>
-											</label>
-										</div>
-										<div class="option">
-											<input type="checkbox" name="addon[ms]" value="true" class="option-input"
-												id="addon4">
-											<label class="option-label" for="addon4">
-												<span class="option-text">Lemon Juice (set)</span>
-												<span class="option-price">+2.50</span>
-											</label>
-										</div>
-									</div>
-								</div>
-								<hr class="mx-n4">
-								<div class="row">
-									<div class="col-4">
-										<a href="#" class="btn btn-default h4 mb-0 d-block rounded-0 py-3"
-											data-bs-dismiss="modal">Cancel</a>
-									</div>
-									<div class="col-8">
-										<a href="#"
-											class="btn btn-theme d-flex justify-content-center align-items-center rounded-0 py-3 h4 m-0">Add
-											to cart <i class="bi bi-plus fa-2x ms-2 my-n3"></i></a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="card-arrow">
-						<div class="card-arrow-top-left"></div>
-						<div class="card-arrow-top-right"></div>
-						<div class="card-arrow-bottom-left"></div>
-						<div class="card-arrow-bottom-right"></div>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 
 
