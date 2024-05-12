@@ -27,7 +27,7 @@
 					<div class="pos-menu">
 
 						<div class="logo">
-							<a href="index.html">
+							<a href="{% url 'hud:hud-index' %}">
 								<div class="logo-img"><i class="bi bi-x-diamond" style="font-size: 2.1rem;"></i></div>
 								<div class="logo-text">Pine & Dine</div>
 							</a>
@@ -157,7 +157,7 @@
 										{% csrf_token %}
 										<div class="input-group flex-nowrap mb-3">
 											<span class="input-group-text" id="addon-wrapping"><i class="bi bi-search"></i></span>
-											<input type="text" name="barcode" class="form-control" placeholder="Search for barcodes...">
+											<input type="text" name="barcode" class="form-control form-control-lg active" placeholder="Search for barcodes...">
 											<span class="input-group-text"><i class="bi bi-x-lg"></i></span>
 										</div>
 									</form>
