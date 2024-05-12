@@ -1,4 +1,4 @@
-{% load static %}
+{% load static custom_tags %}
 
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
@@ -13,9 +13,14 @@
 	<link href="{% static 'hud/css/vendor.min.css' %}" rel="stylesheet">
 	<link href="{% static 'hud/css/app.min.css' %}" rel="stylesheet">
 
+    {% for htmx_url in dz_array.crm.htmx %}
+		<script src="{% static htmx_url %}" defer></script>
+	{% endfor %}
+	
+
 </head>
 
-<body class="pace-top">
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="pace-top">
 
 	<div id="app" class="app app-content-full-height app-without-sidebar app-without-header">
 
@@ -38,7 +43,7 @@
 							<div data-scrollbar="true" data-height="100%" data-skip-mobile="true">
 								<ul class="nav nav-tabs">
 									<li class="nav-item">
-										<a class="nav-link" href="#" data-filter="all">
+										<a class="nav-link active" href="#" data-filter="all">
 											<div class="card">
 												<div class="card-body">
 													<i class="fa fa-fw fa-utensils"></i> All Dishes
@@ -54,7 +59,7 @@
 									</li>
 									{% for group in groups %}
 									<li class="nav-item">
-										<a class="nav-link active" href="#" data-filter="{{ group.id }}">
+										<a class="nav-link" href="#" data-filter="{{ group.id }}">
 											<div class="card">
 												<div class="card-body">
 													<i class="fa fa-fw fa-shopping-basket"></i> {{ group.name }}
@@ -170,7 +175,11 @@
 						<div class="pos-content-container h-100 p-4" data-scrollbar="true" data-height="100%">
 							<div class="row">
 								<div class="col-xxl-12">
-									<form class="menu-search" method="POST" name="header_search_form">
+									<form
+									hx-post=""
+									hx-target="" 
+									class="menu-search" 
+									name="header_search_form">
 										{% csrf_token %}
 										<div class="input-group flex-nowrap mb-3">
 											<span class="input-group-text" id="addon-wrapping"><i class="bi bi-search"></i></span>
@@ -186,10 +195,16 @@
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="{{ product.parent_group.id }}">
 									<div class="card h-100">
 										<div class="card-body h-100 p-1">
-											<a href="#" class="pos-product" data-bs-toggle="modal"
-												data-bs-target="#modal-{{ product.id }}">
+											<a href="#" 
+											    hx-get="{% url 'hud:modal-product' product.id %}" 
+												hx-target="#modal-product" 
+												hx-trigger="click" 
+												class="pos-product" 
+												data-bs-toggle="modal"
+												data-bs-target="#modal-product"
+												>
 												<div class="img"
-													style="background-image: url({{ product.image.url }})"></div>
+													style="background-image: url({{ product.img }})"></div>
 												<div class="info">
 													<div class="title">{{ product.name }}</div>
 													<div class="desc">Dill pickle, cheddar cheese, tomato, red onion,
@@ -206,7 +221,7 @@
 										</div>
 									</div>
 								</div>
-								{% include 'hud/pos/product-modal.html' with product=product %}
+								
 								{% endfor %}
 								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
 									<div class="card h-100">
@@ -631,9 +646,7 @@
 
 
 							<div class="pos-sidebar-body tab-content" data-scrollbar="true" data-height="100%">
-
 								<div class="tab-pane fade h-100 show active" id="newOrderTab">
-
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
@@ -657,8 +670,6 @@
 											$12.99
 										</div>
 									</div>
-
-
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
@@ -697,8 +708,6 @@
 											</div>
 										</div>
 									</div>
-
-
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
@@ -725,8 +734,6 @@
 											$10.99
 										</div>
 									</div>
-
-
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
@@ -753,8 +760,6 @@
 											$15.00
 										</div>
 									</div>
-
-
 									<div class="pos-order">
 										<div class="pos-order-product">
 											<div class="img"
@@ -781,7 +786,6 @@
 											$3.99
 										</div>
 									</div>
-
 								</div>
 
 
@@ -1056,7 +1060,11 @@
 
 	</div>
 
-
+<div class="modal modal-pos fade" id="modal-product">
+{% include 'hud/pos/product-modal2.html' %}
+</div>
+{% load django_htmx %}
+	{% django_htmx_script %}
 	<script src="{% static 'hud/js/vendor.min.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
 	<script src="{% static 'hud/js/app.min.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
 

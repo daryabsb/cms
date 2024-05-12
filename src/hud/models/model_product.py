@@ -2,8 +2,8 @@ from django.db import models
 from django.utils.text import slugify
 from src.accounts.models import User
 from src.hud.modules import upload_image_file_path
-from mptt.models import MPTTModel,TreeForeignKey,TreeManyToManyField
-from django.utils.translation import gettext_lazy as _ 
+from mptt.models import MPTTModel, TreeForeignKey, TreeManyToManyField
+from django.utils.translation import gettext_lazy as _
 
 
 class Product(models.Model):
@@ -31,7 +31,7 @@ class Product(models.Model):
         default=0, null=True, blank=True, decimal_places=3, max_digits=11)
     margin = models.DecimalField(max_digits=18, decimal_places=3, default=0)
     image = models.ImageField(null=True, blank=True,
-                                upload_to=upload_image_file_path)
+                              upload_to=upload_image_file_path)
     color = models.CharField(max_length=50, default="Transparent")
     is_enabled = models.BooleanField(default=True)
     age_restriction = models.SmallIntegerField(null=True, blank=True)
@@ -44,6 +44,12 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def img(self):
+        from django.urls import reverse
+        if self.image:
+            return self.image.url
+        return '/media/placeholder-image.jpg'
 
     def save(self, *args, **kwargs):
         rate = 0
@@ -58,4 +64,3 @@ class Product(models.Model):
             delta = self.price - self.cost
             self.margin = delta / self.price * 100
         super(Product, self).save(*args, **kwargs)
-
