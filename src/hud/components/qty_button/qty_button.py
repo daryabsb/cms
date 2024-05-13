@@ -7,9 +7,9 @@ class QuantityButton(component.Component):
     template_name = "qty_button/qty_button.html"
 
     # This component takes one parameter, a date string to show in the template
-    def get_context_data(self, div_class='', input_class='', btn_class='', qty=1 ):
+    def get_context_data(self, div_class='', input_class='', btn_class='', item=None ):
         return {
-            "qty": qty,
+            "item": item,
             "div_class": div_class,
             "input_class": input_class,
             "btn_class": btn_class,

@@ -1,7 +1,8 @@
 <div class="d-flex {{ div_class }}">
     <a href="#" class="btn btn-outline-theme {{ btn_class }}" onclick="decreaseValue(this.nextElementSibling);"><i
             class="fa fa-minus"></i></a>
-    <input type="text" class="form-control w-50px text-center mx-2 {{ input_class }}" name="qty" value="{{ qty }}">
+    <input hx-post="{% url 'hud:add-quantity' item.number %}" hx-trigger="changed" value="1" type="text"
+        class="form-control w-50px text-center mx-2 {{ input_class }}" name="qty">
     <a href="#" class="btn btn-outline-theme {{ btn_class }}" onclick="increaseValue(this.previousElementSibling);"><i
             class="fa fa-plus"></i></a>
 </div>

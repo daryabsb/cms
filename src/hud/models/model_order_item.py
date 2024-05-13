@@ -35,5 +35,5 @@ class PosOrderItem(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return f"{self.product.name}: {self.quantity}{self.product.measurement_unit}"
+    # def __str__(self):
+    #     return f"{self.product.name}: {self.quantity}{self.product.measurement_unit}"

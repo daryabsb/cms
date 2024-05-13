@@ -1,6 +1,6 @@
 from django.urls import path, include
 from src.hud.views import hud_index, hud_pos
-from src.hud.htmx_views import modal_product
+from src.hud.htmx_views import modal_product, add_quantity
 
 app_name = 'hud'
 
@@ -13,6 +13,7 @@ urlpatterns = [
 # HTMX URLS
 urlpatterns += [
     path('modal-product/<int:id>/', modal_product, name="modal-product"),
+    path('add-quantity/<item_number>/', add_quantity, name="add-quantity"),
 ]
 
 urlpatterns += [
