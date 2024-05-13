@@ -1,5 +1,6 @@
 from django.db import models
 from src.accounts.models import User
+from django.db.models import F
 
 
 class PosOrderItem(models.Model):
@@ -18,6 +19,10 @@ class PosOrderItem(models.Model):
         decimal_places=3, max_digits=4, default=0)
     quantity = models.SmallIntegerField(default=1)
     price = models.DecimalField(decimal_places=3,  max_digits=9, default=0)
+    subtotal = models.GeneratedField(expression=F("price") * F("quantity"),
+                                    output_field=models.DecimalField(
+                                    max_digits=6, decimal_places=2
+                                    ), db_persist=True,)
     is_locked = models.BooleanField(default=False)
     discount = models.FloatField(default=0)
     discount_type = models.FloatField(default=0)
