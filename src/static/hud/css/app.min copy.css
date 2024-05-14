@@ -34391,19 +34391,19 @@ body .note-modal-backdrop {
 }
 
 .pos .pos-sidebar .pos-order {
-    padding: 1.1rem;
+    padding: 1.5rem;
     position: relative;
     display: flex
 }
 
 .pos .pos-sidebar .pos-order .pos-order-product {
     display: flex;
-    flex: 1
+    /* flex: 1 */
 }
 
 .pos .pos-sidebar .pos-order .pos-order-product .img {
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
     background-position: center;
     background-size: cover
 }
@@ -34413,7 +34413,7 @@ body .note-modal-backdrop {
 }
 
 .pos .pos-sidebar .pos-order>*+* {
-    margin-left: 0.75rem
+    margin-left: 1rem
 }
 
 .pos .pos-sidebar .pos-order .pos-order-confirmation {

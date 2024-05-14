@@ -2,7 +2,7 @@ from django.urls import path, include
 from src.hud.views import hud_index, hud_pos
 from src.hud.htmx_views import (
     modal_product, add_quantity, subtract_quantity,
-    add_order_item)
+    add_order_item, remove_item)
 
 app_name = 'hud'
 
@@ -16,7 +16,9 @@ urlpatterns = [
 urlpatterns += [
     path('modal-product/<int:id>/', modal_product, name="modal-product"),
     path('add-quantity/<item_number>/', add_quantity, name="add-quantity"),
-    path('subtract-quantity/<item_number>/', subtract_quantity, name="subtract-quantity"),
+    path('subtract-quantity/<item_number>/',
+         subtract_quantity, name="subtract-quantity"),
+    path('remove-item/<item_number>/', remove_item, name="remove-item"),
     path('add-item/', add_order_item, name="add-item"),
 ]
 

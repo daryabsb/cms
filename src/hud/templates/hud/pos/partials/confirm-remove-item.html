@@ -7,6 +7,9 @@ class="alert pos-order-confirmation text-center flex-column justify-content-cent
 <div class="mb-2">Remove this item?</div>
 <div>
     <button data-bs-dismiss="alert" class="btn btn-outline-default btn-sm ms-auto me-2 width-100px">No</button>
-    <button  class="btn btn-outline-theme btn-sm width-100px">Yes</button>
+    <button 
+    hx-delete="{% url 'hud:remove-item' item.number %}"
+    hx-target="#active-order-tab"
+    class="btn btn-outline-theme btn-sm width-100px">Yes</button>
 </div>
 </div>

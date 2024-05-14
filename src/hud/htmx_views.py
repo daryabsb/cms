@@ -3,13 +3,13 @@ from django.shortcuts import get_object_or_404, render
 from src.hud.models import ProductGroup, Product, Barcode, PosOrderItem, PosOrder
 from decimal import Decimal
 
+
 def modal_product(request, id):
     product = get_object_or_404(Product, id=id)
 
     if product:
         context = {"product": product}
         return render(request, 'hud/pos/product-modal.html', context)
-
 
 
 def add_quantity(request, item_number):
@@ -22,6 +22,7 @@ def add_quantity(request, item_number):
         "active_order": active_order,
     }
     return render(request, 'hud/pos/renders/update-order-item.html', context)
+
 
 def subtract_quantity(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
@@ -37,6 +38,18 @@ def subtract_quantity(request, item_number):
     elif item.quantity == 1:
         return render(request, 'hud/pos/renders/confirm-remove.html', context)
 
+
+def remove_item(request, item_number):
+    active_order = PosOrder.objects.filter(is_active=True).first()
+    item = get_object_or_404(PosOrderItem, number=item_number)
+    item.delete()
+
+    context = {
+        "active_order": active_order,
+    }
+    return render(request, 'hud/pos/renders/update-active-order.html', context)
+
+
 def add_order_item(request):
     if request.method == 'POST':
         product_id = request.POST.get('product_id', None)
@@ -46,8 +59,7 @@ def add_order_item(request):
         except Decimal.InvalidOperation as e:
             print(e)
             # Handle the case where quantity is not a valid decimal
-            return 
-        print("type(quantity) = ", type(quantity))
+            return
 
         active_order = PosOrder.objects.filter(is_active=True).first()
 
@@ -60,10 +72,9 @@ def add_order_item(request):
                     "item": item,
                     "active_order": active_order,
                 }
-                print("type(item.quantity) = ", type(item.quantity))
                 if quantity:
-                    item.quantity += quantity
-                    print("Types are equal: ", type(item.price) == type(product.price))
+                    item.quantity += int(quantity)
+
                     item.save()
                     return render(request, 'hud/pos/renders/update-active-order.html', context)
             else:
@@ -71,10 +82,11 @@ def add_order_item(request):
                     user=request.user,
                     order=active_order,
                     product=product,
-                    price=Decimal(2000),
+                    price=int(product.price),
+                    # quantity=int(quantity)
                 )
                 if quantity > 1:
-                    item.quantity = quantity
+                    item.quantity = int(quantity)
                     item.save()
                 context = {
                     "item": item,
