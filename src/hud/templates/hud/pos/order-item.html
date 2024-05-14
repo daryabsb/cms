@@ -6,7 +6,7 @@
         <!-- item details will be updated here -->
         {% include 'hud/pos/partials/order-item-detail.html' %}
     </div>
-    <div class="pos-order-price">
+    <div id="pos-order-price-{{ item.number }}" class="pos-order-price">
         {{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
     </div>
     <div id="placeholder-remove">

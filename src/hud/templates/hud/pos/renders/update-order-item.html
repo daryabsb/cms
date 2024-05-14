@@ -1,0 +1,7 @@
+{% include 'hud/pos/partials/order-item-detail.html' %}
+
+<div hx-swap-oob="true" id="pos-order-price-{{ item.number }}" class="pos-order-price">
+    {{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
+</div>
+
+<div hx-swap-oob="true" id="order-subtotal-{{ active_order.id }}" class="flex-1 text-end h4 mb-0">${{ active_order.subtotal }}</div>
