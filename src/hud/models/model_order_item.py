@@ -44,3 +44,18 @@ class PosOrderItem(models.Model):
     def subtotal(self):
         return self.price * self.quantity
     
+    def save(self, *args, **kwargs):
+        import random
+        from datetime import date
+        if not self.number:
+            min = 100
+            max = 3999
+            digits = str(random.randint(min, max))
+            digits = (len(str(max))-len(digits))*'0'+digits
+            target = 'item'
+            print(digits)
+            if target:
+                self.number = f'{target}-{self.user.id}-{date.today().strftime("%d%m%Y")}-01-{digits}'
+
+        super(PosOrderItem, self).save(*args, **kwargs)
+    

@@ -1,6 +1,7 @@
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from src.hud.models import ProductGroup, Product, Barcode, PosOrderItem, PosOrder
-
+from decimal import Decimal
 
 def modal_product(request, id):
     product = get_object_or_404(Product, id=id)
@@ -35,3 +36,52 @@ def subtract_quantity(request, item_number):
         return render(request, 'hud/pos/renders/update-order-item.html', context)
     elif item.quantity == 1:
         return render(request, 'hud/pos/renders/confirm-remove.html', context)
+
+def add_order_item(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id', None)
+        quantity_str = request.POST.get('quantity', '1')
+        try:
+            quantity = Decimal(quantity_str)
+        except Decimal.InvalidOperation as e:
+            print(e)
+            # Handle the case where quantity is not a valid decimal
+            return 
+        print("type(quantity) = ", type(quantity))
+
+        active_order = PosOrder.objects.filter(is_active=True).first()
+
+        if product_id:
+            product = get_object_or_404(Product, id=product_id)
+            item = PosOrderItem.objects.filter(product=product).first()
+            print("type(product.price) = ", type(product.price))
+            if item:
+                context = {
+                    "item": item,
+                    "active_order": active_order,
+                }
+                print("type(item.quantity) = ", type(item.quantity))
+                if quantity:
+                    item.quantity += quantity
+                    print("Types are equal: ", type(item.price) == type(product.price))
+                    item.save()
+                    return render(request, 'hud/pos/renders/update-active-order.html', context)
+            else:
+                item = PosOrderItem.objects.create(
+                    user=request.user,
+                    order=active_order,
+                    product=product,
+                    price=Decimal(2000),
+                )
+                if quantity > 1:
+                    item.quantity = quantity
+                    item.save()
+                context = {
+                    "item": item,
+                    "active_order": active_order,
+                }
+            return render(request, 'hud/pos/renders/update-active-order.html', context)
+        else:
+            return JsonResponse({"failed": "Failed to add!"})
+
+    return JsonResponse({"success": "Item added successfully!"})

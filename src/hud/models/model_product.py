@@ -18,7 +18,7 @@ class Product(models.Model):
     plu = models.IntegerField(null=True, blank=True)
     measurement_unit = models.CharField(max_length=10, null=True, blank=True)
 
-    price = models.DecimalField(default=0, decimal_places=3, max_digits=11)
+    price = models.DecimalField(default=3, decimal_places=3, max_digits=11)
     currency = models.ForeignKey(
         "Currency", on_delete=models.CASCADE, related_name="products"
     )
