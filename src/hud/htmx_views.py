@@ -73,7 +73,7 @@ def add_order_item(request):
                     "active_order": active_order,
                 }
                 if quantity:
-                    item.quantity += int(quantity)
+                    item.quantity += quantity
 
                     item.save()
                     return render(request, 'hud/pos/renders/update-active-order.html', context)
@@ -82,11 +82,11 @@ def add_order_item(request):
                     user=request.user,
                     order=active_order,
                     product=product,
-                    price=int(product.price),
+                    price=product.price + Decimal(0.00),
                     # quantity=int(quantity)
                 )
                 if quantity > 1:
-                    item.quantity = int(quantity)
+                    item.quantity = quantity
                     item.save()
                 context = {
                     "item": item,
