@@ -50,6 +50,15 @@ def remove_item(request, item_number):
     return render(request, 'hud/pos/renders/update-active-order.html', context)
 
 
+def add_item_with_barcode(request):
+    if request.method == 'POST':
+        barcode = request.POST.get("barcode", None)
+
+        if barcode:
+            print("Barcode = ", barcode)
+    return JsonResponse({"success": "Added barcode successfully!"})
+
+
 def add_order_item(request):
     if request.method == 'POST':
         product_id = request.POST.get('product_id', None)

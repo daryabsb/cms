@@ -175,18 +175,18 @@
 						<div class="pos-content-container h-100 p-4" data-scrollbar="true" data-height="100%">
 							<div class="row">
 								<div class="col-xxl-12">
-									<form
-									hx-post=""
-									hx-target="" 
-									class="menu-search" 
-									name="header_search_form">
-										{% csrf_token %}
+							
+										
 										<div class="input-group flex-nowrap mb-3">
 											<span class="input-group-text" id="addon-wrapping"><i class="bi bi-search"></i></span>
-											<input type="text" name="barcode" class="form-control form-control-lg active" placeholder="Search for barcodes...">
+											<input 
+											hx-post="{% url 'hud:add-item-with-barcode' %}" 
+											hx-trigger="keyup[keyCode==13]" type="text" 
+											name="barcode" 
+											class="form-control form-control-lg active" placeholder="Search for barcodes...">
 											<span class="input-group-text"><i class="bi bi-x-lg"></i></span>
 										</div>
-									</form>
+								
 							</div>
 						</div>
 							<div class="row gx-4">
