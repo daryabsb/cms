@@ -1,6 +1,7 @@
 from django.db import models
 from src.accounts.models import User
-from django.db.models import F
+from django.db.models import F, Sum, Case, When
+from decimal import Decimal
 
 
 class PosOrderItem(models.Model):
@@ -17,12 +18,13 @@ class PosOrderItem(models.Model):
     )
     round_number = models.DecimalField(
         decimal_places=3, max_digits=4, default=0)
-    quantity = models.SmallIntegerField(default=1)
+    quantity = models.DecimalField(decimal_places=0,  max_digits=9, default=1)
     price = models.DecimalField(decimal_places=3,  max_digits=9, default=0)
-    subtotal = models.GeneratedField(expression=F("price") * F("quantity"),
-                                    output_field=models.DecimalField(
-                                    max_digits=6, decimal_places=2
-                                    ), db_persist=True,)
+    # subtotal2 = models.GeneratedField(
+    #     expression= F("price") * F("quantity"),
+    #     output_field=models.DecimalField(
+    #     max_digits=6, decimal_places=2
+    #     ), db_persist=True,)
     is_locked = models.BooleanField(default=False)
     discount = models.FloatField(default=0)
     discount_type = models.FloatField(default=0)
@@ -35,5 +37,10 @@ class PosOrderItem(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
-    # def __str__(self):
-    #     return f"{self.product.name}: {self.quantity}{self.product.measurement_unit}"
+    def __str__(self):
+        return f"{self.product.name}: {self.quantity}{self.product.measurement_unit}"
+    
+    @property
+    def subtotal(self):
+        return self.price * self.quantity
+    

@@ -647,38 +647,8 @@
 
 							<div class="pos-sidebar-body tab-content" data-scrollbar="true" data-height="100%">
 								<div class="tab-pane fade h-100 show active" id="newOrderTab">
-									
 									{% for item in active_order.items.all %}
-									<div class="pos-order">
-										<div class="pos-order-product">
-											<div class="img"
-											style="background-image: url({{ item.product.image.url }})"></div>
-											<div class="flex-1">
-												<div class="h6 mb-1">{{ item.product.name }}</div>
-												<div class="small">$12.99</div>
-												<div class="small mb-2">- size: large</div>
-												{% component "qty_button" item=item btn_class='btn-sm' input_class='form-control-sm  bg-white bg-opacity-25' %}{% endcomponent %}
-											</div>
-										</div>
-										<div class="pos-order-price">
-											{{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
-										</div>
-										<div
-											id="confirm-remove"
-											style="display: none;"
-											class="pos-order-confirmation text-center flex-column justify-content-center">
-											<div class="mb-1">
-												<i class="bi bi-trash fs-36px lh-1"></i>
-											</div>
-											<div class="mb-2">Remove this item?</div>
-											<div>
-												<a href="#"
-													class="btn btn-outline-default btn-sm ms-auto me-2 width-100px"
-													onclick="toggleConfirmRemove()">No</a>
-												<a href="#" class="btn btn-outline-theme btn-sm width-100px">Yes</a>
-											</div>
-										</div>
-									</div>
+									{% include 'hud/pos/order-item.html' with item=item %}
 									{% endfor %}
 									<div id="pos-order" class="pos-order">
 										<div class="pos-order-product">

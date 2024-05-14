@@ -29,7 +29,7 @@ class PosOrder(models.Model):
     @property
     def subtotal(self):
         return self.items.aggregate(
-            total=Sum('subtotal'))['total'] or 0
+            total=Sum(F('price') * F('quantity')))['total'] or 0
     # def __str__(self):
     #     return f"{self.number}:" + \
     #         f" [{self.total}]" + \

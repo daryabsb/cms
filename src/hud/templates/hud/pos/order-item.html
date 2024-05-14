@@ -1,0 +1,16 @@
+{% if item %}
+<div class="pos-order">
+    <div class="pos-order-product">
+        <div class="img"
+        style="background-image: url({{ item.product.image.url }})"></div>
+        <!-- item details will be updated here -->
+        {% include 'hud/pos/partials/order-item-detail.html' %}
+    </div>
+    <div class="pos-order-price">
+        {{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
+    </div>
+    <div id="placeholder-remove">
+        <!-- Confirm remove will be rendered here -->
+    </div>
+</div>
+{% endif %}

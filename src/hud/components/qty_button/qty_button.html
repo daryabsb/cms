@@ -1,53 +1,55 @@
 <div class="d-flex {{ div_class }}">
-    <a href="#" class="btn btn-outline-theme {{ btn_class }}" onclick="decreaseValue(this.nextElementSibling);"><i
-            class="fa fa-minus"></i></a>
-    <input hx-post="{% url 'hud:add-quantity' item.number %}" hx-trigger="changed" value="1" type="text"
+    <button hx-get="{% url 'hud:subtract-quantity' item.number %}" hx-target="#item-detail-{{ item.number }}"
+        hx-swap="outerHTML" class="btn btn-outline-theme {{ btn_class }}"><i class="fa fa-minus"></i></button>
+    <input id="qty-input" value="{{ item.quantity }}" type="text"
         class="form-control w-50px text-center mx-2 {{ input_class }}" name="qty">
-    <a href="#" class="btn btn-outline-theme {{ btn_class }}" onclick="increaseValue(this.previousElementSibling);"><i
-            class="fa fa-plus"></i></a>
+    <button hx-get="{% url 'hud:add-quantity' item.number %}" hx-target="#item-detail-{{ item.number }}"
+        hx-swap="outerHTML" class="btn btn-outline-theme {{ btn_class }}"><i class="fa fa-plus"></i></button>
 </div>
 <script>
-    // Function to increase the input value
-    function increaseValue(input) {
-        var value = parseInt(input.value, 10);
-        value = isNaN(value) ? 0 : value;
+    /*
+    var increaseBtn = document.getElementById('increase')
+    var decreaseBtn = document.getElementById('decrease')
+    increaseBtn.addEventListener("click", function () {
+        var qtyInput = document.getElementById('qty-input');
+        var value = parseInt(qtyInput.value, 10);
         value++;
-        input.value = value;
-        toggleConfirmRemove(input);
-    }
-
-    // Function to decrease the input value
-    function decreaseValue(input) {
-        var value = parseInt(input.value, 10);
-        var originalValue = value;
-        value = isNaN(value) ? 0 : value;
+        qtyInput.value = value
+        htmx.ajax(
+            'POST',
+            '{% url "hud:add-quantity" item.number %}',
+            {
+                target: '#qty-input',
+                swap: 'none',
+                values: { "quantity": value }
+            }
+        )
+        
+    });
+    decreaseBtn.addEventListener("click", function () {
+        var qtyInput = document.getElementById('qty-input');
+        var value = parseInt(qtyInput.value, 10);
+        value--;
         if (value > 0) {
-            value--;
-            input.value = value;
-        } else if (parseInt(input.value, 10) === 0) {
-            // Show confirmation only when the value becomes 0
-            var canceled = toggleConfirmRemove(input);
-            // If the user cancels, revert the value back
-            if (canceled) input.value = originalValue;
-        }
-    }
-    // Function to toggle the display of confirm-remove element based on input value
-    function toggleConfirmRemove(input) {
-        var confirmRemove = document.getElementById('confirm-remove');
-        // If the input is undefined or value is less than or equal to 0, show confirmation
-        if (!input || parseInt(input.value) <= 0) {
-            confirmRemove.style.display = 'block';
-            confirmRemove.classList.add('d-flex');
-            // Return false to indicate that the confirmation is not canceled
-            return false;
-        } else {
-            // Hide confirmation if value is greater than 0
-            confirmRemove.style.display = 'none';
-            confirmRemove.classList.remove('d-flex');
-            // Return true to indicate that the confirmation is canceled
-            return true;
-        }
-    }
+            qtyInput.value = value
+            htmx.ajax(
+                    'POST',
+                    '{% url "hud:add-quantity" item.number %}',
+                    {
+                        target: '#qty-input',
+                        swap: 'none',
+                        values: { "quantity": value }
+                    }
+                )
+            } else {
+                var confirmRemove = document.getElementById('confirm-remove');
+                confirmRemove.style.display = 'block';
+                confirmRemove.classList.add('d-flex');
+            }
+            
+        });
+        
+        */
 </script>
 
 <!-- form-control w-50px text-center mx-2    fw-bold  bg-inverse bg-opacity-15 border-0  -->
