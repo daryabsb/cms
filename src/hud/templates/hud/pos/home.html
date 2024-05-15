@@ -20,7 +20,7 @@
 
 </head>
 
-<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' class="pace-top">
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-on="htmx:load: bInput=htmx.find('#barcode-input');bInput.value= '';bInput.focus();" class="pace-top">
 
 	<div id="app" class="app app-content-full-height app-without-sidebar app-without-header">
 
@@ -179,14 +179,15 @@
 										
 										<div class="input-group flex-nowrap mb-3">
 											<span class="input-group-text" id="addon-wrapping"><i class="bi bi-search"></i></span>
-											<input 
+											<input
+											id="barcode-input"
 											hx-post="{% url 'hud:add-item-with-barcode' %}" 
-											hx-trigger="keyup[keyCode==13]" type="text" 
+											hx-trigger="keyup[keyCode==13]" type="text"
+											hx-target="#active-order-tab-{{ active_order.id }}"
 											name="barcode" 
-											class="form-control form-control-lg active" placeholder="Search for barcodes...">
+											class="form-control form-control-lg active" placeholder="Search for barcodes..">
 											<span class="input-group-text"><i class="bi bi-x-lg"></i></span>
 										</div>
-								
 							</div>
 						</div>
 							<div class="row gx-4">
@@ -273,7 +274,7 @@
 								<ul class="nav nav-tabs nav-fill">
 									<li class="nav-item">
 										<a class="nav-link active" href="#" data-bs-toggle="tab"
-											data-bs-target="#active-order-tab">New Order ({{ active_order.id }})</a>
+											data-bs-target="#active-order-tab-{{ active_order.id }}">New Order ({{ active_order.id }})</a>
 									</li>
 									<li class="nav-item">
 										<a class="nav-link" href="#" data-bs-toggle="tab"

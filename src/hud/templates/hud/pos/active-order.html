@@ -1,8 +1,9 @@
 {% load static %}
-<div class="tab-pane fade h-100 show active" id="active-order-tab">
+<div class="tab-pane fade h-100 show active" id="active-order-tab-{{ active_order.id }}">
     {% for item in active_order.items.all %}
     {% include 'hud/pos/order-item.html' with item=item %}
     {% endfor %}
+    <!--
     <div id="pos-order" class="pos-order">
         <div class="pos-order-product">
             <div class="img"
@@ -42,4 +43,5 @@
             </div>
         </div>
     </div>
+    -->
 </div>

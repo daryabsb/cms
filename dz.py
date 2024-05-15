@@ -15,7 +15,7 @@ dz_array = {
     "crm": {
 
         "htmx": [
-            f"js/htmx.js",
+            f"js/htmx.min.js",
             f"js/preload.js",
             f"js/ext/debug.js",
             f"js/ext/event-header.js",

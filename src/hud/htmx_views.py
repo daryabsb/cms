@@ -51,13 +51,30 @@ def remove_item(request, item_number):
 
 
 def add_item_with_barcode(request):
-    if request.method == 'POST':
-        barcode = request.POST.get("barcode", None)
 
-        if barcode:
-            print("Barcode = ", barcode)
-    return JsonResponse({"success": "Added barcode successfully!"})
+    barcode_value = request.POST.get("barcode", None)
+    barcode = get_object_or_404(Barcode, value=barcode_value)
 
+    active_order = PosOrder.objects.filter(is_active=True).first()
+    item = PosOrderItem.objects.filter(order=active_order, product=barcode.product).first()
+
+    if not item:
+        item = PosOrderItem.objects.create(
+            user=request.user,
+            order=active_order,
+            product=barcode.product,
+            price=15000,
+            quantity=1
+        )
+    else:
+        item.quantity += 1
+        item.save()
+
+    context = {
+        "item": item,
+        "active_order": active_order,
+    }
+    return render(request, 'hud/pos/renders/update-active-order.html', context)
 
 def add_order_item(request):
     if request.method == 'POST':
@@ -91,7 +108,7 @@ def add_order_item(request):
                     user=request.user,
                     order=active_order,
                     product=product,
-                    price=product.price + Decimal(0.00),
+                    price=15000
                     # quantity=int(quantity)
                 )
                 if quantity > 1:
