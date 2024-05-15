@@ -3,12 +3,13 @@ from django.shortcuts import get_object_or_404, render
 from src.hud.models import ProductGroup, Product, Barcode, PosOrderItem, PosOrder
 from decimal import Decimal
 
+active_order = PosOrder.objects.filter(is_active=True).first()
 
 def modal_product(request, id):
     product = get_object_or_404(Product, id=id)
 
     if product:
-        context = {"product": product}
+        context = {"product": product, "active_order": active_order}
         return render(request, 'hud/pos/product-modal.html', context)
 
 
@@ -16,7 +17,7 @@ def add_quantity(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
     item.quantity += 1  # Set quantity to the new value received from the client
     item.save()
-    active_order = PosOrder.objects.filter(is_active=True).first()
+    
     context = {
         "item": item,
         "active_order": active_order,
@@ -26,7 +27,6 @@ def add_quantity(request, item_number):
 
 def subtract_quantity(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
-    active_order = PosOrder.objects.filter(is_active=True).first()
     context = {
         "item": item,
         "active_order": active_order,
@@ -40,7 +40,6 @@ def subtract_quantity(request, item_number):
 
 
 def remove_item(request, item_number):
-    active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
     item.delete()
 
@@ -54,8 +53,6 @@ def add_item_with_barcode(request):
 
     barcode_value = request.POST.get("barcode", None)
     barcode = get_object_or_404(Barcode, value=barcode_value)
-
-    active_order = PosOrder.objects.filter(is_active=True).first()
     item = PosOrderItem.objects.filter(order=active_order, product=barcode.product).first()
 
     if not item:
@@ -63,7 +60,7 @@ def add_item_with_barcode(request):
             user=request.user,
             order=active_order,
             product=barcode.product,
-            price=15000,
+            price=barcode.product.price,
             quantity=1
         )
     else:
@@ -108,7 +105,7 @@ def add_order_item(request):
                     user=request.user,
                     order=active_order,
                     product=product,
-                    price=15000
+                    price=product.price
                     # quantity=int(quantity)
                 )
                 if quantity > 1:

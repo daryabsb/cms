@@ -19,7 +19,7 @@ class PosOrderItem(models.Model):
     round_number = models.DecimalField(
         decimal_places=3, max_digits=4, default=0)
     quantity = models.DecimalField(decimal_places=0,  max_digits=9, default=1)
-    price = models.DecimalField(decimal_places=3,  max_digits=9, default=0)
+    price = models.DecimalField(decimal_places=3,  max_digits=15, default=0)
     # subtotal2 = models.GeneratedField(
     #     expression= F("price") * F("quantity"),
     #     output_field=models.DecimalField(
