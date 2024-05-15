@@ -52,6 +52,7 @@ def remove_item(request, item_number):
 def add_item_with_barcode(request):
 
     barcode_value = request.POST.get("barcode", None)
+    print(barcode_value)
     barcode = get_object_or_404(Barcode, value=barcode_value)
     item = PosOrderItem.objects.filter(order=active_order, product=barcode.product).first()
 

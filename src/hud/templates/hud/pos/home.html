@@ -1,557 +1,283 @@
 {% load static custom_tags component_tags %}
-
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
-
-<head>
-	<meta charset="utf-8">
-	<title>HUD | POS - Customer Order System</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content>
-	<meta name="author" content>
-
-	<link href="{% static 'hud/css/vendor.min.css' %}" rel="stylesheet">
-	<link href="{% static 'hud/css/app.min.css' %}" rel="stylesheet">
-
-    {% for htmx_url in dz_array.crm.htmx %}
+	<head>
+		<meta charset="utf-8">
+		<title>HUD | POS - Customer Order System</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content>
+		<meta name="author" content>
+		<link href="{% static 'hud/css/vendor.min.css' %}" rel="stylesheet">
+		<link href="{% static 'hud/css/app.min.css' %}" rel="stylesheet">
+		{% for htmx_url in dz_array.crm.htmx %}
 		<script src="{% static htmx_url %}" defer></script>
-	{% endfor %}
-	
-
-</head>
-
-<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-on="htmx:load: bInput=htmx.find('#barcode-input');bInput.value= '';bInput.focus();" class="pace-top">
-
-	<div id="app" class="app app-content-full-height app-without-sidebar app-without-header">
-
-		<div id="content" class="app-content p-1 ps-xl-4 pe-xl-4 pt-xl-3 pb-xl-3">
-
-			<div class="pos card" id="pos">
-				<div class="pos-container card-body">
-
-					<div class="pos-menu">
-
-						<div class="logo">
-							<a href="{% url 'hud:hud-index' %}">
-								<div class="logo-img"><i class="bi bi-x-diamond" style="font-size: 2.1rem;"></i></div>
-								<div class="logo-text">Pine & Dine</div>
-							</a>
+		{% endfor %}
+	</head>
+	<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-on="htmx:load: bInput=htmx.find('#barcode-input');bInput.value= '';bInput.focus();" class="pace-top">
+		<div id="app" class="app app-content-full-height app-without-sidebar app-without-header">
+			<div id="content" class="app-content p-1 ps-xl-4 pe-xl-4 pt-xl-3 pb-xl-3">
+				<div class="pos card" id="pos">
+					<div class="pos-container card-body">
+						<div class="pos-menu">
+							<div class="logo">
+								<a href="{% url 'hud:hud-index' %}">
+									<div class="logo-img"><i class="bi bi-x-diamond" style="font-size: 2.1rem;"></i></div>
+									<div class="logo-text">Pine & Dine</div>
+								</a>
+							</div>
+							<div class="nav-container">
+								<div data-scrollbar="true" data-height="100%" data-skip-mobile="true">
+									<ul class="nav nav-tabs">
+										<li class="nav-item">
+											<a class="nav-link active" href="#" data-filter="all">
+												<div class="card">
+													<div class="card-body">
+														<i class="fa fa-fw fa-utensils"></i> All Dishes
+													</div>
+													<div class="card-arrow">
+														<div class="card-arrow-top-left"></div>
+														<div class="card-arrow-top-right"></div>
+														<div class="card-arrow-bottom-left"></div>
+														<div class="card-arrow-bottom-right"></div>
+													</div>
+												</div>
+											</a>
+										</li>
+										{% for group in groups %}
+										<li class="nav-item">
+											<a class="nav-link" href="#" data-filter="{{ group.id }}">
+												<div class="card">
+													<div class="card-body">
+														<i class="fa fa-fw fa-shopping-basket"></i> {{ group.name }}
+													</div>
+													<div class="card-arrow">
+														<div class="card-arrow-top-left"></div>
+														<div class="card-arrow-top-right"></div>
+														<div class="card-arrow-bottom-left"></div>
+														<div class="card-arrow-bottom-right"></div>
+													</div>
+												</div>
+											</a>
+										</li>
+										{% endfor %}
+										<li class="nav-item">
+											<a class="nav-link" href="#" data-filter="meat">
+												<div class="card">
+													<div class="card-body">
+														<i class="fa fa-fw fa-drumstick-bite"></i> Meat
+													</div>
+													<div class="card-arrow">
+														<div class="card-arrow-top-left"></div>
+														<div class="card-arrow-top-right"></div>
+														<div class="card-arrow-bottom-left"></div>
+														<div class="card-arrow-bottom-right"></div>
+													</div>
+												</div>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#" data-filter="burger">
+												<div class="card">
+													<div class="card-body">
+														<i class="fa fa-fw fa-hamburger"></i> Burger
+													</div>
+													<div class="card-arrow">
+														<div class="card-arrow-top-left"></div>
+														<div class="card-arrow-top-right"></div>
+														<div class="card-arrow-bottom-left"></div>
+														<div class="card-arrow-bottom-right"></div>
+													</div>
+												</div>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#" data-filter="pizza">
+												<div class="card">
+													<div class="card-body">
+														<i class="fa fa-fw fa-pizza-slice"></i> Pizza
+													</div>
+													<div class="card-arrow">
+														<div class="card-arrow-top-left"></div>
+														<div class="card-arrow-top-right"></div>
+														<div class="card-arrow-bottom-left"></div>
+														<div class="card-arrow-bottom-right"></div>
+													</div>
+												</div>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#" data-filter="drinks">
+												<div class="card">
+													<div class="card-body">
+														<i class="fa fa-fw fa-cocktail"></i> Drinks
+													</div>
+													<div class="card-arrow">
+														<div class="card-arrow-top-left"></div>
+														<div class="card-arrow-top-right"></div>
+														<div class="card-arrow-bottom-left"></div>
+														<div class="card-arrow-bottom-right"></div>
+													</div>
+												</div>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#" data-filter="desserts">
+												<div class="card">
+													<div class="card-body">
+														<i class="fa fa-fw fa-ice-cream"></i> Desserts
+													</div>
+													<div class="card-arrow">
+														<div class="card-arrow-top-left"></div>
+														<div class="card-arrow-top-right"></div>
+														<div class="card-arrow-bottom-left"></div>
+														<div class="card-arrow-bottom-right"></div>
+													</div>
+												</div>
+											</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#" data-filter="snacks">
+												<div class="card">
+													<div class="card-body">
+														<i class="fa fa-fw fa-cookie-bite"></i> Snacks
+													</div>
+													<div class="card-arrow">
+														<div class="card-arrow-top-left"></div>
+														<div class="card-arrow-top-right"></div>
+														<div class="card-arrow-bottom-left"></div>
+														<div class="card-arrow-bottom-right"></div>
+													</div>
+												</div>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
 						</div>
-
-
-						<div class="nav-container">
-							<div data-scrollbar="true" data-height="100%" data-skip-mobile="true">
-								<ul class="nav nav-tabs">
-									<li class="nav-item">
-										<a class="nav-link active" href="#" data-filter="all">
-											<div class="card">
-												<div class="card-body">
-													<i class="fa fa-fw fa-utensils"></i> All Dishes
-												</div>
-												<div class="card-arrow">
-													<div class="card-arrow-top-left"></div>
-													<div class="card-arrow-top-right"></div>
-													<div class="card-arrow-bottom-left"></div>
-													<div class="card-arrow-bottom-right"></div>
-												</div>
+						<div class="pos-content">
+							<div class="pos-content-container h-100 p-4" data-scrollbar="true" data-height="100%">
+								<div class="row">
+									<div class="col-xxl-12">
+										{% include 'hud/pos/partials/barcode-input.html' %}
+									</div>
+								</div>
+								<div class="row gx-4">
+									{% for product in products%}
+									<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="{{ product.parent_group.id }}">
+										<div class="card h-100">
+											<div class="card-body h-100 p-1">
+												<a href="#" 
+													hx-get="{% url 'hud:modal-product' product.id %}" 
+													hx-target="#modal-product" 
+													hx-trigger="click" 
+													class="pos-product" 
+													data-bs-toggle="modal"
+													data-bs-target="#modal-product"
+													>
+													<div class="img"
+														style="background-image: url({{ product.img }})"></div>
+													<div class="info">
+														<div class="title">{{ product.name }}</div>
+														<div class="desc">Dill pickle, cheddar cheese, tomato, red onion,
+															ground chuck beef
+														</div>
+														<div class="price">{{ product.currency.name }} {{ product.price|floatformat:"0" }}</div>
+													</div>
+												</a>
 											</div>
-										</a>
-									</li>
-									{% for group in groups %}
-									<li class="nav-item">
-										<a class="nav-link" href="#" data-filter="{{ group.id }}">
-											<div class="card">
-												<div class="card-body">
-													<i class="fa fa-fw fa-shopping-basket"></i> {{ group.name }}
-												</div>
-												<div class="card-arrow">
-													<div class="card-arrow-top-left"></div>
-													<div class="card-arrow-top-right"></div>
-													<div class="card-arrow-bottom-left"></div>
-													<div class="card-arrow-bottom-right"></div>
-												</div>
+											<div class="card-arrow">
+												<div class="card-arrow-top-left"></div>
+												<div class="card-arrow-top-right"></div>
+												<div class="card-arrow-bottom-left"></div>
+												<div class="card-arrow-bottom-right"></div>
 											</div>
-										</a>
-									</li>
+										</div>
+									</div>
 									{% endfor %}
-									<li class="nav-item">
-										<a class="nav-link" href="#" data-filter="meat">
-											<div class="card">
-												<div class="card-body">
-													<i class="fa fa-fw fa-drumstick-bite"></i> Meat
-												</div>
-												<div class="card-arrow">
-													<div class="card-arrow-top-left"></div>
-													<div class="card-arrow-top-right"></div>
-													<div class="card-arrow-bottom-left"></div>
-													<div class="card-arrow-bottom-right"></div>
-												</div>
+									<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
+										<div class="card h-100">
+											<div class="card-body h-100 p-1">
+												<a href="#" class="pos-product" data-bs-toggle="modal"
+													data-bs-target="#modalPosItem">
+													<div class="img"
+														style="background-image: url({% static 'hud/img/pos/product-1.jpg' %})"></div>
+													<div class="info">
+														<div class="title">Grill Chicken Chop&reg;</div>
+														<div class="desc">chicken, egg, mushroom, salad</div>
+														<div class="price">$10.99</div>
+													</div>
+												</a>
 											</div>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#" data-filter="burger">
-											<div class="card">
-												<div class="card-body">
-													<i class="fa fa-fw fa-hamburger"></i> Burger
-												</div>
-												<div class="card-arrow">
-													<div class="card-arrow-top-left"></div>
-													<div class="card-arrow-top-right"></div>
-													<div class="card-arrow-bottom-left"></div>
-													<div class="card-arrow-bottom-right"></div>
-												</div>
+											<div class="card-arrow">
+												<div class="card-arrow-top-left"></div>
+												<div class="card-arrow-top-right"></div>
+												<div class="card-arrow-bottom-left"></div>
+												<div class="card-arrow-bottom-right"></div>
 											</div>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#" data-filter="pizza">
-											<div class="card">
-												<div class="card-body">
-													<i class="fa fa-fw fa-pizza-slice"></i> Pizza
-												</div>
-												<div class="card-arrow">
-													<div class="card-arrow-top-left"></div>
-													<div class="card-arrow-top-right"></div>
-													<div class="card-arrow-bottom-left"></div>
-													<div class="card-arrow-bottom-right"></div>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#" data-filter="drinks">
-											<div class="card">
-												<div class="card-body">
-													<i class="fa fa-fw fa-cocktail"></i> Drinks
-												</div>
-												<div class="card-arrow">
-													<div class="card-arrow-top-left"></div>
-													<div class="card-arrow-top-right"></div>
-													<div class="card-arrow-bottom-left"></div>
-													<div class="card-arrow-bottom-right"></div>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#" data-filter="desserts">
-											<div class="card">
-												<div class="card-body">
-													<i class="fa fa-fw fa-ice-cream"></i> Desserts
-												</div>
-												<div class="card-arrow">
-													<div class="card-arrow-top-left"></div>
-													<div class="card-arrow-top-right"></div>
-													<div class="card-arrow-bottom-left"></div>
-													<div class="card-arrow-bottom-right"></div>
-												</div>
-											</div>
-										</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#" data-filter="snacks">
-											<div class="card">
-												<div class="card-body">
-													<i class="fa fa-fw fa-cookie-bite"></i> Snacks
-												</div>
-												<div class="card-arrow">
-													<div class="card-arrow-top-left"></div>
-													<div class="card-arrow-top-right"></div>
-													<div class="card-arrow-bottom-left"></div>
-													<div class="card-arrow-bottom-right"></div>
-												</div>
-											</div>
-										</a>
-									</li>
-								</ul>
-							</div>
-						</div>
-
-					</div>
-
-
-					<div class="pos-content">
-						<div class="pos-content-container h-100 p-4" data-scrollbar="true" data-height="100%">
-							<div class="row">
-								<div class="col-xxl-12">
-							
-										
-										<div class="input-group flex-nowrap mb-3">
-											<span class="input-group-text" id="addon-wrapping"><i class="bi bi-search"></i></span>
-											<input
-											id="barcode-input"
-											hx-post="{% url 'hud:add-item-with-barcode' %}" 
-											hx-trigger="keyup[keyCode==13]" type="text"
-											hx-target="#active-order-tab-{{ active_order.id }}"
-											name="barcode" 
-											class="form-control form-control-lg active" placeholder="Search for barcodes..">
-											<span class="input-group-text"><i class="bi bi-x-lg"></i></span>
-										</div>
-							</div>
-						</div>
-							<div class="row gx-4">
-
-								{% for product in products%}
-								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="{{ product.parent_group.id }}">
-									<div class="card h-100">
-										<div class="card-body h-100 p-1">
-											<a href="#" 
-											    hx-get="{% url 'hud:modal-product' product.id %}" 
-												hx-target="#modal-product" 
-												hx-trigger="click" 
-												class="pos-product" 
-												data-bs-toggle="modal"
-												data-bs-target="#modal-product"
-												>
-												<div class="img"
-													style="background-image: url({{ product.img }})"></div>
-												<div class="info">
-													<div class="title">{{ product.name }}</div>
-													<div class="desc">Dill pickle, cheddar cheese, tomato, red onion,
-														ground chuck beef</div>
-													<div class="price">{{ product.currency.name }} {{ product.price|floatformat:"0" }}</div>
-												</div>
-											</a>
-										</div>
-										<div class="card-arrow">
-											<div class="card-arrow-top-left"></div>
-											<div class="card-arrow-top-right"></div>
-											<div class="card-arrow-bottom-left"></div>
-											<div class="card-arrow-bottom-right"></div>
 										</div>
 									</div>
 								</div>
-								
-								{% endfor %}
-								<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
-									<div class="card h-100">
-										<div class="card-body h-100 p-1">
-											<a href="#" class="pos-product" data-bs-toggle="modal"
-												data-bs-target="#modalPosItem">
-												<div class="img"
-													style="background-image: url({% static 'hud/img/pos/product-1.jpg' %})"></div>
-												<div class="info">
-													<div class="title">Grill Chicken Chop&reg;</div>
-													<div class="desc">chicken, egg, mushroom, salad</div>
-													<div class="price">$10.99</div>
-												</div>
-											</a>
-										</div>
-										<div class="card-arrow">
-											<div class="card-arrow-top-left"></div>
-											<div class="card-arrow-top-right"></div>
-											<div class="card-arrow-bottom-left"></div>
-											<div class="card-arrow-bottom-right"></div>
-										</div>
-									</div>
-
-								</div>
-
 							</div>
 						</div>
-					</div>
-
-
-					<div class="pos-sidebar" id="pos-sidebar">
-						<div class="h-100 d-flex flex-column p-0">
-
-							<div class="pos-sidebar-header">
-								<div class="back-btn">
-									<button type="button" data-toggle-class="pos-mobile-sidebar-toggled"
-										data-toggle-target="#pos" class="btn">
+						<div class="pos-sidebar" id="pos-sidebar">
+							<div class="h-100 d-flex flex-column p-0">
+								<div class="pos-sidebar-header">
+									<div class="back-btn">
+										<button type="button" data-toggle-class="pos-mobile-sidebar-toggled"
+											data-toggle-target="#pos" class="btn">
 										<i class="bi bi-chevron-left"></i>
-									</button>
-								</div>
-								<div class="icon"><img src="{% static 'hud/img/pos/icon-table-black.svg' %}" class="invert-dark"
-										alt></div>
-								<div class="title">Table 01</div>
-								<div class="order">Order: <b>#00{{ active_order.id }}</b></div>
-							</div>
-
-
-							<div class="pos-sidebar-nav">
-								<ul class="nav nav-tabs nav-fill">
-									<li class="nav-item">
-										<a class="nav-link active" href="#" data-bs-toggle="tab"
-											data-bs-target="#active-order-tab-{{ active_order.id }}">New Order ({{ active_order.id }})</a>
-									</li>
-									<li class="nav-item">
-										<a class="nav-link" href="#" data-bs-toggle="tab"
-											data-bs-target="#orderHistoryTab">Order List ({{ orders.count }})</a>
-									</li>
-								</ul>
-							</div>
-
-
-							<div class="pos-sidebar-body tab-content" data-scrollbar="true" data-height="100%">
-								{% include 'hud/pos/active-order.html' %}
-								{% include 'hud/pos/order-list.html' %}
-							</div>
-
-
-							<div class="pos-sidebar-footer">
-								<div class="d-flex align-items-center mb-2">
-									<div>Subtotal</div>
-									<div class="flex-1 text-end h6 mb-0">$30.98</div>
-								</div>
-								<div class="d-flex align-items-center">
-									<div>Taxes (6%)</div>
-									<div class="flex-1 text-end h6 mb-0">$2.12</div>
-								</div>
-								<hr>
-								<div class="d-flex align-items-center mb-2">
-									<div>Total</div>
-									<div id="order-subtotal-{{ active_order.id }}" class="flex-1 text-end h4 mb-0">${{ active_order.subtotal }}</div>
-								</div>
-								<div class="mt-3">
-									<div class="btn-group d-flex">
-										<a href="#" class="btn btn-outline-default rounded-0 w-80px">
-											<i class="bi bi-bell fa-lg"></i><br>
-											<span class="small">Service</span>
-										</a>
-										<a href="#" class="btn btn-outline-default rounded-0 w-80px">
-											<i class="bi bi-receipt fa-fw fa-lg"></i><br>
-											<span class="small">Bill</span>
-										</a>
-										<a href="#" class="btn btn-outline-theme rounded-0 w-150px">
-											<i class="bi bi-send-check fa-lg"></i><br>
-											<span class="small">Submit Order</span>
-										</a>
+										</button>
 									</div>
+									<div class="icon"><img src="{% static 'hud/img/pos/icon-table-black.svg' %}" class="invert-dark"
+										alt></div>
+									<div class="title">Table 01</div>
+									<div class="order">Order: <b>#00{{ active_order.id }}</b></div>
 								</div>
+								<div class="pos-sidebar-nav">
+									<ul class="nav nav-tabs nav-fill">
+										<li class="nav-item">
+											<a class="nav-link active" href="#" data-bs-toggle="tab"
+												data-bs-target="#active-order-tab-{{ active_order.id }}">Order # ({{ active_order.id }})</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link" href="#" data-bs-toggle="tab"
+												data-bs-target="#orderHistoryTab">Order List ({{ orders.count }})</a>
+										</li>
+									</ul>
+								</div>
+								<div class="pos-sidebar-body tab-content" data-scrollbar="true" data-height="100%">
+									{% include 'hud/pos/active-order.html' %}
+									{% include 'hud/pos/order-list.html' %}
+								</div>
+								<!-- ORDER CALCULATIONS -->
+								{% include 'hud/pos/partials/order-calculations.html' %}
 							</div>
-
 						</div>
 					</div>
-
+					<div class="card-arrow">
+						<div class="card-arrow-top-left"></div>
+						<div class="card-arrow-top-right"></div>
+						<div class="card-arrow-bottom-left"></div>
+						<div class="card-arrow-bottom-right"></div>
+					</div>
 				</div>
-				<div class="card-arrow">
-					<div class="card-arrow-top-left"></div>
-					<div class="card-arrow-top-right"></div>
-					<div class="card-arrow-bottom-left"></div>
-					<div class="card-arrow-bottom-right"></div>
-				</div>
-			</div>
-
-
-			<a href="#" class="pos-mobile-sidebar-toggler" data-toggle-class="pos-mobile-sidebar-toggled"
-				data-toggle-target="#pos">
+				<a href="#" class="pos-mobile-sidebar-toggler" data-toggle-class="pos-mobile-sidebar-toggled"
+					data-toggle-target="#pos">
 				<i class="bi bi-bag"></i>
 				<span class="badge">5</span>
-			</a>
-
-		</div>
-
-
-		{% comment %} <div class="app-theme-panel">
-			<div class="app-theme-panel-container">
-				<a href="javascript:;" data-toggle="theme-panel-expand" class="app-theme-toggle-btn"><i
-						class="bi bi-sliders"></i></a>
-				<div class="app-theme-panel-content">
-					<div class="small fw-bold text-inverse mb-1">Display Mode</div>
-					<div class="card mb-3">
-
-						<div class="card-body p-2">
-							<div class="row gx-2">
-								<div class="col-6">
-									<a href="javascript:;" data-toggle="theme-mode-selector" data-theme-mode="dark"
-										class="app-theme-mode-link active">
-										<div class="img"><img src="{% static 'hud/img/mode/dark.jpg' %}" class="object-fit-cover"
-												height="76" width="76" alt="Dark Mode"></div>
-										<div class="text">Dark</div>
-									</a>
-								</div>
-								<div class="col-6">
-									<a href="javascript:;" data-toggle="theme-mode-selector" data-theme-mode="light"
-										class="app-theme-mode-link">
-										<div class="img"><img src="{% static 'hud/img/mode/light.jpg' %}" class="object-fit-cover"
-												height="76" width="76" alt="Light Mode"></div>
-										<div class="text">Light</div>
-									</a>
-								</div>
-							</div>
-						</div>
-
-
-						<div class="card-arrow">
-							<div class="card-arrow-top-left"></div>
-							<div class="card-arrow-top-right"></div>
-							<div class="card-arrow-bottom-left"></div>
-							<div class="card-arrow-bottom-right"></div>
-						</div>
-
-					</div>
-					<div class="small fw-bold text-inverse mb-1">Theme Color</div>
-					<div class="card mb-3">
-
-						<div class="card-body p-2">
-
-							<div class="app-theme-list">
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-pink" data-theme-class="theme-pink"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Pink">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-red" data-theme-class="theme-red"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Red">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-warning" data-theme-class="theme-warning"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Orange">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-yellow" data-theme-class="theme-yellow"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Yellow">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-lime" data-theme-class="theme-lime"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Lime">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-green" data-theme-class="theme-green"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Green">&nbsp;</a></div>
-								<div class="app-theme-list-item active"><a href="javascript:;"
-										class="app-theme-list-link bg-teal" data-theme-class
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Default">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-info" data-theme-class="theme-info"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Cyan">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-primary" data-theme-class="theme-primary"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Blue">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-purple" data-theme-class="theme-purple"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Purple">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-indigo" data-theme-class="theme-indigo"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Indigo">&nbsp;</a></div>
-								<div class="app-theme-list-item"><a href="javascript:;"
-										class="app-theme-list-link bg-gray-100" data-theme-class="theme-gray-200"
-										data-toggle="theme-selector" data-bs-toggle="tooltip" data-bs-trigger="hover"
-										data-bs-container="body" data-bs-title="Gray">&nbsp;</a></div>
-							</div>
-
-						</div>
-
-
-						<div class="card-arrow">
-							<div class="card-arrow-top-left"></div>
-							<div class="card-arrow-top-right"></div>
-							<div class="card-arrow-bottom-left"></div>
-							<div class="card-arrow-bottom-right"></div>
-						</div>
-
-					</div>
-					<div class="small fw-bold text-inverse mb-1">Theme Cover</div>
-					<div class="card">
-
-						<div class="card-body p-2">
-
-							<div class="app-theme-cover">
-								<div class="app-theme-cover-item active">
-									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url({% static 'hud/img/cover/cover-thumb-1.jpg' %});"
-										data-theme-cover-class data-toggle="theme-cover-selector"
-										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
-										data-bs-title="Default">&nbsp;</a>
-								</div>
-								<div class="app-theme-cover-item">
-									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url({% static 'hud/img/cover/cover-thumb-2.jpg' %});"
-										data-theme-cover-class="bg-cover-2" data-toggle="theme-cover-selector"
-										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
-										data-bs-title="Cover 2">&nbsp;</a>
-								</div>
-								<div class="app-theme-cover-item">
-									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url({% static 'hud/img/cover/cover-thumb-3.jpg' %});"
-										data-theme-cover-class="bg-cover-3" data-toggle="theme-cover-selector"
-										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
-										data-bs-title="Cover 3">&nbsp;</a>
-								</div>
-								<div class="app-theme-cover-item">
-									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url({% static 'hud/img/cover/cover-thumb-4.jpg' %});"
-										data-theme-cover-class="bg-cover-4" data-toggle="theme-cover-selector"
-										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
-										data-bs-title="Cover 4">&nbsp;</a>
-								</div>
-								<div class="app-theme-cover-item">
-									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url({% static 'hud/img/cover/cover-thumb-5.jpg' %});"
-										data-theme-cover-class="bg-cover-5" data-toggle="theme-cover-selector"
-										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
-										data-bs-title="Cover 5">&nbsp;</a>
-								</div>
-								<div class="app-theme-cover-item">
-									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url({% static 'hud/img/cover/cover-thumb-6.jpg' %});"
-										data-theme-cover-class="bg-cover-6" data-toggle="theme-cover-selector"
-										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
-										data-bs-title="Cover 6">&nbsp;</a>
-								</div>
-								<div class="app-theme-cover-item">
-									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url({% static 'hud/img/cover/cover-thumb-7.jpg' %});"
-										data-theme-cover-class="bg-cover-7" data-toggle="theme-cover-selector"
-										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
-										data-bs-title="Cover 7">&nbsp;</a>
-								</div>
-								<div class="app-theme-cover-item">
-									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url({% static 'hud/img/cover/cover-thumb-8.jpg' %});"
-										data-theme-cover-class="bg-cover-8" data-toggle="theme-cover-selector"
-										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
-										data-bs-title="Cover 8">&nbsp;</a>
-								</div>
-								<div class="app-theme-cover-item">
-									<a href="javascript:;" class="app-theme-cover-link"
-										style="background-image: url({% static 'hud/img/cover/cover-thumb-9.jpg' %});"
-										data-theme-cover-class="bg-cover-9" data-toggle="theme-cover-selector"
-										data-bs-toggle="tooltip" data-bs-trigger="hover" data-bs-container="body"
-										data-bs-title="Cover 9">&nbsp;</a>
-								</div>
-							</div>
-
-						</div>
-
-
-						<div class="card-arrow">
-							<div class="card-arrow-top-left"></div>
-							<div class="card-arrow-top-right"></div>
-							<div class="card-arrow-bottom-left"></div>
-							<div class="card-arrow-bottom-right"></div>
-						</div>
-
-					</div>
-				</div>
+				</a>
 			</div>
-		</div> {% endcomment %}
-
-
-		<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
-
-	</div>
-
-<div class="modal modal-pos fade" id="modal-product">
-{% include 'hud/pos/product-modal2.html' %}
-</div>
-{% load django_htmx %}
-	{% django_htmx_script %}
-	<script src="{% static 'hud/js/vendor.min.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
-	<script src="{% static 'hud/js/app.min.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
-
-
-	<script src="{% static 'hud/js/demo/pos-customer-order.demo.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
-
-	<script src="{% static 'hud/js/rocket-loader.min.js' %}" data-cf-settings="6a9f65d44ad9696aba2f6178-|49" defer></script>
-</body>
-
+			<a href="#" data-toggle="scroll-to-top" class="btn-scroll-top fade"><i class="fa fa-arrow-up"></i></a>
+		</div>
+		{% include 'hud/pos/renders/modal-search-cover.html' %}
+		<div class="modal modal-pos fade" id="modal-product">
+			{% include 'hud/pos/product-modal2.html' %}
+		</div>
+		{% load django_htmx %}
+		{% django_htmx_script %}
+		<script src="{% static 'hud/js/vendor.min.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
+		<script src="{% static 'hud/js/app.min.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
+		<script src="{% static 'hud/js/demo/pos-customer-order.demo.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
+		<script src="{% static 'hud/js/rocket-loader.min.js' %}" data-cf-settings="6a9f65d44ad9696aba2f6178-|49" defer></script>
+	</body>
 </html>

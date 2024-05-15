@@ -1,0 +1,19 @@
+<div class="modal modal-cover fade"  id="barcode-search-result">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <ul class="position-absolute barcode-search-input">
+                <li>
+                    <button 
+                    hx-post="{% url 'hud:add-item-with-barcode' %}" 
+                    hx-trigger="click" type="button"
+                    hx-target="#active-order-tab-{{ active_order.id }}"
+                    hx-vals='{"barcode": "5000219632073"}'
+                    class="dropdown-item" >iMac
+                </button>
+                </li>
+                <li><button class="dropdown-item" href="#">Another action</button></li>
+                <li><button class="dropdown-item" href="#">Something else here</button></li>
+            </ul>
+        </div>  
+    </div>
+</div>

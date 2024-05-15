@@ -35628,3 +35628,15 @@ body .note-modal-backdrop {
 .widget-user-list .widget-user-list-item+.widget-user-list-item {
     margin-left: -1.25rem
 }
+
+
+.barcode-search-input {
+    position: absolute;
+    bottom: -111px !important;
+    z-index: 12;
+    background-color: white;
+    left: 0px !important;
+    padding: 15px 25px;
+    width: 100%;
+    color: var(--bs-gray);
+}
