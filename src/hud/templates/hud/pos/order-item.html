@@ -7,7 +7,8 @@
         {% include 'hud/pos/partials/order-item-detail.html' %}
     </div>
     <div id="pos-order-price-{{ item.number }}" class="pos-order-price">
-        {{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
+        <div>{{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}</div>
+        <div class="mt-4">Some</div>
     </div>
     <div id="placeholder-remove">
         <!-- Confirm remove will be rendered here -->

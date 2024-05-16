@@ -1,4 +1,4 @@
-{% load static custom_tags component_tags %}
+{% load static custom_tags component_tags pos %}
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 	<head>
@@ -43,6 +43,9 @@
 												</div>
 											</a>
 										</li>
+										{% for item in gettotals %}
+											{{ item.number }}111
+										{% endfor %}
 										{% for group in groups %}
 										<li class="nav-item">
 											<a class="nav-link" href="#" data-filter="{{ group.id }}">
@@ -60,96 +63,7 @@
 											</a>
 										</li>
 										{% endfor %}
-										<li class="nav-item">
-											<a class="nav-link" href="#" data-filter="meat">
-												<div class="card">
-													<div class="card-body">
-														<i class="fa fa-fw fa-drumstick-bite"></i> Meat
-													</div>
-													<div class="card-arrow">
-														<div class="card-arrow-top-left"></div>
-														<div class="card-arrow-top-right"></div>
-														<div class="card-arrow-bottom-left"></div>
-														<div class="card-arrow-bottom-right"></div>
-													</div>
-												</div>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#" data-filter="burger">
-												<div class="card">
-													<div class="card-body">
-														<i class="fa fa-fw fa-hamburger"></i> Burger
-													</div>
-													<div class="card-arrow">
-														<div class="card-arrow-top-left"></div>
-														<div class="card-arrow-top-right"></div>
-														<div class="card-arrow-bottom-left"></div>
-														<div class="card-arrow-bottom-right"></div>
-													</div>
-												</div>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#" data-filter="pizza">
-												<div class="card">
-													<div class="card-body">
-														<i class="fa fa-fw fa-pizza-slice"></i> Pizza
-													</div>
-													<div class="card-arrow">
-														<div class="card-arrow-top-left"></div>
-														<div class="card-arrow-top-right"></div>
-														<div class="card-arrow-bottom-left"></div>
-														<div class="card-arrow-bottom-right"></div>
-													</div>
-												</div>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#" data-filter="drinks">
-												<div class="card">
-													<div class="card-body">
-														<i class="fa fa-fw fa-cocktail"></i> Drinks
-													</div>
-													<div class="card-arrow">
-														<div class="card-arrow-top-left"></div>
-														<div class="card-arrow-top-right"></div>
-														<div class="card-arrow-bottom-left"></div>
-														<div class="card-arrow-bottom-right"></div>
-													</div>
-												</div>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#" data-filter="desserts">
-												<div class="card">
-													<div class="card-body">
-														<i class="fa fa-fw fa-ice-cream"></i> Desserts
-													</div>
-													<div class="card-arrow">
-														<div class="card-arrow-top-left"></div>
-														<div class="card-arrow-top-right"></div>
-														<div class="card-arrow-bottom-left"></div>
-														<div class="card-arrow-bottom-right"></div>
-													</div>
-												</div>
-											</a>
-										</li>
-										<li class="nav-item">
-											<a class="nav-link" href="#" data-filter="snacks">
-												<div class="card">
-													<div class="card-body">
-														<i class="fa fa-fw fa-cookie-bite"></i> Snacks
-													</div>
-													<div class="card-arrow">
-														<div class="card-arrow-top-left"></div>
-														<div class="card-arrow-top-right"></div>
-														<div class="card-arrow-bottom-left"></div>
-														<div class="card-arrow-bottom-right"></div>
-													</div>
-												</div>
-											</a>
-										</li>
+
 									</ul>
 								</div>
 							</div>
@@ -163,59 +77,8 @@
 								</div>
 								<div class="row gx-4">
 									{% for product in products%}
-									<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="{{ product.parent_group.id }}">
-										<div class="card h-100">
-											<div class="card-body h-100 p-1">
-												<a href="#" 
-													hx-get="{% url 'hud:modal-product' product.id %}" 
-													hx-target="#modal-product" 
-													hx-trigger="click" 
-													class="pos-product" 
-													data-bs-toggle="modal"
-													data-bs-target="#modal-product"
-													>
-													<div class="img"
-														style="background-image: url({{ product.img }})"></div>
-													<div class="info">
-														<div class="title">{{ product.name }}</div>
-														<div class="desc">Dill pickle, cheddar cheese, tomato, red onion,
-															ground chuck beef
-														</div>
-														<div class="price">{{ product.currency.name }} {{ product.price|floatformat:"0" }}</div>
-													</div>
-												</a>
-											</div>
-											<div class="card-arrow">
-												<div class="card-arrow-top-left"></div>
-												<div class="card-arrow-top-right"></div>
-												<div class="card-arrow-bottom-left"></div>
-												<div class="card-arrow-bottom-right"></div>
-											</div>
-										</div>
-									</div>
+										{% include 'hud/pos/partials/product-card.html' %}
 									{% endfor %}
-									<div class="col-xxl-3 col-xl-4 col-lg-6 col-md-4 col-sm-6 pb-4" data-type="meat">
-										<div class="card h-100">
-											<div class="card-body h-100 p-1">
-												<a href="#" class="pos-product" data-bs-toggle="modal"
-													data-bs-target="#modalPosItem">
-													<div class="img"
-														style="background-image: url({% static 'hud/img/pos/product-1.jpg' %})"></div>
-													<div class="info">
-														<div class="title">Grill Chicken Chop&reg;</div>
-														<div class="desc">chicken, egg, mushroom, salad</div>
-														<div class="price">$10.99</div>
-													</div>
-												</a>
-											</div>
-											<div class="card-arrow">
-												<div class="card-arrow-top-left"></div>
-												<div class="card-arrow-top-right"></div>
-												<div class="card-arrow-bottom-left"></div>
-												<div class="card-arrow-bottom-right"></div>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>

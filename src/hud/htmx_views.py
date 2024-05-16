@@ -5,6 +5,7 @@ from decimal import Decimal
 
 active_order = PosOrder.objects.filter(is_active=True).first()
 
+
 def modal_product(request, id):
     product = get_object_or_404(Product, id=id)
 
@@ -17,7 +18,7 @@ def add_quantity(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
     item.quantity += 1  # Set quantity to the new value received from the client
     item.save()
-    
+
     context = {
         "item": item,
         "active_order": active_order,
@@ -54,7 +55,8 @@ def add_item_with_barcode(request):
     barcode_value = request.POST.get("barcode", None)
     print(barcode_value)
     barcode = get_object_or_404(Barcode, value=barcode_value)
-    item = PosOrderItem.objects.filter(order=active_order, product=barcode.product).first()
+    item = PosOrderItem.objects.filter(
+        order=active_order, product=barcode.product).first()
 
     if not item:
         item = PosOrderItem.objects.create(
@@ -73,6 +75,7 @@ def add_item_with_barcode(request):
         "active_order": active_order,
     }
     return render(request, 'hud/pos/renders/update-active-order.html', context)
+
 
 def add_order_item(request):
     if request.method == 'POST':
