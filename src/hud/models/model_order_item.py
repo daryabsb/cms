@@ -18,13 +18,14 @@ class PosOrderItem(models.Model):
     )
     round_number = models.DecimalField(
         decimal_places=3, max_digits=4, default=0)
-    quantity = models.DecimalField(decimal_places=0,  max_digits=9, default=1)
+    quantity = models.IntegerField(default=1)
     price = models.DecimalField(decimal_places=3,  max_digits=15, default=0)
-    # subtotal2 = models.GeneratedField(
-    #     expression= F("price") * F("quantity"),
+    # subtotal = models.GeneratedField(
+    #     expression=F("price") * F("quantity"),
     #     output_field=models.DecimalField(
-    #     max_digits=6, decimal_places=2
+    #         max_digits=15, decimal_places=3
     #     ), db_persist=True,)
+    subtotal = models.DecimalField(decimal_places=3,  max_digits=15, default=0)
     is_locked = models.BooleanField(default=False)
     discount = models.FloatField(default=0)
     discount_type = models.FloatField(default=0)
@@ -39,11 +40,7 @@ class PosOrderItem(models.Model):
 
     def __str__(self):
         return f"{self.product.name}: {self.quantity}{self.product.measurement_unit}"
-    
-    @property
-    def subtotal(self):
-        return self.price * self.quantity
-    
+
     def save(self, *args, **kwargs):
         import random
         from datetime import date
@@ -58,4 +55,3 @@ class PosOrderItem(models.Model):
                 self.number = f'{target}-{self.user.id}-{date.today().strftime("%d%m%Y")}-01-{digits}'
 
         super(PosOrderItem, self).save(*args, **kwargs)
-    

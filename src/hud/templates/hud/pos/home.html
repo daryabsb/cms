@@ -1,4 +1,4 @@
-{% load static custom_tags component_tags pos %}
+{% load static custom_tags component_tags %}
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 	<head>
@@ -7,6 +7,13 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="description" content>
 		<meta name="author" content>
+		<!-- favicon -->
+		<link rel="icon" href="{% static 'hud/img/icons/favicon.ico' %}" sizes="32x32" type="image/png">
+		<link rel="apple-touch-icon" href="{% static 'hud/img/icons/favicon-16x16.png' %}" sizes="16x16">
+		<link rel="icon" href="{% static 'hud/img/icons/favicon-32x32.png' %}" sizes="32x32" type="image/png">
+		<!-- favicon sizes 
+		-->
+		<link href="{% static 'hud/css/vendor.min.css' %}" rel="stylesheet">
 		<link href="{% static 'hud/css/vendor.min.css' %}" rel="stylesheet">
 		<link href="{% static 'hud/css/app.min.css' %}" rel="stylesheet">
 		{% for htmx_url in dz_array.crm.htmx %}
@@ -21,8 +28,11 @@
 						<div class="pos-menu">
 							<div class="logo">
 								<a href="{% url 'hud:hud-index' %}">
-									<div class="logo-img"><i class="bi bi-x-diamond" style="font-size: 2.1rem;"></i></div>
-									<div class="logo-text">Pine & Dine</div>
+									<div class="logo-img">
+									{% comment %} <i class="bi bi-x-diamond" style="font-size: 2.1rem;"></i> {% endcomment %}
+									<img class="" src="{% static 'hud/img/icons/zeneon-icon-white-02.svg' %}" style="width: 3.1rem;" />
+									</div>
+									<div class="logo-text">Zeneon LLC.</div>
 								</a>
 							</div>
 							<div class="nav-container">
@@ -43,9 +53,9 @@
 												</div>
 											</a>
 										</li>
-										{% for item in gettotals %}
+										{% comment %} {% for item in gettotals %}
 											{{ item.number }}111
-										{% endfor %}
+										{% endfor %} {% endcomment %}
 										{% for group in groups %}
 										<li class="nav-item">
 											<a class="nav-link" href="#" data-filter="{{ group.id }}">
@@ -91,9 +101,12 @@
 										<i class="bi bi-chevron-left"></i>
 										</button>
 									</div>
-									<div class="icon"><img src="{% static 'hud/img/pos/icon-table-black.svg' %}" class="invert-dark"
-										alt></div>
-									<div class="title">Table 01</div>
+									<div class="icon">
+										{% comment %} <img src="{% static 'hud/img/pos/icon-table-black.svg' %}" class="invert-dark"alt> {% endcomment %}
+										<img src="{% static 'hud/img/user/customer.png' %}" class="invert-dark"alt>
+									</div>
+									{% comment %} <div class="title">Table 01</div> {% endcomment %}
+									<div class="title">Customer 01</div>
 									<div class="order">Order: <b>#00{{ active_order.id }}</b></div>
 								</div>
 								<div class="pos-sidebar-nav">

@@ -1,11 +1,11 @@
-{% include 'hud/pos/partials/order-item-detail.html' %}
+{% include 'hud/pos/order-item.html' %}
 
-<input hx-swap-oob="true" id="qty-input-{{ item.number }}" value="{{ item.quantity }}" type="text"
+{% comment %} <input hx-swap-oob="true" id="qty-input-{{ item.number }}" value="{{ item.quantity }}" type="text"
 class="form-control w-50px text-center mx-2 {{ input_class }}" name="qty">
 
 
 <div hx-swap-oob="true" id="pos-order-price-{{ item.number }}" class="pos-order-price">
     {{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
-</div>
+</div> {% endcomment %}
 
 <div hx-swap-oob="true" id="order-subtotal-{{ active_order.id }}" class="flex-1 text-end h4 mb-0">${{ active_order.subtotal }}</div>

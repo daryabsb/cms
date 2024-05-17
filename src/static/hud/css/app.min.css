@@ -34424,7 +34424,7 @@ body .note-modal-backdrop {
     bottom: 0;
     z-index: 10;
     background: rgba(235, 235, 235, .88);
-    padding: 1rem;
+    padding: 0.5rem;
     margin: 0
 }
 

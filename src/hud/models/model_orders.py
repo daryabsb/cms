@@ -9,6 +9,9 @@ class PosOrder(models.Model):
     #     max_length=100, primary_key=True, db_index=True, unique=True)
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="orders")
+    customer = models.ForeignKey(
+        "Customer", on_delete=models.CASCADE, related_name="orders",
+        null=True, blank=True, default=1)
     discount = models.SmallIntegerField(default=0)
     discount_type = models.SmallIntegerField(default=0)
     # subtotal = models.GeneratedField(expression=Sum("items__subtotal"),
@@ -25,7 +28,7 @@ class PosOrder(models.Model):
     # objects = OrderManager()
     class Meta:
         ordering = ['-created']
-    
+
     @property
     def subtotal(self):
         return self.items.aggregate(

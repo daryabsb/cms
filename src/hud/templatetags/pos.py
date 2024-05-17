@@ -11,11 +11,11 @@ register = template.Library()
 
 def gettotals():
     func_name = ''
-    active_order = PosOrder.objects.filter(is_active=True).first()
+    # active_order = PosOrder.objects.filter(is_active=True).first()
     try:
 
-        logger.debug("Active Order is:> {} ",
-                     active_order.user.email, feature="f-strings")
+        # logger.debug("Active Order is:> {} ",
+        #              active_order.user.email, feature="f-strings")
         # logger.debug("Module Name:> {} ",
         #              myfunc.__module__, feature="f-strings")
         # logger.debug("URL_Path:> {} ", args, feature="f-strings")
@@ -27,7 +27,7 @@ def gettotals():
         pass
 
     # return json_data.get(func_name)
-    return active_order.items
+    # return active_order.items
 
 
 register.filter('gettotals', gettotals)

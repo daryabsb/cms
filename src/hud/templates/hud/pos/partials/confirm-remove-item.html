@@ -4,11 +4,11 @@ class="alert pos-order-confirmation text-center flex-column justify-content-cent
 <div class="mb-1">
     <i class="bi bi-trash fs-36px lh-1"></i>
 </div>
-<div class="mb-2">Remove this item?</div>
+<div class="mb-1">Remove item #{{ item.number }}?</div>
 <div>
     <button data-bs-dismiss="alert" class="btn btn-outline-default btn-sm ms-auto me-2 width-100px">No</button>
     <button 
-    hx-delete="{% url 'hud:remove-item' item.number %}"
+    hx-delete="{% url 'hud:remove-item' item.number False %}"
     hx-target="#active-order-tab-{{ active_order.id }}"
     class="btn btn-outline-theme btn-sm width-100px">Yes</button>
 </div>
