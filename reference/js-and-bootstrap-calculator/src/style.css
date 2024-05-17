@@ -1,0 +1,59 @@
+.container {
+  position: relative;
+  background-image: url("https://images.unsplash.com/photo-1454720203134-22a81186a6c6?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&w=1080&fit=max&s=c8d278e0cf5e8fb217bec40568c69653");
+  background-size: 100%;
+  height: 100%;
+}
+
+#clip {
+  position: absolute;
+  clip: rect(400px, 900px, 1300px, 280px);
+  /* clip: shape(top, right, bottom, left); NB 'rect' is the only available option */
+}
+
+
+/* centered columns styles */
+
+h1 {
+  color: #fff;
+}
+.footer {
+  color: #fff;
+}
+a {
+    color: #fff;
+}
+.row-centered {
+  text-align: center;
+}
+
+.col-centered {
+  display: inline-block;
+  float: none;
+  /* reset the text-align */
+  text-align: left;
+  /* inline-block space fix */
+  margin-right: -4px;
+}
+
+.col-fixed {
+  /* custom width */
+  width: 320px;
+}
+
+.col-min {
+  /* custom min width */
+  min-width: 320px;
+}
+
+.table-box {
+  border-collapse: separate;
+  border: 0px solid @table-outer-border-color;
+}
+
+.table-box thead > tr > th {
+  border-bottom: 0px solid @table-head-border-separate-color;
+}
+
+@table-outer-border-color: #000000;
+@table-head-border-separate-color: #000000;

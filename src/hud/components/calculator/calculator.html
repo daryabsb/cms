@@ -1,0 +1,116 @@
+<div class="d-flex {{ div_class }}">
+<table class="table table-box">
+  <tr>
+    <th colspan=3 style="text-align: right !important">
+      <div id="message">
+        <!-- Initial display area -->
+      </div>
+    </th>
+    <td>
+      <button class="btn btn-primary btn-block" 
+
+              onclick="submitCalculation('C')">C</button>
+    </td>
+  </tr>
+  <tr>
+    <td><button class="btn btn-block" onclick="displayData(7)">7</button></td>
+    <td><button class="btn btn-block" onclick="displayData(8)">8</button></td>
+    <td><button class="btn btn-block" onclick="displayData(9)">9</button></td>
+    <td><button class="btn btn-primary btn-block" onclick="displayData('/')">/</button></td>
+  </tr>
+  <tr>
+    <td><button class="btn btn-block" onclick="displayData(4)">4</button></td>
+    <td><button class="btn btn-block" onclick="displayData(5)">5</button></td>
+    <td><button class="btn btn-block" onclick="displayData(6)">6</button></td>
+    <td><button class="btn btn-primary btn-block" onclick="displayData('*')">*</button></td>
+  </tr>
+  <tr>
+    <td><button class="btn btn-block" onclick="displayData(1)">1</button></td>
+    <td><button class="btn btn-block" onclick="displayData(2)">2</button></td>
+    <td><button class="btn btn-block" onclick="displayData(3)">3</button></td>
+    <td><button class="btn btn-primary btn-block" onclick="displayData('-')">-</button></td>
+  </tr>
+  <tr>
+    <td><button class="btn btn-block" onclick="displayData(0)">0</button></td>
+    <td><button class="btn btn-block" onclick="displayData('.')">.</button></td>
+    <td><button class="btn btn-primary btn-block" onclick="displayData('=')">=</button></td>
+    <td><button class="btn btn-primary btn-block" onclick="displayData('+')">+</button></td>
+  </tr>
+</table>
+
+<form 
+  hx-post="{% url 'hud:calculate' %}" 
+  hx-trigger="click" 
+  hx-target="#{{ el_id }}" 
+  id="calculator-form" >
+  <input type="hidden" name="calculation" id="calculation">
+</form>
+</div>
+<script>
+  var str = '';
+
+  function displayData(ch) {
+    if (ch == 'C') {
+      str = '';
+    } else if (ch == '=') {
+      try {
+        str = eval(str);
+      } catch (e) {
+        str = 'Error';
+      }
+    } else {
+      if (str == '' && (ch == '+' || ch == '*' || ch == '/')) {
+        return;
+      } else if (str == '' && ch == '-') {
+        str = '-';
+      } else {
+        str += ch;
+      }
+    }
+    document.getElementById("message").innerText = str;
+  }
+
+  function submitCalculation(key) {
+    if (key === 'C' || key === 'Enter') {
+      document.getElementById('calculation').value = str;
+      document.getElementById('calculator-form').submit();
+    }
+  }
+
+  function debounce(func, delay) {
+    let debounceTimer;
+    return function() {
+      const context = this;
+      const args = arguments;
+      clearTimeout(debounceTimer);
+      debounceTimer = setTimeout(() => func.apply(context, args), delay);
+    }
+  }
+
+  const debouncedDisplayData = debounce(displayData, 50);
+
+  document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    if (/[0-9/*+\-.,=C]/.test(key) || key === 'Enter') {
+      event.preventDefault(); // Prevent default action for handled keys
+      if (key === 'Enter') {
+        submitCalculation('Enter');
+      } else if (key === 'C') {
+        submitCalculation('C');
+      } else {
+        debouncedDisplayData(key);
+      }
+    }
+  });
+
+  // Prevent keydown events from triggering button clicks
+  document.querySelectorAll('button').forEach(button => {
+    button.addEventListener('click', (event) => {
+      debouncedDisplayData(event.target.value);
+      event.stopPropagation();
+    });
+  });
+</script>
+
+<!-- form-control w-50px text-center mx-2    fw-bold  bg-inverse bg-opacity-15 border-0  -->
+<!-- form-control w-50px text-center mx-2    form-control-sm  bg-white bg-opacity-25  -->

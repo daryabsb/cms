@@ -5,15 +5,6 @@ from src.hud.models import ProductGroup, Product, Barcode, PosOrderItem, PosOrde
 from src.hud.calculations import add_or_update_product_to_order
 
 
-def modal_product(request, id):
-    active_order = PosOrder.objects.filter(is_active=True).first()
-    product = get_object_or_404(Product, id=id)
-
-    if product:
-        context = {"product": product, "active_order": active_order}
-        return render(request, 'hud/pos/product-modal.html', context)
-
-
 def add_quantity(request, item_number):
     active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
@@ -121,3 +112,12 @@ def add_order_item(request):
         return render(request, 'hud/pos/renders/update-active-order.html', context)
 
     return JsonResponse({"success": "Item added successfully!"})
+
+
+def calculate(request):
+    from django.http import JsonResponse
+    print(dir(request))
+    calculation = request.POST.get('calculation', '')
+    # Process the calculation as needed, e.g., log it, store it, etc.
+    print("calculation = ", calculation)
+    return JsonResponse({'message': calculation})

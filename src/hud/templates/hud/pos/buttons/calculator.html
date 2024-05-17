@@ -1,0 +1,12 @@
+<a href="#" 
+    hx-get="{% url 'hud:modal-calculator' %}" 
+    hx-target="#modal-calculator" 
+    hx-trigger="click"
+    hx-vals='{"el-id": "{{el_id}}"}'
+    data-bs-toggle="modal"
+    data-bs-target="#modal-calculator"
+    class="btn text-success"
+    style="width:10px;"
+    >
+    <i class="fas fa-fw fa-calculator"></i>
+</a>

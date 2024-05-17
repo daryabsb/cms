@@ -7,7 +7,9 @@
         {% include 'hud/pos/partials/order-item-detail.html' %}
     </div>
     <div id="pos-order-price-{{ item.number }}" class="pos-order-price">
-        <div>{{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}</div>
+        <div>
+        <span  class="small">{{ item.product.currency.name }}</span> {{ item.subtotal|floatformat:"0" }}</div>
+        <div id='message-received'></div>
         {% comment %} <div class="">
         {{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
         </div>
@@ -15,6 +17,10 @@
         {{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
         </div> {% endcomment %}
         <div class="btn-group position-absolute end-0 bottom-0">
+            {% comment %} hx-delete="{% url 'hud:remove-item' item.number True %}"
+            hx-target="#active-order-tab-{{ active_order.id }}" {% endcomment %}
+            {% include 'hud/pos/buttons/calculator.html' with el_id="message-received" %}
+
         <button 
             hx-delete="{% url 'hud:remove-item' item.number True %}"
             hx-target="#active-order-tab-{{ active_order.id }}"
@@ -27,4 +33,5 @@
         <!-- Confirm remove will be rendered here -->
     </div>
 </div>
+
 {% endif %}

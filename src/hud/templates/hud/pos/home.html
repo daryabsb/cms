@@ -106,7 +106,7 @@
 										<img src="{% static 'hud/img/user/customer.png' %}" class="invert-dark"alt>
 									</div>
 									{% comment %} <div class="title">Table 01</div> {% endcomment %}
-									<div class="title">Customer 01</div>
+									<div class="title">{{ active_order.customer.name }}</div>
 									<div class="order">Order: <b>#00{{ active_order.id }}</b></div>
 								</div>
 								<div class="pos-sidebar-nav">
@@ -147,8 +147,13 @@
 		</div>
 		{% include 'hud/pos/renders/modal-search-cover.html' %}
 		<div class="modal modal-pos fade" id="modal-product">
-			{% include 'hud/pos/product-modal2.html' %}
+			{% include 'hud/pos/modals/product-modal2.html' %}
 		</div>
+		<div class="modal modal-pos fade" id="modal-calculator">
+			{% include 'hud/pos/modals/calculator-modal.html' %}
+		</div>
+		
+
 		{% load django_htmx %}
 		{% django_htmx_script %}
 		<script src="{% static 'hud/js/vendor.min.js' %}" type="6a9f65d44ad9696aba2f6178-text/javascript"></script>
