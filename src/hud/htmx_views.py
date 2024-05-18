@@ -2,8 +2,8 @@ from decimal import Decimal
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from src.hud.models import ProductGroup, Product, Barcode, PosOrderItem, PosOrder
-from src.hud.calculations import add_or_update_product_to_order
-
+from src.hud.calculations import (add_or_update_product_to_order as add_or_create_item)
+from src.hud.utils import get_context
 
 def add_quantity(request, item_number):
     active_order = PosOrder.objects.filter(is_active=True).first()
@@ -11,48 +11,53 @@ def add_quantity(request, item_number):
     item.quantity += 1  # Set quantity to the new value received from the client
     item.save()
 
-    context = {
-        "item": item,
-        "active_order": active_order,
-    }
+    active_order, item = add_or_create_item(order_item=item)
+
+    context = get_context(active_order)
+    context["item"] = item
+    
     return render(request, 'hud/pos/renders/update-order-item.html', context)
 
 
 def subtract_quantity(request, item_number):
     active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
-    context = {
-        "item": item,
-        "active_order": active_order,
-    }
     if item.quantity > 1:
         item.quantity -= 1
         item.save()
+        active_order, item = add_or_create_item(order_item=item)
+        context = get_context(active_order)
+        context["item"] = item
         return render(request, 'hud/pos/renders/update-order-item.html', context)
     elif item.quantity == 1:
+        active_order, item = add_or_create_item(order_item=item)
+
+        context = get_context(active_order)
+        context["item"] = item
+
         return render(request, 'hud/pos/renders/order-item-with-confirm.html', context)
 
+def p(name,var=None):
+    print(name,var)
 
-def remove_item(request, item_number, is_button=False):
-    '''
-    Check if it is a direct delete
-    '''
-    if is_button:
-        active_order = PosOrder.objects.filter(is_active=True).first()
-        item = get_object_or_404(PosOrderItem, number=item_number)
-        context = {
-            "item": item,
-            "active_order": active_order,
-        }
-        return render(request, 'hud/pos/renders/order-item-with-confirm.html', context)
+def confirm_remove_item_button(request, item_number):
+    active_order = PosOrder.objects.filter(is_active=True).first()
+    item = get_object_or_404(PosOrderItem, number=item_number)
+    active_order, item = add_or_create_item(order_item=item)
+    context = get_context(active_order)
+    context["item"] = item
+    return render(request, 'hud/pos/renders/order-item-with-confirm.html', context)
+
+
+def remove_item(request, item_number):
 
     active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
+
     item.delete()
 
-    context = {
-        "active_order": active_order,
-    }
+    context = get_context(active_order)
+
     return render(request, 'hud/pos/renders/update-active-order.html', context)
 
 
@@ -67,51 +72,45 @@ def add_item_with_barcode(request):
         order=active_order, product=barcode.product).first()
 
     if not item:
-        order, item, total = add_or_update_product_to_order(
+        order, item, total = add_or_create_item(
             request.user, barcode.product, active_order)
     else:
         item.quantity += 1
         item.save()
 
-    context = {
-        "item": item,
-        "active_order": order,
-        "total": total
-    }
+    context = get_context(active_order)
+    context["item"] = item
+    
     return render(request, 'hud/pos/renders/update-active-order.html', context)
 
 
 def add_order_item(request):
     active_order = PosOrder.objects.filter(is_active=True).first()
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id', None)
-        quantity = request.POST.get('quantity', 1)
 
-        print("Quantity1 = ", quantity)
+    product_id = request.POST.get('product_id', None)
+    quantity = request.POST.get('quantity', 1)
 
-        order = active_order
+    print("Quantity1 = ", quantity)
 
-        product = get_object_or_404(Product, id=product_id)
+    order = active_order
 
-        item = PosOrderItem.objects.filter(
-            order=active_order, product=product).first()
+    product = get_object_or_404(Product, id=product_id)
 
-        if not item:
-            order, subtotal, item = add_or_update_product_to_order(
-                request.user, product, quantity, active_order)
-        else:
-            item.quantity += 1
-            item.save()
+    item = PosOrderItem.objects.filter(
+        order=active_order, product=product).first()
 
-        context = {
-            "item": item,
-            "items_subtotal": subtotal,
-            "active_order": order,
-        }
+    if not item:
+        order, item = add_or_create_item(
+            user=request.user, product=product, quantity=quantity, order=active_order)
+    else:
+        item.quantity += 1
+        item.save()
+    
+    context = get_context(active_order)
+    context["item"] = item
 
-        return render(request, 'hud/pos/renders/update-active-order.html', context)
+    return render(request, 'hud/pos/renders/update-active-order.html', context)
 
-    return JsonResponse({"success": "Item added successfully!"})
 
 
 def calculate(request):

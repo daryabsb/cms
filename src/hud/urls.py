@@ -2,7 +2,7 @@ from django.urls import path, include
 from src.hud.views import hud_index, hud_pos
 from src.hud.htmx_views import (
     add_quantity, subtract_quantity, calculate,
-    add_order_item, remove_item, add_item_with_barcode)
+    add_order_item, confirm_remove_item_button, remove_item, add_item_with_barcode)
 from src.hud.modal_views import modal_product, modal_calculator
 
 
@@ -19,8 +19,10 @@ urlpatterns += [
     path('add-quantity/<item_number>/', add_quantity, name="add-quantity"),
     path('subtract-quantity/<item_number>/',
          subtract_quantity, name="subtract-quantity"),
-    path('remove-item/<str:item_number>/<is_button>/',
+    path('remove-item/<str:item_number>/',
          remove_item, name="remove-item"),
+    path('rremove-button-confirm/<str:item_number>/',
+         confirm_remove_item_button, name="remove-button-confirm"),
     path('add-item/', add_order_item, name="add-item"),
     path('add-item-with-barcode/', add_item_with_barcode,
          name="add-item-with-barcode"),

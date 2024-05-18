@@ -22,8 +22,8 @@
             {% include 'hud/pos/buttons/calculator.html' with el_id="message-received" %}
 
         <button 
-            hx-delete="{% url 'hud:remove-item' item.number True %}"
-            hx-target="#active-order-tab-{{ active_order.id }}"
+            hx-delete="{% url 'hud:remove-button-confirm' item.number %}"
+            hx-target="#order-item-{{ item.number }}"
             class="btn text-danger">
             <i class="far fa-fw fa-trash-alt col"></i>
             </button>

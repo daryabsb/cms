@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404, render
 from src.hud.models import (
     ProductGroup, Product, Barcode, PosOrderItem, PosOrder,
     )
-from src.hud.utils import activate_order_and_deactivate_others as aod
+from src.hud.utils import activate_order_and_deactivate_others as aod, get_context
 
 # Create your views here.
 
@@ -16,10 +16,10 @@ def hud_pos(request, id=None):
     product_groups = ProductGroup.objects.all()
     pos_orders = PosOrder.objects.all()
     products = Product.objects.all()
-    context = {
-        'groups': product_groups,
-        'products': products,
-        'orders': pos_orders,
-        'active_order': active_order,
-    }
+
+    context = get_context(active_order)
+    context["groups"] = product_groups
+    context["products"] = products
+    context["orders"] = pos_orders
+
     return render(request, 'hud/pos/home.html', context)

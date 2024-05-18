@@ -16,7 +16,7 @@
         </div> {% endcomment %}
         <div class="btn-group position-absolute end-0 bottom-0">
         <button 
-            hx-delete="{% url 'hud:remove-item' item.number True %}"
+            hx-delete="{% url 'hud:remove-item' item.number %}"
             hx-target="#active-order-tab-{{ active_order.id }}"
             hx-trigger="click"
             class="btn text-danger">
@@ -30,11 +30,11 @@
     <div class="mb-1">
         <i class="bi bi-trash fs-36px lh-1"></i>
     </div>
-    <div class="mb-1">Remove item #{{ item.number }}?</div>
+    <div class="mb-1">Remove item #{{ item.number }}??</div>
         <div>
             <button data-bs-dismiss="alert" class="btn btn-outline-default btn-sm ms-auto me-2 width-100px">No</button>
             <button 
-            hx-delete="{% url 'hud:remove-item' item.number False %}"
+            hx-delete="{% url 'hud:remove-item' item.number %}"
             hx-target="#active-order-tab-{{ active_order.id }}"
             class="btn btn-outline-theme btn-sm width-100px">Yes</button>
         </div>

@@ -18,6 +18,7 @@ class PosOrder(models.Model):
     #                                 output_field=models.DecimalField(
     #                                 max_digits=6, decimal_places=2
     #                                 ), db_persist=True,)
+    item_subtotal = models.FloatField(default=0)
     total = models.FloatField(default=0)
     status = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)

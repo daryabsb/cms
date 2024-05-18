@@ -9,47 +9,59 @@ from decimal import Decimal
 from src.hud.models import PosOrder, PosOrderItem, Product, Tax, ProductTax
 
 
-def add_or_update_product_to_order(user, product, quantity=1, order=None, **kwargs):
+def add_or_update_product_to_order(
+        order_item=None,
+        user=None, 
+        product=None, 
+        quantity=1, 
+        order=None, 
+        **kwargs):
 
     if not order:
-        order = PosOrder.objects.get(is_active=True)
-    if not product:
-        return
+        order = PosOrder.objects.filter(is_active=True).first()
+        if not order:
+            order = PosOrder.objects.create(user=user, is_active=True)
 
-    print("kwargs = ", kwargs)
-    # Apply kwargs settings
-    is_tax_inclusive_price = kwargs.get(
-        'is_tax_inclusive_price', product.is_tax_inclusive_price)
-    is_price_change_allowed = kwargs.get('is_price_change_allowed', False)
-    is_using_default_quantity = kwargs.get('is_using_default_quantity', False)
-    custom_price = Decimal(kwargs.get('custom_price', product.price))
+    if order_item is None:
+        # Apply kwargs settings
+        is_tax_inclusive_price = product.is_tax_inclusive_price
+        is_price_change_allowed = product.is_price_change_allowed
+        is_using_default_quantity = product.is_using_default_quantity
+
+        custom_price = Decimal(kwargs.get('custom_price', product.price))
+
+        add = kwargs.get('is_add_quantity', True)
+
+
+        order_item = PosOrderItem.objects.filter(
+            user=user, order=order, product=product).first()
+    # Check if the order item already exists
     item_discount = Decimal(kwargs.get('item_discount', 0))
     item_discount_type = kwargs.get('item_discount_type', 0)
-
-    print("Quantity2 = ", quantity)
-
-    # Check if the order item already exists
-    order_item = PosOrderItem.objects.filter(
-        user=user, order=order, product=product).first()
+    
     if order_item:
-        if is_using_default_quantity:
+        if order_item.product.is_using_default_quantity:
             quantity = order_item.quantity  # Use the existing quantity
+        elif not add:
+            print("Add is false")
+            order_item.quantity -= quantity  # Update the quantity
         else:
+            print("Add is true")
             order_item.quantity += quantity  # Update the quantity
     else:
         order_item = PosOrderItem(
             user=user, order=order, product=product, quantity=quantity)
 
     # Update the price if price change is allowed
-    if is_price_change_allowed:
+    if order_item.product.is_price_change_allowed:
         order_item.price = custom_price
     else:
-        order_item.price = product.price
+        order_item.price = order_item.product.price
 
     # Calculate base price considering product-specific taxes
     base_price = order_item.price
 
-    for product_tax in product.productTaxes.all():
+    for product_tax in order_item.product.productTaxes.all():
         tax = product_tax.tax
         if not tax.is_tax_on_total:
             if tax.is_fixed:
@@ -59,7 +71,6 @@ def add_or_update_product_to_order(user, product, quantity=1, order=None, **kwar
 
     order_item.price = base_price
 
-    print("order_item.price = ", order_item.price)
     # Apply item-specific discount
     if item_discount_type == 1:  # Percentage discount
         item_discount_amount = (item_discount / 100) * \
@@ -74,21 +85,24 @@ def add_or_update_product_to_order(user, product, quantity=1, order=None, **kwar
     order_item.save()
 
     # Recalculate order totals
-    order, item_subtotal = update_order_totals(order)
-    return order, item_subtotal, order_item
+    active_order, order_discount, total_tax, tax_rate = update_order_totals(order)
+    return active_order, order_item
 
 
 def update_order_totals(order):
     # Calculate item subtotal
-    item_subtotal = sum(item.subtotal for item in order.items.all())
 
+    order.item_subtotal = sum(item.subtotal for item in order.items.all())
+    
+    order_discount_amount = 0
+    subtotal_after_discount = 0
     # Apply order discount
     if order.discount_type == 1:  # Percentage discount
-        order_discount_amount = (order.discount / 100) * item_subtotal
+        order_discount_amount = Decimal(order.discount / 100) * order.item_subtotal
     else:  # Fixed amount discount
         order_discount_amount = order.discount
 
-    subtotal_after_discount = item_subtotal - order_discount_amount
+    subtotal_after_discount = order.item_subtotal - order_discount_amount
 
     # Apply customer discount
     customer_discounts = order.customer.discounts.all()
@@ -101,11 +115,13 @@ def update_order_totals(order):
             subtotal_after_discount -= discount.value
     # Apply taxes
     total_tax = 0
+    tax_rate = 0
     for tax in Tax.objects.all():
         if tax.is_tax_on_total:
             if tax.is_fixed:
                 total_tax += tax.amount
             else:
+                tax_rate = tax.rate
                 total_tax += subtotal_after_discount * \
                     (Decimal(tax.rate) / 100)
 
@@ -114,7 +130,7 @@ def update_order_totals(order):
     order.total = total
     order.save()
 
-    return order, item_subtotal
+    return order, order_discount_amount, total_tax, tax_rate
 
 
 # View example to add product and render order summary
