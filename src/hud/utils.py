@@ -1,6 +1,7 @@
 from django.db import transaction
 from src.hud.models import PosOrder
 
+
 def activate_order_and_deactivate_others(order_id=None):
     with transaction.atomic():
         if order_id:
@@ -15,7 +16,8 @@ def activate_order_and_deactivate_others(order_id=None):
         order.save(update_fields=['is_active'])
 
         # Deactivate all other orders of the same user
-        PosOrder.objects.filter(user=order.user).exclude(pk=order.pk).update(is_active=False)
+        PosOrder.objects.filter(user=order.user).exclude(
+            pk=order.pk).update(is_active=False)
 
     return order
 
@@ -27,5 +29,6 @@ def get_context(active_order):
         "active_order": order,
         "discount": discount,
         "tax_rate": tax_rate,
-        "tax_amount": tax_amount
+        "tax_amount": tax_amount,
+        "dscnt": tax_amount
     }

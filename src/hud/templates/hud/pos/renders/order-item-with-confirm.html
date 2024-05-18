@@ -2,7 +2,7 @@
 <div class="pos-order border-bottom" id="order-item-{{ item.number }}">
     <div class="pos-order-product">
         <div class="img"
-        style="background-image: url({{ item.product.image.url }})"></div>
+        style="background-image: url({{ item.product.img }})"></div>
         <!-- item details will be updated here -->
         {% include 'hud/pos/partials/order-item-detail.html' %}
     </div>
@@ -17,7 +17,7 @@
         <div class="btn-group position-absolute end-0 bottom-0">
         <button 
             hx-delete="{% url 'hud:remove-item' item.number %}"
-            hx-target="#active-order-tab-{{ active_order.id }}"
+            hx-target="#orders-detail"
             hx-trigger="click"
             class="btn text-danger">
             <i class="far fa-fw fa-trash-alt col"></i>
@@ -35,7 +35,7 @@
             <button data-bs-dismiss="alert" class="btn btn-outline-default btn-sm ms-auto me-2 width-100px">No</button>
             <button 
             hx-delete="{% url 'hud:remove-item' item.number %}"
-            hx-target="#active-order-tab-{{ active_order.id }}"
+            hx-target="#orders-detail"
             class="btn btn-outline-theme btn-sm width-100px">Yes</button>
         </div>
     </div>

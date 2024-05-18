@@ -7,7 +7,7 @@
                     <a href="#" data-bs-dismiss="modal" class="btn-close position-absolute top-0 end-0 m-4"></a>
                     <form 
                     hx-post="{% url 'hud:add-item' %}" 
-                    hx-target="#active-order-tab-{{ active_order.id }}"
+                    hx-target="#orders-detail"
                     
                     >
                         <div class="modal-pos-product">

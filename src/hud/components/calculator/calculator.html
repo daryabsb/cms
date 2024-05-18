@@ -8,7 +8,9 @@
     </th>
     <td>
       <button class="btn btn-primary btn-block" 
-
+              hx-post="{% url 'hud:calculate' %}" 
+              hx-trigger="click" 
+              hx-target="#{{ el_id }}"
               onclick="submitCalculation('C')">C</button>
     </td>
   </tr>
@@ -39,9 +41,6 @@
 </table>
 
 <form 
-  hx-post="{% url 'hud:calculate' %}" 
-  hx-trigger="click" 
-  hx-target="#{{ el_id }}" 
   id="calculator-form" >
   <input type="hidden" name="calculation" id="calculation">
 </form>
@@ -71,10 +70,12 @@
   }
 
   function submitCalculation(key) {
+    /*
     if (key === 'C' || key === 'Enter') {
       document.getElementById('calculation').value = str;
-      document.getElementById('calculator-form').submit();
+      // document.getElementById('calculator-form').submit();
     }
+    */
   }
 
   function debounce(func, delay) {
@@ -91,12 +92,12 @@
 
   document.addEventListener('keydown', (event) => {
     const key = event.key;
-    if (/[0-9/*+\-.,=C]/.test(key) || key === 'Enter') {
+    if (/[0-9/*+\-.,=C]/.test(key) || key === 'Ctrl') {
       event.preventDefault(); // Prevent default action for handled keys
       if (key === 'Enter') {
-        submitCalculation('Enter');
+        // submitCalculation('Enter');
       } else if (key === 'C') {
-        submitCalculation('C');
+        // submitCalculation('C');
       } else {
         debouncedDisplayData(key);
       }
@@ -104,12 +105,14 @@
   });
 
   // Prevent keydown events from triggering button clicks
+  /*
   document.querySelectorAll('button').forEach(button => {
     button.addEventListener('click', (event) => {
       debouncedDisplayData(event.target.value);
       event.stopPropagation();
     });
   });
+  */
 </script>
 
 <!-- form-control w-50px text-center mx-2    fw-bold  bg-inverse bg-opacity-15 border-0  -->

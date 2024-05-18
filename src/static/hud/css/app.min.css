@@ -34386,6 +34386,8 @@ body .note-modal-backdrop {
 }
 
 .pos .pos-sidebar .pos-sidebar-footer {
+    /* position: absolute;
+    bottom: 0; */
     border-top: 1px solid var(--bs-border-color);
     padding: 1rem 1.5rem
 }
