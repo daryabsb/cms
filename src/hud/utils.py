@@ -23,14 +23,6 @@ def activate_order_and_deactivate_others(order_id=None):
 def get_context(active_order):
     from src.hud.calculations import update_order_totals
     order, discount, tax_amount, tax_rate = update_order_totals(active_order)
-    print(
-        {
-        "active_order": order,
-        "discount": discount,
-        "tax_rate": tax_rate,
-        "tax_amount": tax_amount
-    }
-    )
     return {
         "active_order": order,
         "discount": discount,
