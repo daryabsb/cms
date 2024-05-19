@@ -20,7 +20,8 @@
 		<script src="{% static htmx_url %}" defer></script>
 		{% endfor %}
 	</head>
-	<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' hx-on="htmx:load: bInput=htmx.find('#barcode-input');bInput.value= '';bInput.focus();" class="pace-top">
+	<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' 
+	hx-on::load="bInput=htmx.find('#barcode-input');bInput.value= '';bInput.focus();" class="pace-top">
 		<div id="app" class="app app-content-full-height app-without-sidebar app-without-header">
 			<div id="content" class="app-content p-1 ps-xl-4 pe-xl-4 pt-xl-3 pb-xl-3">
 				<div class="pos card" id="pos">
@@ -116,7 +117,7 @@
 			{% include 'hud/pos/modals/product-modal2.html' %}
 		</div>
 		<div class="modal modal-pos fade" id="modal-calculator">
-			{% comment %} {% include 'hud/pos/modals/calculator-modal.html' %} {% endcomment %}
+			{% include 'hud/pos/modals/calculator-modal.html' %} 
 		</div>
 		
 

@@ -8,7 +8,6 @@ from django.db.models import Sum
 from decimal import Decimal
 from src.hud.models import PosOrder, PosOrderItem, Product, Tax, ProductTax
 
-
 def add_or_update_product_to_order(
         order_item=None,
         user=None,
@@ -53,9 +52,6 @@ def add_or_update_product_to_order(
         # Create a new order item
         order_item = PosOrderItem(
             user=user, order=order, product=product, quantity=quantity)
-
-    print("Step 1: ", order_item.subtotal)
-    print("Step 2: ", order_item.quantity)
     # Update the price if price change is allowed
     if order_item.product.is_price_change_allowed:
         order_item.price = custom_price
@@ -86,13 +82,13 @@ def add_or_update_product_to_order(
     order_item.discount = item_discount
     order_item.discount_type = item_discount_type
 
-    print("Step 2: ", order_item.subtotal)
     # Save the order item
     order_item.save()
-
+    
     # Recalculate order totals
     active_order, order_discount, total_tax, tax_rate = update_order_totals(
         order)
+
     return active_order, order_item
 
 
@@ -143,24 +139,101 @@ def update_order_totals(order):
 
 # View example to add product and render order summary
 
+def create_order_item(user, order, product, quantity=1):
+    return PosOrderItem.objects.create(
+        user=user,
+        order=order,
+        product=product,
+        quantity=quantity,
+        price=product.price
+    )
 
-def add_product_view(request, order_id, product_id):
-    kwargs = {
-        'is_tax_inclusive_price': request.POST.get('is_tax_inclusive_price', False),
-        'is_price_change_allowed': request.POST.get('is_price_change_allowed', False),
-        'is_using_default_quantity': request.POST.get('is_using_default_quantity', False),
-        'custom_price': Decimal(request.POST.get('custom_price', 0)),
-        'quantity': int(request.POST.get('quantity', 1)),
-        'item_discount': Decimal(request.POST.get('item_discount', 0)),
-        'item_discount_type': int(request.POST.get('item_discount_type', 0)),
-    }
+def update_order_item(order_item, quantity, custom_price=None, add_quantity=True):
+    if order_item.product.is_using_default_quantity:
+        quantity = order_item.quantity
+    elif not add_quantity:
+        order_item.quantity -= quantity
+    else:
+        order_item.quantity += quantity
 
-    add_product_to_order(order_id, product_id, **kwargs)
+    if order_item.product.is_price_change_allowed and custom_price is not None:
+        order_item.price = custom_price
+    else:
+        order_item.price = order_item.product.price
 
-    order = get_object_or_404(PosOrder, id=order_id)
-    total = update_order_totals(order)
+    order_item.save()
+    return order_item
 
-    return render(request, 'order_summary.html', {'order': order, 'total': total})
+
+def calculate_subtotal_and_discounts(order_item, item_discount=0, item_discount_type=0):
+    base_price = order_item.price
+
+    # Calculate the final price considering any applicable product-specific taxes
+    for product_tax in order_item.product.productTaxes.all():
+        tax = product_tax.tax
+        if not tax.is_tax_on_total:
+            if tax.is_fixed:
+                base_price += Decimal(tax.amount)
+            else:
+                base_price += base_price * (Decimal(tax.rate) / 100)
+
+    order_item.price = base_price
+
+    if item_discount_type == 1:  # Percentage discount
+        item_discount_amount = (item_discount / 100) * base_price * Decimal(order_item.quantity)
+    else:  # Fixed amount discount
+        item_discount_amount = item_discount
+
+    order_item.subtotal = base_price * Decimal(order_item.quantity) - item_discount_amount
+    order_item.discount = item_discount
+    order_item.discount_type = item_discount_type
+
+    order_item.save()
+    return order_item
+
+def add_or_update_product_to_order(
+        order_item=None,
+        user=None,
+        product=None,
+        quantity=1,
+        order=None,
+        **kwargs):
+
+    # Check if an active order exists, create one if not
+    if not order:
+        order = PosOrder.objects.filter(is_active=True).first()
+        if not order:
+            order = PosOrder.objects.create(user=user, is_active=True)
+
+    # Apply kwargs settings
+    custom_price = Decimal(kwargs.get('custom_price', product.price))
+    add_quantity = kwargs.get('is_add_quantity', True)
+    item_discount = Decimal(kwargs.get('item_discount', 0))
+    item_discount_type = kwargs.get('item_discount_type', 0)
+
+    # Determine if we are adding a new order item or updating an existing one
+    if order_item is None:
+        # Try to find an existing order item
+        order_item = PosOrderItem.objects.filter(
+            user=user, order=order, product=product).first()
+
+    if order_item:
+        # Update existing order item
+        order_item = update_order_item(order_item, quantity, custom_price, add_quantity)
+    else:
+        # Create a new order item
+        order_item = create_order_item(user, order, product, quantity)
+
+    # Calculate subtotal and apply discounts
+    order_item = calculate_subtotal_and_discounts(order_item, item_discount, item_discount_type)
+
+    active_order, order_discount, total_tax, tax_rate = update_order_totals(order)
+
+    return active_order, order_item
+
+
+
+
 
 
 '''

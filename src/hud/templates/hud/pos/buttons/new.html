@@ -1,0 +1,20 @@
+{% comment %} <div class="mb-3 mt-n5">
+    <div id="display-container">
+        {% include 'hud/pos/buttons/input_display.html' %}
+    </div>
+    <div id="keypad">
+
+        <button id='keypad-0' 
+        hx-trigger="keyup[key==0] from:body" 
+        hx-post="{% url 'hud:add_digit' %}"
+        hx-include="#display" 
+        hx-target="#display-container" hx-swap="innerHTML" hx-swap="innerHTML"
+        hx-vals='{"digit": "0"}'
+        >0</button>
+        <button hx-trigger="keyup[key==1] from:body" hx-post="{% url 'hud:add_digit' %}" hx-include="#display"
+            hx-target="#display-container" hx-swap="innerHTML" hx-swap="innerHTML" hx-vals='{"digit": "1"}'>1</button>
+        <button hx-trigger="keyup[key==2] from:body" hx-post="{% url 'hud:add_digit' %}" hx-include="#display"
+            hx-target="#display-container" hx-swap="innerHTML" hx-swap="innerHTML" hx-vals='{"digit": "2"}'>2</button>
+        <button hx-trigger="keyup[key==3] from:body" hx-post="{% url 'hud:add_digit' %}" hx-include="#display"
+            hx-target="#display-container" hx-swap="innerHTML" hx-swap="innerHTML" hx-vals='{"digit": "3"}'>3</button>
+    </div> {% endcomment %}

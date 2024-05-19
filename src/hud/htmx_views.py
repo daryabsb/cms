@@ -3,22 +3,42 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from src.hud.models import ProductGroup, Product, Barcode, PosOrderItem, PosOrder
 from src.hud.calculations import (
-    add_or_update_product_to_order as add_or_create_item)
+    add_or_update_product_to_order as add_or_create_item, 
+    calculate_subtotal_and_discounts as recalculate_item,
+    )
 from src.hud.utils import get_context
+from loguru import logger
+
+def log(step,time):
+    logger.success("*"*50)
+    print()
+    logger.debug("Step {}:> {} ",step, time, feature="f-strings")
+    print()
+    logger.success("*"*50)
 
 # update_active_order_template = 'hud/pos/renders/update-active-order.html'
 update_active_order_template = 'hud/pos/order-detail.html'
 update_order_item_template = 'hud/pos/renders/update-order-item.html'
 order_item_confirm_remove_template = 'hud/pos/renders/order-item-with-confirm.html'
 
+def time_function():
+    import timeit
+    starttime = timeit.default_timer()
+    secondtime = timeit.default_timer()
+    thirdtime = timeit.default_timer()
+    fourthtime = timeit.default_timer()
+    lasttime = timeit.default_timer()
+    print("The secondtime is :", secondtime - starttime)
+    print("The thirdtime is :", thirdtime - secondtime)
+    print("The fourthtime is :", fourthtime - thirdtime)
+    print("The lasttime is :", lasttime - fourthtime)
 
 def add_quantity(request, item_number):
     active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
     item.quantity += 1  # Set quantity to the new value received from the client
     item.save()
-
-    active_order, item = add_or_create_item(order_item=item)
+    item = recalculate_item(order_item=item)
 
     context = get_context(active_order)
     context["item"] = item
@@ -32,17 +52,18 @@ def subtract_quantity(request, item_number):
     if item.quantity > 1:
         item.quantity -= 1
         item.save()
-        active_order, item = add_or_create_item(order_item=item)
+        item = recalculate_item(order_item=item)
+
         context = get_context(active_order)
         context["item"] = item
-        return render(request, update_order_item_template, context)
+        return render(request, update_active_order_template, context)
     elif item.quantity == 1:
-        active_order, item = add_or_create_item(order_item=item)
+        item = recalculate_item(order_item=item)
 
         context = get_context(active_order)
         context["item"] = item
 
-        return render(request, order_item_confirm_remove_template, context)
+        return render(request, update_active_order_template, context)
 
 
 def p(name, var=None):
@@ -52,7 +73,6 @@ def p(name, var=None):
 def confirm_remove_item_button(request, item_number):
     active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
-    active_order, item = add_or_create_item(order_item=item)
     context = get_context(active_order)
     context["item"] = item
     return render(request, order_item_confirm_remove_template, context)
@@ -98,10 +118,11 @@ def add_item_with_barcode(request):
 
 
 def add_order_item(request):
+    import timeit
     active_order = PosOrder.objects.filter(is_active=True).first()
 
     product_id = request.POST.get('product_id', None)
-    quantity = request.POST.get('quantity', 1)
+    quantity = int(request.POST.get('quantity', 1))
 
     print("Quantity1 = ", quantity)
 
@@ -116,7 +137,7 @@ def add_order_item(request):
         order, item = add_or_create_item(
             user=request.user, product=product, quantity=quantity, order=active_order)
     else:
-        item.quantity += 1
+        item.quantity += quantity
         item.save()
 
     context = get_context(active_order)
@@ -127,8 +148,7 @@ def add_order_item(request):
 
 def calculate(request):
     from django.http import JsonResponse
-    print(dir(request))
-    calculation = request.POST.get('calculation', '')
+    calculation = request.POST.get('display', '')
     # Process the calculation as needed, e.g., log it, store it, etc.
     print("calculation = ", calculation)
     return JsonResponse({'message': calculation})

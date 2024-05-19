@@ -18,9 +18,20 @@ def modal_calculator(request):
     el_id = request.GET.get('el-id', '')
     url = request.GET.get('url', '')
     template_name = request.GET.get('template-name', '')
+    digits = [[7,8,9,'/'],[4,5,6,'*'],[1,2,3,'-'],[0,'.','=','+'],]
     context = {
         "div_class": div_class,
         "el_id": el_id,
-        "url": url
+        "url": url,
+        "digits":digits,
     }
     return render(request, 'hud/pos/modals/calculator-modal.html', context)
+
+
+def add_digit(request):
+    if request.method == 'POST':
+        current_value = request.POST.get('display', '')
+        digit = request.POST.get('digit', '')
+        new_value = current_value + digit
+        return render(request, 'hud/pos/buttons/input_display.html', {'new_value': new_value})
+    return render(request, 'keypad.html', {'error': 'Invalid request'})

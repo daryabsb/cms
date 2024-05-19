@@ -3,7 +3,7 @@ from src.hud.views import hud_index, hud_pos
 from src.hud.htmx_views import (
     add_quantity, subtract_quantity, calculate,
     add_order_item, confirm_remove_item_button, remove_item, add_item_with_barcode)
-from src.hud.modal_views import modal_product, modal_calculator
+from src.hud.modal_views import modal_product, modal_calculator, add_digit
 
 
 app_name = 'hud'
@@ -38,4 +38,5 @@ urlpatterns += [
 urlpatterns += [
     path('modal-product/<int:id>/', modal_product, name="modal-product"),
     path('modal-calculator/', modal_calculator, name="modal-calculator"),
+    path('add_digit/', add_digit, name='add_digit'),
 ]

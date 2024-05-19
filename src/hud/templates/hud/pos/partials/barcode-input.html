@@ -14,6 +14,7 @@
     id="barcode-input"
     hx-post="{% url 'hud:add-item-with-barcode' %}" 
     hx-trigger="keyup[keyCode==13]" type="text"
+   
     hx-target="#orders-detail"
     name="barcode" 
     class="form-control form-control-lg active position-relative" 
