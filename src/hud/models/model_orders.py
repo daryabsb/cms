@@ -14,10 +14,10 @@ class PosOrder(models.Model):
         null=True, blank=True, default=1)
     discount = models.SmallIntegerField(default=0)
     discount_type = models.SmallIntegerField(default=0)
-    # subtotal = models.GeneratedField(expression=Sum("items__subtotal"),
-    #                                 output_field=models.DecimalField(
-    #                                 max_digits=6, decimal_places=2
-    #                                 ), db_persist=True,)
+    # item_subtotal = models.GeneratedField(expression=Sum(F("items__subtotal")),
+    #                                       output_field=models.DecimalField(
+    #     max_digits=15, decimal_places=3
+    # ), db_persist=True,)
     item_subtotal = models.FloatField(default=0)
     total = models.FloatField(default=0)
     status = models.BooleanField(default=False)

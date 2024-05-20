@@ -1,14 +1,10 @@
 from django.db import models
 from src.accounts.models import User
-from django.db.models import F, Sum, Case, When
+from django.db.models import F, Sum, Case, When, Value
 from decimal import Decimal
 
 
 class PosOrderItem(models.Model):
-    DISCOUNT_TYPE_CHOICES = (
-        (0, 'IQD'),
-        (1, '%'),
-    )
     number = models.CharField(
         max_length=100, primary_key=True, db_index=True, unique=True)
     user = models.ForeignKey(
@@ -24,15 +20,47 @@ class PosOrderItem(models.Model):
         decimal_places=3, max_digits=4, default=0)
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(decimal_places=3,  max_digits=15, default=0)
-    # subtotal = models.GeneratedField(
-    #     expression=F("price") * F("quantity"),
-    #     output_field=models.DecimalField(
-    #         max_digits=15, decimal_places=3
-    #     ), db_persist=True,)
+
     subtotal = models.DecimalField(decimal_places=3,  max_digits=15, default=0)
     is_locked = models.BooleanField(default=False)
     discount = models.FloatField(default=0)
-    discount_type = models.PositiveSmallIntegerField(default=0, choices=DISCOUNT_TYPE_CHOICES)
+    discount_type = models.FloatField(default=0)
+
+    discounted_amount = models.GeneratedField(
+        expression=Case(
+            When(discount_type=1, then=F('price') *
+                 F('quantity') * (F('discount') / 100)),
+            When(discount_type=0, then=F('discount')),
+            default=Value(0),
+            output_field=models.DecimalField(
+                decimal_places=3,  max_digits=15, default=0)
+        ),
+        output_field=models.DecimalField(decimal_places=3,  max_digits=15, default=0), db_persist=True,)
+
+    discount_sign = models.GeneratedField(
+        expression=Case(
+            When(discount_type=1, then=Value('%')),
+            When(discount_type=0, then=Value('$')),
+            default=Value(''),
+            output_field=models.CharField(max_length=20)
+        ),
+        output_field=models.CharField(max_length=20), db_persist=False,)
+
+    item_total = models.GeneratedField(
+        expression=Case(
+            When(discount_type=1, then=F('price') * F('quantity') -
+                 F('price') * F('quantity') * (F('discount') / 100)),
+            When(discount_type=0, then=F('price')
+                 * F('quantity') - F('discount')),
+            default=Value(0),
+            output_field=models.DecimalField(
+                decimal_places=3,  max_digits=15, default=0)
+        ),
+        output_field=models.DecimalField(
+            decimal_places=3,  max_digits=15, default=0),
+        db_persist=True
+    )
+
     is_featured = models.BooleanField(default=False)
     # voide by = not comparable
     voided_by = models.SmallIntegerField(default=0)
