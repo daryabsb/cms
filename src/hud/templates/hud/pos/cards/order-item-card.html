@@ -1,0 +1,65 @@
+{% load static %}
+<div class="card m-2">
+    
+    <div class="card-body">
+        <a href="#" class="list-group-item list-group-item-action d-flex align-items-center text-inverse">
+            <div class="w-60px h-60px d-flex align-items-center justify-content-center ms-n1">
+                <img src="{{ item.product.img }}" class="mw-100 mh-100 rounded">
+            </div>
+            <div class="flex-fill px-3">
+                <div class="fw-bold">{{ item.product.name }}</div>
+                <div class="small text-inverse text-opacity-50 mb-2">{{ item.price|floatformat:"0"}}</div>
+                <div class="d-flex align-items-center fs-11px">
+                </div>
+            </div>
+            <div>
+                <div class="flex-fill text-center">
+                    <h4>{{ item.product.currency.name }} {{ item.price|floatformat:"0"}}</h4>
+                    <div>
+                        {% component "qty_button" item=item btn_class='btn-sm' input_class='form-control-sm  bg-white bg-opacity-25' %}{% endcomponent %}
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="card-footer text-end">
+        <button 
+                hx-get="{% url 'hud:modal-calculator' %}" 
+                hx-target="#modal-calculator" 
+                hx-trigger="click"
+                hx-vals='{
+                    "is_ajax": true,
+                    "el-id": "orders-detail",
+                    "url": "/hud/change-quantity/{{ item.number}}/",
+                    "template_name":"hud/pos/order-detail.html"
+                    }'
+                data-bs-toggle="modal"
+                data-bs-target="#modal-calculator"
+                class="btn btn-sm text-success"
+                
+                >
+                <i class="fas fa-lg fa-fw fa-calculator"></i>
+            </button>
+        <span class="label bg-transparent border border-theme text-theme fs-12px fw-500 p-1">
+            
+            Item Discount: 
+            <span>
+                {% if item.discount_type == 1 %}
+                <i class="fas fa-lg fa-fw me-2 fa-percent"></i>
+                {% else %}
+                {{ item.product.currency.name }}
+                {% endif %}
+            </span>
+            <span>
+                {{ item.discount|floatformat:"0"}}
+            </span>
+        </span>
+    </div>
+<!-- arrow -->
+    <div class="card-arrow">
+        <div class="card-arrow-top-left"></div>
+        <div class="card-arrow-top-right"></div>
+        <div class="card-arrow-bottom-left"></div>
+        <div class="card-arrow-bottom-right"></div>
+    </div>
+</div>

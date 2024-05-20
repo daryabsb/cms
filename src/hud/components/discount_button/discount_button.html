@@ -1,0 +1,14 @@
+<div class="d-flex {{ div_class }}">
+    <input id="qty-input-{{ product.id }}" value="0" type="text"
+        class="form-control w-50px text-center mx-2 {{ input_class }}" name="qty">
+    <select class="form-select form-select-sm">
+        <option>Select Type</option>
+        <option>%</option>
+        <option>$$</option>
+    </select>
+    <button hx-get="/add-quantity" hx-target="#orders-detail" class="btn btn-sm btn-outline-theme {{ btn_class }}"><i
+            class="fa fa-lg fa-plus"></i></button>
+</div>
+
+<!-- form-control w-50px text-center mx-2    fw-bold  bg-inverse bg-opacity-15 border-0  -->
+<!-- form-control w-50px text-center mx-2    form-control-sm  bg-white bg-opacity-25  -->

@@ -6,8 +6,11 @@
         <button type="button" class="btn btn-outline-info rounded-0">Next</button>
         </div>
     {% if active_order.items.exists %}
-        {% for item in active_order.items.all %}
+        {% comment %} {% for item in active_order.items.all %}
         {% include 'hud/pos/order-item.html' with item=item %}
+        {% endfor %} {% endcomment %}
+        {% for item in active_order.items.all %}
+        {% include 'hud/pos/cards/order-item-card.html' with item=item %}
         {% endfor %}
     {% else %}
     <div

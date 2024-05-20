@@ -8,11 +8,11 @@
     </div>
     <div id="pos-order-price-{{ item.number }}" class="pos-order-price">
         <div>
-        <span  class="small">{{ item.product.currency.name }}</span> {{ item.subtotal|floatformat:"0" }}</div>
-        <div id='message-received'></div>
-        <div class="btn-group position-absolute end-0 bottom-0">
-
-            <a href="#" 
+            <span  class="small">{{ item.product.currency.name }}</span> {{ item.subtotal|floatformat:"0" }}</div>
+            <div id='message-received'></div>
+            <div class="btn-group position-absolute end-0 bottom-0">
+            
+            <button 
                 hx-get="{% url 'hud:modal-calculator' %}" 
                 hx-target="#modal-calculator" 
                 hx-trigger="click"
@@ -24,17 +24,16 @@
                     }'
                 data-bs-toggle="modal"
                 data-bs-target="#modal-calculator"
-                class="btn text-success"
-                style="width:10px;"
+                class="btn btn-sm text-success"
+                
                 >
-                <i class="fas fa-fw fa-calculator"></i>
-                </a>
-            
+                <i class="fas fa-lg fa-fw fa-calculator"></i>
+            </button>
         <button 
             hx-delete="{% url 'hud:remove-button-confirm' item.number %}"
             hx-target="#order-item-{{ item.number }}"
-            class="btn text-danger">
-            <i class="far fa-fw fa-trash-alt col"></i>
+            class="btn btn-sm text-danger">
+            <i class="far fa-lg fa-fw fa-trash-alt col"></i>
             </button>
         </div>
     </div>

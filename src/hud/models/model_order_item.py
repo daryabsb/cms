@@ -5,6 +5,10 @@ from decimal import Decimal
 
 
 class PosOrderItem(models.Model):
+    DISCOUNT_TYPE_CHOICES = (
+        (0, 'IQD'),
+        (1, '%'),
+    )
     number = models.CharField(
         max_length=100, primary_key=True, db_index=True, unique=True)
     user = models.ForeignKey(
@@ -28,7 +32,7 @@ class PosOrderItem(models.Model):
     subtotal = models.DecimalField(decimal_places=3,  max_digits=15, default=0)
     is_locked = models.BooleanField(default=False)
     discount = models.FloatField(default=0)
-    discount_type = models.FloatField(default=0)
+    discount_type = models.PositiveSmallIntegerField(default=0, choices=DISCOUNT_TYPE_CHOICES)
     is_featured = models.BooleanField(default=False)
     # voide by = not comparable
     voided_by = models.SmallIntegerField(default=0)

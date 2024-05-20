@@ -4,7 +4,7 @@
     <input id="qty-input-{{ item.number }}" value="{{ item.quantity }}" type="text"
         class="form-control w-50px text-center mx-2 {{ input_class }}" name="qty">
     <button hx-get="{% url 'hud:add-quantity' item.number %}" hx-target="#orders-detail"
-        class="btn btn-outline-theme {{ btn_class }}"><i class="fa fa-plus"></i></button>
+        class="btn btn-sm btn-outline-theme {{ btn_class }}"><i class="fa fa-lg fa-plus"></i></button>
 </div>
 <script>
     /*

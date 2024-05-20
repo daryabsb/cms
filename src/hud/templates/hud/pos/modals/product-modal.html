@@ -22,14 +22,17 @@
                                 </div>
                                 <div class="h4 mb-3">{{ product.currency.name }} {{ product.price|floatformat:"0" }}</div>
                                 {% comment %} {% component "qty_button" div_class='mb-3' input_class='fw-bold  bg-inverse bg-opacity-15 border-0' %}{% endcomponent %} {% endcomment %}
-                                <div class="d-flex mb-3">
-                                    <a href="#" id="decrease-modal-qty" class="btn btn-outline-theme"><i class="fa fa-minus"></i></a>
-                                    <input type="text"
-                                    id="input-modal-qty"
-                                        class="form-control w-50px fw-bold mx-2 bg-inverse bg-opacity-15 border-0 text-center"
-                                        name="quantity" value="1">
-                                    <a href="#" id="increase-modal-qty" class="btn btn-outline-theme"><i class="fa fa-plus"></i></a>
-                                </div>
+                                <div class="d-flex gap-3">
+                                    <div class="d-flex mb-3">
+                                        <a href="#" id="decrease-modal-qty" class="btn btn-outline-theme"><i class="fa fa-minus"></i></a>
+                                        <input type="text"
+                                        id="input-modal-qty"
+                                            class="form-control w-50px fw-bold mx-2 bg-inverse bg-opacity-15 border-0 text-center"
+                                            name="quantity" value="1">
+                                        <a href="#" id="increase-modal-qty" class="btn btn-outline-theme"><i class="fa fa-plus"></i></a>
+                                    </div>
+                                    {% component 'discount_button' %}{% endcomponent %}
+                            </div>
                                 <hr class="mx-n4">
                                 <div class="mb-2">
                                     <div class="fw-bold">Size:</div>

@@ -34295,12 +34295,19 @@ body .note-modal-backdrop {
     padding: 0 2rem
 }
 
-.pos .pos-sidebar {
+/* .pos .pos-sidebar {
     width: 360px;
     height: 100%;
     display: flex;
     flex-direction: column;
     flex: 0 0 360px
+} */
+.pos .pos-sidebar {
+    width: 450px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 450px
 }
 
 @media (max-width:991.98px) {
