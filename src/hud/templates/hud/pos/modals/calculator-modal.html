@@ -1,5 +1,6 @@
 <div class="modal-dialog modal-sm">
     <div class="modal-content">
-    {% component 'calculator' digits=digits el_id=el_id %}{% endcomponent %}
+    {% component 'calculator' digits=digits el_id=el_id is_ajax=is_ajax div_class=div_class template_name=template_name url=url %}
+    {% endcomponent %}
     </div>
 </div>

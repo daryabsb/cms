@@ -3,23 +3,26 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from src.hud.models import ProductGroup, Product, Barcode, PosOrderItem, PosOrder
 from src.hud.calculations import (
-    add_or_update_product_to_order as add_or_create_item, 
+    add_or_update_product_to_order as add_or_create_item,
     calculate_subtotal_and_discounts as recalculate_item,
-    )
+)
 from src.hud.utils import get_context
 from loguru import logger
 
-def log(step,time):
+
+def log(step, time):
     logger.success("*"*50)
     print()
-    logger.debug("Step {}:> {} ",step, time, feature="f-strings")
+    logger.debug("Step {}:> {} ", step, time, feature="f-strings")
     print()
     logger.success("*"*50)
+
 
 # update_active_order_template = 'hud/pos/renders/update-active-order.html'
 update_active_order_template = 'hud/pos/order-detail.html'
 update_order_item_template = 'hud/pos/renders/update-order-item.html'
 order_item_confirm_remove_template = 'hud/pos/renders/order-item-with-confirm.html'
+
 
 def time_function():
     import timeit
@@ -32,6 +35,27 @@ def time_function():
     print("The thirdtime is :", thirdtime - secondtime)
     print("The fourthtime is :", fourthtime - thirdtime)
     print("The lasttime is :", lasttime - fourthtime)
+
+
+def p(arg):
+    print(arg)
+
+
+def change_quantity(request, item_number):
+    active_order = PosOrder.objects.filter(is_active=True).first()
+    item = get_object_or_404(PosOrderItem, number=item_number)
+    quantity = request.POST.get("display", None)
+    p(f"quantity: {quantity}")
+    if quantity:
+        item.quantity = quantity
+        item.save()
+    item = recalculate_item(order_item=item)
+
+    context = get_context(active_order)
+    context["item"] = item
+
+    return render(request, update_active_order_template, context)
+
 
 def add_quantity(request, item_number):
     active_order = PosOrder.objects.filter(is_active=True).first()

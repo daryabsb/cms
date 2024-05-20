@@ -1,7 +1,7 @@
 from django.urls import path, include
 from src.hud.views import hud_index, hud_pos
 from src.hud.htmx_views import (
-    add_quantity, subtract_quantity, calculate,
+    add_quantity, subtract_quantity, calculate, change_quantity,
     add_order_item, confirm_remove_item_button, remove_item, add_item_with_barcode)
 from src.hud.modal_views import modal_product, modal_calculator, add_digit
 
@@ -16,6 +16,8 @@ urlpatterns = [
 
 # HTMX URLS
 urlpatterns += [
+    path('change-quantity/<item_number>/',
+         change_quantity, name="change-quantity"),
     path('add-quantity/<item_number>/', add_quantity, name="add-quantity"),
     path('subtract-quantity/<item_number>/',
          subtract_quantity, name="subtract-quantity"),

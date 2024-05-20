@@ -16,12 +16,22 @@
     {% endfor %}
   </div>
   <div class="card-footer">
-    <a href="#" class="card-link" hx-post="{% url 'hud:calculate' %}" hx-trigger="click" hx-include="#display"
-      hx-swap="none" hx-target="#{{ el_id }}"
+    <a href="#" class="card-link" 
+    {% if is_ajax %}
+      hx-post="{{ url }}"
+      hx-swap="outerHTML" 
+      {% else %} 
+      hx-post="{% url 'hud:calculate' %}" 
+      hx-swap="none" 
       hx-on::after-request="htmx.find('#{{ el_id }}').value = (JSON.parse(event.detail.xhr.responseText).message)"
-      data-bs-dismiss="modal" data-bs-target="#modal-calculator">Submit
+      {% endif %}
+      hx-trigger="click" 
+      hx-include="#display"
+      hx-target="#{{ el_id }}"
+      data-bs-dismiss="modal" 
+      data-bs-target="#modal-calculator">Submit
       result</a>
-    <a href="#" class="card-link">Another link</a>
+    <a href="#" class="card-link">{{ is_ajax }}</a>
   </div>
   <div class="card-arrow">
     <div class="card-arrow-top-left"></div>

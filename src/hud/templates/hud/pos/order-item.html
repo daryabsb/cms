@@ -10,16 +10,25 @@
         <div>
         <span  class="small">{{ item.product.currency.name }}</span> {{ item.subtotal|floatformat:"0" }}</div>
         <div id='message-received'></div>
-        {% comment %} <div class="">
-        {{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
-        </div>
-        <div class="">
-        {{ item.product.currency.name }} {{ item.subtotal|floatformat:"0" }}
-        </div> {% endcomment %}
         <div class="btn-group position-absolute end-0 bottom-0">
-            {% comment %} hx-delete="{% url 'hud:remove-item' item.number True %}"
-            hx-target="#active-order-tab-{{ active_order.id }}" {% endcomment %}
-        {% include 'hud/pos/buttons/calculator.html' with el_id='qty-input-item-1-19052024-01-0313' %}
+
+            <a href="#" 
+                hx-get="{% url 'hud:modal-calculator' %}" 
+                hx-target="#modal-calculator" 
+                hx-trigger="click"
+                hx-vals='{
+                    "is_ajax": true,
+                    "el-id": "orders-detail",
+                    "url": "/hud/change-quantity/{{ item.number}}/",
+                    "template_name":"hud/pos/order-detail.html"
+                    }'
+                data-bs-toggle="modal"
+                data-bs-target="#modal-calculator"
+                class="btn text-success"
+                style="width:10px;"
+                >
+                <i class="fas fa-fw fa-calculator"></i>
+                </a>
             
         <button 
             hx-delete="{% url 'hud:remove-button-confirm' item.number %}"
