@@ -8,6 +8,7 @@ from django.db.models import Sum
 from decimal import Decimal
 from src.hud.models import PosOrder, PosOrderItem, Product, Tax, ProductTax
 
+
 def add_or_update_product_to_order(
         order_item=None,
         user=None,
@@ -84,57 +85,57 @@ def add_or_update_product_to_order(
 
     # Save the order item
     order_item.save()
-    
-    # Recalculate order totals
-    active_order, order_discount, total_tax, tax_rate = update_order_totals(
-        order)
 
-    return active_order, order_item
+    # Recalculate order totals
+    # active_order, order_discount, total_tax, tax_rate = update_order_totals(
+    #     order)
+
+    return order, order_item
 
 
 def update_order_totals(order):
     # Calculate item subtotal
 
-    order.item_subtotal = sum(item.subtotal for item in order.items.all())
+    # order.item_subtotal = sum(item.subtotal for item in order.items.all())
 
-    order_discount_amount = 0
-    subtotal_after_discount = 0
+    # order_discount_amount = 0
+    # subtotal_after_discount = 0
     # Apply order discount
-    if order.discount_type == 1:  # Percentage discount
-        order_discount_amount = Decimal(
-            order.discount / 100) * order.item_subtotal
-    else:  # Fixed amount discount
-        order_discount_amount = order.discount
+    # if order.discount_type == 1:  # Percentage discount
+    # order_discount_amount = Decimal(
+    # order.discount / 100) * order.item_subtotal
+    # else:  # Fixed amount discount
+    # order_discount_amount = order.discount
 
-    subtotal_after_discount = order.item_subtotal - order_discount_amount
+    # subtotal_after_discount = order.item_subtotal - order_discount_amount
 
     # Apply customer discount
-    customer_discounts = order.customer.discounts.all()
+    # customer_discounts = order.customer.discounts.all()
 
-    for discount in customer_discounts:
-        if discount.type == 1:  # Percentage discount
-            subtotal_after_discount -= (discount.value / 100) * \
-                subtotal_after_discount
-        else:  # Fixed amount discount
-            subtotal_after_discount -= discount.value
+    # for discount in customer_discounts:
+    #     if discount.type == 1:  # Percentage discount
+    #         subtotal_after_discount -= (discount.value / 100) * \
+    #             subtotal_after_discount
+    #     else:  # Fixed amount discount
+    #         subtotal_after_discount -= discount.value
     # Apply taxes
-    total_tax = 0
-    tax_rate = 0
-    for tax in Tax.objects.all():
-        if tax.is_tax_on_total:
-            if tax.is_fixed:
-                total_tax += tax.amount
-            else:
-                tax_rate = tax.rate
-                total_tax += subtotal_after_discount * \
-                    (Decimal(tax.rate) / 100)
+    # total_tax = 0
+    # tax_rate = 0
+    # for tax in Tax.objects.all():
+    #     if tax.is_tax_on_total:
+    #         if tax.is_fixed:
+    #             total_tax += tax.amount
+    #         else:
+    #             tax_rate = tax.rate
+    #             total_tax += order.subtotal_after_discount * \
+    #                 (Decimal(tax.rate) / 100)
 
     # Calculate final total
-    total = subtotal_after_discount + total_tax
-    order.total = total
-    order.save()
+    # total = order.subtotal_after_discount + total_tax
+    # order.total = total
+    # order.save()
 
-    return order, order_discount_amount, total_tax, tax_rate
+    return order, order.discounted_amount, order.total_tax, 1
 
 
 # View example to add product and render order summary
@@ -147,6 +148,7 @@ def create_order_item(user, order, product, quantity=1):
         quantity=quantity,
         price=product.price
     )
+
 
 def update_order_item(order_item, quantity, custom_price=None, add_quantity=True):
     if order_item.product.is_using_default_quantity:
@@ -180,16 +182,19 @@ def calculate_subtotal_and_discounts(order_item, item_discount=0, item_discount_
     order_item.price = base_price
 
     if item_discount_type == 1:  # Percentage discount
-        item_discount_amount = (item_discount / 100) * base_price * Decimal(order_item.quantity)
+        item_discount_amount = (item_discount / 100) * \
+            base_price * Decimal(order_item.quantity)
     else:  # Fixed amount discount
         item_discount_amount = item_discount
 
-    order_item.subtotal = base_price * Decimal(order_item.quantity) - item_discount_amount
+    order_item.subtotal = base_price * \
+        Decimal(order_item.quantity) - item_discount_amount
     order_item.discount = item_discount
     order_item.discount_type = item_discount_type
 
     order_item.save()
     return order_item
+
 
 def add_or_update_product_to_order(
         order_item=None,
@@ -219,21 +224,20 @@ def add_or_update_product_to_order(
 
     if order_item:
         # Update existing order item
-        order_item = update_order_item(order_item, quantity, custom_price, add_quantity)
+        order_item = update_order_item(
+            order_item, quantity, custom_price, add_quantity)
     else:
         # Create a new order item
         order_item = create_order_item(user, order, product, quantity)
 
     # Calculate subtotal and apply discounts
-    order_item = calculate_subtotal_and_discounts(order_item, item_discount, item_discount_type)
+    order_item = calculate_subtotal_and_discounts(
+        order_item, item_discount, item_discount_type)
 
-    active_order, order_discount, total_tax, tax_rate = update_order_totals(order)
+    active_order, order_discount, total_tax, tax_rate = update_order_totals(
+        order)
 
     return active_order, order_item
-
-
-
-
 
 
 '''

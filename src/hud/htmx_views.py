@@ -66,8 +66,7 @@ def add_quantity(request, item_number):
     item.save()
     # item = recalculate_item(order_item=item)
 
-    context = get_context(active_order)
-    context["item"] = item
+    context = {"active_order": active_order, "item": item}
 
     return render(request, update_active_order_template, context)
 

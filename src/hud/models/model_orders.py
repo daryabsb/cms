@@ -1,6 +1,6 @@
 from django.db import models
 from src.accounts.models import User
-from django.db.models import F, Sum
+from django.db.models import F, Sum, Case, When, Value
 
 
 class PosOrder(models.Model):
@@ -12,14 +12,61 @@ class PosOrder(models.Model):
     customer = models.ForeignKey(
         "Customer", on_delete=models.CASCADE, related_name="orders",
         null=True, blank=True, default=1)
-    discount = models.SmallIntegerField(default=0)
-    discount_type = models.SmallIntegerField(default=0)
+    item_subtotal = models.DecimalField(
+        decimal_places=3,  max_digits=15, default=0)
+    total_tax = models.DecimalField(
+        decimal_places=3,  max_digits=15, default=0)
+    discount = models.FloatField(default=0)
+    discount_type = models.FloatField(default=0)
+
+    discounted_amount = models.GeneratedField(
+        expression=Case(
+            When(discount_type=1, then=F('item_subtotal')
+                 * (F('discount') / 100)),
+            When(discount_type=0, then=F('discount')),
+            default=Value(0),
+            output_field=models.DecimalField(
+                decimal_places=3,  max_digits=15, default=0)
+        ),
+        output_field=models.DecimalField(decimal_places=3,  max_digits=15, default=0), db_persist=True,)
+
+    # subtotal_after_discount = models.GeneratedField(
+    #     expression=Case(
+    #         When(discount_type=1, then=F('item_subtotal') - F('item_subtotal')
+    #              * (F('discount') / 100)),
+    #         When(discount_type=0, then=F('item_subtotal') - F('discount')),
+    #         default=Value(0),
+    #         output_field=models.DecimalField(
+    #             decimal_places=3,  max_digits=15, default=0)
+    #     ),
+    #     output_field=models.DecimalField(decimal_places=3,  max_digits=15, default=0), db_persist=True,)
+
+    discount_sign = models.GeneratedField(
+        expression=Case(
+            When(discount_type=1, then=Value('%')),
+            When(discount_type=0, then=Value('$')),
+            default=Value(''),
+            output_field=models.CharField(max_length=20)
+        ),
+        output_field=models.CharField(max_length=20), db_persist=False,)
+
     # item_subtotal = models.GeneratedField(expression=Sum(F("items__subtotal")),
     #                                       output_field=models.DecimalField(
     #     max_digits=15, decimal_places=3
     # ), db_persist=True,)
-    item_subtotal = models.FloatField(default=0)
-    total = models.FloatField(default=0)
+    subtotal_after_discount = models.DecimalField(
+        decimal_places=3,  max_digits=15, default=0)
+    fixed_taxes = models.DecimalField(
+        decimal_places=3,  max_digits=15, default=0)
+    total_tax_rate = models.DecimalField(
+        decimal_places=3,  max_digits=15, default=0)
+    total_tax = models.DecimalField(
+        decimal_places=3,  max_digits=15, default=0)
+    total = models.GeneratedField(
+        expression=F('subtotal_after_discount') + F('subtotal_after_discount'),
+        output_field=models.DecimalField(
+            decimal_places=3,  max_digits=15, default=0),
+        db_persist=False)
     status = models.BooleanField(default=False)
     is_active = models.BooleanField(default=False)
 
@@ -30,9 +77,71 @@ class PosOrder(models.Model):
     class Meta:
         ordering = ['-created']
 
+    def save(self, *args, **kwargs):
+        if not self.pk:  # If the object is being created
+            self.set_tax_fields()
+        super().save(*args, **kwargs)
+
+    def set_tax_fields(self):
+        # Calculate fixed taxes and total tax rate
+        from src.hud.models import Tax
+        from decimal import Decimal
+        taxes = Tax.objects.filter(is_tax_on_total=True).aggregate(
+            fixed_tax=Sum(Case(
+                When(is_fixed=True, then=F('amount')),
+                default=Value(0),
+                output_field=models.DecimalField(
+                    decimal_places=3,  max_digits=15, default=0)
+            )),
+            percentage_tax=Sum(Case(
+                When(is_fixed=False, then=F('rate')),
+                default=Value(0),
+                output_field=models.DecimalField(
+                    decimal_places=3,  max_digits=15, default=0)
+            ))
+        )
+
+        self.fixed_taxes = taxes['fixed_tax'] or Decimal('0.00')
+        self.total_tax_rate = taxes['percentage_tax'] or Decimal('0.00')
+
     def update_items_subtotal(self):
         # Calculate the subtotal based on order items
+        from src.hud.models import Tax
+        from decimal import Decimal
         self.item_subtotal = sum(item.item_total for item in self.items.all())
+        customer_discounts = self.customer.discounts.all()
+        for discount in customer_discounts:
+            if discount.type == 1:  # Percentage discount
+                self.item_subtotal -= (discount.value / 100) * \
+                    self.item_subtotal
+            else:  # Fixed amount discount
+                self.item_subtotal -= discount.value
+
+        self.subtotal_after_discount = self.item_subtotal - self.discounted_amount
+
+        taxes = Tax.objects.filter(is_tax_on_total=True).aggregate(
+            fixed_tax=Sum(Case(
+                When(is_fixed=True, then=F('amount')),
+                default=Value(0),
+                output_field=models.DecimalField(
+                    decimal_places=3,  max_digits=15, default=0)
+            )),
+            percentage_tax=Sum(Case(
+                When(is_fixed=False, then=F('rate')),
+                default=Value(0),
+                output_field=models.DecimalField(
+                    decimal_places=3,  max_digits=15, default=0)
+            ))
+        )
+
+        # Extract fixed and percentage tax values
+        fixed_tax = taxes['fixed_tax'] or 0
+        percentage_tax_rate = taxes['percentage_tax'] or 0
+
+        # Calculate total tax
+        self.total_tax = fixed_tax + self.subtotal_after_discount * \
+            (Decimal(percentage_tax_rate) / 100)
+        # self.total = self.subtotal_after_discount + self.total_tax
         self.save()
 
     @property
