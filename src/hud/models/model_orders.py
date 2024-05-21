@@ -108,8 +108,6 @@ class PosOrder(models.Model):
 
         self.fixed_taxes = taxes['fixed_tax'] or Decimal('0.00')
         self.total_tax_rate = taxes['percentage_tax'] or Decimal('0.00')
-        print("self.fixed_taxes", self.fixed_taxes)
-        print("self.total_tax_rate", self.total_tax_rate)
 
     def update_items_subtotal(self):
         # Calculate the subtotal based on order items

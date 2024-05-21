@@ -19,8 +19,8 @@ def get_active_order(active_order=None):
         active_order = PosOrder.objects.filter(is_active=True).first()
     active_order.update_items_subtotal()
     active_order.refresh_from_db()
-    logger.success("Active order item_subtotal:> {} ", active_order.item_subtotal, feature="f-strings")
-    logger.success("Active order total:> {} ", active_order.total, feature="f-strings")
+    # logger.success("Active order item_subtotal:> {} ", active_order.item_subtotal, feature="f-strings")
+    # logger.success("Active order total:> {} ", active_order.total, feature="f-strings")
     return active_order
 
 
@@ -82,6 +82,16 @@ def subtract_quantity(request, item_number):
         active_order = get_active_order()
         context = {"active_order": active_order, "item": item}
         return render(request, order_item_confirm_remove_template, context)
+
+def change_discount(request, item_number):
+    item = get_object_or_404(PosOrderItem, number=item_number)
+    # FIND A WAY TO ADD DISCOUNT
+    item.quantity += 1  # Set quantity to the new value received from the client
+    item.save()
+    # item = recalculate_item(order_item=item)
+    active_order = get_active_order()
+    context = {"active_order": active_order, "item": item}
+    return render(request, update_active_order_template, context)
 
 def confirm_remove_item_button(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)

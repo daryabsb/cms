@@ -4,15 +4,15 @@
     <div class="row align-content-center">
         <div class="col-lg-4 text-center">
             <div class="h6">Subtotal</div>
-            <div class="h4">${{ active_order.item_subtotal|floatformat:"0"|intcomma }}</div>
+            <div class="h5">${{ active_order.item_subtotal|floatformat:"0"|intcomma }}</div>
         </div>
         <div class="col-lg-4 text-center">
             <div class="h6 text-success">Total Discount</div>
-            <div class="h4 text-success">${{ active_order.discounted_amount|floatformat:"0"|intcomma }}</div>
+            <div class="h5 text-success">${{ active_order.discounted_amount|floatformat:"0"|intcomma }}</div>
         </div>
         <div class="col-lg-4 text-center">
         <div class="h6 text-danger">VAT ({{ active_order.total_tax_rate|floatformat:"0" }}%)</div>
-        <div class="h4 text-danger">${{ active_order.total_tax|floatformat:"0"|intcomma }}</div>
+        <div class="h5 text-danger">${{ active_order.total_tax|floatformat:"0"|intcomma }}</div>
         </div>
     </div>
     <hr>

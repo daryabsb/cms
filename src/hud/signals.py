@@ -16,8 +16,6 @@ def update_orders_on_producttax_change(sender, instance, **kwargs):
 
 def update_active_orders():
     active_order = PosOrder.objects.filter(is_active=True).first()
-    print("Signal triggered!! = ", active_order.total_tax)
     active_order.set_tax_fields()
     active_order.refresh_from_db()
     active_order.save()
-    print("Signal triggered!! 2= ", active_order.total_tax)
