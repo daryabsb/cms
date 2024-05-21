@@ -21,7 +21,6 @@ class PosOrderItem(models.Model):
     quantity = models.IntegerField(default=1)
     price = models.DecimalField(decimal_places=3,  max_digits=15, default=0)
 
-    subtotal = models.DecimalField(decimal_places=3,  max_digits=15, default=0)
     is_locked = models.BooleanField(default=False)
     discount = models.FloatField(default=0)
     discount_type = models.FloatField(default=0)
@@ -85,5 +84,7 @@ class PosOrderItem(models.Model):
             print(digits)
             if target:
                 self.number = f'{target}-{self.user.id}-{date.today().strftime("%d%m%Y")}-01-{digits}'
+                
+        self.order.update_items_subtotal()
 
         super(PosOrderItem, self).save(*args, **kwargs)

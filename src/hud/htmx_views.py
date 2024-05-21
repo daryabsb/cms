@@ -1,14 +1,9 @@
-from decimal import Decimal
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
 from src.hud.models import ProductGroup, Product, Barcode, PosOrderItem, PosOrder
 from src.hud.calculations import (
-    add_or_update_product_to_order as add_or_create_item,
-    calculate_subtotal_and_discounts as recalculate_item,
+    create_order_item,
 )
-from src.hud.utils import get_context
 from loguru import logger
-from src.hud.decorators import update_items_subtotal
 
 
 def log(step, time):
@@ -17,6 +12,16 @@ def log(step, time):
     logger.debug("Step {}:> {} ", step, time, feature="f-strings")
     print()
     logger.success("*"*50)
+
+
+def get_active_order(active_order=None):
+    if not active_order:
+        active_order = PosOrder.objects.filter(is_active=True).first()
+    active_order.update_items_subtotal()
+    active_order.refresh_from_db()
+    logger.success("Active order item_subtotal:> {} ", active_order.item_subtotal, feature="f-strings")
+    logger.success("Active order total:> {} ", active_order.total, feature="f-strings")
+    return active_order
 
 
 # update_active_order_template = 'hud/pos/renders/update-active-order.html'
@@ -41,117 +46,82 @@ def time_function():
 def p(arg):
     print(arg)
 
-
 def change_quantity(request, item_number):
-    active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
     quantity = request.POST.get("display", None)
-    p(f"quantity: {quantity}")
+
     if quantity:
         item.quantity = quantity
         item.save()
-    item = recalculate_item(order_item=item)
 
-    context = get_context(active_order)
-    context["item"] = item
-
+    active_order = get_active_order()
+    context = {"active_order": active_order, "item": item}
     return render(request, update_active_order_template, context)
 
-
-@update_items_subtotal
 def add_quantity(request, item_number):
-    active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
     item.quantity += 1  # Set quantity to the new value received from the client
     item.save()
     # item = recalculate_item(order_item=item)
-
+    active_order = get_active_order()
     context = {"active_order": active_order, "item": item}
-
     return render(request, update_active_order_template, context)
 
-
 def subtract_quantity(request, item_number):
-    active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
     if item.quantity > 1:
         item.quantity -= 1
         item.save()
-        item = recalculate_item(order_item=item)
+        # item = recalculate_item(order_item=item)
 
-        context = get_context(active_order)
-        context["item"] = item
+        active_order = get_active_order()
+        context = {"active_order": active_order, "item": item}
         return render(request, update_active_order_template, context)
     elif item.quantity == 1:
-        item = recalculate_item(order_item=item)
 
-        context = get_context(active_order)
-        context["item"] = item
-
-        return render(request, update_active_order_template, context)
-
-
-def p(name, var=None):
-    print(name, var)
-
+        active_order = get_active_order()
+        context = {"active_order": active_order, "item": item}
+        return render(request, order_item_confirm_remove_template, context)
 
 def confirm_remove_item_button(request, item_number):
-    active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
-    context = get_context(active_order)
-    context["item"] = item
+
+    active_order = get_active_order()
+    context = {"active_order": active_order, "item": item}
     return render(request, order_item_confirm_remove_template, context)
 
-
 def remove_item(request, item_number):
-
-    active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
-
     item.delete()
+
+    active_order = get_active_order()
     context = {"active_order": active_order}
     # context = get_context(active_order)
 
     return render(request, update_active_order_template, context)
 
-
 def add_item_with_barcode(request):
-
     barcode_value = request.POST.get("barcode", None)
-    active_order = PosOrder.objects.filter(is_active=True).first()
     barcode = get_object_or_404(Barcode, value=barcode_value)
-    order = active_order
 
     item = PosOrderItem.objects.filter(
         user=request.user, order=active_order, product=barcode.product).first()
     if item:
         item.quantity += 1  # Set quantity to the new value received from the client
         item.save()
-    # if not item:
-    order, item = add_or_create_item(
-        user=request.user, product=barcode.product, order=active_order)
-    context = get_context(order)
-    context["item"] = item
+    else:
+        item = create_order_item(
+            request.user,active_order,barcode.product
+        )
+
+    active_order = get_active_order()
+    context = {"active_order": active_order, "item": item}
     return render(request, update_active_order_template, context)
-    # else:
-    #     item.quantity += 1
-    #     item.save()
-
-    #     context = get_context(order)
-    #     context["item"] = item
-    #     return render(request, update_order_item_template, context)
-
 
 def add_order_item(request):
-    import timeit
-    active_order = PosOrder.objects.filter(is_active=True).first()
-
     product_id = request.POST.get('product_id', None)
     quantity = int(request.POST.get('quantity', 1))
-
-    print("Quantity1 = ", quantity)
-
-    order = active_order
+    active_order = get_active_order()
 
     product = get_object_or_404(Product, id=product_id)
 
@@ -159,14 +129,14 @@ def add_order_item(request):
         order=active_order, product=product).first()
 
     if not item:
-        order, item = add_or_create_item(
-            user=request.user, product=product, quantity=quantity, order=active_order)
+        item = create_order_item(
+            request.user,active_order,product, quantity)
     else:
         item.quantity += quantity
         item.save()
 
-    context = get_context(active_order)
-    context["item"] = item
+    active_order = get_active_order()
+    context = {"active_order": active_order, "item": item}
 
     return render(request, update_active_order_template, context)
 

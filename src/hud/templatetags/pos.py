@@ -11,16 +11,9 @@ register = template.Library()
 
 
 def gettotals(active_order):
-    from src.hud.calculations import update_order_totals
-
-    order, discount, tax_amount, tax_rate = update_order_totals(active_order)
+    from src.hud.models import PosOrder
     return {
-        "active_order": order,
-        "discount": discount,
-        "tax_rate": tax_rate,
-        "tax_amount": tax_amount,
-        "dscnt": tax_amount
+        "active_order": active_order,
+        "order": PosOrder.objects.filter(is_active=True).first()
     }
-
-
 register.filter('gettotals', gettotals)

@@ -3,12 +3,13 @@ from src.hud.models import (
     ProductGroup, Product, Barcode, PosOrderItem, PosOrder,
     )
 from src.hud.utils import activate_order_and_deactivate_others as aod, get_context
-
+from src.hud.decorators import update_items_subtotal
 # Create your views here.
 
 def hud_index(request):
     return render(request, 'hud/index.html')
 
+@update_items_subtotal
 def hud_pos(request, id=None):
 
     active_order = aod(id)
@@ -17,9 +18,11 @@ def hud_pos(request, id=None):
     pos_orders = PosOrder.objects.all()
     products = Product.objects.all()
 
-    context = get_context(active_order)
-    context["groups"] = product_groups
-    context["products"] = products
-    context["orders"] = pos_orders
+    context = {
+        "active_order":active_order,
+        "groups": product_groups,
+        "products": products,
+        "orders": pos_orders,
+    }
 
     return render(request, 'hud/pos/home.html', context)

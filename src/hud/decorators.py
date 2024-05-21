@@ -13,6 +13,7 @@ def update_items_subtotal(view_func):
             # Adjust as necessary for your context
             order = PosOrder.objects.get(is_active=True)
             order.update_items_subtotal()
+            
         except PosOrder.DoesNotExist:
             pass  # Handle the case where there is no active order if necessary
 

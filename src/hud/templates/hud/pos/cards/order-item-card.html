@@ -10,6 +10,38 @@
                 <div class="fw-bold">{{ item.product.name }}</div>
                 <div class="small text-inverse text-opacity-50 mb-2">{{ item.price|floatformat:"0"}}</div>
                 <div class="d-flex align-items-center fs-11px">
+                    <button 
+                    hx-get="{% url 'hud:modal-calculator' %}" 
+                    hx-target="#modal-calculator" 
+                    hx-trigger="click"
+                    hx-vals='{
+                        "is_ajax": true,
+                        "el-id": "orders-detail",
+                        "url": "/hud/change-quantity/{{ item.number}}/",
+                        "template_name":"hud/pos/order-detail.html"
+                        }'
+                    data-bs-toggle="modal"
+                    data-bs-target="#modal-calculator"
+                    class="btn btn-sm text-success p-0"
+                    
+                    >
+                    <i class="fas fa-lg fa-fw fa-calculator"></i>
+                </button>
+                    {% comment %} <span class="label bg-transparent border border-theme text-theme fs-12px fw-500 p-1"> {% endcomment %}
+                
+                        <i class="fas fa-lg fa-fw me-2 fa-arrow-down text-success"></i> {{ item.discount_sign }}
+                    {% if item.discount_type == 1 %}
+                <span>
+                    {% comment %} <i class="fas fa-lg fa-fw me-2 fa-percent"></i> {% endcomment %}
+                    {{ item.discount|floatformat:"0"}}
+                </span>
+                    {% else %}
+                <span>
+                    {% comment %} {{ item.product.currency.name }} {% endcomment %}
+                    {{ item.discounted_amount|floatformat:"0"}}
+                </span>
+                    {% endif %}
+            {% comment %} </span> {% endcomment %}
                 </div>
             </div>
             <div>
@@ -22,40 +54,6 @@
             </div>
         </a>
     </div>
-    <div class="card-footer text-end">
-        <button 
-                hx-get="{% url 'hud:modal-calculator' %}" 
-                hx-target="#modal-calculator" 
-                hx-trigger="click"
-                hx-vals='{
-                    "is_ajax": true,
-                    "el-id": "orders-detail",
-                    "url": "/hud/change-quantity/{{ item.number}}/",
-                    "template_name":"hud/pos/order-detail.html"
-                    }'
-                data-bs-toggle="modal"
-                data-bs-target="#modal-calculator"
-                class="btn btn-sm text-success"
-                
-                >
-                <i class="fas fa-lg fa-fw fa-calculator"></i>
-            </button>
-        <span class="label bg-transparent border border-theme text-theme fs-12px fw-500 p-1">
-            
-            Item Discount: {{ item.discount_sign }}
-                {% if item.discount_type == 1 %}
-            <span>
-                {% comment %} <i class="fas fa-lg fa-fw me-2 fa-percent"></i> {% endcomment %}
-                {{ item.discount|floatformat:"0"}}
-            </span>
-                {% else %}
-            <span>
-                {% comment %} {{ item.product.currency.name }} {% endcomment %}
-                {{ item.discounted_amount|floatformat:"0"}}
-            </span>
-                {% endif %}
-        </span>
-    </div>
 <!-- arrow -->
     <div class="card-arrow">
         <div class="card-arrow-top-left"></div>
@@ -64,4 +62,3 @@
         <div class="card-arrow-bottom-right"></div>
     </div>
 </div>
-100
