@@ -46,6 +46,7 @@ def time_function():
 def p(arg):
     print(arg)
 
+
 def change_quantity(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
     quantity = request.POST.get("display", None)
@@ -58,6 +59,7 @@ def change_quantity(request, item_number):
     context = {"active_order": active_order, "item": item}
     return render(request, update_active_order_template, context)
 
+
 def add_quantity(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
     item.quantity += 1  # Set quantity to the new value received from the client
@@ -66,6 +68,7 @@ def add_quantity(request, item_number):
     active_order = get_active_order()
     context = {"active_order": active_order, "item": item}
     return render(request, update_active_order_template, context)
+
 
 def subtract_quantity(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
@@ -83,6 +86,7 @@ def subtract_quantity(request, item_number):
         context = {"active_order": active_order, "item": item}
         return render(request, order_item_confirm_remove_template, context)
 
+
 def change_discount(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
     # FIND A WAY TO ADD DISCOUNT
@@ -93,12 +97,14 @@ def change_discount(request, item_number):
     context = {"active_order": active_order, "item": item}
     return render(request, update_active_order_template, context)
 
+
 def confirm_remove_item_button(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
 
     active_order = get_active_order()
     context = {"active_order": active_order, "item": item}
     return render(request, order_item_confirm_remove_template, context)
+
 
 def remove_item(request, item_number):
     item = get_object_or_404(PosOrderItem, number=item_number)
@@ -109,6 +115,7 @@ def remove_item(request, item_number):
     # context = get_context(active_order)
 
     return render(request, update_active_order_template, context)
+
 
 def add_item_with_barcode(request):
     barcode_value = request.POST.get("barcode", None)
@@ -121,12 +128,13 @@ def add_item_with_barcode(request):
         item.save()
     else:
         item = create_order_item(
-            request.user,active_order,barcode.product
+            request.user, active_order, barcode.product
         )
 
     active_order = get_active_order()
     context = {"active_order": active_order, "item": item}
     return render(request, update_active_order_template, context)
+
 
 def add_order_item(request):
     product_id = request.POST.get('product_id', None)
@@ -140,10 +148,33 @@ def add_order_item(request):
 
     if not item:
         item = create_order_item(
-            request.user,active_order,product, quantity)
+            request.user, active_order, product, quantity)
     else:
         item.quantity += quantity
         item.save()
+
+    active_order = get_active_order()
+    context = {"active_order": active_order, "item": item}
+
+    return render(request, update_active_order_template, context)
+
+
+def update_order_item(request, number):
+    quantity = int(request.POST.get('quantity', 1))
+    discount = int(request.POST.get('discount', 0))
+    discount_type = int(request.POST.get('discount_type', 0))
+    active_order = get_active_order()
+
+    item = get_object_or_404(PosOrderItem, number=number)
+
+    if discount_type:
+        item.discount_type = discount_type
+    if discount:
+        item.discount = discount
+    if quantity:
+        item.quantity = quantity
+
+    item.save()
 
     active_order = get_active_order()
     context = {"active_order": active_order, "item": item}

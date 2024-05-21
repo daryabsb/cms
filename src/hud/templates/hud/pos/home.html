@@ -13,12 +13,11 @@
 		<link rel="icon" href="{% static 'hud/img/icons/favicon-32x32.png' %}" sizes="32x32" type="image/png">
 		<!-- favicon sizes 
 		-->
-		<link href="{% static 'hud/css/vendor.min.css' %}" rel="stylesheet">
-		<link href="{% static 'hud/css/vendor.min.css' %}" rel="stylesheet">
-		<link href="{% static 'hud/css/app.min.css' %}" rel="stylesheet">
 		{% for htmx_url in dz_array.crm.htmx %}
 		<script src="{% static htmx_url %}" defer></script>
 		{% endfor %}
+		<link href="{% static 'hud/css/vendor.min.css' %}" rel="stylesheet">
+		<link href="{% static 'hud/css/app.min.css' %}" rel="stylesheet">
 	</head>
 	<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}' 
 	hx-on::load="bInput=htmx.find('#barcode-input');bInput.value= '';bInput.focus();" class="pace-top">
@@ -116,7 +115,13 @@
 		<div class="modal modal-pos fade" id="modal-product">
 			{% include 'hud/pos/modals/product-modal2.html' %}
 		</div>
+		<div class="modal modal-pos fade" id="modal-item">
+			{% include 'hud/pos/modals/product-modal2.html' %}
+		</div>
 		<div class="modal modal-cover modal-pos fade" id="modal-calculator">
+			{% include 'hud/pos/modals/discount-modal.html' %} 
+		</div>
+		<div class="modal modal-cover modal-pos fade" id="modal-discount">
 			{% include 'hud/pos/modals/calculator-modal.html' %} 
 		</div>
 		

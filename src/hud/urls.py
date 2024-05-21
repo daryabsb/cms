@@ -1,9 +1,11 @@
 from django.urls import path, include
 from src.hud.views import hud_index, hud_pos
 from src.hud.htmx_views import (
-    add_quantity, subtract_quantity, calculate, change_quantity,
+    add_quantity, subtract_quantity, calculate, change_quantity, update_order_item,
     add_order_item, confirm_remove_item_button, remove_item, add_item_with_barcode)
-from src.hud.modal_views import modal_product, modal_calculator, add_digit
+from src.hud.modal_views import (
+    modal_product, modal_calculator, add_digit, modal_discount,
+    tabs_discount, modal_item)
 
 
 app_name = 'hud'
@@ -26,6 +28,7 @@ urlpatterns += [
     path('rremove-button-confirm/<str:item_number>/',
          confirm_remove_item_button, name="remove-button-confirm"),
     path('add-item/', add_order_item, name="add-item"),
+    path('update-item/<str:number>/', update_order_item, name="update-item"),
     path('add-item-with-barcode/', add_item_with_barcode,
          name="add-item-with-barcode"),
 ]
@@ -39,6 +42,9 @@ urlpatterns += [
 # MODALS
 urlpatterns += [
     path('modal-product/<int:id>/', modal_product, name="modal-product"),
+    path('modal-item/<str:number>/', modal_item, name="modal-item"),
     path('modal-calculator/', modal_calculator, name="modal-calculator"),
+    path('tabs-discount/', tabs_discount, name="tabs-discount"),
+    path('modal-discount/', modal_discount, name="modal-discount"),
     path('add_digit/', add_digit, name='add_digit'),
 ]

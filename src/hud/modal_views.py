@@ -1,6 +1,7 @@
 
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render
-from src.hud.models import PosOrder, Product
+from src.hud.models import PosOrder, Product, PosOrderItem
 
 
 def modal_product(request, id):
@@ -10,6 +11,15 @@ def modal_product(request, id):
     if product:
         context = {"product": product, "active_order": active_order}
         return render(request, 'hud/pos/modals/product-modal.html', context)
+
+
+def modal_item(request, number):
+    active_order = PosOrder.objects.filter(is_active=True).first()
+    item = get_object_or_404(PosOrderItem, number=number)
+
+    if item:
+        context = {"item": item, "active_order": active_order}
+        return render(request, 'hud/pos/modals/item-modal.html', context)
 
 
 def modal_calculator(request):
@@ -40,3 +50,54 @@ def add_digit(request):
         new_value = current_value + digit
         return render(request, 'hud/pos/buttons/input_display.html', {'new_value': new_value})
     return render(request, 'keypad.html', {'error': 'Invalid request'})
+
+
+def modal_discount(request):
+    import json
+    is_ajax = request.GET.get('is_ajax', False)
+    div_class = request.GET.get('div-class', '')
+    calculator_id = request.GET.get('calculator_id', '')
+
+    el_id = request.GET.get('el-id', '')
+    url = request.GET.get('url', '')
+    template_name = request.GET.get('template-name', '')
+    digits = [[7, 8, 9, '/'], [4, 5, 6, '*'],
+              [1, 2, 3, '-'], [0, '.', '=', '+'],]
+    context = {
+        "is_ajax": is_ajax,
+        "calculator_id": calculator_id,
+        "div_class": div_class,
+        "el_id": el_id,
+        "template_name": template_name,
+        "url": url,
+        "digits": digits,
+    }
+
+    return render(request, 'hud/pos/modals/discount-modal.html', context)
+
+
+def tabs_discount(request):
+    tabid = request.GET.get('tabid', 'percentage')
+    is_ajax = request.GET.get('percentage', False)
+    div_class = request.GET.get('div-class', '')
+    calculator_id = request.GET.get('calculator_id', '')
+
+    el_id = request.GET.get('el-id', '')
+    url = request.GET.get('url', '')
+    template_name = request.GET.get('template-name', '')
+    digits = [[7, 8, 9, '/'], [4, 5, 6, '*'],
+              [1, 2, 3, '-'], [0, '.', '=', '+'],]
+    context = {
+        "is_ajax": is_ajax,
+        "calculator_id": calculator_id,
+        "div_class": div_class,
+        "el_id": el_id,
+        "template_name": template_name,
+        "url": url,
+        "digits": digits,
+    }
+    print(tabid)
+    if tabid == 'percentage':
+        return render(request, 'hud/pos/cards/percentage-card.html', context)
+    elif tabid == 'amount':
+        return render(request, 'hud/pos/cards/amount-card.html', context)
