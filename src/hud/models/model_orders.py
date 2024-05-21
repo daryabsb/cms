@@ -30,6 +30,11 @@ class PosOrder(models.Model):
     class Meta:
         ordering = ['-created']
 
+    def update_items_subtotal(self):
+        # Calculate the subtotal based on order items
+        self.item_subtotal = sum(item.item_total for item in self.items.all())
+        self.save()
+
     @property
     def subtotal(self):
         return self.items.aggregate(

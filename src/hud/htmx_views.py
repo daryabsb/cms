@@ -8,6 +8,7 @@ from src.hud.calculations import (
 )
 from src.hud.utils import get_context
 from loguru import logger
+from src.hud.decorators import update_items_subtotal
 
 
 def log(step, time):
@@ -57,12 +58,13 @@ def change_quantity(request, item_number):
     return render(request, update_active_order_template, context)
 
 
+@update_items_subtotal
 def add_quantity(request, item_number):
     active_order = PosOrder.objects.filter(is_active=True).first()
     item = get_object_or_404(PosOrderItem, number=item_number)
     item.quantity += 1  # Set quantity to the new value received from the client
     item.save()
-    item = recalculate_item(order_item=item)
+    # item = recalculate_item(order_item=item)
 
     context = get_context(active_order)
     context["item"] = item
